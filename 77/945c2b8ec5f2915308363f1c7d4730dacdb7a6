@@ -1,0 +1,53 @@
+frontend/src/components/MeetingDetectionSettings.tsx
+  s_c3f9d99fbb1d04::t_6489b032521132 1-265
+frontend/src-tauri/src/detection/commands.rs
+  s_c3f9d99fbb1d04::t_0939c663940744 1-121
+frontend/src-tauri/src/database/repositories/setting.rs
+  s_c3f9d99fbb1d04::t_22fab6e2eb048a 431-488
+frontend/src-tauri/src/detection/service.rs
+  s_c3f9d99fbb1d04::t_3f2c9b49d37f3a 33-64
+  s_c3f9d99fbb1d04::t_398415399e4a30 1-32,65-204
+frontend/src-tauri/src/audio/system_audio_commands.rs
+  s_c3f9d99fbb1d04::t_10d855425c5dc5 1
+  s_c3f9d99fbb1d04::t_a51aded82c70fe 41-42
+  s_c3f9d99fbb1d04::t_210284f040743a 9-12
+  s_c3f9d99fbb1d04::t_30ba857f1a0c44 54-56,61-66,71
+frontend/src-tauri/migrations/20260813000000_add_detection_settings.sql
+  s_c3f9d99fbb1d04::t_56bf2fb57c4a95 1-10
+frontend/src-tauri/src/detection/policy.rs
+  s_c3f9d99fbb1d04::t_e983a1876deffd 1-36,42-417
+  s_c3f9d99fbb1d04::t_33073a6e7d377a 37-41
+frontend/src/services/detectionService.ts
+  s_c3f9d99fbb1d04::t_a63c5e7e95109b 1-53
+frontend/src/app/settings/page.tsx
+  s_c3f9d99fbb1d04::t_e6101f2256fb8e 4
+  s_c3f9d99fbb1d04::t_699667ee73a275 134-136
+  s_c3f9d99fbb1d04::t_02dce5706d629e 14
+  s_c3f9d99fbb1d04::t_6fd377ff8befb8 25
+frontend/src-tauri/src/lib.rs
+  s_c3f9d99fbb1d04::t_95a865e0153339 44
+  s_c3f9d99fbb1d04::t_c7b71bd0e3c730 705-708
+  s_c3f9d99fbb1d04::t_81c35be7424739 456-465
+frontend/src-tauri/src/audio/system_detector.rs
+  s_c3f9d99fbb1d04::t_d3fa209e7d2432 7-25,29-30
+  s_c3f9d99fbb1d04::t_c37817de52eaf5 377-382,401-406,408-436,438-439
+  s_c3f9d99fbb1d04::t_b4e387bf8559e2 383-399
+frontend/src-tauri/src/detection/mod.rs
+  s_c3f9d99fbb1d04::t_d2f8ad1dc74af5 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "77945c2b8ec5f2915308363f1c7d4730dacdb7a6",
+  "prompts": {},
+  "sessions": {
+    "s_c3f9d99fbb1d04": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b42f8a7-567f-4091-b374-5adc583f06ed",
+        "model": "claude-opus-5"
+      },
+      "human_author": "<eryk@talentcanvas.tech>"
+    }
+  }
+}
