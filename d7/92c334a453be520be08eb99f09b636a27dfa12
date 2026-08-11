@@ -1,0 +1,37 @@
+frontend/src-tauri/src/lib.rs
+  s_c3f9d99fbb1d04::t_cd240fe4086d61 723
+  s_c3f9d99fbb1d04::t_3e16d829481b07 724-725
+frontend/scripts/tauri-auto.js
+  s_c3f9d99fbb1d04::t_fe266f8aafd63b 6
+  s_c3f9d99fbb1d04::t_93ce3a15aae23e 39-60
+frontend/scripts/build-sidecar.js
+  s_c3f9d99fbb1d04::t_7be7199f7fd4bb 1-18,21-42,44-62,64-120
+  s_c3f9d99fbb1d04::t_7a2edb65ffd68a 19-20
+  s_c3f9d99fbb1d04::t_faaa900da61387 63
+  s_c3f9d99fbb1d04::t_5a71e6c97d03ba 43
+frontend/src-tauri/src/audio/permissions.rs
+  s_c3f9d99fbb1d04::t_cd240fe4086d61 18,28,35,58,64-65,71,79,82,85,88,153-154
+  s_c3f9d99fbb1d04::t_3e16d829481b07 81,87
+frontend/src-tauri/src/audio/capture/backend_config.rs
+  s_c3f9d99fbb1d04::t_03f03ec50c62f9 70-76,80
+  s_c3f9d99fbb1d04::t_24f2479c064ebf 45-49,53-55
+  s_c3f9d99fbb1d04::t_738be08e30fe55 178,183,194-200,202-220
+frontend/src-tauri/src/audio/recording_preferences.rs
+  s_c3f9d99fbb1d04::t_cd240fe4086d61 297,309,313
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d792c334a453be520be08eb99f09b636a27dfa12",
+  "prompts": {},
+  "sessions": {
+    "s_c3f9d99fbb1d04": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b42f8a7-567f-4091-b374-5adc583f06ed",
+        "model": "claude-opus-5"
+      },
+      "human_author": "<eryk@talentcanvas.tech>"
+    }
+  }
+}
