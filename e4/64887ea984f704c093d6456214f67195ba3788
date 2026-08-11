@@ -1,0 +1,928 @@
+.github/ISSUE_TEMPLATE/bug_report.md
+  h_eb49140c9cb58b 1-46
+.github/ISSUE_TEMPLATE/documentation.md
+  h_eb49140c9cb58b 1-28
+.github/ISSUE_TEMPLATE/feature_request.md
+  h_eb49140c9cb58b 1-41
+.github/issue_template.md
+  h_eb49140c9cb58b 1-27
+.github/pull_request_template.md
+  h_eb49140c9cb58b 1-36
+.github/workflows/ACCELERATION_GUIDE.md
+  h_eb49140c9cb58b 1-399
+.github/workflows/README_DEVTEST.md
+  h_eb49140c9cb58b 1-179
+.github/workflows/WORKFLOWS_OVERVIEW.md
+  h_eb49140c9cb58b 1-345
+.github/workflows/build-devtest.yml
+  h_eb49140c9cb58b 1-500
+.github/workflows/build-linux.yml
+  h_eb49140c9cb58b 1-346
+.github/workflows/build-macos.yml
+  h_eb49140c9cb58b 1-281
+.github/workflows/build-test.yml
+  h_eb49140c9cb58b 1-35
+.github/workflows/build-windows.yml
+  h_eb49140c9cb58b 1-732
+.github/workflows/build.yml
+  h_eb49140c9cb58b 1-680
+.github/workflows/pr-main-check.yml
+  h_eb49140c9cb58b 1-65
+.github/workflows/release.yml
+  h_eb49140c9cb58b 1-197
+.gitignore
+  h_eb49140c9cb58b 1-79
+.gitmodules
+  h_eb49140c9cb58b 1-4
+BLUETOOTH_PLAYBACK_NOTICE.md
+  h_eb49140c9cb58b 1-234
+CLAUDE.md
+  h_eb49140c9cb58b 1-409
+CONTRIBUTING.md
+  h_eb49140c9cb58b 1-152
+Cargo.lock
+  h_eb49140c9cb58b 1-9264
+Cargo.toml
+  h_eb49140c9cb58b 1-18
+LICENSE.md
+  h_eb49140c9cb58b 1-21
+PRIVACY_POLICY.md
+  h_eb49140c9cb58b 1-127
+README.md
+  h_eb49140c9cb58b 1-271
+backend/.gitignore
+  h_eb49140c9cb58b 1-290
+backend/API_DOCUMENTATION.md
+  h_eb49140c9cb58b 1-26
+backend/Dockerfile.app
+  h_eb49140c9cb58b 1-51
+backend/Dockerfile.server-cpu
+  h_eb49140c9cb58b 1-92
+backend/Dockerfile.server-gpu
+  h_eb49140c9cb58b 1-101
+backend/Dockerfile.server-macos
+  h_eb49140c9cb58b 1-93
+backend/README.md
+  h_eb49140c9cb58b 1-31
+backend/SCRIPTS_DOCUMENTATION.md
+  h_eb49140c9cb58b 1-26
+backend/app/db.py
+  h_eb49140c9cb58b 1-913
+backend/app/main.py
+  h_eb49140c9cb58b 1-646
+backend/app/schema_validator.py
+  h_eb49140c9cb58b 1-127
+backend/app/transcript_processor.py
+  h_eb49140c9cb58b 1-314
+backend/build-docker.ps1
+  h_eb49140c9cb58b 1-661
+backend/build-docker.sh
+  h_eb49140c9cb58b 1-484
+backend/build_whisper.cmd
+  h_eb49140c9cb58b 1-308
+backend/build_whisper.sh
+  h_eb49140c9cb58b 1-296
+backend/clean_start_backend.cmd
+  h_eb49140c9cb58b 1-300
+backend/clean_start_backend.sh
+  h_eb49140c9cb58b 1-297
+backend/debug_cors.py
+  h_eb49140c9cb58b 1-44
+backend/docker-compose.yml
+  h_eb49140c9cb58b 1-321
+backend/docker/entrypoint.sh
+  h_eb49140c9cb58b 1-551
+backend/download-ggml-model.cmd
+  h_eb49140c9cb58b 1-165
+backend/download-ggml-model.sh
+  h_eb49140c9cb58b 1-132
+backend/examples/run_summary_workflow.py
+  h_eb49140c9cb58b 1-212
+backend/install_dependancies_for_windows.ps1
+  h_eb49140c9cb58b 1-196
+backend/requirements.txt
+  h_eb49140c9cb58b 1-10
+backend/run-docker.ps1
+  h_eb49140c9cb58b 1-1566
+backend/run-docker.sh
+  h_eb49140c9cb58b 1-2009
+backend/set_env.sh
+  h_eb49140c9cb58b 1-42
+backend/setup-db.ps1
+  h_eb49140c9cb58b 1-338
+backend/setup-db.sh
+  h_eb49140c9cb58b 1-369
+backend/start_python_backend.cmd
+  h_eb49140c9cb58b 1-58
+backend/start_whisper_server.cmd
+  h_eb49140c9cb58b 1-49
+backend/start_with_output.ps1
+  h_eb49140c9cb58b 1-924
+backend/temp.env
+  h_eb49140c9cb58b 1-3
+backend/whisper-custom/server/CMakeLists.txt
+  h_eb49140c9cb58b 1-12
+backend/whisper-custom/server/README.md
+  h_eb49140c9cb58b 1-69
+backend/whisper-custom/server/httplib.h
+  h_eb49140c9cb58b 1-9262
+backend/whisper-custom/server/public/index.html
+  h_eb49140c9cb58b 1-243
+backend/whisper-custom/server/server.cpp
+  h_eb49140c9cb58b 1-1170
+docs/BUILDING.md
+  h_eb49140c9cb58b 1-319
+docs/GPU_ACCELERATION.md
+  h_eb49140c9cb58b 1-57
+docs/architecture.md
+  h_eb49140c9cb58b 1-41
+docs/building_in_linux.md
+  h_eb49140c9cb58b 1-341
+frontend/.env.example
+  h_eb49140c9cb58b 1-11
+frontend/.gitignore
+  h_eb49140c9cb58b 1-53
+frontend/API.md
+  h_eb49140c9cb58b 1-23
+frontend/README.md
+  h_eb49140c9cb58b 1-176
+frontend/build-gpu.bat
+  h_eb49140c9cb58b 1-254
+frontend/build-gpu.ps1
+  h_eb49140c9cb58b 1-75
+frontend/build-gpu.sh
+  h_eb49140c9cb58b 1-190
+frontend/build.bat
+  h_eb49140c9cb58b 1-202
+frontend/build.ps1
+  h_eb49140c9cb58b 1-76
+frontend/build_backup.bat
+  h_eb49140c9cb58b 1-202
+frontend/clean_build.sh
+  h_eb49140c9cb58b 1-57
+frontend/clean_build_windows.bat
+  h_eb49140c9cb58b 1-11
+frontend/clean_run.sh
+  h_eb49140c9cb58b 1-45
+frontend/clean_run_windows.bat
+  h_eb49140c9cb58b 1-11
+frontend/components.json
+  h_eb49140c9cb58b 1-21
+frontend/dev-gpu.bat
+  h_eb49140c9cb58b 1-242
+frontend/dev-gpu.ps1
+  h_eb49140c9cb58b 1-62
+frontend/dev-gpu.sh
+  h_eb49140c9cb58b 1-179
+frontend/eslint.config.mjs
+  h_eb49140c9cb58b 1-16
+frontend/next.config.js
+  h_eb49140c9cb58b 1-51
+frontend/package-app.sh
+  h_eb49140c9cb58b 1-20
+frontend/package.json
+  h_eb49140c9cb58b 1-112
+frontend/pnpm-lock.yaml
+  h_eb49140c9cb58b 1-7510
+frontend/postcss.config.js
+  h_eb49140c9cb58b 1-6
+frontend/postcss.config.mjs
+  h_eb49140c9cb58b 1-8
+frontend/public/file.svg
+  h_eb49140c9cb58b 1
+frontend/public/globe.svg
+  h_eb49140c9cb58b 1
+frontend/public/next.svg
+  h_eb49140c9cb58b 1
+frontend/public/vercel.svg
+  h_eb49140c9cb58b 1
+frontend/public/window.svg
+  h_eb49140c9cb58b 1
+frontend/scripts/auto-detect-gpu.js
+  h_eb49140c9cb58b 1-103
+frontend/scripts/load-env.ps1
+  h_eb49140c9cb58b 1-78
+frontend/scripts/tauri-auto.js
+  h_eb49140c9cb58b 1-65
+frontend/src-tauri/.cargo/config.toml
+  h_eb49140c9cb58b 1-13
+frontend/src-tauri/.gitignore
+  h_eb49140c9cb58b 1-7
+frontend/src-tauri/CLEANUP_PLAN.md
+  h_eb49140c9cb58b 1-120
+frontend/src-tauri/Cargo.toml
+  h_eb49140c9cb58b 1-212
+frontend/src-tauri/Info.plist
+  h_eb49140c9cb58b 1-14
+frontend/src-tauri/LOGGING_OPTIMIZATIONS.md
+  h_eb49140c9cb58b 1-171
+frontend/src-tauri/NOTIFICATION_TESTING.md
+  h_eb49140c9cb58b 1-86
+frontend/src-tauri/build.rs
+  h_eb49140c9cb58b 1-92
+frontend/src-tauri/build/ffmpeg.rs
+  h_eb49140c9cb58b 1-351
+frontend/src-tauri/check_screen_permission.swift
+  h_eb49140c9cb58b 1-21
+frontend/src-tauri/config/backend_config.json
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/entitlements.plist
+  h_eb49140c9cb58b 1-14
+frontend/src-tauri/migrations/20250916100000_initial_schema.sql
+  h_eb49140c9cb58b 1-72
+frontend/src-tauri/migrations/20250920155811_add_openrouter_api_key.sql
+  h_eb49140c9cb58b 1-28
+frontend/src-tauri/migrations/20251006000000_add_audio_sync_fields.sql
+  h_eb49140c9cb58b 1-17
+frontend/src-tauri/migrations/20251010153942_add_ollama_endpoint.sql
+  h_eb49140c9cb58b 1-2
+frontend/src-tauri/migrations/20251101000000_add_summary_backup.sql
+  h_eb49140c9cb58b 1-8
+frontend/src-tauri/migrations/20251105120000_add_pro_license_custom_openai.sql
+  h_eb49140c9cb58b 1-20
+frontend/src-tauri/migrations/20251110000000_add_grace_period_to_licensing.sql
+  h_eb49140c9cb58b 1-8
+frontend/src-tauri/migrations/20251110000001_add_speaker_field.sql
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/migrations/20251223000000_add_meeting_notes.sql
+  h_eb49140c9cb58b 1-12
+frontend/src-tauri/migrations/20251229000000_add_gemini_api_key.sql
+  h_eb49140c9cb58b 1-4
+frontend/src-tauri/scripts/sign-windows.ps1
+  h_eb49140c9cb58b 1-38
+frontend/src-tauri/src/analytics/analytics.rs
+  h_eb49140c9cb58b 1-521
+frontend/src-tauri/src/analytics/commands.rs
+  h_eb49140c9cb58b 1-373
+frontend/src-tauri/src/analytics/mod.rs
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/src/anthropic/anthropic.rs
+  h_eb49140c9cb58b 1-171
+frontend/src-tauri/src/anthropic/mod.rs
+  h_eb49140c9cb58b 1
+frontend/src-tauri/src/api/api.rs
+  h_eb49140c9cb58b 1-1383
+frontend/src-tauri/src/api/commands.rs
+  h_eb49140c9cb58b 1-2
+frontend/src-tauri/src/api/mod.rs
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/src/audio/async_logger.rs
+  h_eb49140c9cb58b 1-131
+frontend/src-tauri/src/audio/audio_processing.rs
+  h_eb49140c9cb58b 1-739
+frontend/src-tauri/src/audio/batch_processor.rs
+  h_eb49140c9cb58b 1-216
+frontend/src-tauri/src/audio/buffer_pool.rs
+  h_eb49140c9cb58b 1-177
+frontend/src-tauri/src/audio/capture/backend_config.rs
+  h_eb49140c9cb58b 1-226
+frontend/src-tauri/src/audio/capture/core_audio.rs
+  h_eb49140c9cb58b 1-446
+frontend/src-tauri/src/audio/capture/microphone.rs
+  h_eb49140c9cb58b 1-4
+frontend/src-tauri/src/audio/capture/mod.rs
+  h_eb49140c9cb58b 1-24
+frontend/src-tauri/src/audio/capture/system.rs
+  h_eb49140c9cb58b 1-153
+frontend/src-tauri/src/audio/common.rs
+  h_eb49140c9cb58b 1-236
+frontend/src-tauri/src/audio/constants.rs
+  h_eb49140c9cb58b 1-7
+frontend/src-tauri/src/audio/core-old.rs
+  h_eb49140c9cb58b 1-924
+frontend/src-tauri/src/audio/decoder.rs
+  h_eb49140c9cb58b 1-825
+frontend/src-tauri/src/audio/device_detection.rs
+  h_eb49140c9cb58b 1-509
+frontend/src-tauri/src/audio/device_monitor.rs
+  h_eb49140c9cb58b 1-297
+frontend/src-tauri/src/audio/devices/configuration.rs
+  h_eb49140c9cb58b 1-176
+frontend/src-tauri/src/audio/devices/discovery.rs
+  h_eb49140c9cb58b 1-98
+frontend/src-tauri/src/audio/devices/fallback.rs
+  h_eb49140c9cb58b 1-186
+frontend/src-tauri/src/audio/devices/microphone.rs
+  h_eb49140c9cb58b 1-67
+frontend/src-tauri/src/audio/devices/mod.rs
+  h_eb49140c9cb58b 1-22
+frontend/src-tauri/src/audio/devices/platform/linux.rs
+  h_eb49140c9cb58b 1-33
+frontend/src-tauri/src/audio/devices/platform/macos.rs
+  h_eb49140c9cb58b 1-35
+frontend/src-tauri/src/audio/devices/platform/mod.rs
+  h_eb49140c9cb58b 1-20
+frontend/src-tauri/src/audio/devices/platform/windows.rs
+  h_eb49140c9cb58b 1-257
+frontend/src-tauri/src/audio/devices/speakers.rs
+  h_eb49140c9cb58b 1-115
+frontend/src-tauri/src/audio/diagnostics.rs
+  h_eb49140c9cb58b 1-309
+frontend/src-tauri/src/audio/encode.rs
+  h_eb49140c9cb58b 1-102
+frontend/src-tauri/src/audio/ffmpeg.rs
+  h_eb49140c9cb58b 1-232
+frontend/src-tauri/src/audio/ffmpeg_mixer.rs
+  h_eb49140c9cb58b 1-513
+frontend/src-tauri/src/audio/hardware_detector.rs
+  h_eb49140c9cb58b 1-326
+frontend/src-tauri/src/audio/import.rs
+  h_eb49140c9cb58b 1-1322
+frontend/src-tauri/src/audio/incremental_saver.rs
+  h_eb49140c9cb58b 1-475
+frontend/src-tauri/src/audio/level_monitor.rs
+  h_eb49140c9cb58b 1-355
+frontend/src-tauri/src/audio/mod.rs
+  h_eb49140c9cb58b 1-121
+frontend/src-tauri/src/audio/permissions.rs
+  h_eb49140c9cb58b 1-156
+frontend/src-tauri/src/audio/pipeline.rs
+  h_eb49140c9cb58b 1-1080
+frontend/src-tauri/src/audio/playback_monitor.rs
+  h_eb49140c9cb58b 1-175
+frontend/src-tauri/src/audio/post_processor.rs
+  h_eb49140c9cb58b 1-276
+frontend/src-tauri/src/audio/recording_commands.rs
+  h_eb49140c9cb58b 1-1218
+frontend/src-tauri/src/audio/recording_commands.rs.backup
+  h_eb49140c9cb58b 1-2068
+frontend/src-tauri/src/audio/recording_manager.rs
+  h_eb49140c9cb58b 1-615
+frontend/src-tauri/src/audio/recording_preferences.rs
+  h_eb49140c9cb58b 1-387
+frontend/src-tauri/src/audio/recording_saver.rs
+  h_eb49140c9cb58b 1-485
+frontend/src-tauri/src/audio/recording_saver_old.rs
+  h_eb49140c9cb58b 1-405
+frontend/src-tauri/src/audio/recording_state.rs
+  h_eb49140c9cb58b 1-449
+frontend/src-tauri/src/audio/retranscription.rs
+  h_eb49140c9cb58b 1-1016
+frontend/src-tauri/src/audio/simple_level_monitor.rs
+  h_eb49140c9cb58b 1-92
+frontend/src-tauri/src/audio/stream.rs
+  h_eb49140c9cb58b 1-483
+frontend/src-tauri/src/audio/stt.rs
+  h_eb49140c9cb58b 1-399
+frontend/src-tauri/src/audio/system_audio_commands.rs
+  h_eb49140c9cb58b 1-138
+frontend/src-tauri/src/audio/system_audio_stream.rs
+  h_eb49140c9cb58b 1-232
+frontend/src-tauri/src/audio/system_audio_types.ts
+  h_eb49140c9cb58b 1-55
+frontend/src-tauri/src/audio/system_detector.rs
+  h_eb49140c9cb58b 1-436
+frontend/src-tauri/src/audio/transcription/engine.rs
+  h_eb49140c9cb58b 1-443
+frontend/src-tauri/src/audio/transcription/mod.rs
+  h_eb49140c9cb58b 1-25
+frontend/src-tauri/src/audio/transcription/parakeet_provider.rs
+  h_eb49140c9cb58b 1-57
+frontend/src-tauri/src/audio/transcription/provider.rs
+  h_eb49140c9cb58b 1-73
+frontend/src-tauri/src/audio/transcription/whisper_provider.rs
+  h_eb49140c9cb58b 1-52
+frontend/src-tauri/src/audio/transcription/worker.rs
+  h_eb49140c9cb58b 1-596
+frontend/src-tauri/src/audio/vad.rs
+  h_eb49140c9cb58b 1-595
+frontend/src-tauri/src/audio_v2/compatibility.rs
+  h_eb49140c9cb58b 1-235
+frontend/src-tauri/src/audio_v2/lib.rs
+  h_eb49140c9cb58b 1-128
+frontend/src-tauri/src/audio_v2/limiter.rs
+  h_eb49140c9cb58b 1-24
+frontend/src-tauri/src/audio_v2/mixer.rs
+  h_eb49140c9cb58b 1-271
+frontend/src-tauri/src/audio_v2/normalizer.rs
+  h_eb49140c9cb58b 1-36
+frontend/src-tauri/src/audio_v2/recorder.rs
+  h_eb49140c9cb58b 1-193
+frontend/src-tauri/src/audio_v2/resampler.rs
+  h_eb49140c9cb58b 1-54
+frontend/src-tauri/src/audio_v2/stream.rs
+  h_eb49140c9cb58b 1-418
+frontend/src-tauri/src/audio_v2/sync.rs
+  h_eb49140c9cb58b 1-34
+frontend/src-tauri/src/config.rs
+  h_eb49140c9cb58b 1-36
+frontend/src-tauri/src/console_utils/commands.rs
+  h_eb49140c9cb58b 1-2
+frontend/src-tauri/src/console_utils/console_utils.rs
+  h_eb49140c9cb58b 1-158
+frontend/src-tauri/src/console_utils/mod.rs
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/src/database/commands.rs
+  h_eb49140c9cb58b 1-278
+frontend/src-tauri/src/database/manager.rs
+  h_eb49140c9cb58b 1-208
+frontend/src-tauri/src/database/mod.rs
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/src/database/models.rs
+  h_eb49140c9cb58b 1-130
+frontend/src-tauri/src/database/repositories/meeting.rs
+  h_eb49140c9cb58b 1-274
+frontend/src-tauri/src/database/repositories/mod.rs
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/src/database/repositories/setting.rs
+  h_eb49140c9cb58b 1-348
+frontend/src-tauri/src/database/repositories/summary.rs
+  h_eb49140c9cb58b 1-221
+frontend/src-tauri/src/database/repositories/transcript.rs
+  h_eb49140c9cb58b 1-146
+frontend/src-tauri/src/database/repositories/transcript_chunk.rs
+  h_eb49140c9cb58b 1-49
+frontend/src-tauri/src/database/setup.rs
+  h_eb49140c9cb58b 1-38
+frontend/src-tauri/src/groq/groq.rs
+  h_eb49140c9cb58b 1-165
+frontend/src-tauri/src/groq/mod.rs
+  h_eb49140c9cb58b 1
+frontend/src-tauri/src/lib.rs
+  h_eb49140c9cb58b 1-786
+frontend/src-tauri/src/lib_old_complex.rs
+  h_eb49140c9cb58b 1-2437
+frontend/src-tauri/src/main.rs
+  h_eb49140c9cb58b 1-16
+frontend/src-tauri/src/notifications/commands.rs
+  h_eb49140c9cb58b 1-459
+frontend/src-tauri/src/notifications/manager.rs
+  h_eb49140c9cb58b 1-341
+frontend/src-tauri/src/notifications/mod.rs
+  h_eb49140c9cb58b 1-27
+frontend/src-tauri/src/notifications/settings.rs
+  h_eb49140c9cb58b 1-277
+frontend/src-tauri/src/notifications/system.rs
+  h_eb49140c9cb58b 1-111
+frontend/src-tauri/src/notifications/types.rs
+  h_eb49140c9cb58b 1-199
+frontend/src-tauri/src/ollama/commands.rs
+  h_eb49140c9cb58b 1
+frontend/src-tauri/src/ollama/metadata.rs
+  h_eb49140c9cb58b 1-366
+frontend/src-tauri/src/ollama/mod.rs
+  h_eb49140c9cb58b 1-6
+frontend/src-tauri/src/ollama/ollama.rs
+  h_eb49140c9cb58b 1-514
+frontend/src-tauri/src/onboarding.rs
+  h_eb49140c9cb58b 1-246
+frontend/src-tauri/src/openai/mod.rs
+  h_eb49140c9cb58b 1
+frontend/src-tauri/src/openai/openai.rs
+  h_eb49140c9cb58b 1-194
+frontend/src-tauri/src/openrouter/commands.rs
+  h_eb49140c9cb58b 1-2
+frontend/src-tauri/src/openrouter/mod.rs
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/src/openrouter/openrouter.rs
+  h_eb49140c9cb58b 1-73
+frontend/src-tauri/src/parakeet_engine/commands.rs
+  h_eb49140c9cb58b 1-599
+frontend/src-tauri/src/parakeet_engine/mod.rs
+  h_eb49140c9cb58b 1-26
+frontend/src-tauri/src/parakeet_engine/model.rs
+  h_eb49140c9cb58b 1-498
+frontend/src-tauri/src/parakeet_engine/parakeet_engine.rs
+  h_eb49140c9cb58b 1-1088
+frontend/src-tauri/src/state.rs
+  h_eb49140c9cb58b 1-5
+frontend/src-tauri/src/summary/commands.rs
+  h_eb49140c9cb58b 1-444
+frontend/src-tauri/src/summary/language_detection.rs
+  h_eb49140c9cb58b 1-219
+frontend/src-tauri/src/summary/llm_client.rs
+  h_eb49140c9cb58b 1-346
+frontend/src-tauri/src/summary/metadata.rs
+  h_eb49140c9cb58b 1-297
+frontend/src-tauri/src/summary/mod.rs
+  h_eb49140c9cb58b 1-77
+frontend/src-tauri/src/summary/processor.rs
+  h_eb49140c9cb58b 1-856
+frontend/src-tauri/src/summary/service.rs
+  h_eb49140c9cb58b 1-979
+frontend/src-tauri/src/summary/summary_engine/client.rs
+  h_eb49140c9cb58b 1-359
+frontend/src-tauri/src/summary/summary_engine/commands.rs
+  h_eb49140c9cb58b 1-432
+frontend/src-tauri/src/summary/summary_engine/mod.rs
+  h_eb49140c9cb58b 1-27
+frontend/src-tauri/src/summary/summary_engine/model_manager.rs
+  h_eb49140c9cb58b 1-851
+frontend/src-tauri/src/summary/summary_engine/models.rs
+  h_eb49140c9cb58b 1-493
+frontend/src-tauri/src/summary/summary_engine/sidecar.rs
+  h_eb49140c9cb58b 1-670
+frontend/src-tauri/src/summary/template_commands.rs
+  h_eb49140c9cb58b 1-167
+frontend/src-tauri/src/summary/templates/defaults.rs
+  h_eb49140c9cb58b 1-65
+frontend/src-tauri/src/summary/templates/loader.rs
+  h_eb49140c9cb58b 1-252
+frontend/src-tauri/src/summary/templates/mod.rs
+  h_eb49140c9cb58b 1-83
+frontend/src-tauri/src/summary/templates/types.rs
+  h_eb49140c9cb58b 1-164
+frontend/src-tauri/src/tray.rs
+  h_eb49140c9cb58b 1-414
+frontend/src-tauri/src/utils.rs
+  h_eb49140c9cb58b 1-25
+frontend/src-tauri/src/whisper_engine/_stderr_suppressor.rs
+  h_eb49140c9cb58b 1-83
+frontend/src-tauri/src/whisper_engine/acceleration.rs
+  h_eb49140c9cb58b 1-144
+frontend/src-tauri/src/whisper_engine/commands.rs
+  h_eb49140c9cb58b 1-561
+frontend/src-tauri/src/whisper_engine/mod.rs
+  h_eb49140c9cb58b 1-15
+frontend/src-tauri/src/whisper_engine/parallel_commands.rs
+  h_eb49140c9cb58b 1-263
+frontend/src-tauri/src/whisper_engine/parallel_processor.rs
+  h_eb49140c9cb58b 1-481
+frontend/src-tauri/src/whisper_engine/system_monitor.rs
+  h_eb49140c9cb58b 1-288
+frontend/src-tauri/src/whisper_engine/whisper_engine.rs
+  h_eb49140c9cb58b 1-1137
+frontend/src-tauri/tauri.conf.json
+  h_eb49140c9cb58b 1-121
+frontend/src-tauri/templates/README.md
+  h_eb49140c9cb58b 1-86
+frontend/src-tauri/templates/daily_standup.json
+  h_eb49140c9cb58b 1-39
+frontend/src-tauri/templates/project_sync.json
+  h_eb49140c9cb58b 1-51
+frontend/src-tauri/templates/psychatric_session.json
+  h_eb49140c9cb58b 1-64
+frontend/src-tauri/templates/retrospective.json
+  h_eb49140c9cb58b 1-45
+frontend/src-tauri/templates/sales_marketing_client_call.json
+  h_eb49140c9cb58b 1-44
+frontend/src-tauri/templates/standard_meeting.json
+  h_eb49140c9cb58b 1-27
+frontend/src/app/_components/SettingsModal.tsx
+  h_eb49140c9cb58b 1-338
+frontend/src/app/_components/StatusOverlays.tsx
+  h_eb49140c9cb58b 1-62
+frontend/src/app/_components/TranscriptPanel.tsx
+  h_eb49140c9cb58b 1-122
+frontend/src/app/globals.css
+  h_eb49140c9cb58b 1-214
+frontend/src/app/layout.tsx
+  h_eb49140c9cb58b 1-283
+frontend/src/app/meeting-details/page-content.tsx
+  h_eb49140c9cb58b 1-233
+frontend/src/app/meeting-details/page.tsx
+  h_eb49140c9cb58b 1-393
+frontend/src/app/metadata.ts
+  h_eb49140c9cb58b 1-6
+frontend/src/app/metadata.tsx
+  h_eb49140c9cb58b 1-6
+frontend/src/app/notes/[id]/page.tsx
+  h_eb49140c9cb58b 1-189
+frontend/src/app/page.tsx
+  h_eb49140c9cb58b 1-265
+frontend/src/app/settings/page.tsx
+  h_eb49140c9cb58b 1-135
+frontend/src/components/AISummary/Block.tsx
+  h_eb49140c9cb58b 1-286
+frontend/src/components/AISummary/BlockNoteSummaryView.tsx
+  h_eb49140c9cb58b 1-279
+frontend/src/components/AISummary/Section.tsx
+  h_eb49140c9cb58b 1-124
+frontend/src/components/AISummary/index.tsx
+  h_eb49140c9cb58b 1-821
+frontend/src/components/About.tsx
+  h_eb49140c9cb58b 1-157
+frontend/src/components/AnalyticsConsentSwitch.tsx
+  h_eb49140c9cb58b 1-247
+frontend/src/components/AnalyticsDataModal.tsx
+  h_eb49140c9cb58b 1-159
+frontend/src/components/AnalyticsProvider.tsx
+  h_eb49140c9cb58b 1-151
+frontend/src/components/AudioBackendSelector.tsx
+  h_eb49140c9cb58b 1-184
+frontend/src/components/AudioLevelMeter.tsx
+  h_eb49140c9cb58b 1-148
+frontend/src/components/BetaSettings.tsx
+  h_eb49140c9cb58b 1-71
+frontend/src/components/BlockNoteEditor/BasicBlockNoteTest.tsx
+  h_eb49140c9cb58b 1-54
+frontend/src/components/BlockNoteEditor/Editor.tsx
+  h_eb49140c9cb58b 1-51
+frontend/src/components/BluetoothPlaybackWarning.tsx
+  h_eb49140c9cb58b 1-105
+frontend/src/components/BuiltInModelManager.tsx
+  h_eb49140c9cb58b 1-492
+frontend/src/components/ChunkProgressDisplay.tsx
+  h_eb49140c9cb58b 1-294
+frontend/src/components/ComplianceNotification.tsx
+  h_eb49140c9cb58b 1-125
+frontend/src/components/ConfidenceIndicator.tsx
+  h_eb49140c9cb58b 1-49
+frontend/src/components/ConfirmationModel/confirmation-modal.tsx
+  h_eb49140c9cb58b 1-35
+frontend/src/components/ConsoleToggle.tsx
+  h_eb49140c9cb58b 1-92
+frontend/src/components/CustomDialog.tsx
+  h_eb49140c9cb58b 1-35
+frontend/src/components/DatabaseImport/HomebrewDatabaseDetector.tsx
+  h_eb49140c9cb58b 1-151
+frontend/src/components/DatabaseImport/LegacyDatabaseImport.tsx
+  h_eb49140c9cb58b 1-231
+frontend/src/components/DeviceSelection.tsx
+  h_eb49140c9cb58b 1-385
+frontend/src/components/EditableTitle.tsx
+  h_eb49140c9cb58b 1-112
+frontend/src/components/EmptyStateSummary.tsx
+  h_eb49140c9cb58b 1-64
+frontend/src/components/ImportAudio/ImportAudioDialog.tsx
+  h_eb49140c9cb58b 1-475
+frontend/src/components/ImportAudio/ImportDropOverlay.tsx
+  h_eb49140c9cb58b 1-27
+frontend/src/components/ImportAudio/index.ts
+  h_eb49140c9cb58b 1-2
+frontend/src/components/Info.tsx
+  h_eb49140c9cb58b 1-42
+frontend/src/components/LanguagePickerPopover.tsx
+  h_eb49140c9cb58b 1-176
+frontend/src/components/LanguageSelection.tsx
+  h_eb49140c9cb58b 1-234
+frontend/src/components/Logo.tsx
+  h_eb49140c9cb58b 1-39
+frontend/src/components/MainContent/index.tsx
+  h_eb49140c9cb58b 1-26
+frontend/src/components/MainNav/index.tsx
+  h_eb49140c9cb58b 1-19
+frontend/src/components/MeetingDetails/RetranscribeDialog.tsx
+  h_eb49140c9cb58b 1-432
+frontend/src/components/MeetingDetails/SummaryGeneratorButtonGroup.tsx
+  h_eb49140c9cb58b 1-360
+frontend/src/components/MeetingDetails/SummaryPanel.tsx
+  h_eb49140c9cb58b 1-446
+frontend/src/components/MeetingDetails/SummaryUpdaterButtonGroup.tsx
+  h_eb49140c9cb58b 1-89
+frontend/src/components/MeetingDetails/TranscriptButtonGroup.tsx
+  h_eb49140c9cb58b 1-99
+frontend/src/components/MeetingDetails/TranscriptPanel.tsx
+  h_eb49140c9cb58b 1-113
+frontend/src/components/MessageToast.tsx
+  h_eb49140c9cb58b 1-25
+frontend/src/components/ModelDownloadProgress.tsx
+  h_eb49140c9cb58b 1-130
+frontend/src/components/ModelSettingsModal.tsx
+  h_eb49140c9cb58b 1-1408
+frontend/src/components/ParakeetModelManager.tsx
+  h_eb49140c9cb58b 1-628
+frontend/src/components/PermissionWarning.tsx
+  h_eb49140c9cb58b 1-141
+frontend/src/components/PreferenceSettings.tsx
+  h_eb49140c9cb58b 1-229
+frontend/src/components/RecordingControls.tsx
+  h_eb49140c9cb58b 1-532
+frontend/src/components/RecordingSettings.tsx
+  h_eb49140c9cb58b 1-252
+frontend/src/components/RecordingStatusBar.tsx
+  h_eb49140c9cb58b 1-47
+frontend/src/components/SettingTabs.tsx
+  h_eb49140c9cb58b 1-66
+frontend/src/components/Sidebar/SidebarProvider.tsx
+  h_eb49140c9cb58b 1-320
+frontend/src/components/Sidebar/index.tsx
+  h_eb49140c9cb58b 1-882
+frontend/src/components/SummaryLanguageSettings.tsx
+  h_eb49140c9cb58b 1-101
+frontend/src/components/SummaryModelSettings.tsx
+  h_eb49140c9cb58b 1-154
+frontend/src/components/TranscriptRecovery/TranscriptRecovery.tsx
+  h_eb49140c9cb58b 1-312
+frontend/src/components/TranscriptRecovery/index.ts
+  h_eb49140c9cb58b 1
+frontend/src/components/TranscriptSettings.tsx
+  h_eb49140c9cb58b 1-234
+frontend/src/components/TranscriptView.tsx
+  h_eb49140c9cb58b 1-381
+frontend/src/components/UpdateCheckProvider.tsx
+  h_eb49140c9cb58b 1-78
+frontend/src/components/UpdateDialog.tsx
+  h_eb49140c9cb58b 1-306
+frontend/src/components/UpdateNotification.tsx
+  h_eb49140c9cb58b 1-47
+frontend/src/components/VirtualizedTranscriptView.tsx
+  h_eb49140c9cb58b 1-394
+frontend/src/components/WhisperModelManager.tsx
+  h_eb49140c9cb58b 1-728
+frontend/src/components/molecules/form-components/form-input-item.tsx
+  h_eb49140c9cb58b 1-132
+frontend/src/components/molecules/form-components/form-input-switch.tsx
+  h_eb49140c9cb58b 1-59
+frontend/src/components/molecules/form-components/form-select-item.tsx
+  h_eb49140c9cb58b 1-90
+frontend/src/components/onboarding/OnboardingContainer.tsx
+  h_eb49140c9cb58b 1-104
+frontend/src/components/onboarding/OnboardingFlow.tsx
+  h_eb49140c9cb58b 1-48
+frontend/src/components/onboarding/index.ts
+  h_eb49140c9cb58b 1-3
+frontend/src/components/onboarding/shared/PermissionRow.tsx
+  h_eb49140c9cb58b 1-81
+frontend/src/components/onboarding/shared/ProgressIndicator.tsx
+  h_eb49140c9cb58b 1-68
+frontend/src/components/onboarding/shared/StatusIndicator.tsx
+  h_eb49140c9cb58b 1-20
+frontend/src/components/onboarding/shared/index.ts
+  h_eb49140c9cb58b 1-3
+frontend/src/components/onboarding/steps/DownloadProgressStep.tsx
+  h_eb49140c9cb58b 1-540
+frontend/src/components/onboarding/steps/PermissionsStep.tsx
+  h_eb49140c9cb58b 1-169
+frontend/src/components/onboarding/steps/SetupOverviewStep.tsx
+  h_eb49140c9cb58b 1-113
+frontend/src/components/onboarding/steps/WelcomeStep.tsx
+  h_eb49140c9cb58b 1-66
+frontend/src/components/onboarding/steps/index.ts
+  h_eb49140c9cb58b 1-4
+frontend/src/components/shared/DownloadProgressToast.tsx
+  h_eb49140c9cb58b 1-358
+frontend/src/components/ui/accordion.tsx
+  h_eb49140c9cb58b 1-70
+frontend/src/components/ui/alert.tsx
+  h_eb49140c9cb58b 1-59
+frontend/src/components/ui/button-group.tsx
+  h_eb49140c9cb58b 1-83
+frontend/src/components/ui/button.tsx
+  h_eb49140c9cb58b 1-61
+frontend/src/components/ui/command.tsx
+  h_eb49140c9cb58b 1-153
+frontend/src/components/ui/dialog.tsx
+  h_eb49140c9cb58b 1-122
+frontend/src/components/ui/dropdown-menu.tsx
+  h_eb49140c9cb58b 1-201
+frontend/src/components/ui/form.tsx
+  h_eb49140c9cb58b 1-178
+frontend/src/components/ui/input-group.tsx
+  h_eb49140c9cb58b 1-170
+frontend/src/components/ui/input.tsx
+  h_eb49140c9cb58b 1-22
+frontend/src/components/ui/label.tsx
+  h_eb49140c9cb58b 1-26
+frontend/src/components/ui/popover.tsx
+  h_eb49140c9cb58b 1-33
+frontend/src/components/ui/progress.tsx
+  h_eb49140c9cb58b 1-28
+frontend/src/components/ui/scroll-area.tsx
+  h_eb49140c9cb58b 1-48
+frontend/src/components/ui/select.tsx
+  h_eb49140c9cb58b 1-159
+frontend/src/components/ui/separator.tsx
+  h_eb49140c9cb58b 1-31
+frontend/src/components/ui/sheet.tsx
+  h_eb49140c9cb58b 1-140
+frontend/src/components/ui/switch.tsx
+  h_eb49140c9cb58b 1-29
+frontend/src/components/ui/tabs.tsx
+  h_eb49140c9cb58b 1-55
+frontend/src/components/ui/textarea.tsx
+  h_eb49140c9cb58b 1-22
+frontend/src/components/ui/tooltip.tsx
+  h_eb49140c9cb58b 1-32
+frontend/src/components/ui/visually-hidden.tsx
+  h_eb49140c9cb58b 1-24
+frontend/src/constants/audioFormats.ts
+  h_eb49140c9cb58b 1-41
+frontend/src/constants/languages.ts
+  h_eb49140c9cb58b 1-40
+frontend/src/constants/modelDefaults.ts
+  h_eb49140c9cb58b 1-25
+frontend/src/contexts/ConfigContext.tsx
+  h_eb49140c9cb58b 1-547
+frontend/src/contexts/ImportDialogContext.tsx
+  h_eb49140c9cb58b 1-44
+frontend/src/contexts/OllamaDownloadContext.tsx
+  h_eb49140c9cb58b 1-156
+frontend/src/contexts/OnboardingContext.tsx
+  h_eb49140c9cb58b 1-645
+frontend/src/contexts/RecordingPostProcessingProvider.tsx
+  h_eb49140c9cb58b 1-61
+frontend/src/contexts/RecordingStateContext.tsx
+  h_eb49140c9cb58b 1-242
+frontend/src/contexts/TranscriptContext.tsx
+  h_eb49140c9cb58b 1-539
+frontend/src/hooks/meeting-details/useCopyOperations.ts
+  h_eb49140c9cb58b 1-196
+frontend/src/hooks/meeting-details/useMeetingData.ts
+  h_eb49140c9cb58b 1-179
+frontend/src/hooks/meeting-details/useMeetingOperations.ts
+  h_eb49140c9cb58b 1-26
+frontend/src/hooks/meeting-details/useModelConfiguration.ts
+  h_eb49140c9cb58b 1-169
+frontend/src/hooks/meeting-details/useSummaryGeneration.ts
+  h_eb49140c9cb58b 1-672
+frontend/src/hooks/meeting-details/useTemplates.ts
+  h_eb49140c9cb58b 1-46
+frontend/src/hooks/useAudioPlayer.ts
+  h_eb49140c9cb58b 1-275
+frontend/src/hooks/useAutoScroll.ts
+  h_eb49140c9cb58b 1-208
+frontend/src/hooks/useImportAudio.ts
+  h_eb49140c9cb58b 1-283
+frontend/src/hooks/useModalState.ts
+  h_eb49140c9cb58b 1-199
+frontend/src/hooks/useNavigation.ts
+  h_eb49140c9cb58b 1-20
+frontend/src/hooks/usePaginatedTranscripts.ts
+  h_eb49140c9cb58b 1-215
+frontend/src/hooks/usePermissionCheck.ts
+  h_eb49140c9cb58b 1-86
+frontend/src/hooks/usePlatform.ts
+  h_eb49140c9cb58b 1-86
+frontend/src/hooks/useProcessingProgress.ts
+  h_eb49140c9cb58b 1-264
+frontend/src/hooks/useRecentLanguages.ts
+  h_eb49140c9cb58b 1-101
+frontend/src/hooks/useRecordingStart.ts
+  h_eb49140c9cb58b 1-326
+frontend/src/hooks/useRecordingStateSync.ts
+  h_eb49140c9cb58b 1-71
+frontend/src/hooks/useRecordingStop.ts
+  h_eb49140c9cb58b 1-470
+frontend/src/hooks/useTranscriptRecovery.ts
+  h_eb49140c9cb58b 1-248
+frontend/src/hooks/useTranscriptStreaming.ts
+  h_eb49140c9cb58b 1-123
+frontend/src/hooks/useTranscriptionModels.ts
+  h_eb49140c9cb58b 1-121
+frontend/src/hooks/useUpdateCheck.ts
+  h_eb49140c9cb58b 1-65
+frontend/src/lib/analytics.ts
+  h_eb49140c9cb58b 1-836
+frontend/src/lib/blocknote-markdown.ts
+  h_eb49140c9cb58b 1-39
+frontend/src/lib/builtin-ai.ts
+  h_eb49140c9cb58b 1-98
+frontend/src/lib/onboarding-summary-model.ts
+  h_eb49140c9cb58b 1-54
+frontend/src/lib/parakeet.ts
+  h_eb49140c9cb58b 1-206
+frontend/src/lib/recordingNotification.tsx
+  h_eb49140c9cb58b 1-63
+frontend/src/lib/summary-language-preferences.ts
+  h_eb49140c9cb58b 1-229
+frontend/src/lib/summary-languages.ts
+  h_eb49140c9cb58b 1-65
+frontend/src/lib/utils.ts
+  h_eb49140c9cb58b 1-32
+frontend/src/lib/whisper.ts
+  h_eb49140c9cb58b 1-334
+frontend/src/services/configService.ts
+  h_eb49140c9cb58b 1-118
+frontend/src/services/indexedDBService.ts
+  h_eb49140c9cb58b 1-449
+frontend/src/services/recordingService.ts
+  h_eb49140c9cb58b 1-170
+frontend/src/services/storageService.ts
+  h_eb49140c9cb58b 1-70
+frontend/src/services/transcriptService.ts
+  h_eb49140c9cb58b 1-117
+frontend/src/services/updateService.ts
+  h_eb49140c9cb58b 1-136
+frontend/src/types/betaFeatures.ts
+  h_eb49140c9cb58b 1-89
+frontend/src/types/index.ts
+  h_eb49140c9cb58b 1-110
+frontend/src/types/onboarding.ts
+  h_eb49140c9cb58b 1-39
+frontend/src/types/summary.ts
+  h_eb49140c9cb58b 1-22
+frontend/tailwind.config.js
+  h_eb49140c9cb58b 1-89
+frontend/tailwind.config.ts
+  h_eb49140c9cb58b 1-33
+frontend/tests/lib/blocknote-markdown.test.ts
+  h_eb49140c9cb58b 1-72
+frontend/tests/lib/onboarding-summary-model.test.mjs
+  h_eb49140c9cb58b 1-94
+frontend/tests/lib/summary-language-preferences.test.js
+  h_eb49140c9cb58b 1-130
+frontend/tsconfig.json
+  h_eb49140c9cb58b 1-30
+llama-helper/Cargo.toml
+  h_eb49140c9cb58b 1-22
+llama-helper/src/main.rs
+  h_eb49140c9cb58b 1-750
+scripts/generate-update-manifest-github.js
+  h_eb49140c9cb58b 1-177
+scripts/inject_transcript.py
+  h_eb49140c9cb58b 1-351
+scripts/test-update-locally.js
+  h_eb49140c9cb58b 1-132
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e464887ea984f704c093d6456214f67195ba3788",
+  "prompts": {},
+  "humans": {
+    "h_eb49140c9cb58b": {
+      "author": "<eryk@talentcanvas.tech>"
+    }
+  }
+}
