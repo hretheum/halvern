@@ -1,0 +1,46 @@
+frontend/src/components/SettingTabs.tsx
+  s_c3f9d99fbb1d04::t_fdacb745f18239 5
+  s_c3f9d99fbb1d04::t_e6a66ad89a7da8 40
+  s_c3f9d99fbb1d04::t_d1cc75c52aaa3c 61-63
+frontend/src-tauri/src/summary/service.rs
+  s_c3f9d99fbb1d04::t_51eaedfbcbf907 583-587
+  s_c3f9d99fbb1d04::t_cfbb301e7d8904 604-637
+frontend/src/components/MeetingDetails/TranscriptButtonGroup.tsx
+  s_c3f9d99fbb1d04::t_5b1524a66e4549 34-52
+  s_c3f9d99fbb1d04::t_e947a3b2dc09e1 92-105
+  s_c3f9d99fbb1d04::t_edf9f8d9c0f058 6-7,11
+frontend/src-tauri/src/database/repositories/setting.rs
+  s_c3f9d99fbb1d04::t_90c4b96260db83 348-401
+frontend/src-tauri/src/lib.rs
+  s_c3f9d99fbb1d04::t_82dcbd19f759c5 44
+  s_c3f9d99fbb1d04::t_1d2769e3c538fd 694-698
+frontend/src-tauri/migrations/20260812000000_add_export_settings.sql
+  s_c3f9d99fbb1d04::t_fa7ef15cd9eb8c 1-7
+frontend/src-tauri/src/export/mod.rs
+  s_c3f9d99fbb1d04::t_38f27eb6ddcdee 275-277
+  s_c3f9d99fbb1d04::t_38f7d7023f3b28 1-274,278-287
+frontend/src-tauri/src/export/markdown.rs
+  s_c3f9d99fbb1d04::t_db978b2b089563 1-376
+frontend/src/components/ObsidianExportSettings.tsx
+  s_c3f9d99fbb1d04::t_fc3ffb13f2efd4 1-142
+frontend/src-tauri/src/export/commands.rs
+  s_c3f9d99fbb1d04::t_3ff193e2ba05c4 1-149
+frontend/src/services/exportService.ts
+  s_c3f9d99fbb1d04::t_577f40ed600140 1-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "62f0f0636e3342542f555860d3c939fa00f287a2",
+  "prompts": {},
+  "sessions": {
+    "s_c3f9d99fbb1d04": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b42f8a7-567f-4091-b374-5adc583f06ed",
+        "model": "claude-opus-5"
+      },
+      "human_author": "<eryk@talentcanvas.tech>"
+    }
+  }
+}
