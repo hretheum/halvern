@@ -1,0 +1,26 @@
+frontend/src-tauri/src/audio/pipeline.rs
+  s_c3f9d99fbb1d04::t_bbea1577e65359 450-454
+frontend/src-tauri/src/audio/raw_tap.rs
+  s_c3f9d99fbb1d04::t_8218b3c9935ad4 1-245
+frontend/src-tauri/src/audio/mod.rs
+  s_c3f9d99fbb1d04::t_d259a732e6974e 20
+frontend/src-tauri/src/audio/recording_manager.rs
+  s_c3f9d99fbb1d04::t_580326b1f7b72c 325-328
+  s_c3f9d99fbb1d04::t_d4809b619ba9b6 79-86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "fbea9fbbc64d80144972d5ea88b00bed69257bc4",
+  "prompts": {},
+  "sessions": {
+    "s_c3f9d99fbb1d04": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b42f8a7-567f-4091-b374-5adc583f06ed",
+        "model": "claude-opus-5"
+      },
+      "human_author": "<eryk@talentcanvas.tech>"
+    }
+  }
+}
