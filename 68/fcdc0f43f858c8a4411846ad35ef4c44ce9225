@@ -1,0 +1,34 @@
+frontend/src-tauri/src/summary/processor.rs
+  s_1ec8223b6afa99::t_4fb2931fea79a6 741-785
+  s_1ec8223b6afa99::t_d6ee13fb5a8207 343,369
+  s_1ec8223b6afa99::t_bc6b64bd2869e5 516
+  s_1ec8223b6afa99::t_04eebfb04cd904 517
+  s_1ec8223b6afa99::t_774388adf46972 149-173
+frontend/src-tauri/src/summary/service.rs
+  s_1ec8223b6afa99::t_684b0769ce8758 103,516,577
+  s_1ec8223b6afa99::t_c7bc5aa8f4bae5 6,62-67,118
+  s_1ec8223b6afa99::t_dc61041afd145e 271-305
+  s_1ec8223b6afa99::t_d6b21c1abf7ab3 494-498
+  s_1ec8223b6afa99::t_228975db37a2a9 804,921,936,951
+  s_1ec8223b6afa99::t_b0ed0bafb985b8 901-917
+  s_1ec8223b6afa99::t_b9b30ef4527d6e 966,981,996,1011
+frontend/src-tauri/src/summary/metadata.rs
+  s_1ec8223b6afa99::t_dc873fdab5e933 27-53
+  s_1ec8223b6afa99::t_ce911a2339a919 11-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "68fcdc0f43f858c8a4411846ad35ef4c44ce9225",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
