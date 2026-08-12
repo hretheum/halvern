@@ -1,0 +1,35 @@
+CLAUDE.md
+  s_1ec8223b6afa99::t_e010d7958808cd 383-388
+frontend/src-tauri/src/lib.rs
+  s_1ec8223b6afa99::t_032eead35c9ed8 653-655
+  s_1ec8223b6afa99::t_6d0bbe1dcc4099 656-657
+RAPORT-sprzatanie.md
+  s_913c6316162f6e::t_fe3d92e45392f0 1-126,128-129,131,133-134,136-138,140-141,143-146,148-150,152-171
+  s_913c6316162f6e::t_73dfb89102e6a9 127,130,132,135,139,142,147,151
+frontend/src-tauri/src/summary/template_commands.rs
+  s_1ec8223b6afa99::t_a9fc9c42b1669c 4,19-34,64-125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "938f053f37898b567e9e6fb327a5b7aebb84cae2",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    },
+    "s_913c6316162f6e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cfe1336-5447-4865-808b-73ebf81c6020",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
