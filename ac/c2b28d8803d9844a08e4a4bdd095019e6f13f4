@@ -1,0 +1,22 @@
+frontend/package.json
+  s_913c6316162f6e::t_27059aff267c6a 88
+  s_913c6316162f6e::t_27747d24df7000 68
+frontend/pnpm-lock.yaml
+  s_913c6316162f6e::t_b3fe59e85fc6bf 2504,2506-2507,2528,2537,2546,2548-2549,2557,2567,2569-2570,2572-2573,2575-2576,2582,2587,2594,2607,2613,2769,3635,3637-3638,3640,3973-3974,3989-3990,4060-4061,4230-4231,4233-4234,4261,5028-5029,5241-5242
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "acc2b28d8803d9844a08e4a4bdd095019e6f13f4",
+  "prompts": {},
+  "sessions": {
+    "s_913c6316162f6e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cfe1336-5447-4865-808b-73ebf81c6020",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
