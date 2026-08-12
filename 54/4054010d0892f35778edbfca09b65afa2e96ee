@@ -1,0 +1,19 @@
+frontend/src-tauri/src/audio/recording_commands.rs
+  s_1ec8223b6afa99::t_24b54b78eeb7d9 355-357,363-373,381-392
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "544054010d0892f35778edbfca09b65afa2e96ee",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
