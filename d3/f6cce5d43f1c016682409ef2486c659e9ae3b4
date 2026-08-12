@@ -1,0 +1,23 @@
+frontend/src-tauri/src/audio/recording_commands.rs
+  s_1ec8223b6afa99::t_7555b1d62f8120 93-173
+  s_1ec8223b6afa99::t_7218d631d5d6cf 48-52
+  s_1ec8223b6afa99::t_2a840a7944b618 10
+  s_1ec8223b6afa99::t_f1db1da585b4a7 367-369,567-568
+  s_1ec8223b6afa99::t_6b3588de7b83d0 569,1322-1358
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d3f6cce5d43f1c016682409ef2486c659e9ae3b4",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
