@@ -1,0 +1,29 @@
+frontend/src-tauri/src/detection/policy.rs
+  s_1ec8223b6afa99::t_1314f9620b6c14 300-303,307-349
+  s_1ec8223b6afa99::t_26ddb07198ad0f 243-244,250-256
+  s_1ec8223b6afa99::t_ea69cca750514f 50-89,103-106
+  s_1ec8223b6afa99::t_10e4299397aba7 388-399,403-405
+  s_1ec8223b6afa99::t_10f87b2c1ee13f 350,686-809
+  s_1ec8223b6afa99::t_6eab06e484e32d 366-369
+  s_1ec8223b6afa99::t_118d96c2cca3ea 406
+frontend/src-tauri/src/detection/commands.rs
+  s_1ec8223b6afa99::t_70b0fa52869430 46-51
+frontend/src-tauri/src/detection/service.rs
+  s_1ec8223b6afa99::t_7a3ec8e8ddf107 162-166
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "2fb46659652b5999ce538bd88995b833da3b1df3",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
