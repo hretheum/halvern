@@ -1,0 +1,24 @@
+frontend/src/components/MeetingDetails/RetranscribeDialog.tsx
+  s_1ec8223b6afa99::t_c48126dd07117d 379
+frontend/src/components/MeetingDetails/TranscriptPanel.tsx
+  s_1ec8223b6afa99::t_0716447c9a47e2 22-28
+frontend/src/contexts/TranscriptContext.tsx
+  s_1ec8223b6afa99::t_3e4c0a2a67a16c 10
+  s_1ec8223b6afa99::t_57a67d1e4048c8 388-391
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7dee66bb18af2bab43d6fba0897d95eb75766230",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
