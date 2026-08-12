@@ -1,0 +1,33 @@
+frontend/src-tauri/src/detection/commands.rs
+  s_1ec8223b6afa99::t_232c9cf1a26363 13-15,27-53,64-67,80-83
+  s_1ec8223b6afa99::t_735a74e6e0084c 129-138
+frontend/src/components/MeetingDetectionSettings.tsx
+  s_1ec8223b6afa99::t_cb3065f3482f90 193-283
+  s_414394c2cf4a1a::t_e77e43487ab78f 21-24
+frontend/src/services/detectionService.ts
+  s_1ec8223b6afa99::t_c9770c236bba12 19-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "caf5a9ad61e82349bb0cfa61829089158209dd94",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    },
+    "s_414394c2cf4a1a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d2357ddd-c2c9-4aa0-940e-c56629c4aca5",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
