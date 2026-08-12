@@ -1,0 +1,55 @@
+frontend/src-tauri/src/calendar/macos.rs
+  s_1ec8223b6afa99::t_8c4da14d5a4680 1,3-5,12,14,16-18,20,22-24,26,28-31,33-34,36-37,44,47-50,52,56,58-59,61-69,71,75-76,80-81,86,88-89,91-92,94-95,97-98,100,105,110-113,116,120,122-123,127-128,130,132-134,139-144,146-147,150-152,154,157-158,162-163,165-169,171,174
+frontend/src-tauri/src/calendar/mod.rs
+  s_1ec8223b6afa99::t_a1f5fa5a0e0f95 1,3,5-8,10-12,14,16,18-20,22,24-25,27-31,36,38-45,47-48,51,53-57,60,68-72
+frontend/src-tauri/src/api/api.rs
+  s_1ec8223b6afa99::t_b21d547550c06e 116,170
+frontend/src-tauri/src/audio/capture/backend_config.rs
+  s_1ec8223b6afa99::t_0fec47f0180fcc 199,215
+frontend/src-tauri/src/audio/pipeline.rs
+  s_1ec8223b6afa99::t_32f2d8539bdf9b 736,739,741-742,757,768,775,781,787,801-803,807,820,824,826-828,833,854,892-894,913,923,1022,1024,1075-1077,1079,1297-1299,1304,1318,1338-1339,1348,1361,1363-1364,1376,1390-1391,1395,1406
+frontend/src-tauri/src/audio/raw_tap.rs
+  s_1ec8223b6afa99::t_0424836880d97e 269,293-294
+frontend/src-tauri/src/audio/recording_commands.rs
+  s_1ec8223b6afa99::t_ef83ec279ae63b 80-81,83
+frontend/src-tauri/src/audio/recording_manager.rs
+  s_1ec8223b6afa99::t_7c643a0758cf8d 456
+frontend/src-tauri/src/audio/recording_saver.rs
+  s_1ec8223b6afa99::t_ed3ac55a852700 25-26,74,106,296,300
+frontend/src-tauri/src/audio/transcription/worker.rs
+  s_1ec8223b6afa99::t_b4316d21bfd036 45,76-78,159,213,229
+frontend/src-tauri/src/bin/vad_bench.rs
+  s_1ec8223b6afa99::t_de1200bd0f7c0a 66-76,78-79,81,93,112,127,141,147,150,155,171,178,185,204,222,227,234,241,246,273,283,288,290,299,319,343,371-374
+frontend/src-tauri/src/database/models.rs
+  s_1ec8223b6afa99::t_c3fb60859c8ade 38-39,41-42
+frontend/src-tauri/src/detection/commands.rs
+  s_1ec8223b6afa99::t_151d11234d2d91 71,89,96,107,112
+frontend/src-tauri/src/detection/policy.rs
+  s_1ec8223b6afa99::t_8c69db48df4633 338,347,356,403,450,459-460,480-481,485,497
+frontend/src-tauri/src/export/commands.rs
+  s_1ec8223b6afa99::t_88db9982a23aec 50,56,77,97,100,126-127,135,155,171,182,186
+frontend/src-tauri/src/export/markdown.rs
+  s_1ec8223b6afa99::t_c87916751deac4 192,194-197,291,374,380,383,385,400
+frontend/src-tauri/src/export/mod.rs
+  s_1ec8223b6afa99::t_ba84568b155aec 96,112,117,127,133,168-169,186,210,307,318-319,330,358,376,392,418,421,426
+frontend/src-tauri/src/summary/processor.rs
+  s_1ec8223b6afa99::t_063d42bbe8cd66 756,760,768
+frontend/src-tauri/src/summary/service.rs
+  s_1ec8223b6afa99::t_7d330f0650b411 62-65,906
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d7e0b74c1b174a4c1dfa7cd97c06895bd382ada8",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
