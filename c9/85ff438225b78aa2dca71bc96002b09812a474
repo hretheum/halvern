@@ -1,0 +1,21 @@
+frontend/src/components/RecordingStopPrompt.tsx
+  s_1ec8223b6afa99::t_4043906be843b8 1-138
+frontend/src/app/layout.tsx
+  s_1ec8223b6afa99::t_8cdbf7d49c70a9 23,248
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c985ff438225b78aa2dca71bc96002b09812a474",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
