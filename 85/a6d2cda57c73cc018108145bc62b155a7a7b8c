@@ -1,0 +1,26 @@
+frontend/src-tauri/src/audio/transcription/worker.rs
+  s_1ec8223b6afa99::t_f8bf4396564e95 47-84
+  s_1ec8223b6afa99::t_259045f0c7f915 269,272-294
+  s_1ec8223b6afa99::t_40de12af4a60ab 217-219
+  s_1ec8223b6afa99::t_1a1b5f9a6ffc3d 108-122
+  s_1ec8223b6afa99::t_20a6aa6660f77c 150-156
+  s_1ec8223b6afa99::t_70a22565030abf 7,9,14
+  s_1ec8223b6afa99::t_9958092211b73e 365-376
+  s_1ec8223b6afa99::t_358c440995661b 177,179-189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "85a6d2cda57c73cc018108145bc62b155a7a7b8c",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
