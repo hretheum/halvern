@@ -1,0 +1,36 @@
+frontend/src/components/VirtualizedTranscriptView.tsx
+  s_1ec8223b6afa99::t_b845cfbf2a2557 73,81,86,104-106
+  s_1ec8223b6afa99::t_15f5b4bac57d0e 304
+  s_1ec8223b6afa99::t_b49cf991b22073 361
+  s_1ec8223b6afa99::t_49c26306202185 12
+frontend/src/types/index.ts
+  s_1ec8223b6afa99::t_afb1ad5de02c95 119-120
+frontend/src/components/MeetingDetails/TranscriptPanel.tsx
+  s_1ec8223b6afa99::t_c04b102b7832a3 64
+frontend/src/hooks/usePaginatedTranscripts.ts
+  s_1ec8223b6afa99::t_521d9ec9239d2f 40
+frontend/src/app/_components/TranscriptPanel.tsx
+  s_1ec8223b6afa99::t_7b216053f706d4 48
+frontend/src/contexts/TranscriptContext.tsx
+  s_1ec8223b6afa99::t_f4321530ea6098 4
+  s_1ec8223b6afa99::t_d2e8d368f8a623 317
+  s_1ec8223b6afa99::t_c09a3a6b997799 386-387
+frontend/src/hooks/useTranscriptRecovery.ts
+  s_1ec8223b6afa99::t_1b42a48aef3de1 176-178
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "136a04087d891a630f79b2d89956dc4d8c1a250b",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
