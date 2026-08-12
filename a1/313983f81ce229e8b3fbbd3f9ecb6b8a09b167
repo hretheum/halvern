@@ -1,0 +1,24 @@
+docs/superpowers/specs/2026-08-12-rozdzielenie-rozpoznawania-na-zrodla-design.md
+  s_1ec8223b6afa99::t_5e93d21037ab3e 135,138,142-143
+  s_1ec8223b6afa99::t_f0f94eb39394ee 44-46
+  s_1ec8223b6afa99::t_7763938806365b 106-114
+  s_1ec8223b6afa99::t_cd0e6898ac9469 1-43,47-92,115-122,124-134,136-137,139-141,144-229
+  s_1ec8223b6afa99::t_5081cb03ce34bb 93-105
+  s_1ec8223b6afa99::t_7bf7e9bcecd06f 123
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a1313983f81ce229e8b3fbbd3f9ecb6b8a09b167",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
