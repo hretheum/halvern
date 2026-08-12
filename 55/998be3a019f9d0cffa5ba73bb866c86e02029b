@@ -1,0 +1,32 @@
+frontend/src/components/TranscriptView.tsx
+  s_1ec8223b6afa99::t_9a5d5d9053536a 292-296
+  s_1ec8223b6afa99::t_9b3743e40f63ba 9
+frontend/src/hooks/meeting-details/useSummaryGeneration.ts
+  s_1ec8223b6afa99::t_aef61beb4c3c30 15
+  s_1ec8223b6afa99::t_c996c9a162c031 449-450,452
+frontend/src/lib/speaker-labels.ts
+  s_1ec8223b6afa99::t_205c1f187cb29c 1-31
+frontend/src/contexts/TranscriptContext.tsx
+  s_1ec8223b6afa99::t_4d14aa151e61dd 427,434-436,438-441
+frontend/src/hooks/meeting-details/useCopyOperations.ts
+  s_1ec8223b6afa99::t_9c452e065958ec 90
+  s_1ec8223b6afa99::t_80f5ea06f77eac 7
+frontend/src/types/index.ts
+  s_1ec8223b6afa99::t_a149dfbc548332 19-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "55998be3a019f9d0cffa5ba73bb866c86e02029b",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
