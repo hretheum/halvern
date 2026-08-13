@@ -1,0 +1,23 @@
+RAPORT-autostop.md
+  s_1ec8223b6afa99::t_cbd72a6a2a09d3 1-121
+frontend/src-tauri/src/detection/policy.rs
+  s_1ec8223b6afa99::t_9d9e05e175ed86 573,580,656,670,681-682,730
+frontend/src-tauri/src/export/markdown.rs
+  s_1ec8223b6afa99::t_68e56cc191acb6 421
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b3eee5de8f7a5a6665aa1b79a11fa58ba5c4738a",
+  "prompts": {},
+  "sessions": {
+    "s_1ec8223b6afa99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87416209-f6ef-496e-9a13-4f312a30f41a",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
