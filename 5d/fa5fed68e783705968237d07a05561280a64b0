@@ -1,0 +1,37 @@
+frontend/src/app/notes/[id]/page.tsx
+  s_06ea03cf3d42ec::t_2b9c1a125ed5d2 5,7
+  s_06ea03cf3d42ec::t_189d9c46d86d55 29-30
+  s_06ea03cf3d42ec::t_3d00eb339f3963 130
+frontend/package.json
+  s_06ea03cf3d42ec::t_9746a96fb742ae 7-8
+  s_f3a3a4217285f4::t_6f6a2d2706bbdb 60
+frontend/tsconfig.json
+  s_06ea03cf3d42ec::t_82d79865edb6ab 40-41
+  s_06ea03cf3d42ec::t_997f7f408b1b85 4-8,18,26-28,31-37
+frontend/pnpm-lock.yaml
+  s_06ea03cf3d42ec::t_7df68a2aae0609 99-100,244-246,281-442,459-460,462-463,468-469,474-475,481-482,488-489,495-496,502-503,508-509,1311-1312,1681-1684,2088-2095,2099-2102,2109-2110,2208-2211,2434-2447,2464-2465,2470,2883-2887,2923-3029,3050,3052,3055,3058,3061,3064,3067,3070,3073,3909,4249-4251,4865-4867,4869-4871,4873,4876,4878-4886,4889,4954,4960,4962,5281-5317,5332
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5dfa5fed68e783705968237d07a05561280a64b0",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    },
+    "s_f3a3a4217285f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0d90902e-0711-4cc6-9c89-eb2b564b147b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
