@@ -1,0 +1,189 @@
+frontend/src/components/AISummary/Section.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 78
+frontend/src/app/page.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 197
+  s_06ea03cf3d42ec::t_00836d72450897 234
+frontend/src/components/ModelSettingsModal.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 1338,1376
+  s_06ea03cf3d42ec::t_00836d72450897 1280
+  s_06ea03cf3d42ec::t_f69856694af465 1287,1343,1398
+frontend/src/components/onboarding/steps/DownloadProgressStep.tsx
+  s_06ea03cf3d42ec::t_7a5403c872df1e 431
+  s_06ea03cf3d42ec::t_00836d72450897 397
+  s_06ea03cf3d42ec::t_f69856694af465 429,460,528
+  s_06ea03cf3d42ec::t_a804d24718aeb4 400,404-405,410,413,436,441,445,486,493,508,511,514
+frontend/src/components/LanguageSelection.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 180-181,210,226
+  s_06ea03cf3d42ec::t_a8a8889e713d29 190
+frontend/src/components/SummaryLanguageSettings.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 19
+  s_06ea03cf3d42ec::t_a804d24718aeb4 21-22,24,39,49,54,63,76,95
+frontend/src/components/RecordingControls.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 349,365,376,437,461,495,525
+  s_06ea03cf3d42ec::t_f69856694af465 348,362,369,382,400,404,431,456
+  s_06ea03cf3d42ec::t_00836d72450897 345,432
+frontend/src/components/BuiltInModelManager.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 478
+  s_06ea03cf3d42ec::t_00836d72450897 305
+  s_06ea03cf3d42ec::t_a804d24718aeb4 309,322,424,436,449,457,459-460,464,469
+  s_06ea03cf3d42ec::t_7a5403c872df1e 308,480
+frontend/src/components/Sidebar/index.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 667,678
+  s_06ea03cf3d42ec::t_a8a8889e713d29 806
+  s_06ea03cf3d42ec::t_f69856694af465 691
+  s_06ea03cf3d42ec::t_a804d24718aeb4 462,465,515,518,530,533,571,596,598,609-610,646,727,746-747,775,797,812,839,854,864
+frontend/src/components/AISummary/Block.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 224,249,266-267,272,277
+  s_06ea03cf3d42ec::t_00836d72450897 259
+frontend/src/components/SummaryModelSettings.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 130-131,141
+  s_06ea03cf3d42ec::t_00836d72450897 127,139
+frontend/src/components/MeetingDetails/TranscriptPanel.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 92,131
+  s_06ea03cf3d42ec::t_a804d24718aeb4 94,128
+frontend/src/app/_components/TranscriptPanel.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 54,56
+frontend/src/components/ui/button.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 25
+frontend/src/components/PreferenceSettings.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 158-159,167-168,174,176,181,189,191,196,204,206,211
+  s_06ea03cf3d42ec::t_00836d72450897 155,166,227
+frontend/src/components/EmptyStateSummary.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 27
+  s_06ea03cf3d42ec::t_a804d24718aeb4 28,31
+frontend/src/components/RecordingSettings.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 176,185,199,201,207,214,246,259-260,264
+  s_06ea03cf3d42ec::t_f69856694af465 166-167
+frontend/src/components/onboarding/shared/StatusIndicator.tsx
+  s_06ea03cf3d42ec::t_7a5403c872df1e 13
+frontend/src/components/AISummary/index.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 675
+  s_06ea03cf3d42ec::t_a804d24718aeb4 651-653,684,687,691,711,732,752,775,782
+frontend/src/components/LanguagePickerPopover.tsx
+  s_06ea03cf3d42ec::t_7a5403c872df1e 96
+  s_06ea03cf3d42ec::t_a804d24718aeb4 88-89,103,112-113,118,123,132-133,139,147,158-159,164,171
+  s_06ea03cf3d42ec::t_00836d72450897 84
+frontend/src/components/ParakeetModelManager.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 464
+  s_06ea03cf3d42ec::t_a804d24718aeb4 335-336,406,465,486,499,521,588,600,614
+  s_06ea03cf3d42ec::t_f69856694af465 606
+frontend/src/components/onboarding/steps/PermissionsStep.tsx
+  s_06ea03cf3d42ec::t_7a5403c872df1e 155
+frontend/src/components/onboarding/shared/PermissionRow.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 23,32,35
+  s_06ea03cf3d42ec::t_7a5403c872df1e 40
+frontend/src/components/ConfirmationModel/confirmation-modal.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 15
+  s_06ea03cf3d42ec::t_a804d24718aeb4 17,21
+frontend/src/components/ImportAudio/ImportAudioDialog.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 272,276-277,293,309-310,324,333,422
+  s_06ea03cf3d42ec::t_f69856694af465 416
+frontend/src/components/shared/DownloadProgressToast.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 97,99
+  s_06ea03cf3d42ec::t_00836d72450897 64
+  s_06ea03cf3d42ec::t_a804d24718aeb4 67,74,76,83,93,105,113
+frontend/src/components/TranscriptSettings.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 102,106,178,184,195
+frontend/src/components/onboarding/steps/SetupOverviewStep.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 95
+  s_06ea03cf3d42ec::t_00836d72450897 55
+  s_06ea03cf3d42ec::t_a804d24718aeb4 64,71,104
+frontend/src/components/DeviceSelection.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 218-220
+  s_06ea03cf3d42ec::t_a804d24718aeb4 229,247,264-265,290,295-296,302,332-333,360,365,373
+frontend/src/app/_components/SettingsModal.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 283,293
+  s_06ea03cf3d42ec::t_00836d72450897 65,95,115,139,171,212,247,305,323
+  s_06ea03cf3d42ec::t_a804d24718aeb4 68,72,87,90,144-145,173,176,214,217,249-250,255,273,286-287
+frontend/src/app/meeting-details/page-content.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 173
+frontend/src/components/AnalyticsConsentSwitch.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 195
+  s_06ea03cf3d42ec::t_a804d24718aeb4 160-161,166,168-169,175,187,190-191
+frontend/src/app/settings/page.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 70,72,77,92,100
+frontend/src/components/About.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 37-39,46,48-50,52-54,56-58,60-62,76-77,89-90
+frontend/src/components/BetaSettings.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 35
+  s_06ea03cf3d42ec::t_a804d24718aeb4 40-41,48
+frontend/src/app/_components/StatusOverlays.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 31
+  s_06ea03cf3d42ec::t_00836d72450897 29
+  s_06ea03cf3d42ec::t_f69856694af465 30
+frontend/src/components/MeetingDetails/SummaryPanel.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 238,258,334
+  s_06ea03cf3d42ec::t_00836d72450897 256,370,373,381,389,397
+frontend/src/components/MeetingDetails/RetranscribeDialog.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 403
+  s_06ea03cf3d42ec::t_a804d24718aeb4 409
+frontend/src/components/AudioBackendSelector.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 80-81,107,116
+  s_06ea03cf3d42ec::t_00836d72450897 142
+  s_06ea03cf3d42ec::t_a804d24718aeb4 94,102,152,156,165,170,177
+frontend/src/components/ComplianceNotification.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 79,85,93
+  s_06ea03cf3d42ec::t_00836d72450897 74
+frontend/src/components/WhisperModelManager.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 396-398,483,540,561-563,578,586,621,688,700,714
+  s_06ea03cf3d42ec::t_00836d72450897 539
+  s_06ea03cf3d42ec::t_f69856694af465 706
+frontend/src/components/AnalyticsDataModal.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 17,145
+  s_06ea03cf3d42ec::t_a804d24718aeb4 19,22,26,47,50-52,57,61-63,69,73-75,79,83-85,91,95-97,102,121-123,142
+frontend/src/components/Logo.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 22
+frontend/src/components/ModelDownloadProgress.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 114,116,119
+frontend/src/components/AudioLevelMeter.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 67,73,92,94,96,136,140
+  s_06ea03cf3d42ec::t_a804d24718aeb4 101
+frontend/src/components/onboarding/shared/ProgressIndicator.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 39-40,58
+  s_06ea03cf3d42ec::t_a804d24718aeb4 48
+frontend/src/components/onboarding/OnboardingContainer.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 58,71
+  s_06ea03cf3d42ec::t_a804d24718aeb4 46,60,73,89,91
+frontend/src/app/notes/[id]/page.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 141
+frontend/src/components/onboarding/steps/WelcomeStep.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 34,57
+  s_06ea03cf3d42ec::t_00836d72450897 37
+  s_06ea03cf3d42ec::t_a804d24718aeb4 43-44,47,61
+frontend/src/components/Info.tsx
+  s_06ea03cf3d42ec::t_f69856694af465 20
+  s_06ea03cf3d42ec::t_a804d24718aeb4 19,24,26
+frontend/src/components/DatabaseImport/HomebrewDatabaseDetector.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 106
+  s_06ea03cf3d42ec::t_a8a8889e713d29 123,141
+frontend/src/lib/recordingNotification.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 25,34,36
+  s_06ea03cf3d42ec::t_f69856694af465 49
+frontend/src/components/ChunkProgressDisplay.tsx
+  s_06ea03cf3d42ec::t_00836d72450897 91
+  s_06ea03cf3d42ec::t_a804d24718aeb4 86,95,135,138,157,164,168,171,178,196,216,230,267,269,272,284
+  s_06ea03cf3d42ec::t_f69856694af465 143,277
+frontend/src/components/RecordingStatusBar.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 39,42
+frontend/src/components/EditableTitle.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 52,61,69,89
+frontend/src/components/VirtualizedTranscriptView.tsx
+  s_06ea03cf3d42ec::t_a804d24718aeb4 93,105,108-109,112,251,258,261,317-318,322,335,374-375,379,392
+  s_06ea03cf3d42ec::t_00836d72450897 238
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "133c7a4f17f9bf9c95a8fd8d76116e41a7aa3fc2",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
