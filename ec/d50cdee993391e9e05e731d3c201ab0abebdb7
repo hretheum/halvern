@@ -1,0 +1,21 @@
+frontend/src/hooks/useTranscriptStreaming.ts
+  s_06ea03cf3d42ec::t_00eb3ff0a604d7 105-110
+frontend/src/hooks/useAudioPlayer.ts
+  s_06ea03cf3d42ec::t_697bd3f3469414 52,56-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ecd50cdee993391e9e05e731d3c201ab0abebdb7",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
