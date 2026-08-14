@@ -1,0 +1,47 @@
+frontend/src-tauri/src/lib.rs
+  s_06ea03cf3d42ec::t_091946ae4ce26d 719-723
+frontend/src/app/settings/page.tsx
+  s_06ea03cf3d42ec::t_3a81b85a815da4 26
+  s_06ea03cf3d42ec::t_9a8d5bba52b808 144-146
+  s_06ea03cf3d42ec::t_fcab22fe287d21 4,15
+frontend/src-tauri/src/summary/templates/defaults.rs
+  s_06ea03cf3d42ec::t_237264b1528f26 38-39
+frontend/src/hooks/useTemplateManagement.ts
+  s_06ea03cf3d42ec::t_caa0ca7694e13d 1-104
+frontend/src-tauri/src/summary/templates/loader.rs
+  s_06ea03cf3d42ec::t_e34039026be6c8 355-400,404,406-425,437-444
+  s_06ea03cf3d42ec::t_551c758979d8ea 401-403,405
+  s_06ea03cf3d42ec::t_796db1e68b4a98 180-211,216-218,224-250,259-301
+  s_06ea03cf3d42ec::t_e5dbdb0489821f 70
+  s_06ea03cf3d42ec::t_a8f494939ec543 11-16
+  s_06ea03cf3d42ec::t_9a3b53c4b65edd 251-258
+  s_06ea03cf3d42ec::t_e27baf668b2dc0 426-436
+  s_06ea03cf3d42ec::t_1973c24ccfa71e 302
+frontend/src/components/TemplateSettings.tsx
+  s_06ea03cf3d42ec::t_e44a75609f3b3c 236,240
+  s_06ea03cf3d42ec::t_8c586f6515e430 211-212,219
+  s_06ea03cf3d42ec::t_0f5711adef8b02 1-69,76-210,213-218,220-235,237-239,241-445
+  s_06ea03cf3d42ec::t_4570603c5a56a8 70-75
+frontend/src-tauri/src/summary/template_commands.rs
+  s_06ea03cf3d42ec::t_f9abe2d207db61 56,60-67
+  s_06ea03cf3d42ec::t_805fc5ab8a00c4 138-265
+  s_06ea03cf3d42ec::t_1efebf30f7b19b 3-5,19-23
+frontend/src-tauri/src/summary/templates/mod.rs
+  s_06ea03cf3d42ec::t_0fa09e91d8d2e1 46-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ff75529bcfd9569022abe9d52a41819f4bb763a1",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
