@@ -1,0 +1,40 @@
+frontend/src-tauri/src/api/api.rs
+  s_06ea03cf3d42ec::t_e15432ad4cb7d9 32-67
+  s_06ea03cf3d42ec::t_45dbfa3712d7e8 274-356
+  s_06ea03cf3d42ec::t_65e93b9b75affb 10-11
+frontend/src-tauri/src/database/repositories/transcript.rs
+  s_06ea03cf3d42ec::t_de586b59a35a9c 26-36,39-40,47
+frontend/src-tauri/src/lib.rs
+  s_06ea03cf3d42ec::t_c194ee1b09f6c6 684
+frontend/src-tauri/migrations/20260814120000_meeting_list_and_search.sql
+  s_06ea03cf3d42ec::t_ed611d0eb7a54b 1-57,67-73,76-81,84-87,90-93,98-113
+  s_06ea03cf3d42ec::t_d60745ebfbef8c 58-66,74-75,82-83,88-89,94-97
+frontend/src-tauri/src/database/models.rs
+  s_06ea03cf3d42ec::t_af257ec6225570 12-20
+frontend/src-tauri/src/database/repositories/meeting.rs
+  s_06ea03cf3d42ec::t_9d3d8a76f8d5bf 194-215,218-222
+  s_06ea03cf3d42ec::t_152c12d618c91c 7-113,125-151,155,160-193,216-217,223-229,231-239,245-249,263
+  s_06ea03cf3d42ec::t_84de70d4d8b502 241-243
+  s_06ea03cf3d42ec::t_66aa91c096b7ca 230,244,250-262,264-299
+  s_06ea03cf3d42ec::t_7a09730dbeb7f2 152-154,156-159
+  s_06ea03cf3d42ec::t_1902fc8dcf80ac 240
+  s_06ea03cf3d42ec::t_31ee1e8c34cdb3 560-652
+  s_06ea03cf3d42ec::t_02d05da8f443b8 300,653-862
+  s_06ea03cf3d42ec::t_4dc08cb13b5a4b 301
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "39c1c6cb7e1b38396f4960fce0625dd93cc172fa",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
