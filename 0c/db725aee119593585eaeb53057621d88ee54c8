@@ -1,0 +1,25 @@
+frontend/src/components/ConfirmationModel/confirmation-modal.tsx
+  s_8e7c8d8b770249::t_9eb919ec02f5fd 14
+frontend/src/components/TranscriptSettings.tsx
+  s_8e7c8d8b770249::t_9eb919ec02f5fd 195
+frontend/src/components/AnalyticsDataModal.tsx
+  s_8e7c8d8b770249::t_9eb919ec02f5fd 16
+frontend/src/app/_components/SettingsModal.tsx
+  s_8e7c8d8b770249::t_9eb919ec02f5fd 64,170,211,246,304,322
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "0cdb725aee119593585eaeb53057621d88ee54c8",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
