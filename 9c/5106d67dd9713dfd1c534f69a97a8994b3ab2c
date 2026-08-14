@@ -1,0 +1,63 @@
+frontend/src-tauri/src/lib.rs
+  s_06ea03cf3d42ec::t_222a28e87b9d9e 786
+frontend/src/components/MeetingDetails/RetranscribeDialog.tsx
+  s_06ea03cf3d42ec::t_5d441e712d07af 398-412,422
+  s_06ea03cf3d42ec::t_075f51c5ffc8a5 477-483,485
+  s_06ea03cf3d42ec::t_39e2e03cad5daf 384-387
+  s_06ea03cf3d42ec::t_7683a92dcee8f8 128,132-149,151
+  s_06ea03cf3d42ec::t_9dd3fb6899a1cc 70-72,74-77
+  s_06ea03cf3d42ec::t_536a54086c5e13 34
+frontend/src-tauri/src/audio/common.rs
+  s_06ea03cf3d42ec::t_2eba386d097d24 97,105-111
+  s_06ea03cf3d42ec::t_0727557883b14f 52-66,69,81
+frontend/src-tauri/src/audio/retranscription.rs
+  s_06ea03cf3d42ec::t_b5a676fb3cfe48 230,356,378,384,405,412,416,449,453,455-499,503-504,507-513,520-527,529-535,541-543,545-548,555-556,562-565,578-581,584,587-590,596,598,600,609-612,614-615,622-626,628-629,633-634,643-648,652-663,669-674,676-677,679-685,689,1033
+  s_06ea03cf3d42ec::t_347619e0209887 248-321,324-355
+  s_06ea03cf3d42ec::t_5387c11858b5d1 322
+  s_06ea03cf3d42ec::t_010c702d715a70 1038
+  s_06ea03cf3d42ec::t_11686b574b0909 113,116-121
+  s_06ea03cf3d42ec::t_ba82184fd5dc2b 388-400
+  s_06ea03cf3d42ec::t_f31e8cba6e79a1 4,6-9
+  s_06ea03cf3d42ec::t_8f5a684cb6407a 1026-1032
+  s_06ea03cf3d42ec::t_f4ce59c1f6ce9e 134-135
+  s_06ea03cf3d42ec::t_2c92cf6f750501 365-367
+  s_06ea03cf3d42ec::t_986bddcf65887c 425-435
+  s_06ea03cf3d42ec::t_2d36cc3e3a0463 407,423,444,1116-1208
+  s_06ea03cf3d42ec::t_c73ecb3523b591 215-229
+  s_06ea03cf3d42ec::t_fd37ec2899c0b7 185-214
+  s_06ea03cf3d42ec::t_08e09d77799c70 74-77
+  s_06ea03cf3d42ec::t_70ed6154d2f5b0 231
+  s_06ea03cf3d42ec::t_20e8d8885f5096 323
+  s_06ea03cf3d42ec::t_b9263f067220c8 363-364
+  s_06ea03cf3d42ec::t_789a54a836c14b 368-370,375-377
+  s_06ea03cf3d42ec::t_f0c7996827eff0 379-383
+  s_06ea03cf3d42ec::t_6f30247f0093a0 385-387
+  s_06ea03cf3d42ec::t_af2e2216cd2114 401-404
+  s_06ea03cf3d42ec::t_e08aa1fe6a9d82 406
+  s_06ea03cf3d42ec::t_87f302e4625fb1 408-411
+  s_06ea03cf3d42ec::t_49c87dd7051691 413-415
+  s_06ea03cf3d42ec::t_ba08e0c1e8f7da 417-422
+  s_06ea03cf3d42ec::t_3b2b997df3a5c5 424
+  s_06ea03cf3d42ec::t_481c7898b2b63c 436-438,441-443
+  s_06ea03cf3d42ec::t_c827ecca60b9a7 445-448
+  s_06ea03cf3d42ec::t_aad21cd5909414 450-452
+  s_06ea03cf3d42ec::t_a01402662b51bf 1034
+  s_06ea03cf3d42ec::t_af2b23949e08bf 1209
+  s_06ea03cf3d42ec::t_d308a39fa3fe66 371-374,439-440
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9c5106d67dd9713dfd1c534f69a97a8994b3ab2c",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
