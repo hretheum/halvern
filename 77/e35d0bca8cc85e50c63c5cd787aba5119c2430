@@ -1,0 +1,82 @@
+frontend/src/contexts/ConfigContext.tsx
+  s_06ea03cf3d42ec::t_f52d7050839f79 323-325,341-347,350
+frontend/src/components/WhisperModelManager.tsx
+  s_06ea03cf3d42ec::t_fffc64ed070197 160-164,167
+  s_06ea03cf3d42ec::t_bd8c09b9be84ec 127-128,134
+  s_06ea03cf3d42ec::t_1ddcec464a9d1d 245-249,256
+  s_06ea03cf3d42ec::t_6443cdd8a7f64e 205-209,212
+frontend/src/contexts/RecordingPostProcessingProvider.tsx
+  s_06ea03cf3d42ec::t_3e909435a14fb4 32-33,38,45-49,60
+frontend/src/components/Sidebar/index.tsx
+  s_06ea03cf3d42ec::t_0ce496c28f7848 164-166,178-184,187
+frontend/src/contexts/RecordingStateContext.tsx
+  s_06ea03cf3d42ec::t_cdaf1b363a1248 136-137
+  s_06ea03cf3d42ec::t_a9cc5073d88ddd 232
+  s_06ea03cf3d42ec::t_14b8b1feb7acb6 201-204
+  s_06ea03cf3d42ec::t_1816217a5c1b11 216-219
+  s_06ea03cf3d42ec::t_b0aaeabd65f035 186-189
+  s_06ea03cf3d42ec::t_8aa44570e66a4b 153-156
+frontend/src/components/RecordingStopPrompt.tsx
+  s_06ea03cf3d42ec::t_2ea02be1c67cc4 58-59,62-74,76-81,84-89,94
+frontend/src/hooks/useModalState.ts
+  s_06ea03cf3d42ec::t_9ecd278aff478d 184-186,188,200-203,208-212
+  s_06ea03cf3d42ec::t_e6975f09f5ae6f 139-140,145
+  s_06ea03cf3d42ec::t_078f67af812cb1 160-164,174
+  s_06ea03cf3d42ec::t_38280925db1bfa 104-105,110,114-118,128
+frontend/src/hooks/meeting-details/useModelConfiguration.ts
+  s_06ea03cf3d42ec::t_df0948368e6e81 101-109,112
+frontend/src/hooks/useRecordingStop.ts
+  s_06ea03cf3d42ec::t_1566322ce73699 87
+  s_06ea03cf3d42ec::t_5143c7807525b8 121
+  s_06ea03cf3d42ec::t_3ff3c0e2c0e564 106-110
+  s_06ea03cf3d42ec::t_2e122495717045 81-82
+frontend/src/components/RecordingControls.tsx
+  s_06ea03cf3d42ec::t_ba7e01e731a740 249-250
+  s_06ea03cf3d42ec::t_15a2b918216f2e 275-279
+  s_06ea03cf3d42ec::t_dab48ed9dedc23 316-320
+  s_06ea03cf3d42ec::t_72ab3e1260f191 346
+  s_06ea03cf3d42ec::t_3b1eafdc55291b 330-334
+frontend/src/contexts/TranscriptContext.tsx
+  s_06ea03cf3d42ec::t_aa780f67cfe7e9 196-197
+  s_06ea03cf3d42ec::t_cab8cee5f75ad9 88-89,97
+  s_06ea03cf3d42ec::t_e745c5126a1068 303
+  s_06ea03cf3d42ec::t_4adedef24b824b 168-172,181
+  s_06ea03cf3d42ec::t_0ea176eac1dc80 354-358
+  s_06ea03cf3d42ec::t_78898a7112b710 146-150,153
+  s_06ea03cf3d42ec::t_eba80ba986ef4f 371
+frontend/src/components/BuiltInModelManager.tsx
+  s_06ea03cf3d42ec::t_7c68c3d1ee3046 192-196,202
+  s_06ea03cf3d42ec::t_74860ca110c214 79-80,83
+frontend/src/components/ParakeetModelManager.tsx
+  s_06ea03cf3d42ec::t_50e44cf425bcfd 79-80
+  s_06ea03cf3d42ec::t_e6d20712829a83 156-159
+  s_06ea03cf3d42ec::t_ed8fcb9c22476f 196-199,206
+  s_06ea03cf3d42ec::t_9c561644bbddb2 112-115
+frontend/src/components/SummaryModelSettings.tsx
+  s_06ea03cf3d42ec::t_f887ca4305344b 94-102,105
+frontend/src/contexts/OllamaDownloadContext.tsx
+  s_06ea03cf3d42ec::t_f1646bc6b6a205 47-48
+  s_06ea03cf3d42ec::t_669808110d5f26 74-77
+  s_06ea03cf3d42ec::t_bef83ea8a71f02 106-109
+  s_06ea03cf3d42ec::t_05b1f9784366e3 138-141
+  s_06ea03cf3d42ec::t_8abe77876276bf 154
+frontend/src/components/DeviceSelection.tsx
+  s_06ea03cf3d42ec::t_4167bae07a1aa8 77-79,83,93-97
+  s_06ea03cf3d42ec::t_f942f9ff88ca58 107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "77e35d0bca8cc85e50c63c5cd787aba5119c2430",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
