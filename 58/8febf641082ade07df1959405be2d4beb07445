@@ -1,0 +1,45 @@
+frontend/src/hooks/useTranscriptionModels.ts
+  s_06ea03cf3d42ec::t_9e66490509092b 11,17-20
+  s_06ea03cf3d42ec::t_bcf981cf638163 86-104
+  s_06ea03cf3d42ec::t_0801db5fab078c 21-22
+frontend/src-tauri/src/audio/transcription/mod.rs
+  s_06ea03cf3d42ec::t_2f2c2c29da9abc 8,16
+frontend/src-tauri/src/lib.rs
+  s_06ea03cf3d42ec::t_90c487aecaefbc 705-708
+frontend/src-tauri/src/audio/transcription/engine.rs
+  s_06ea03cf3d42ec::t_60e6245a7c9003 48,77-95
+  s_06ea03cf3d42ec::t_948ebdd40d77cb 187-190,193
+  s_06ea03cf3d42ec::t_415b1e5aa305d3 49-76
+frontend/src-tauri/src/audio/transcription/remote_provider.rs
+  s_06ea03cf3d42ec::t_c3c47674b4b343 1-405
+frontend/src/components/ImportAudio/ImportAudioDialog.tsx
+  s_06ea03cf3d42ec::t_d90473a56f5165 87-91,93,100-103
+frontend/src/components/TranscriptSettings.tsx
+  s_06ea03cf3d42ec::t_262889134d6928 37-89
+  s_06ea03cf3d42ec::t_3e411cc6baa894 7,11-15
+  s_06ea03cf3d42ec::t_f29c160b0b3f9b 234-300
+  s_06ea03cf3d42ec::t_8b781434d5c24b 16
+frontend/src-tauri/src/database/repositories/setting.rs
+  s_06ea03cf3d42ec::t_af5055106f9ae2 1
+  s_06ea03cf3d42ec::t_82429bc6aea35d 349-430
+frontend/src-tauri/src/api/api.rs
+  s_06ea03cf3d42ec::t_a531f46439ce01 1115-1195
+frontend/src-tauri/migrations/20260814000000_add_remote_transcription.sql
+  s_06ea03cf3d42ec::t_194dbe75632182 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "588febf641082ade07df1959405be2d4beb07445",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
