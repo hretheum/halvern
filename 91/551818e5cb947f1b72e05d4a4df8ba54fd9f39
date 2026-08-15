@@ -1,0 +1,25 @@
+frontend/src/components/shared/DownloadProgressToast.tsx
+  s_06ea03cf3d42ec::t_2125e40ca985df 14
+frontend/src/components/PreferenceSettings.tsx
+  s_06ea03cf3d42ec::t_be2495cc9111da 127
+frontend/src/app/settings/page.tsx
+  s_06ea03cf3d42ec::t_11f99dd4c8ab42 3-4,15,19-33,36-37,43,45-48,50,52,74-85,87-99,102-109,111-117,119-150,154
+frontend/src/components/DataLocationsSettings.tsx
+  s_06ea03cf3d42ec::t_b272e8d49250ea 1-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "91551818e5cb947f1b72e05d4a4df8ba54fd9f39",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
