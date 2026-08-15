@@ -1,0 +1,20 @@
+frontend/src/app/globals.css
+  s_06ea03cf3d42ec::t_4f99b85ae550e5 44-45
+  s_06ea03cf3d42ec::t_3d7d12215bff79 172-176,178-179,181,183-197,207-226
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c9a1b5154756720e8aac16af0aee4e8ac293ce29",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
