@@ -1,0 +1,29 @@
+frontend/src/components/MeetingDetails/WorkshopTranscriptPanel.tsx
+  s_06ea03cf3d42ec::t_46e5841ff25f18 1-167
+frontend/src/app/meeting-details/page-content.tsx
+  s_06ea03cf3d42ec::t_be8318499de9f2 2,9-10,12,14-15,25-56,91-94,101,168-224,271-272,278,280-313,350-362
+frontend/src/components/MeetingDetails/WorkshopHeader.tsx
+  s_06ea03cf3d42ec::t_b8650c0ecc17f0 1-263
+frontend/src/app/meeting-details/page.tsx
+  s_06ea03cf3d42ec::t_c1287e438d2df9 143-146
+  s_06ea03cf3d42ec::t_d5a62d3a49e508 20-23
+  s_06ea03cf3d42ec::t_e42a14b347a71c 355,371,402
+frontend/src/components/VirtualizedTranscriptView.tsx
+  s_06ea03cf3d42ec::t_f7c0e9ddbfca65 32-37,60-62,75-98,107-108,117-118,124,147-149,166-167,272-286,361-362,402,420-421
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b94ab7163d658353a65aa4a1435ca53dabb67822",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "unknown"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
