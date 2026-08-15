@@ -1,0 +1,28 @@
+frontend/src-tauri/src/detection/service.rs
+  s_8e7c8d8b770249::t_2b9294806aa82a 361
+  s_8e7c8d8b770249::t_1d03b1bd61aa61 211,213-214,216,223
+  s_8e7c8d8b770249::t_c849868b5aeed3 279
+  s_8e7c8d8b770249::t_ecb4d2808c1c60 20
+  s_8e7c8d8b770249::t_1ed5c888e09bcf 330,332-335
+frontend/src-tauri/src/detection/policy.rs
+  s_8e7c8d8b770249::t_0a75dc0fc4a99f 422-465,467-472
+  s_8e7c8d8b770249::t_2ad65530147168 1064-1069
+  s_8e7c8d8b770249::t_f95563d3feb6f3 1024-1063,1070-1147
+  s_8e7c8d8b770249::t_2ba64b8fe19e79 466
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7b89f437580328ca36445d16c01b5ef4109c2db0",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
