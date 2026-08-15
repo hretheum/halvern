@@ -1,0 +1,25 @@
+frontend/src/app/globals.css
+  s_06ea03cf3d42ec::t_9eff4c8fed174f 313-322,325,328-331,334-337
+  s_06ea03cf3d42ec::t_94bc431ed3241c 323-324,326-327,332-333
+frontend/src/components/MeetingDetails/SummaryPanel.tsx
+  s_06ea03cf3d42ec::t_068fe8e60dda84 280-311
+  s_06ea03cf3d42ec::t_211a60cd80b548 417
+frontend/src/components/MeetingDetails/SummaryUpdaterButtonGroup.tsx
+  s_06ea03cf3d42ec::t_de2c92663a9ed1 28-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "73cc6a4784fd017899bbe1744ebab8c08411e1b8",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "unknown"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
