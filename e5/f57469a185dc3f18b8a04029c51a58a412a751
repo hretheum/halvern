@@ -1,0 +1,20 @@
+frontend/src-tauri/src/summary/summary_engine/model_manager.rs
+  s_8e7c8d8b770249::t_8808dcdd6d91ed 856
+  s_8e7c8d8b770249::t_900ad1b4e3679f 852-855,857-1043
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e5f57469a185dc3f18b8a04029c51a58a412a751",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
