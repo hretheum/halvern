@@ -1,0 +1,31 @@
+frontend/src-tauri/src/database/repositories/summary.rs
+  s_8e7c8d8b770249::t_bf73f6b4648e1d 656-662,672-673,685-692,708-709,713
+  s_8e7c8d8b770249::t_ed82cbadc0c388 51-72
+  s_8e7c8d8b770249::t_f57ec44b67f40b 256-263,268
+  s_8e7c8d8b770249::t_4daebd833e5295 141-143,150,155,170-177,182,185,190,194,214-221,226,229,233,237
+  s_8e7c8d8b770249::t_248ef728e83c8c 89-97,102
+  s_8e7c8d8b770249::t_78596f47e8f085 546-550,554,562-565,567-570,572-580
+  s_8e7c8d8b770249::t_6db9b809a2e3c5 716-722
+frontend/src-tauri/src/summary/service.rs
+  s_8e7c8d8b770249::t_e2c91940709e2f 666,675-679,681-700
+  s_8e7c8d8b770249::t_733d302920bc87 707-716
+  s_8e7c8d8b770249::t_77444f101a1257 775,777-781,784-785
+frontend/src-tauri/src/summary/commands.rs
+  s_8e7c8d8b770249::t_4927b919a71dfb 427-436
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c43c3be667c9e57197aeeeaa1791b9ab29985caa",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
