@@ -1,0 +1,32 @@
+frontend/src-tauri/src/audio/stream.rs
+  s_8e7c8d8b770249::t_6c0769e4e0aa1d 210,221,225
+  s_8e7c8d8b770249::t_71f032feb2c859 564-744
+  s_8e7c8d8b770249::t_3571cd78f64845 268
+  s_8e7c8d8b770249::t_8a8d4aaf504c02 281
+  s_8e7c8d8b770249::t_99f77ac47d4717 371-435
+  s_8e7c8d8b770249::t_7267be7e3d7f85 95-97,100
+  s_8e7c8d8b770249::t_c1dd8d3bfb600e 31-61
+  s_8e7c8d8b770249::t_489fcbc6d8d162 294
+frontend/src-tauri/src/audio/recording_manager.rs
+  s_8e7c8d8b770249::t_aafcfe64444ca4 101-104
+  s_8e7c8d8b770249::t_77ad09b001113f 448-457,459-475,478-479
+  s_8e7c8d8b770249::t_4fb85abbc6f06f 614-1010
+  s_8e7c8d8b770249::t_cc1921976aace3 12
+  s_8e7c8d8b770249::t_1496158dc016e7 535-602
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "1f28ecfb52b08d64b61c5543d578720d4cbff5b2",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
