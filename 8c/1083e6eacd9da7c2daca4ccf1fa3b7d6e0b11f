@@ -1,0 +1,26 @@
+docs/ONBOARDING_LANGUAGE_MODEL.md
+  s_8e7c8d8b770249::t_a57567bda930b1 231,234-251,254-263
+  s_8e7c8d8b770249::t_01fc5aac42f684 7-13
+  s_8e7c8d8b770249::t_525e575fc3279a 218-224
+  s_8e7c8d8b770249::t_95c439c1e53417 190-201,203-208
+frontend/src/components/onboarding/steps/MeetingLanguageStep.tsx
+  s_8e7c8d8b770249::t_073b8fd978006a 48
+  s_8e7c8d8b770249::t_5e81f930a34359 16,18-19
+  s_8e7c8d8b770249::t_7c9d04ba4388e7 83-102,105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8c1083e6eacd9da7c2daca4ccf1fa3b7d6e0b11f",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
