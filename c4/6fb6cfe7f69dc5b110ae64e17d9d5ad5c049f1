@@ -1,0 +1,33 @@
+frontend/src/components/ui/alert-dialog.tsx
+  s_06ea03cf3d42ec::t_c474e6999c1230 1-196
+frontend/src/components/ui/avatar.tsx
+  s_06ea03cf3d42ec::t_6677a8bc4f5f67 1-109
+frontend/src/components/ui/badge.tsx
+  s_06ea03cf3d42ec::t_cea430b1b5baf7 1-48
+frontend/src/components/ui/button.tsx
+  s_06ea03cf3d42ec::t_bca0f5f421e394 3,8,12,14,16,18-20,24-31,41-51,53-62
+frontend/src/components/ui/card.tsx
+  s_06ea03cf3d42ec::t_3086ba3cfd218e 1-92
+frontend/src/components/ui/checkbox.tsx
+  s_06ea03cf3d42ec::t_eb5c543b658dda 1-32
+frontend/src/components/ui/skeleton.tsx
+  s_06ea03cf3d42ec::t_dc5252fe14e2fd 1-13
+frontend/src/components/ui/table.tsx
+  s_06ea03cf3d42ec::t_7cecb75bfb568b 1-116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c46fb6cfe7f69dc5b110ae64e17d9d5ad5c049f1",
+  "prompts": {},
+  "sessions": {
+    "s_06ea03cf3d42ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f3e50-4611-4dd5-a31f-12304e76f37b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
