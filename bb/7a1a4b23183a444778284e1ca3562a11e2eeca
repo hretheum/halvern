@@ -1,0 +1,19 @@
+frontend/src-tauri/TEST_COVERAGE_AUDIT.md
+  s_8e7c8d8b770249::t_ada1b154bc0183 243,246-250,252-259,261-262,268,270-273,276-279
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "bb7a1a4b23183a444778284e1ca3562a11e2eeca",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
