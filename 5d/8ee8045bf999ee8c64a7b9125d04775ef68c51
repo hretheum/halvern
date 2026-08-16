@@ -1,0 +1,25 @@
+frontend/src-tauri/src/audio/audio_processing.rs
+  s_8e7c8d8b770249::t_6867f858b41c55 27-47,63-64
+  s_8e7c8d8b770249::t_8d40e52fb30d0d 761-823
+  s_8e7c8d8b770249::t_c3f91838fdf114 9
+frontend/src-tauri/src/audio/recording_saver.rs
+  s_8e7c8d8b770249::t_6375ed5c5b24ba 168-177,186
+  s_8e7c8d8b770249::t_3f00b5b9d2aa3b 699-702,706-722,725-729
+  s_8e7c8d8b770249::t_0a59e41f0a34fb 640-644,652-660
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5d8ee8045bf999ee8c64a7b9125d04775ef68c51",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
