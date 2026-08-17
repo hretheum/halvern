@@ -1,0 +1,20 @@
+LAUNCH_READINESS.md
+  s_8e7c8d8b770249::t_27a39874b39928 89,91-114
+  s_8e7c8d8b770249::t_64ab55d54fdef5 245-247
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7759066ccb02189b4a8401a4be44403fd9fafaee",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
