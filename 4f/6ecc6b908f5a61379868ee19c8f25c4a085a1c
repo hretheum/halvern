@@ -1,0 +1,21 @@
+prompts/prompt-halvern-design-rollout.md
+  s_8e7c8d8b770249::t_77bb77062c9cf7 37-41
+  s_8e7c8d8b770249::t_c351182f8ad44a 88
+  s_8e7c8d8b770249::t_7289b6ef755897 1-36,42-87,89-221
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "4f6ecc6b908f5a61379868ee19c8f25c4a085a1c",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
