@@ -1,0 +1,26 @@
+CLAUDE.md
+  s_8e7c8d8b770249::t_1c989dfffb377e 530-531
+frontend/src/app/globals.css
+  s_8e7c8d8b770249::t_07ec0fffcca2b9 203,240
+  s_8e7c8d8b770249::t_c4b023feab8f51 27-33
+  s_8e7c8d8b770249::t_f52375dc0fdb55 224-239,241-243,245-248
+  s_8e7c8d8b770249::t_bf28f21b5c0031 178-187,189-194,196-202,204-206,208-210,212-214
+docs/DESIGN_TOKEN_MAPPING.md
+  s_8e7c8d8b770249::t_d360ca673fd56a 1-103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "057bb7eac99633ccb621a12d7fb395dd50881c77",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
