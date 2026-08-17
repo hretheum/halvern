@@ -1,0 +1,23 @@
+scripts/build-tokens.mjs
+  s_8e7c8d8b770249::t_f10ea5ab931b05 1-138
+docs/DESIGN_ROLLOUT_REPORT.md
+  s_8e7c8d8b770249::t_a73529ddd73bbf 1-181
+frontend/src/app/tokens.generated.css
+  s_8e7c8d8b770249::t_e4b42dc10cd8e9 1-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c3d6b70a7e31437a0730fe6fd6e28b5ce9d2fb37",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
