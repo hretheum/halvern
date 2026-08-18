@@ -1,0 +1,27 @@
+frontend/src/components/AppearanceSetting.tsx
+  s_8e7c8d8b770249::t_e5e3f8d05b0047 1-67
+frontend/src/components/AppShell/TopBar.tsx
+  s_8e7c8d8b770249::t_65d9d6b30ac45c 3,5
+  s_8e7c8d8b770249::t_27b674b8c3aa54 48,50
+  s_8e7c8d8b770249::t_f5caee04bdc0a5 10-14
+frontend/src/app/globals.css
+  s_8e7c8d8b770249::t_8db3199a801266 100-110
+frontend/src/components/PreferenceSettings.tsx
+  s_8e7c8d8b770249::t_78201a661ff8a6 7,128-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8b9ee39922fb5f525919d92983956ed1a4041fa1",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
