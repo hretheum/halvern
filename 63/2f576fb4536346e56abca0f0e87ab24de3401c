@@ -1,0 +1,85 @@
+CLAUDE.md
+  s_8e7c8d8b770249::t_639b78c8356b51 556-562
+SECURITY.md
+  s_8e7c8d8b770249::t_2d65fd7e39f1f7 1-70
+frontend/src/contexts/TranscriptContext.tsx
+  s_8e7c8d8b770249::t_d8b6107354f1c5 409-412
+.github/workflows/ci.yml
+  s_8e7c8d8b770249::t_62f9d2752dbce5 1-118
+scripts/ci/guards.sh
+  s_8e7c8d8b770249::t_b2bf23faf993aa 1-35
+scripts/ci/check-brand.sh
+  s_8e7c8d8b770249::t_9348861c498ca6 1-30,32-49
+  s_8e7c8d8b770249::t_28b4e1f5dacd0e 31
+frontend/package.json
+  s_8e7c8d8b770249::t_13f6da738246b3 2-81
+.github/pull_request_template.md
+  s_8e7c8d8b770249::t_595429ca89922f 1-32
+.github/ISSUE_TEMPLATE/bug.yml
+  s_8e7c8d8b770249::t_d53a2ca21ab29d 1-91
+scripts/ci/check-format.sh
+  s_8e7c8d8b770249::t_3527ae05110795 1-2,15-28,46-47,49,51,53,55-57
+  s_8e7c8d8b770249::t_e69f772f982417 3-14
+  s_8e7c8d8b770249::t_5cb39a87c1a173 29-45,48,50,52,54,58-59
+.github/ISSUE_TEMPLATE/feature.yml
+  s_8e7c8d8b770249::t_595429ca89922f 1-40
+CONTRIBUTING.md
+  s_8e7c8d8b770249::t_59d65bc60d0dc1 36-37,40-46
+  s_8e7c8d8b770249::t_4eb2dc32477452 47
+CODE_OF_CONDUCT.md
+  s_8e7c8d8b770249::t_04b3eb11acb90b 1-40
+docs/CONTRIBUTION_PROCESS.md
+  s_8e7c8d8b770249::t_778d97ef7fdab2 1-175
+scripts/ci/check-english-only.sh
+  s_8e7c8d8b770249::t_a3f5a315af99d2 1-25,48-79
+  s_8e7c8d8b770249::t_2c2283b136f519 41,44
+  s_8e7c8d8b770249::t_0599bc253f8668 26-38,40,42-43,45-47
+  s_8e7c8d8b770249::t_02b18dc448b573 39
+frontend/src-tauri/src/language.rs
+  s_8e7c8d8b770249::t_b1cafa0deffd3c 265,291,307-310,319-322
+scripts/ci/clippy-ratchet.sh
+  s_8e7c8d8b770249::t_5d6d1dfa3eec74 1-55
+.github/dependabot.yml
+  s_8e7c8d8b770249::t_67e995665d945a 1-49
+frontend/src/lib/layout.ts
+  s_8e7c8d8b770249::t_2558c6e7dff765 17
+frontend/src/hooks/meeting-details/useSummaryGeneration.ts
+  s_8e7c8d8b770249::t_b1f5527107b391 461-462
+  s_8e7c8d8b770249::t_e682b1ca4a446b 32-39
+frontend/src/types/index.ts
+  s_8e7c8d8b770249::t_eea1c0ee783242 126
+  s_8e7c8d8b770249::t_0b8824b6a228ed 20-21,23-26
+scripts/ci/check-network-hosts.sh
+  s_8e7c8d8b770249::t_5ae14a893b1728 1-14,18-22,35,37-38,40,44,48-51,57-58
+  s_8e7c8d8b770249::t_8f67e9265fbebc 15-17,23-34,36,39,41-43,45-47,52-56,59
+frontend/src/hooks/useTranscriptRecovery.ts
+  s_8e7c8d8b770249::t_039e3707fc974a 177-181
+scripts/ci/clippy-baseline.txt
+  s_8e7c8d8b770249::t_7a4efc66591838 1-11
+frontend/src-tauri/src/database/repositories/transcript.rs
+  s_8e7c8d8b770249::t_612071e10aa732 378
+scripts/ci/check-test-isolation.sh
+  s_8e7c8d8b770249::t_d14c193087de6c 1-56
+scripts/ci/allowed-hosts.txt
+  s_8e7c8d8b770249::t_3fa9e0284cac97 1-59
+.github/CODEOWNERS
+  s_8e7c8d8b770249::t_67e995665d945a 1-11
+.github/ISSUE_TEMPLATE/config.yml
+  s_8e7c8d8b770249::t_5df1b96dea1e12 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "632f576fb4536346e56abca0f0e87ab24de3401c",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
