@@ -1,0 +1,31 @@
+design/brand/gatehouse.svg
+  s_8e7c8d8b770249::t_d634b0fabd7c61 1-3
+frontend/src/components/About.tsx
+  s_8e7c8d8b770249::t_386492606e596a 16,18-20,63-78,81
+scripts/build-tokens.mjs
+  s_8e7c8d8b770249::t_cde6b0e96d5cc6 83-98
+frontend/src/app/globals.css
+  s_8e7c8d8b770249::t_b176db408ea295 53-68
+README.md
+  s_8e7c8d8b770249::t_d8687b4dfe80d3 1-8,13-16,18,20-23,25,27,29-30,32-37,39-40,42,44-52,54,56,58-64,66-67,69,71-72,74-76,78,80-81,83-87,89-91,95-102,104,106
+frontend/src/components/AnalyticsConsentSwitch.tsx
+  s_8e7c8d8b770249::t_d780c4c9fe7f61 215-217,219-223
+frontend/src/app/tokens.generated.css
+  s_8e7c8d8b770249::t_785f7c796e5766 27-38,71-82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "3e2cea7347aa29ef1009bcd502c9ccf425d53d17",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
