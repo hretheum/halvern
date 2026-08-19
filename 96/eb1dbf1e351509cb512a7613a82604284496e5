@@ -1,0 +1,22 @@
+LAUNCH_READINESS.md
+  s_8e7c8d8b770249::t_ed475aa6a1caf3 23-48
+  s_8e7c8d8b770249::t_a7f866392e9ec7 459-463,476-478,481-484
+docs/SIGNING.md
+  s_8e7c8d8b770249::t_ed475aa6a1caf3 131-147
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "96eb1dbf1e351509cb512a7613a82604284496e5",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
