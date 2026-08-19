@@ -1,0 +1,21 @@
+frontend/src-tauri/tauri.conf.json
+  s_8e7c8d8b770249::t_347222a11b96c9 20-22,105-106
+CLAUDE.md
+  s_8e7c8d8b770249::t_b99a12ed3ff0fe 62-87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e7d979b30011762565486233a5d4d56a619cbfdd",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
