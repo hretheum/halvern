@@ -1,0 +1,25 @@
+frontend/src-tauri/src/audio/simple_level_monitor.rs
+  s_8e7c8d8b770249::t_c0392e957d69c8 50
+frontend/src-tauri/src/database/repositories/setting.rs
+  s_8e7c8d8b770249::t_6deb827fa139e0 92,143,208,248,284,330,358,412,433,590
+frontend/src-tauri/src/whisper_engine/whisper_engine.rs
+  s_8e7c8d8b770249::t_c0392e957d69c8 196,216,225,241
+scripts/ci/clippy-baseline.txt
+  s_8e7c8d8b770249::t_637bddba4b4ab0 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "41b03d7d05fdb75a4f97d09fc0cc5e06ee021343",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
