@@ -1,0 +1,21 @@
+scripts/ci/clippy-baseline.txt
+  s_8e7c8d8b770249::t_c6d511a79e9aab 1
+frontend/src-tauri/src/audio/buffer_pool.rs
+  s_8e7c8d8b770249::t_c1bd6eef762558 89-95,97,100,102,104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "44f7cca6972849774b48aa7f90b74fbbce5747ab",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
