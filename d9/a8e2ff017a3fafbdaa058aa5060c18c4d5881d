@@ -1,0 +1,31 @@
+frontend/src-tauri/src/whisper_engine/whisper_engine.rs
+  s_8e7c8d8b770249::t_7ce6c2a3bd3462 1082
+  s_8e7c8d8b770249::t_bfdfbc3fecd60f 554
+frontend/src-tauri/src/whisper_engine/system_monitor.rs
+  s_8e7c8d8b770249::t_7ce6c2a3bd3462 43-48
+frontend/src-tauri/src/audio/vad.rs
+  s_8e7c8d8b770249::t_7ce6c2a3bd3462 421
+  s_8e7c8d8b770249::t_bfdfbc3fecd60f 191,194
+frontend/src-tauri/src/audio/level_monitor.rs
+  s_8e7c8d8b770249::t_7ce6c2a3bd3462 34-39
+frontend/src-tauri/src/whisper_engine/parallel_commands.rs
+  s_8e7c8d8b770249::t_7ce6c2a3bd3462 14-19
+scripts/ci/clippy-baseline.txt
+  s_8e7c8d8b770249::t_08ff78885c6146 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d9a8e2ff017a3fafbdaa058aa5060c18c4d5881d",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
