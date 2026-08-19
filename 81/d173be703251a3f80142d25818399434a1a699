@@ -1,0 +1,24 @@
+docs/experiments/summary-model-bakeoff/results/REPORT-run3-M-cjk.md
+  s_8e7c8d8b770249::t_67f297f347ef81 1-13
+docs/experiments/summary-model-bakeoff/scripts/compare_arms.py
+  s_8e7c8d8b770249::t_43c4f9ffa12b78 1-75
+docs/experiments/summary-model-bakeoff/results/REPORT.md
+  s_8e7c8d8b770249::t_d743c935618deb 119-166
+  s_8e7c8d8b770249::t_55b805a9810b21 3-7,195-200
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "81d173be703251a3f80142d25818399434a1a699",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
