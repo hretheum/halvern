@@ -1,0 +1,19 @@
+frontend/src-tauri/src/audio/capture/backend_config.rs
+  s_8e7c8d8b770249::t_25b326d8fcb6ea 96-100,103-108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8add5cddf8c6f9c3d1200986b18e345c2aa2fb63",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
