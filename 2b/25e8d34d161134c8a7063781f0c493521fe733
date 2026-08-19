@@ -1,0 +1,48 @@
+frontend/src/components/onboarding/OnboardingContainer.tsx
+  s_8e7c8d8b770249::t_f03000bf6fd793 13
+frontend/src/contexts/OnboardingContext.tsx
+  s_8e7c8d8b770249::t_f03000bf6fd793 30
+frontend/src-tauri/src/summary/summary_engine/commands.rs
+  s_8e7c8d8b770249::t_5e54ccb833790d 66-79
+  s_8e7c8d8b770249::t_f943d553a9764c 477-592,711,714
+  s_8e7c8d8b770249::t_63fb92924ecfeb 712-713,715-768,772-798
+  s_8e7c8d8b770249::t_e29b6c2afac477 49-53,55,57-64
+  s_8e7c8d8b770249::t_2759c690a9133f 612-614,616-617,693-701,705-710
+frontend/src/components/onboarding/steps/index.ts
+  s_8e7c8d8b770249::t_f03000bf6fd793 3
+frontend/src-tauri/src/lib.rs
+  s_8e7c8d8b770249::t_bf140434efc582 762
+frontend/src/components/onboarding/steps/MeetingLanguageStep.tsx
+  s_8e7c8d8b770249::t_331403f0bd7a02 112
+  s_8e7c8d8b770249::t_f03000bf6fd793 114
+frontend/src/components/onboarding/steps/SummaryModelStep.tsx
+  s_8e7c8d8b770249::t_f03000bf6fd793 4,108,146-147,204-213
+  s_8e7c8d8b770249::t_caddfd6ad0892d 1-3,5-107,109-145,148,150-201,214-216
+  s_8e7c8d8b770249::t_331403f0bd7a02 149,202-203
+frontend/src/components/onboarding/steps/PermissionsStep.tsx
+  s_8e7c8d8b770249::t_f03000bf6fd793 118
+frontend/src/components/onboarding/OnboardingFlow.tsx
+  s_8e7c8d8b770249::t_f03000bf6fd793 6,51-54
+frontend/src/components/onboarding/steps/DownloadProgressStep.tsx
+  s_8e7c8d8b770249::t_f03000bf6fd793 540-541
+frontend/src/components/onboarding/steps/SetupOverviewStep.tsx
+  s_8e7c8d8b770249::t_f03000bf6fd793 62-63
+frontend/src-tauri/src/onboarding.rs
+  s_8e7c8d8b770249::t_331403f0bd7a02 253
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "2b25e8d34d161134c8a7063781f0c493521fe733",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
