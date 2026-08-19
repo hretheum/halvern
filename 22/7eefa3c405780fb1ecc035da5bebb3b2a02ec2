@@ -1,0 +1,20 @@
+www/index.html
+  s_8e7c8d8b770249::t_53bf78a444bc14 205-206,236-250
+  s_8e7c8d8b770249::t_1b603c1b53cdf4 251-253
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "227eefa3c405780fb1ecc035da5bebb3b2a02ec2",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
