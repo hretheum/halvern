@@ -1,0 +1,38 @@
+frontend/src-tauri/src/audio/audio_processing.rs
+  s_8e7c8d8b770249::t_02c0fc57e3eb99 57,644,688,719
+  s_8e7c8d8b770249::t_13542642c19ef6 664,705,739
+  s_8e7c8d8b770249::t_87d40e17167c18 679
+frontend/src-tauri/src/audio/recording_saver.rs
+  s_8e7c8d8b770249::t_846bfcfa0b2971 8
+  s_8e7c8d8b770249::t_02c0fc57e3eb99 409,421
+frontend/src-tauri/src/parakeet_engine/parakeet_engine.rs
+  s_8e7c8d8b770249::t_02c0fc57e3eb99 268
+  s_8e7c8d8b770249::t_846bfcfa0b2971 5
+frontend/src-tauri/src/audio/incremental_saver.rs
+  s_8e7c8d8b770249::t_02c0fc57e3eb99 149
+  s_8e7c8d8b770249::t_846bfcfa0b2971 1
+frontend/src-tauri/src/summary/summary_engine/models.rs
+  s_8e7c8d8b770249::t_846bfcfa0b2971 6
+  s_8e7c8d8b770249::t_02c0fc57e3eb99 275
+frontend/src-tauri/src/audio/encode.rs
+  s_8e7c8d8b770249::t_02c0fc57e3eb99 22
+  s_8e7c8d8b770249::t_9d9d60f13e7803 6
+scripts/ci/clippy-baseline.txt
+  s_8e7c8d8b770249::t_245c7b4fd2e541 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9a62408e80152349b23dc8dd6a6fb899321024b5",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
