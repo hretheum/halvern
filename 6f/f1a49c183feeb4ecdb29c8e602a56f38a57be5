@@ -1,0 +1,36 @@
+frontend/src/components/onboarding/steps/DownloadProgressStep.tsx
+  s_8e7c8d8b770249::t_4bf06feeb67d4a 470,475-478,482-483,487,495-503
+  s_8e7c8d8b770249::t_73e67a4a3baa53 530
+scripts/build-tokens.mjs
+  s_8e7c8d8b770249::t_19e2712c255004 77-87
+frontend/src/app/globals.css
+  s_8e7c8d8b770249::t_e6462f9facb896 32-38,137-152
+frontend/src/components/onboarding/steps/SummaryModelStep.tsx
+  s_8e7c8d8b770249::t_4e2eebf17ae4f8 86-89
+  s_8e7c8d8b770249::t_c294598e969fcb 58,60-63,67-69,72-74,83-85,96,107,112,196
+  s_8e7c8d8b770249::t_a39ebf5f988edf 91
+frontend/src/components/onboarding/steps/MeetingLanguageStep.tsx
+  s_8e7c8d8b770249::t_73e67a4a3baa53 183,190
+frontend/src/components/onboarding/steps/WelcomeStep.tsx
+  s_8e7c8d8b770249::t_73e67a4a3baa53 61
+frontend/src/components/onboarding/steps/PermissionsStep.tsx
+  s_8e7c8d8b770249::t_73e67a4a3baa53 161
+frontend/src/app/tokens.generated.css
+  s_8e7c8d8b770249::t_79c72bfdda4e8d 21,66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "6ff1a49c183feeb4ecdb29c8e602a56f38a57be5",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
