@@ -1,0 +1,24 @@
+CLAUDE.md
+  s_8e7c8d8b770249::t_604be279c77501 62-81,627-628
+docs/CONTRIBUTION_PROCESS.md
+  s_8e7c8d8b770249::t_604be279c77501 71-76,147
+README.md
+  s_8e7c8d8b770249::t_036b3b606f8570 63-72
+  s_8e7c8d8b770249::t_ce15bfb16f806f 7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "fc87d0ab5ac50a47b8cfe86b25569eaa75eefdb2",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
