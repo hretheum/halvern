@@ -64,7 +64,7 @@ jobs:
         with:
           workspaces: frontend/src-tauri
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           # Must match `packageManager` in frontend/package.json. pnpm honours
           # that field and downgrades itself to it, so a mismatch here does not
@@ -98,7 +98,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           # Must match `packageManager` in frontend/package.json. pnpm honours
           # that field and downgrades itself to it, so a mismatch here does not
