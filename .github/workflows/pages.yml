@@ -59,7 +59,12 @@ jobs:
           fi
           echo "no scripts in www/index.html"
 
+      # `enablement` turns Pages on for the repository if it is off, rather
+      # than failing with "Get Pages site failed" and waiting for somebody to
+      # find the right settings screen. The first deploy did exactly that.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:

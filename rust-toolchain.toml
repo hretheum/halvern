@@ -1,0 +1,15 @@
+# The clippy ratchet counts warnings, and a warning count is only comparable
+# against the same compiler. `dtolnay/rust-toolchain@stable` pulled whatever
+# was newest that morning — 1.98.0 on 23 August against 1.95.0 locally — and
+# reported 63 warnings where the maintainer's machine reported 27. Those 36
+# were lints that did not exist in April, not decay in the code, and the
+# ratchet cannot tell the difference.
+#
+# So the toolchain is pinned and a Rust upgrade becomes a deliberate change:
+# bump this file, watch the count move, decide what the new lints are worth,
+# and update scripts/ci/clippy-baseline.txt in the same commit. rustup honours
+# this file automatically, so a contributor arriving on a different stable gets
+# the right one installed without being told.
+[toolchain]
+channel = "1.95.0"
+components = ["clippy", "rustfmt"]

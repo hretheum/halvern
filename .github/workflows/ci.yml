@@ -39,10 +39,13 @@ jobs:
       - name: Resolve merge base
         run: echo "BASE_SHA=$(git merge-base origin/main HEAD)" >> "$GITHUB_ENV"
 
-      # rustfmt only — no full toolchain build, this job must stay fast.
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: rustfmt
+      # rust-toolchain.toml pins the version and its components; rustup
+      # installs exactly that. `@stable` used to sit here and floated to
+      # whatever shipped that morning, which is how CI came to count 63 clippy
+      # warnings against the maintainer's 27. No full build here — this job
+      # must stay fast.
+      - name: Install the pinned toolchain
+        run: rustup show active-toolchain
 
       - name: Run guards
         run: ./scripts/ci/guards.sh
@@ -56,9 +59,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy
+      # Pinned by rust-toolchain.toml, deliberately. A warning count is only
+      # comparable against the same compiler.
+      - name: Install the pinned toolchain
+        run: |
+          rustup show active-toolchain
+          cargo clippy --version
 
       - uses: swatinem/rust-cache@v2
         with:
