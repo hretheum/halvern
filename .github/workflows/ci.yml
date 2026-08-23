@@ -75,7 +75,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       # Tauri resolves `externalBin` at build-script time, so without this file
       # every cargo command fails with "resource path
@@ -109,7 +109,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
 
