@@ -59,12 +59,17 @@ jobs:
           fi
           echo "no scripts in www/index.html"
 
-      # `enablement` turns Pages on for the repository if it is off, rather
-      # than failing with "Get Pages site failed" and waiting for somebody to
-      # find the right settings screen. The first deploy did exactly that.
+      # Pages has to be switched on by a human, once, before this can work:
+      # Settings -> Pages -> Build and deployment -> Source: GitHub Actions.
+      #
+      # `enablement: true` was tried here and cannot do it. Creating a Pages
+      # site needs administration rights, which GITHUB_TOKEN does not carry
+      # whatever `permissions:` asks for — the run failed with "Create Pages
+      # site failed. Resource not accessible by integration". Widening the
+      # repository's default token permissions would not be worth it for a
+      # one-time setup step, so the step stays manual and is written down in
+      # docs/OSS_LAUNCH.md.
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:

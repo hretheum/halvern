@@ -313,6 +313,15 @@ rewriting it again, in the same commit as the move.
 `pages.yml` refuses to deploy an `index.html` containing a `<script>` tag. The
 page's promise is enforceable, so it is enforced.
 
+**One manual step, once, before the first deploy can succeed:** Settings →
+Pages → Build and deployment → Source: **GitHub Actions**. The workflow
+cannot do this for itself. `actions/configure-pages` offers
+`enablement: true`, which was tried and fails with "Create Pages site failed.
+Resource not accessible by integration" — creating a Pages site needs
+administration rights that `GITHUB_TOKEN` does not carry regardless of what
+the workflow requests, and widening the repository default token permissions
+to buy a one-time convenience is a bad trade.
+
 ## 9. Deliberately not before launch
 
 - Trimming `build.yml`'s unused Windows and Ubuntu branches. It is the only
