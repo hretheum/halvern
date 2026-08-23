@@ -1,0 +1,26 @@
+docs/OSS_LAUNCH.md
+  s_8e7c8d8b770249::t_f796af9aee158f 206-244
+frontend/src/services/indexedDBService.ts
+  s_8e7c8d8b770249::t_fd778a26a5c21b 98-99
+  s_8e7c8d8b770249::t_13f35c52613dfd 34,38-55,57
+  s_8e7c8d8b770249::t_415e4e8a749ee4 58-83
+  s_8e7c8d8b770249::t_1bb263c98c9be0 56
+scripts/ci/check-brand.sh
+  s_8e7c8d8b770249::t_da359cecf8337d 26-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "fd7983eeb583578ed06c4f96f7b00b904a3b6a22",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
