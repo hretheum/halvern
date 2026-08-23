@@ -1,0 +1,11 @@
+# Review is required for everything by default.
+* @hretheum
+
+# The files where a mistake is invisible in review unless someone is looking for
+# it. Listed separately so that a change to any of them is unmistakably a change
+# to the security posture, not a routine edit.
+/scripts/ci/allowed-hosts.txt        @hretheum
+/frontend/src-tauri/src/analytics/   @hretheum
+/PRIVACY_POLICY.md                   @hretheum
+/SECURITY.md                         @hretheum
+/.github/workflows/                  @hretheum

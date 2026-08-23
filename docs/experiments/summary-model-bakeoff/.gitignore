@@ -1,0 +1,16 @@
+# Real meetings, extracted by scripts/extract-control-set.sh. These are
+# recordings of actual people; they exist on one machine and stay there.
+corpus/_control/
+
+# Run output. Raw records embed the corpus transcripts and, for the control
+# set, real meeting content — so they are not committed either. The scored
+# table and REPORT-*.md are the artefacts worth keeping, and those are added
+# deliberately.
+results/raw/
+results/scored.json
+results/uncertain.json
+
+# adjudications.json IS committed: it is the record of how every uncertain row
+# was judged, it references synthetic material only (the control set is
+# excluded from adjudication by score.py), and without it the reported numbers
+# cannot be reproduced.

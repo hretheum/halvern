@@ -1,0 +1,108 @@
+{
+  "$description": "Halvern design tokens, exported from Figma file JGGujPmlHo0mVCBIFQblKo on 17 August 2026. Core values are literal; semantic values are references into core and carry one entry per theme. Generated from the file's variable collections — edit in Figma and re-export, do not hand-edit here.",
+
+  "core": {
+    "stone": {
+      "50":  "#f5f3ee", "100": "#eceae3", "200": "#e2dfd8", "300": "#d4d0c8",
+      "400": "#b9b4ab", "500": "#a8a49c", "600": "#85807a", "700": "#6b6660",
+      "800": "#5c5750", "850": "#3d3832", "900": "#36312c", "925": "#2a2622",
+      "950": "#1e1c18", "975": "#141210"
+    },
+    "bronze": {
+      "50":  "#f7ede2", "100": "#efdcc6", "200": "#e3c39f", "300": "#d4a273",
+      "400": "#d4934f", "500": "#c07a3a", "600": "#a3672f", "700": "#8c5a2b",
+      "800": "#7a4e24", "900": "#5c3a1b", "950": "#3d2712"
+    },
+    "success": { "100": "#e8eee3", "300": "#b9cbaa", "500": "#6b8c5a", "700": "#4f6a41", "900": "#2f4027" },
+    "warning": { "100": "#f9eeda", "300": "#ecd09a", "500": "#c9922e", "700": "#966b1f", "900": "#573d10" },
+    "danger":  { "100": "#f3e2de", "300": "#d9ab9f", "500": "#8c4a3a", "700": "#6b382c", "900": "#3f1f18" },
+    "info":    { "100": "#e3e8ee", "300": "#a9b8c9", "500": "#5b7186", "700": "#445667", "900": "#26313b" },
+    "white": "#ffffff",
+
+    "font": {
+      "family": { "sans": "Source Sans 3", "mono": "Source Code Pro" },
+      "size":   { "2xs": 11, "xs": 12, "sm": 13, "base": 14, "md": 15, "lg": 18, "xl": 22, "2xl": 28, "3xl": 36, "4xl": 48 },
+      "weight": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 },
+      "leading": { "$unit": "percent", "tight": 120, "snug": 135, "normal": 150, "relaxed": 165 },
+      "tracking": { "$unit": "px", "tight": -0.4, "normal": 0, "wide": 0.4, "wider": 1.2 }
+    },
+
+    "space": {
+      "$description": "Step names match Tailwind's scale, where 1 = 4px, so a spacing decision in Figma reads straight across to a class name in the app.",
+      "0": 0, "px": 1, "half": 2, "1": 4, "2": 8, "3": 12, "4": 16, "5": 20,
+      "6": 24, "8": 32, "10": 40, "12": 48, "16": 64, "20": 80, "24": 96
+    },
+
+    "radius": { "none": 0, "xs": 2, "sm": 4, "md": 6, "lg": 8, "xl": 12, "2xl": 16, "3xl": 24, "full": 9999 },
+
+    "duration": { "$unit": "ms", "instant": 0, "fast": 120, "normal": 200, "slow": 320, "slower": 480 },
+    "easing": {
+      "standard":   "cubic-bezier(0.2, 0, 0, 1)",
+      "decelerate": "cubic-bezier(0, 0, 0, 1)",
+      "accelerate": "cubic-bezier(0.3, 0, 1, 1)",
+      "emphasis":   "cubic-bezier(0.2, 0, 0, 1.2)"
+    }
+  },
+
+  "semantic": {
+    "$description": "Every value is a reference into core. Light and dark are the two modes of the Figma Semantic collection; nothing here knows whether it is rendering an app or a website.",
+
+    "bg/app":      { "light": "stone.50",   "dark": "stone.975" },
+    "bg/surface":  { "light": "stone.100",  "dark": "stone.950" },
+    "bg/elevated": { "light": "stone.200",  "dark": "stone.925" },
+    "bg/overlay":  { "light": "white",      "dark": "stone.900" },
+    "bg/sunken":   { "light": "stone.200",  "dark": "stone.975" },
+    "bg/hover":    { "light": "stone.200",  "dark": "stone.900" },
+    "bg/selected": { "light": "bronze.50",  "dark": "bronze.950" },
+
+    "border/default": { "light": "stone.300",  "dark": "stone.850" },
+    "border/subtle":  { "light": "stone.200",  "dark": "stone.900" },
+    "border/strong":  { "light": "stone.400",  "dark": "stone.800" },
+    "border/focus":   { "light": "bronze.500", "dark": "bronze.400" },
+
+    "text/primary":   { "light": "stone.950", "dark": "stone.100", "contrastOnSurface": [14.13, 14.13] },
+    "text/secondary": { "light": "stone.800", "dark": "stone.500", "contrastOnSurface": [5.95, 6.85] },
+    "text/tertiary":  { "light": "stone.700", "dark": "stone.600", "contrastOnSurface": [4.72, 4.35] },
+    "text/disabled":  { "light": "stone.600", "dark": "stone.700", "contrastOnSurface": [3.25, 2.99], "$note": "WCAG-exempt; kept clearly dimmer than tertiary so the four levels read as a hierarchy." },
+    "text/inverse":   { "light": "stone.50",  "dark": "stone.950" },
+    "text/link":      { "light": "bronze.700", "dark": "bronze.400" },
+
+    "accent/default":   { "light": "bronze.700", "dark": "bronze.500" },
+    "accent/hover":     { "light": "bronze.800", "dark": "bronze.400" },
+    "accent/active":    { "light": "bronze.700", "dark": "bronze.600" },
+    "accent/subtle":    { "light": "stone.200",  "dark": "stone.900" },
+    "accent/on-accent": { "light": "white",      "dark": "stone.975", "$note": "Dark mode inverts to ink because the accent is the bright element there; white on bronze/500 is only 3.45:1." },
+
+    "interactive/primary":      { "light": "bronze.700", "dark": "bronze.500" },
+    "interactive/primary-text": { "light": "white",      "dark": "stone.975" },
+
+    "status/success/bg":     { "light": "success.100", "dark": "success.900" },
+    "status/success/border": { "light": "success.300", "dark": "success.700" },
+    "status/success/text":   { "light": "success.700", "dark": "success.300" },
+    "status/success/solid":  { "light": "success.500", "dark": "success.500" },
+
+    "status/warning/bg":     { "light": "warning.100", "dark": "warning.900" },
+    "status/warning/border": { "light": "warning.300", "dark": "warning.700" },
+    "status/warning/text":   { "light": "warning.900", "dark": "warning.300", "$note": "Yellows are light by nature, so warning needs a darker text stop than the other hues to clear 4.5:1 on its own tint." },
+
+    "status/danger/bg":      { "light": "danger.100", "dark": "danger.900" },
+    "status/danger/border":  { "light": "danger.300", "dark": "danger.700" },
+    "status/danger/text":    { "light": "danger.700", "dark": "danger.300" },
+    "status/danger/solid":   { "light": "danger.500", "dark": "danger.500" },
+
+    "status/info/bg":        { "light": "info.100", "dark": "info.900" },
+    "status/info/border":    { "light": "info.300", "dark": "info.700" },
+    "status/info/text":      { "light": "info.700", "dark": "info.300" }
+  },
+
+  "$retired": {
+    "$description": "The hand-picked primitives the ramps replaced. Renamed to _legacy/* in Figma rather than deleted, so the change stays reversible. Safe to remove once nothing outside the file references them.",
+    "names": [
+      "ink", "stone", "dark/0", "dark/1", "dark/2", "dark/3", "dark/4",
+      "light/0", "light/1", "light/2", "light/3",
+      "text/light", "text/mid", "text/muted", "text/dark", "text/dark-mid",
+      "bronze", "bronze/light", "bronze/hover", "bronze/dark",
+      "success", "destructive"
+    ]
+  }
+}

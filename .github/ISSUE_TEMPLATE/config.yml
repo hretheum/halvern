@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/hretheum/halvern/blob/main/SECURITY.md
+    about: Do not open a public issue. Read SECURITY.md first — a public report is a working exploit handed to every unpatched copy.
+  - name: Where does my data go?
+    url: https://github.com/hretheum/halvern/blob/main/PRIVACY_POLICY.md
+    about: PRIVACY_POLICY.md names the source file behind every claim, including the two features that do send data once configured.

@@ -1,0 +1,75 @@
+{
+  "id": "ja-short-01",
+  "language": "ja",
+  "group": "Cjk",
+  "length_class": "short",
+  "template_id": "standard_meeting",
+  "participants": ["田中 美咲", "佐々木 亮介", "van Dijk Marieke", "小柳 健太"],
+  "transcript": [
+    { "t": 0.0, "speaker": "田中 美咲", "text": "では始めましょう。今日は三つです。決済代行の選定、問い合わせの一次対応時間、それから新プランの公開日。" },
+    { "t": 12.4, "speaker": "佐々木 亮介", "text": "決済から入らせてください。他の二つに影響しますので。二社を比較しました。オービスは手数料が安いのですが、分割払いに対応していません。" },
+    { "t": 27.8, "speaker": "小柳 健太", "text": "手数料の差はどのくらいですか。" },
+    { "t": 32.0, "speaker": "佐々木 亮介", "text": "一件あたり四十円ほどです。今の取引量だと年間でおよそ二百四十万円になります。" },
+    { "t": 43.6, "speaker": "van Dijk Marieke", "text": "分割払いを使う注文は全体のどのくらいですか。" },
+    { "t": 50.2, "speaker": "小柳 健太", "text": "約十九パーセントです。しかも単価が高い注文がそこに集中しています。" },
+    { "t": 60.5, "speaker": "田中 美咲", "text": "では手数料が高くてもセキュアペイにしましょう。これは決定です。年間二百四十万円のために、単価の高い二割の注文を捨てるのは筋が通りません。" },
+    { "t": 76.9, "speaker": "佐々木 亮介", "text": "承知しました。" },
+    { "t": 79.4, "speaker": "田中 美咲", "text": "佐々木さん、セキュアペイの接続実装を九月二十五日までにお願いできますか。" },
+    { "t": 88.0, "speaker": "佐々木 亮介", "text": "九月二十五日ですね。承知しました。" },
+    { "t": 93.5, "speaker": "田中 美咲", "text": "次は一次対応時間。小柳さん。" },
+    { "t": 97.8, "speaker": "小柳 健太", "text": "現在の中央値は四時間十二分です。目標は二時間なので、まだ倍かかっています。原因の大半は夜間に届いた問い合わせの滞留です。" },
+    { "t": 113.4, "speaker": "van Dijk Marieke", "text": "夜間の当番を置けば解決しますか。" },
+    { "t": 119.0, "speaker": "小柳 健太", "text": "半分は解決します。ただ、テンプレート返信の整備も必要です。今のテンプレートは十二種類しかありません。" },
+    { "t": 131.7, "speaker": "田中 美咲", "text": "小柳さん、テンプレートの拡充を十月二日までにお願いします。" },
+    { "t": 140.2, "speaker": "小柳 健太", "text": "十月二日、承知しました。" },
+    { "t": 145.0, "speaker": "田中 美咲", "text": "最後に公開日です。私は十月九日を想定していました。" },
+    { "t": 152.8, "speaker": "佐々木 亮介", "text": "九日は無理です。決済の実装が二十五日に終わるとして、本番相当の検証が二週間は必要になります。" },
+    { "t": 166.3, "speaker": "田中 美咲", "text": "確かにそうですね。今言ってもらえて助かります。公開日は十月二十三日に変更します。九日ではありません。皆さん記録をお願いします。" },
+    { "t": 181.0, "speaker": "van Dijk Marieke", "text": "二十三日の方が安全だと思います。" },
+    { "t": 186.4, "speaker": "田中 美咲", "text": "van Dijk さん、では検証計画をお願いできますか。十月十七日までに。" },
+    { "t": 194.9, "speaker": "van Dijk Marieke", "text": "十月十七日ですね。事前に草案を共有します。" },
+    { "t": 202.0, "speaker": "佐々木 亮介", "text": "管理画面の刷新はどうしますか。ずっと先送りにしています。" },
+    { "t": 210.5, "speaker": "田中 美咲", "text": "それは今日は決めません。来週あらためて話しましょう。" },
+    { "t": 218.0, "speaker": "小柳 健太", "text": "在庫システムの移行についても、藤原さんから問い合わせがありました。" },
+    { "t": 226.8, "speaker": "田中 美咲", "text": "それはまだ誰も担当していません。この会議では割り当てません。" },
+    { "t": 234.5, "speaker": "van Dijk Marieke", "text": "それから、大阪拠点を閉じるかどうかという話もあります。" },
+    { "t": 243.0, "speaker": "田中 美咲", "text": "それは保留にします。今日の時間では足りません。" },
+    { "t": 250.2, "speaker": "小柳 健太", "text": "最後に、公開前にクローズドテストを実施しますか。" },
+    { "t": 257.6, "speaker": "田中 美咲", "text": "それも来週決めましょう。中途半端に約束したくありません。" },
+    { "t": 265.0, "speaker": "佐々木 亮介", "text": "記録のために。前回のリリースはコード凍結から公開まで三十七日かかりました。あれは例外的でしたが。" },
+    { "t": 276.4, "speaker": "田中 美咲", "text": "記録しますが、三十七日を前提には計画しません。田中は経営会議向けの要約を九月二十六日までに作成します。" },
+    { "t": 288.0, "speaker": "van Dijk Marieke", "text": "そういえば、宮下さんが旧契約書を送ってきましたが、もうこの案件の担当ではありません。" },
+    { "t": 297.5, "speaker": "田中 美咲", "text": "ありがとうございます。本日は以上です。" }
+  ],
+  "ground_truth": {
+    "facts": [
+      { "id": "F1", "kind": "decision", "canonical": "The team chose SecurePay over Orbis despite the higher fee", "paraphrases": ["went with SecurePay", "SecurePay was selected as the payment provider", "decided against Orbis"], "owner": null, "due": null },
+      { "id": "F2", "kind": "decision", "canonical": "The launch date moved from 9 October to 23 October", "paraphrases": ["launch pushed to 23 October", "releasing on the 23rd instead of the 9th"], "owner": null, "due": null },
+      { "id": "F3", "kind": "decision", "canonical": "The reply template set will be expanded rather than left at twelve", "paraphrases": ["decided to expand the templates", "template expansion was approved"], "owner": null, "due": null },
+      { "id": "F4", "kind": "action", "canonical": "Sasaki delivers the SecurePay integration by 25 September", "paraphrases": ["Sasaki builds the SecurePay connection", "payment integration owned by Sasaki"], "owner": "佐々木 亮介", "due": "2026-09-25" },
+      { "id": "F5", "kind": "action", "canonical": "Koyanagi expands the reply templates by 2 October", "paraphrases": ["Koyanagi adds more templates", "template work assigned to Koyanagi"], "owner": "小柳 健太", "due": "2026-10-02" },
+      { "id": "F6", "kind": "action", "canonical": "van Dijk prepares the verification plan by 17 October", "paraphrases": ["van Dijk writes the validation plan", "verification plan owned by van Dijk"], "owner": "van Dijk Marieke", "due": "2026-10-17" },
+      { "id": "F7", "kind": "action", "canonical": "Tanaka prepares the executive summary by 26 September", "paraphrases": ["Tanaka writes the summary for the management meeting", "executive summary owned by Tanaka"], "owner": "田中 美咲", "due": "2026-09-26" },
+      { "id": "F8", "kind": "figure", "canonical": "SecurePay costs about 40 yen more per transaction, roughly 2.4 million yen a year", "paraphrases": ["40 yen more per transaction", "about 2400000 yen a year"], "owner": null, "due": null },
+      { "id": "F9", "kind": "figure", "canonical": "Median first response time is 4 hours 12 minutes against a 2 hour target", "paraphrases": ["first response takes 4 hours 12 minutes", "median response is over four hours"], "owner": null, "due": null },
+      { "id": "F10", "kind": "figure", "canonical": "Instalment payments are about nineteen percent of orders", "paraphrases": ["19% of orders use instalments", "about nineteen percent of orders"], "owner": null, "due": null },
+      { "id": "F11", "kind": "date", "canonical": "The launch is on 23 October", "paraphrases": ["goes live 23 October", "launch date is 23 October"], "owner": null, "due": null },
+      { "id": "F12", "kind": "date", "canonical": "The payment integration is due 25 September", "paraphrases": ["integration due 25 September", "deadline 25 September"], "owner": null, "due": null }
+    ],
+    "decoys": [
+      { "id": "D1", "claim": "Redesigning the admin console", "cancellation_cue": "それは今日は決めません", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D2", "claim": "Migrating the inventory system", "cancellation_cue": "それはまだ誰も担当していません", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D3", "claim": "Closing the Osaka office", "cancellation_cue": "それは保留にします", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D4", "claim": "Running a closed test before launch", "cancellation_cue": "それも来週決めましょう", "must_not_appear_as": ["decision", "action"] }
+    ],
+    "distractors": {
+      "numbers": ["三十七日", "十月九日"],
+      "names": ["藤原", "宮下"]
+    },
+    "reversal": {
+      "initial": "Launch on 9 October",
+      "final": "Launch on 23 October",
+      "correct_answer": "final"
+    }
+  }
+}

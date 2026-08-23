@@ -1,0 +1,91 @@
+name: Bug report
+description: Something behaves differently than it should
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before anything else: **do not paste transcript text, meeting titles, or
+        recordings.** This is a public tracker and those are other people's
+        conversations. Describe the shape of the problem instead — "a 40-minute
+        meeting in Polish" tells us what we need.
+
+        If this is a security problem, close this and read
+        [SECURITY.md](../blob/main/SECURITY.md).
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part
+      description: Best guess is fine; it only routes the first look.
+      options:
+        - Recording — capture, devices, pause/stop
+        - Transcription — wrong text, wrong language, nothing appears
+        - Summary — generation, templates, the editor
+        - Meeting detection and auto-stop
+        - Library — search, filters, export
+        - Onboarding, models, downloads
+        - Settings
+        - Something else / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected instead
+      placeholder: |
+        Recording stopped on its own about 20 minutes in. The file was saved and
+        plays back fine, but it ends mid-sentence and the app showed no error.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce it
+      description: If it happened once and you cannot repeat it, say that — an unreproducible report is still worth having.
+      placeholder: |
+        1. Start a Teams call
+        2. Start recording from the tray
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Halvern version
+      description: Settings → Advanced, or the About panel.
+      placeholder: "0.4.0"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: macOS version and Mac model
+      description: Apple menu → About This Mac. Chip matters for anything about speed or the models.
+      placeholder: "macOS 15.2, MacBook Pro M1 Pro, 16 GB"
+    validations:
+      required: true
+
+  - type: textarea
+    id: setup
+    attributes:
+      label: Audio and model setup
+      description: Only if the bug touches recording, transcription or summaries.
+      placeholder: |
+        Microphone: AirPods Pro
+        System audio: BlackHole 2ch
+        Speech engine: Parakeet
+        Summary model: qwen3.5:4b (local)
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log lines
+      description: |
+        `~/Library/Logs/io.halvern.app/halvern.log`. Read what you paste — the
+        log records file paths and meeting names.
+      render: text

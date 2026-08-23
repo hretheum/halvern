@@ -1,0 +1,395 @@
+{
+  "id": "tr-short-01",
+  "language": "tr",
+  "group": "Other",
+  "length_class": "short",
+  "template_id": "standard_meeting",
+  "participants": [
+    "Elif Karahan",
+    "Burak Demirtaş",
+    "Nilay Şensoy",
+    "Cem Yıldırımlı"
+  ],
+  "transcript": [
+    {
+      "t": 0.0,
+      "speaker": "Elif Karahan",
+      "text": "Başlayalım. Bugün üç konu var: kargo firması seçimi, iade oranı ve yeni sürümün yayın tarihi."
+    },
+    {
+      "t": 11.5,
+      "speaker": "Burak Demirtaş",
+      "text": "İzninizle kargo ile başlayayım, diğer ikisini de etkiliyor. İki teklifi karşılaştırdım. Hızyol daha ucuz ama hafta sonu teslimat garantisi vermiyor."
+    },
+    {
+      "t": 26.8,
+      "speaker": "Nilay Şensoy",
+      "text": "Fiyat farkı ne kadar?"
+    },
+    {
+      "t": 30.4,
+      "speaker": "Burak Demirtaş",
+      "text": "Yıllık bazda yaklaşık yüzde on yedi. Bizim hacmimizde bu aşağı yukarı dört yüz elli bin lira ediyor."
+    },
+    {
+      "t": 42.0,
+      "speaker": "Cem Yıldırımlı",
+      "text": "Hafta sonu teslimat kaç siparişi ilgilendiriyor peki?"
+    },
+    {
+      "t": 49.3,
+      "speaker": "Nilay Şensoy",
+      "text": "Yüzde on iki civarında. Ama şikâyet edenler tam olarak o müşteriler."
+    },
+    {
+      "t": 59.7,
+      "speaker": "Elif Karahan",
+      "text": "O zaman daha pahalı olmasına rağmen Anadolu Kargo ile devam ediyoruz. Bu karar verildi. Dört yüz elli bin lira için en sesli müşterilerimizi kaybetmeyeceğim."
+    },
+    {
+      "t": 75.2,
+      "speaker": "Burak Demirtaş",
+      "text": "Anlaşıldı."
+    },
+    {
+      "t": 77.8,
+      "speaker": "Elif Karahan",
+      "text": "Burak, sözleşme taslağını yirmi üç Eylül'e kadar hazırlar mısın?"
+    },
+    {
+      "t": 86.0,
+      "speaker": "Burak Demirtaş",
+      "text": "Yirmi üç Eylül, tamam. Öncesinde hukukla görüşeceğim."
+    },
+    {
+      "t": 93.4,
+      "speaker": "Elif Karahan",
+      "text": "Güzel. İade oranı, Nilay."
+    },
+    {
+      "t": 97.0,
+      "speaker": "Nilay Şensoy",
+      "text": "Yüzde yirmi altıdayız. Bunun büyük kısmı tek bir kategoriden geliyor: mont ve kabanlar. Beden tablosu yanlış."
+    },
+    {
+      "t": 111.6,
+      "speaker": "Cem Yıldırımlı",
+      "text": "Bunu düzeltmek zor olmasa gerek."
+    },
+    {
+      "t": 116.2,
+      "speaker": "Nilay Şensoy",
+      "text": "Zor değil ama üç yüz seksen ürünü tek tek elden geçirmek gerekiyor."
+    },
+    {
+      "t": 125.8,
+      "speaker": "Elif Karahan",
+      "text": "Nilay, beden tablolarının düzeltilmesini otuz Eylül'e kadar üstlenir misin?"
+    },
+    {
+      "t": 135.0,
+      "speaker": "Nilay Şensoy",
+      "text": "Otuz Eylül, hallederim."
+    },
+    {
+      "t": 140.3,
+      "speaker": "Elif Karahan",
+      "text": "Şimdi yayın tarihi. Ben sekiz Ekim'i düşünüyordum."
+    },
+    {
+      "t": 148.0,
+      "speaker": "Cem Yıldırımlı",
+      "text": "Sekizi yetiştiremeyiz. Beden tabloları Eylül sonunda biterse, kontrol turu için hiç zaman kalmıyor."
+    },
+    {
+      "t": 161.5,
+      "speaker": "Elif Karahan",
+      "text": "Haklısın, şimdi söylemen iyi oldu. Yayın tarihini yirmi iki Ekim'e alıyoruz, sekiz Ekim'e değil. Herkes not alsın."
+    },
+    {
+      "t": 175.0,
+      "speaker": "Cem Yıldırımlı",
+      "text": "Yirmi iki daha gerçekçi."
+    },
+    {
+      "t": 179.4,
+      "speaker": "Elif Karahan",
+      "text": "Cem, o zaman kontrol turunu sen yürüt. On yedi Ekim'e kadar olur mu?"
+    },
+    {
+      "t": 188.0,
+      "speaker": "Cem Yıldırımlı",
+      "text": "On yedi Ekim, tamam."
+    },
+    {
+      "t": 193.6,
+      "speaker": "Burak Demirtaş",
+      "text": "Yeni fotoğraf stüdyosu ne olacak? Haftalardır erteliyoruz."
+    },
+    {
+      "t": 201.2,
+      "speaker": "Elif Karahan",
+      "text": "Bugün buna karar vermiyoruz. Gelecek hafta konuşuruz."
+    },
+    {
+      "t": 205.0,
+      "speaker": "Burak Demirtaş",
+      "text": "Bir de kargo entegrasyonunun test ortamı meselesi var. Anadolu Kargo'nun sandbox'ı çalışıyor mu, onu kontrol etmem gerekiyor. Geçen sefer üç gün kaybetmiştik çünkü test anahtarları geç geldi."
+    },
+    {
+      "t": 209.0,
+      "speaker": "Nilay Şensoy",
+      "text": "Bir de yeni depo sistemine geçiş var. Serkan Bey sormuştu."
+    },
+    {
+      "t": 213.0,
+      "speaker": "Nilay Şensoy",
+      "text": "Ben de iade sürecinde müşteri temsilcilerinin kullandığı ekranı gözden geçirdim. Orada da beden bilgisi görünmüyor, bu yüzden temsilciler müşteriye yanlış bilgi veriyor. Bunu beden tablosu işiyle birlikte halledeceğim."
+    },
+    {
+      "t": 217.5,
+      "speaker": "Elif Karahan",
+      "text": "Onu henüz kimse yürütmüyor. Bu toplantıda atama yapmıyorum."
+    },
+    {
+      "t": 222.0,
+      "speaker": "Cem Yıldırımlı",
+      "text": "Kontrol turunda neye bakacağımı netleştirelim: her kategoriden en az yirmi ürün, beden tablosu, fotoğraf ve fiyat. Rastgele değil, iade oranı en yüksek kategorilerden başlayarak."
+    },
+    {
+      "t": 225.0,
+      "speaker": "Cem Yıldırımlı",
+      "text": "Bir de İzmir şubesini kapatıp kapatmayacağımız meselesi var."
+    },
+    {
+      "t": 231.0,
+      "speaker": "Elif Karahan",
+      "text": "Doğru yaklaşım. İade oranı yüksek kategorilerden başla, kalan süreye göre devam edersin."
+    },
+    {
+      "t": 233.4,
+      "speaker": "Elif Karahan",
+      "text": "Onu şimdilik bekletiyoruz. Bugünkü süremiz yetmez."
+    },
+    {
+      "t": 240.8,
+      "speaker": "Nilay Şensoy",
+      "text": "Son bir şey: yayından önce kapalı test grubu kuralım mı?"
+    },
+    {
+      "t": 248.2,
+      "speaker": "Elif Karahan",
+      "text": "Onu da gelecek hafta karara bağlayalım. Yarım yamalak söz vermek istemiyorum."
+    },
+    {
+      "t": 256.0,
+      "speaker": "Burak Demirtaş",
+      "text": "Kayıtlara geçsin: önceki sürüm kod dondurmadan yayına kadar otuz dört gün sürdü. Ama o istisnai bir durumdu."
+    },
+    {
+      "t": 267.5,
+      "speaker": "Elif Karahan",
+      "text": "Not ediyorum ama otuz dört güne göre plan yapmıyorum. Elif yönetim kurulu özetini yirmi Eylül'e kadar hazırlayacak."
+    },
+    {
+      "t": 278.0,
+      "speaker": "Cem Yıldırımlı",
+      "text": "Bu arada Gülşah Hanım eski sözleşmeleri gönderdi ama artık bu projede değil."
+    },
+    {
+      "t": 286.4,
+      "speaker": "Elif Karahan",
+      "text": "Teşekkürler. Bugünlük bu kadar."
+    }
+  ],
+  "ground_truth": {
+    "facts": [
+      {
+        "id": "F1",
+        "kind": "decision",
+        "canonical": "The team chose Anadolu Kargo over Hizyol despite the higher price",
+        "paraphrases": [
+          "went with Anadolu Kargo",
+          "Anadolu Kargo was selected as the carrier",
+          "decided against Hizyol"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F2",
+        "kind": "decision",
+        "canonical": "The release date moved from 8 October to 22 October",
+        "paraphrases": [
+          "release pushed to 22 October",
+          "publishing on the 22nd instead of the 8th"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F3",
+        "kind": "decision",
+        "canonical": "The coat size tables will be corrected rather than left as they are",
+        "paraphrases": [
+          "decided to fix the size tables",
+          "size table correction was approved"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F4",
+        "kind": "action",
+        "canonical": "Burak prepares the contract draft by 23 September",
+        "paraphrases": [
+          "Burak writes the contract draft",
+          "contract draft owned by Burak"
+        ],
+        "owner": "Burak Demirtaş",
+        "due": "2026-09-23"
+      },
+      {
+        "id": "F5",
+        "kind": "action",
+        "canonical": "Nilay corrects the size tables by 30 September",
+        "paraphrases": [
+          "Nilay fixes the size tables",
+          "size table correction assigned to Nilay"
+        ],
+        "owner": "Nilay Şensoy",
+        "due": "2026-09-30"
+      },
+      {
+        "id": "F6",
+        "kind": "action",
+        "canonical": "Cem runs the checking pass by 17 October",
+        "paraphrases": [
+          "Cem does the control round",
+          "checking pass owned by Cem"
+        ],
+        "owner": "Cem Yıldırımlı",
+        "due": "2026-10-17"
+      },
+      {
+        "id": "F7",
+        "kind": "action",
+        "canonical": "Elif prepares the board summary by 20 September",
+        "paraphrases": [
+          "Elif writes the summary for the board",
+          "board summary owned by Elif"
+        ],
+        "owner": "Elif Karahan",
+        "due": "2026-09-20"
+      },
+      {
+        "id": "F8",
+        "kind": "figure",
+        "canonical": "Anadolu Kargo costs about seventeen percent more, roughly 450000 lira a year",
+        "paraphrases": [
+          "17% more expensive",
+          "about 450 thousand lira a year"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F9",
+        "kind": "figure",
+        "canonical": "The return rate is twenty-six percent",
+        "paraphrases": [
+          "26% returns",
+          "return rate sits at twenty-six percent"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F10",
+        "kind": "figure",
+        "canonical": "Weekend delivery affects about twelve percent of orders",
+        "paraphrases": [
+          "12% of orders need weekend delivery",
+          "around twelve percent of orders"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F11",
+        "kind": "date",
+        "canonical": "The release is on 22 October",
+        "paraphrases": [
+          "publishes 22 October",
+          "release date is 22 October"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F12",
+        "kind": "date",
+        "canonical": "The contract draft is due 23 September",
+        "paraphrases": [
+          "contract due 23 September",
+          "draft deadline 23 September"
+        ],
+        "owner": null,
+        "due": null
+      }
+    ],
+    "decoys": [
+      {
+        "id": "D1",
+        "claim": "The new photo studio",
+        "cancellation_cue": "Bugün buna karar vermiyoruz",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D2",
+        "claim": "Migrating to the new warehouse system",
+        "cancellation_cue": "Onu henüz kimse yürütmüyor",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D3",
+        "claim": "Closing the Izmir branch",
+        "cancellation_cue": "Onu şimdilik bekletiyoruz",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D4",
+        "claim": "Setting up a closed test group before release",
+        "cancellation_cue": "Onu da gelecek hafta karara bağlayalım",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      }
+    ],
+    "distractors": {
+      "numbers": [
+        "otuz dört gün",
+        "sekiz Ekim"
+      ],
+      "names": [
+        "Serkan Bey",
+        "Gülşah Hanım"
+      ]
+    },
+    "reversal": {
+      "initial": "Release on 8 October",
+      "final": "Release on 22 October",
+      "correct_answer": "final"
+    }
+  }
+}

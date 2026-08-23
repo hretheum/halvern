@@ -1,0 +1,391 @@
+{
+  "id": "en-short-01",
+  "language": "en",
+  "group": "English",
+  "length_class": "short",
+  "template_id": "standard_meeting",
+  "participants": [
+    "Dana Whitfield",
+    "Owen Brasher",
+    "Priya Raghavan",
+    "Luca Bertolini"
+  ],
+  "transcript": [
+    {
+      "t": 0.0,
+      "speaker": "Dana Whitfield",
+      "text": "Right, let's get going. Three things on the list today: the offline sync approach, the crash rate, and when we actually ship this."
+    },
+    {
+      "t": 11.2,
+      "speaker": "Owen Brasher",
+      "text": "Can I start with sync? Because it affects the other two."
+    },
+    {
+      "t": 15.8,
+      "speaker": "Dana Whitfield",
+      "text": "Go ahead."
+    },
+    {
+      "t": 17.4,
+      "speaker": "Owen Brasher",
+      "text": "So we prototyped both. The delta-based approach is faster on paper but it falls apart when a device has been offline for more than a week. We hit conflicts we can't resolve automatically. The full-snapshot approach is heavier on bandwidth but it's predictable."
+    },
+    {
+      "t": 36.9,
+      "speaker": "Priya Raghavan",
+      "text": "How much heavier?"
+    },
+    {
+      "t": 39.5,
+      "speaker": "Owen Brasher",
+      "text": "About four times the payload on a typical account. Call it two megabytes instead of five hundred kilobytes."
+    },
+    {
+      "t": 48.0,
+      "speaker": "Priya Raghavan",
+      "text": "That's fine on wifi. It's not fine on a train."
+    },
+    {
+      "t": 53.2,
+      "speaker": "Luca Bertolini",
+      "text": "Most of our sync events happen when people open the app in the morning, and that's overwhelmingly on wifi. I pulled the numbers last week."
+    },
+    {
+      "t": 63.8,
+      "speaker": "Dana Whitfield",
+      "text": "Then let's go with full snapshot. I'd rather have something that works badly on a train than something that corrupts data after a holiday. That's decided."
+    },
+    {
+      "t": 76.1,
+      "speaker": "Owen Brasher",
+      "text": "Agreed. I'll take that."
+    },
+    {
+      "t": 79.0,
+      "speaker": "Dana Whitfield",
+      "text": "Owen, can you have the full-snapshot implementation in review by the twenty-fourth of September?"
+    },
+    {
+      "t": 86.4,
+      "speaker": "Owen Brasher",
+      "text": "Twenty-fourth of September, yes. It's mostly plumbing at this point."
+    },
+    {
+      "t": 92.0,
+      "speaker": "Dana Whitfield",
+      "text": "Good. Crash rate, Priya."
+    },
+    {
+      "t": 95.5,
+      "speaker": "Priya Raghavan",
+      "text": "We're at one point nine percent crash-free sessions inverted, so call it ninety-eight point one percent crash-free. Most of it is one bug in the image cache on older devices."
+    },
+    {
+      "t": 110.2,
+      "speaker": "Luca Bertolini",
+      "text": "Older meaning what?"
+    },
+    {
+      "t": 113.0,
+      "speaker": "Priya Raghavan",
+      "text": "Anything with less than three gigabytes of RAM. It's about eleven percent of our install base."
+    },
+    {
+      "t": 121.7,
+      "speaker": "Dana Whitfield",
+      "text": "Eleven percent is too many to write off. Priya, will you own the image cache fix and land it by the thirtieth of September?"
+    },
+    {
+      "t": 132.4,
+      "speaker": "Priya Raghavan",
+      "text": "Thirtieth of September. I can do that."
+    },
+    {
+      "t": 137.0,
+      "speaker": "Dana Whitfield",
+      "text": "Now, ship date. I had us down for the eighth of October."
+    },
+    {
+      "t": 143.9,
+      "speaker": "Owen Brasher",
+      "text": "The eighth doesn't work. If sync lands on the twenty-fourth we need at least a week of soak time with real accounts, and the eighth gives us four days."
+    },
+    {
+      "t": 156.2,
+      "speaker": "Dana Whitfield",
+      "text": "Hm. You're right, and I'd rather hear that now. Let's move the release to the twenty-second of October. Not the eighth. Everyone note that."
+    },
+    {
+      "t": 168.5,
+      "speaker": "Luca Bertolini",
+      "text": "Twenty-second works better for me anyway, I'm out the first week of October."
+    },
+    {
+      "t": 174.0,
+      "speaker": "Dana Whitfield",
+      "text": "Luca, that means you're on the soak-test plan. Can you write it up by the seventeenth of October?"
+    },
+    {
+      "t": 182.6,
+      "speaker": "Luca Bertolini",
+      "text": "Seventeenth of October, sure. I'll circulate a draft before that."
+    },
+    {
+      "t": 189.0,
+      "speaker": "Priya Raghavan",
+      "text": "What about the tablet layout work? We keep pushing it."
+    },
+    {
+      "t": 195.3,
+      "speaker": "Dana Whitfield",
+      "text": "We're not deciding that today. Let's come back to it next week when we know how sync lands."
+    },
+    {
+      "t": 204.1,
+      "speaker": "Owen Brasher",
+      "text": "And the analytics migration? Marcus was asking."
+    },
+    {
+      "t": 209.8,
+      "speaker": "Dana Whitfield",
+      "text": "Nobody owns that yet. I'm not assigning it in this meeting."
+    },
+    {
+      "t": 216.0,
+      "speaker": "Luca Bertolini",
+      "text": "There's also the question of whether we drop support for the oldest OS version."
+    },
+    {
+      "t": 223.5,
+      "speaker": "Dana Whitfield",
+      "text": "Park that one. It's a bigger conversation than we have time for."
+    },
+    {
+      "t": 229.9,
+      "speaker": "Priya Raghavan",
+      "text": "Last thing — should we run a beta programme for this release?"
+    },
+    {
+      "t": 235.7,
+      "speaker": "Dana Whitfield",
+      "text": "Let's decide that next week as well. I don't want to half-commit to it."
+    },
+    {
+      "t": 243.0,
+      "speaker": "Owen Brasher",
+      "text": "One number for the record: our previous release took thirty-one days from code freeze to store approval. That was unusual."
+    },
+    {
+      "t": 253.4,
+      "speaker": "Dana Whitfield",
+      "text": "Noted, but I'm not planning around thirty-one days. Anything else? No? Good, thanks everyone."
+    },
+    {
+      "t": 258.0,
+      "speaker": "Priya Raghavan",
+      "text": "Dana, will you take the release note for the store listing? Someone has to own it."
+    },
+    {
+      "t": 264.5,
+      "speaker": "Dana Whitfield",
+      "text": "Fine, Dana takes the store listing note. By the twentieth of October."
+    },
+    {
+      "t": 271.0,
+      "speaker": "Luca Bertolini",
+      "text": "Also Helena Fischer sent over the localisation strings, but she's not on this project any more so I just filed them."
+    }
+  ],
+  "ground_truth": {
+    "facts": [
+      {
+        "id": "F1",
+        "kind": "decision",
+        "canonical": "The team chose the full-snapshot sync approach over the delta-based one",
+        "paraphrases": [
+          "went with full snapshot sync",
+          "full-snapshot approach was selected",
+          "decided against delta-based sync"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F2",
+        "kind": "decision",
+        "canonical": "The release date moved from 8 October to 22 October",
+        "paraphrases": [
+          "release pushed to 22 October",
+          "shipping on the 22nd instead of the 8th",
+          "ship date moved to October 22"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F3",
+        "kind": "decision",
+        "canonical": "The image cache bug on low-RAM devices will be fixed rather than written off",
+        "paraphrases": [
+          "decided to fix the image cache crash",
+          "eleven percent of users was too many to ignore"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F4",
+        "kind": "action",
+        "canonical": "Owen has the full-snapshot implementation in review by 24 September",
+        "paraphrases": [
+          "Owen implements full-snapshot sync",
+          "sync implementation owned by Owen"
+        ],
+        "owner": "Owen Brasher",
+        "due": "2026-09-24"
+      },
+      {
+        "id": "F5",
+        "kind": "action",
+        "canonical": "Priya lands the image cache fix by 30 September",
+        "paraphrases": [
+          "Priya owns the image cache fix",
+          "image cache bug assigned to Priya"
+        ],
+        "owner": "Priya Raghavan",
+        "due": "2026-09-30"
+      },
+      {
+        "id": "F6",
+        "kind": "action",
+        "canonical": "Luca writes the soak-test plan by 17 October",
+        "paraphrases": [
+          "Luca produces the soak test plan",
+          "soak-test plan owned by Luca"
+        ],
+        "owner": "Luca Bertolini",
+        "due": "2026-10-17"
+      },
+      {
+        "id": "F7",
+        "kind": "action",
+        "canonical": "Dana writes the store listing release note by 20 October",
+        "paraphrases": [
+          "Dana owns the store listing note",
+          "release note assigned to Dana"
+        ],
+        "owner": "Dana Whitfield",
+        "due": "2026-10-20"
+      },
+      {
+        "id": "F8",
+        "kind": "figure",
+        "canonical": "The full-snapshot payload is about four times larger, two megabytes against five hundred kilobytes",
+        "paraphrases": [
+          "payload grows four times",
+          "two megabytes instead of 500 kilobytes"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F9",
+        "kind": "figure",
+        "canonical": "Crash-free sessions are at 98.1 percent",
+        "paraphrases": [
+          "98.1% crash free",
+          "crash rate is 1.9 percent"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F10",
+        "kind": "figure",
+        "canonical": "Devices with under three gigabytes of RAM are about eleven percent of the install base",
+        "paraphrases": [
+          "11% of installs are low-RAM devices",
+          "eleven percent of the base has under 3 GB"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F11",
+        "kind": "date",
+        "canonical": "The release is on 22 October",
+        "paraphrases": [
+          "ships 22 October",
+          "release date is the 22nd of October"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F12",
+        "kind": "date",
+        "canonical": "Sync implementation is due 24 September",
+        "paraphrases": [
+          "sync due on 24 September",
+          "implementation deadline 24 September"
+        ],
+        "owner": null,
+        "due": null
+      }
+    ],
+    "decoys": [
+      {
+        "id": "D1",
+        "claim": "The tablet layout work",
+        "cancellation_cue": "We're not deciding that today",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D2",
+        "claim": "The analytics migration",
+        "cancellation_cue": "Nobody owns that yet",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D3",
+        "claim": "Dropping support for the oldest OS version",
+        "cancellation_cue": "Park that one",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D4",
+        "claim": "Running a beta programme for this release",
+        "cancellation_cue": "Let's decide that next week as well",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      }
+    ],
+    "distractors": {
+      "numbers": [
+        "thirty-one days",
+        "the eighth of October"
+      ],
+      "names": [
+        "Marcus",
+        "Helena Fischer"
+      ]
+    },
+    "reversal": {
+      "initial": "Release on 8 October",
+      "final": "Release on 22 October",
+      "correct_answer": "final"
+    }
+  }
+}

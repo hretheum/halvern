@@ -1,0 +1,338 @@
+@import 'tailwindcss';
+@import './tokens.generated.css';
+
+/* Since 0.37 @blocknote/shadcn ships no utility CSS of its own; the host
+   app's Tailwind build must scan the package so the editor chrome's classes
+   are generated. Without this line the toolbars and menus lose their styles. */
+@source '../../node_modules/@blocknote/shadcn';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: var(--font-source-sans-3);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  /* Was #64748b — a cool slate hardcoded among the aliases, in a palette that
+     is warm everywhere else. It is now text/tertiary like everything else. */
+  --color-tertiary: hsl(var(--tertiary));
+
+  /* The fourth text level. Named rather than an opacity, because opacity
+     composites against whatever is behind it and no palette can then promise
+     a contrast figure. WCAG exempts disabled controls from the minimum, which
+     is what lets this one sit below it — but only for the control's own label,
+     never for text explaining why the control is off. */
+  --color-disabled: hsl(var(--disabled));
+
+  /* The design has four surface levels where shadcn models two. */
+  --color-surface: hsl(var(--surface));
+  --color-elevated: hsl(var(--elevated));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-recording: hsl(var(--recording));
+
+  /* Status surfaces. A triple per hue — tint, edge, text — so an
+     informational or warning panel is built from tokens rather than from a
+     hardcoded blue that ignores the theme. */
+  --color-success-bg: hsl(var(--success-bg));
+  --color-success-border: hsl(var(--success-border));
+  --color-success-text: hsl(var(--success-text));
+  --color-warning-bg: hsl(var(--warning-bg));
+  --color-warning-border: hsl(var(--warning-border));
+  --color-warning-text: hsl(var(--warning-text));
+  --color-danger-bg: hsl(var(--danger-bg));
+  --color-danger-border: hsl(var(--danger-border));
+  --color-danger-text: hsl(var(--danger-text));
+  --color-info-bg: hsl(var(--info-bg));
+  --color-info-border: hsl(var(--info-border));
+  --color-info-text: hsl(var(--info-text));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* Tailwind 4 dropped the pointer cursor from its button defaults, on the
+     reasoning that native buttons do not show one. In a desktop app that reads
+     as "nothing here is clickable", so it is restored — globally, because the
+     gap is in every button, not in whichever one someone happens to notice.
+     Disabled controls keep the default arrow, which is the point of the
+     :not(). */
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  /* Somebody who has asked their system to reduce motion has asked every app,
+     including this one. The animations here are decoration — a fade on the
+     onboarding title, a pulse, three spinners — so they collapse to something
+     instant rather than being redesigned. `0.01ms` rather than `none` keeps
+     animation-end events firing, which some components wait on. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @keyframes vibrate {
+    0% {
+      transform: translate(0);
+    }
+
+    20% {
+      transform: translate(-2px, 2px);
+    }
+
+    40% {
+      transform: translate(-2px, -2px);
+    }
+
+    60% {
+      transform: translate(2px, 2px);
+    }
+
+    80% {
+      transform: translate(2px, -2px);
+    }
+
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  .animate-vibrate {
+    animation: vibrate 0.3s linear;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out forwards;
+  }
+
+  .delay-75 {
+    animation-delay: 75ms;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-150 {
+    animation-delay: 150ms;
+  }
+}
+
+/* The token blocks that lived here are now generated: see
+   frontend/src/app/tokens.generated.css, emitted by scripts/build-tokens.mjs
+   from design/tokens/halvern.tokens.json. Edit tokens in Figma, re-export,
+   re-run the script — never by hand. The generated file was proven
+   variable-for-variable identical to the block it replaced before the
+   switch (docs/DESIGN_ROLLOUT_REPORT.md §5). */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* html, */
+  body {
+    @apply bg-background text-foreground;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  /* Make the window draggable */
+  .titlebar {
+    -webkit-app-region: drag;
+    app-region: drag;
+  }
+
+  .no-drag {
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+  }
+
+  /* Custom scrollbar styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+
+  /* Firefox scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+  }
+
+  /* BlockNote Editor - Override fixed dimensions for responsive layout */
+  .bn-container {
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  .bn-editor {
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  /* Disable internal scrolling - let parent handle all scrolling */
+  .ProseMirror {
+    overflow: visible !important;
+  }
+
+  /* Ensure BlockNote content area is responsive */
+  .bn-block-outer {
+    max-width: 100% !important;
+  }
+
+  .bn-default-styles {
+    max-width: none !important;
+  }
+
+  /* Disable scrolling on any BlockNote wrapper elements */
+  [data-node-type] {
+    overflow: visible !important;
+  }
+
+  /* Workshop summary document, typography per the redesign mockup: quiet
+     uppercase section headings over 14px body text. Scoped to the summary
+     pane so the rest of the app's headings stay untouched. */
+  .workshop-summary-doc .bn-editor {
+    font-size: 14px;
+    line-height: 1.7;
+    padding-inline: 0;
+  }
+
+  /* BlockNote sets its own heading sizes with high specificity, so these
+     need !important like the other BlockNote overrides above. */
+  .workshop-summary-doc h1 {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+  }
+
+  .workshop-summary-doc h2,
+  .workshop-summary-doc h3 {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: hsl(var(--muted-foreground));
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "pl-short-01",
+  "language": "pl",
+  "group": "Slavic",
+  "length_class": "short",
+  "template_id": "standard_meeting",
+  "participants": ["Iwona Baran", "Krzysztof Malec", "Renata Szuba", "Damian Foltyn"],
+  "transcript": [
+    { "t": 0.0, "speaker": "Iwona Baran", "text": "Dobra, zaczynamy. Trzy tematy: dostawca płatności, poziom porzuceń koszyka i termin uruchomienia nowej wersji sklepu." },
+    { "t": 11.8, "speaker": "Krzysztof Malec", "text": "Zacznę od płatności, bo to blokuje resztę. Porównałem dwie oferty. Payhub jest tańszy, ale nie obsługuje płatności odroczonych." },
+    { "t": 25.4, "speaker": "Renata Szuba", "text": "Ile wynosi różnica w prowizji?" },
+    { "t": 29.0, "speaker": "Krzysztof Malec", "text": "Trzydzieści pięć groszy od transakcji. Przy naszym wolumenie to jakieś osiemnaście tysięcy złotych rocznie." },
+    { "t": 40.2, "speaker": "Damian Foltyn", "text": "A ile zamówień faktycznie idzie przez odroczone płatności?" },
+    { "t": 47.6, "speaker": "Renata Szuba", "text": "Około dwadzieścia trzy procent. I to są koszyki o najwyższej wartości." },
+    { "t": 57.1, "speaker": "Iwona Baran", "text": "To bierzemy Trustpay, mimo wyższej prowizji. Decyzja podjęta. Nie będę rezygnować z jednej czwartej najlepszych zamówień, żeby oszczędzić osiemnaście tysięcy." },
+    { "t": 72.3, "speaker": "Krzysztof Malec", "text": "Zgadzam się." },
+    { "t": 74.9, "speaker": "Iwona Baran", "text": "Krzysztof, weźmiesz integrację z Trustpay do dwudziestego drugiego września?" },
+    { "t": 83.0, "speaker": "Krzysztof Malec", "text": "Dwudziesty drugi września, tak. Mają przyzwoitą dokumentację." },
+    { "t": 90.5, "speaker": "Iwona Baran", "text": "Dobrze. Renata, porzucenia koszyka." },
+    { "t": 94.8, "speaker": "Renata Szuba", "text": "Jesteśmy na sześćdziesięciu ośmiu procentach. Większość odpada na kroku z kosztami dostawy, bo pokazujemy je dopiero na końcu." },
+    { "t": 108.4, "speaker": "Damian Foltyn", "text": "To przecież da się przenieść wyżej." },
+    { "t": 113.0, "speaker": "Renata Szuba", "text": "Da się, ale trzeba przeliczać koszt przy każdej zmianie koszyka. To nie jest kosmetyka." },
+    { "t": 122.7, "speaker": "Iwona Baran", "text": "Renata, zajmiesz się pokazywaniem kosztów dostawy wcześniej, termin do trzydziestego września?" },
+    { "t": 132.9, "speaker": "Renata Szuba", "text": "Trzydziesty września, zrobię." },
+    { "t": 138.0, "speaker": "Iwona Baran", "text": "Teraz uruchomienie. Miałam w głowie siódmego października." },
+    { "t": 145.6, "speaker": "Krzysztof Malec", "text": "Siódmy nie wyjdzie. Jeśli integracja kończy się dwudziestego drugiego, zostają nam dwa tygodnie na testy z prawdziwymi płatnościami, a to za mało." },
+    { "t": 159.8, "speaker": "Iwona Baran", "text": "Masz rację i dobrze, że mówisz teraz. Przesuwamy uruchomienie na dwudziestego pierwszego października, nie siódmego. Wszyscy notują." },
+    { "t": 173.2, "speaker": "Damian Foltyn", "text": "Dwudziesty pierwszy jest bezpieczniejszy." },
+    { "t": 177.5, "speaker": "Iwona Baran", "text": "Damian, w takim razie ty przygotujesz plan testów płatności. Do szesnastego października?" },
+    { "t": 186.0, "speaker": "Damian Foltyn", "text": "Szesnasty października, dobrze. Prześlę szkic wcześniej." },
+    { "t": 192.4, "speaker": "Krzysztof Malec", "text": "A co z przebudową wyszukiwarki? Ciągle to odkładamy." },
+    { "t": 199.8, "speaker": "Iwona Baran", "text": "Tego dzisiaj nie rozstrzygamy. Wrócimy do tematu w przyszłym tygodniu." },
+    { "t": 207.3, "speaker": "Renata Szuba", "text": "I jeszcze migracja do nowego systemu magazynowego. Pytał o to Sławomir Pyrka." },
+    { "t": 216.0, "speaker": "Iwona Baran", "text": "Nikt tego jeszcze nie prowadzi. Nie przydzielam tego na tym spotkaniu." },
+    { "t": 223.7, "speaker": "Damian Foltyn", "text": "Została też kwestia, czy zamykamy sprzedaż na Allegro." },
+    { "t": 231.2, "speaker": "Iwona Baran", "text": "To odkładamy. Na tę rozmowę potrzeba więcej czasu niż mamy." },
+    { "t": 238.6, "speaker": "Renata Szuba", "text": "Ostatnia rzecz: czy robimy zamkniętą grupę testową przed uruchomieniem?" },
+    { "t": 246.0, "speaker": "Iwona Baran", "text": "To też zdecydujemy w przyszłym tygodniu. Nie chcę się w to angażować połowicznie." },
+    { "t": 254.3, "speaker": "Krzysztof Malec", "text": "Do protokołu: poprzednie wdrożenie zajęło nam czterdzieści jeden dni od zamrożenia kodu. To był jednak wyjątkowy przypadek." },
+    { "t": 265.0, "speaker": "Iwona Baran", "text": "Notuję, ale nie planuję pod czterdzieści jeden dni. Iwona przygotuje podsumowanie dla zarządu do dziewiętnastego września." },
+    { "t": 276.5, "speaker": "Damian Foltyn", "text": "Aha, Marta Jendrzejczyk przysłała uwagi do regulaminu, ale ona nie jest już w tym projekcie." },
+    { "t": 285.0, "speaker": "Iwona Baran", "text": "Dzięki. To wszystko na dziś." }
+  ],
+  "ground_truth": {
+    "facts": [
+      { "id": "F1", "kind": "decision", "canonical": "The team chose Trustpay over Payhub despite the higher commission", "paraphrases": ["went with Trustpay", "Trustpay was selected as the payment provider", "decided against Payhub"], "owner": null, "due": null },
+      { "id": "F2", "kind": "decision", "canonical": "The launch moved from 7 October to 21 October", "paraphrases": ["launch pushed to 21 October", "going live on the 21st instead of the 7th"], "owner": null, "due": null },
+      { "id": "F3", "kind": "decision", "canonical": "Delivery costs will be shown earlier in the checkout rather than at the end", "paraphrases": ["decided to move shipping costs up the funnel", "delivery cost will appear before the final step"], "owner": null, "due": null },
+      { "id": "F4", "kind": "action", "canonical": "Krzysztof delivers the Trustpay integration by 22 September", "paraphrases": ["Krzysztof builds the Trustpay integration", "payment integration owned by Krzysztof"], "owner": "Krzysztof Malec", "due": "2026-09-22" },
+      { "id": "F5", "kind": "action", "canonical": "Renata shows delivery costs earlier by 30 September", "paraphrases": ["Renata moves the shipping cost display", "checkout change assigned to Renata"], "owner": "Renata Szuba", "due": "2026-09-30" },
+      { "id": "F6", "kind": "action", "canonical": "Damian prepares the payment test plan by 16 October", "paraphrases": ["Damian writes the payment test plan", "test plan owned by Damian"], "owner": "Damian Foltyn", "due": "2026-10-16" },
+      { "id": "F7", "kind": "action", "canonical": "Iwona prepares the board summary by 19 September", "paraphrases": ["Iwona writes the summary for the board", "board summary owned by Iwona"], "owner": "Iwona Baran", "due": "2026-09-19" },
+      { "id": "F8", "kind": "figure", "canonical": "Trustpay costs 35 groszy more per transaction, about 18000 zloty a year", "paraphrases": ["35 groszy per transaction more", "roughly 18 thousand zloty a year"], "owner": null, "due": null },
+      { "id": "F9", "kind": "figure", "canonical": "Cart abandonment is at sixty-eight percent", "paraphrases": ["68% abandonment", "abandonment rate is sixty-eight percent"], "owner": null, "due": null },
+      { "id": "F10", "kind": "figure", "canonical": "Deferred payments account for about twenty-three percent of orders", "paraphrases": ["23% of orders use deferred payment", "about twenty-three percent of orders"], "owner": null, "due": null },
+      { "id": "F11", "kind": "date", "canonical": "The launch is on 21 October", "paraphrases": ["goes live 21 October", "launch date is the 21st of October"], "owner": null, "due": null },
+      { "id": "F12", "kind": "date", "canonical": "The payment integration is due 22 September", "paraphrases": ["integration due 22 September", "deadline 22 September"], "owner": null, "due": null }
+    ],
+    "decoys": [
+      { "id": "D1", "claim": "Rebuilding the search engine", "cancellation_cue": "Tego dzisiaj nie rozstrzygamy", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D2", "claim": "Migrating to the new warehouse system", "cancellation_cue": "Nikt tego jeszcze nie prowadzi", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D3", "claim": "Closing the Allegro sales channel", "cancellation_cue": "To odkładamy", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D4", "claim": "Running a closed test group before launch", "cancellation_cue": "To też zdecydujemy w przyszłym tygodniu", "must_not_appear_as": ["decision", "action"] }
+    ],
+    "distractors": {
+      "numbers": ["czterdzieści jeden dni", "siódmego października"],
+      "names": ["Sławomir Pyrka", "Marta Jendrzejczyk"]
+    },
+    "reversal": {
+      "initial": "Launch on 7 October",
+      "final": "Launch on 21 October",
+      "correct_answer": "final"
+    }
+  }
+}

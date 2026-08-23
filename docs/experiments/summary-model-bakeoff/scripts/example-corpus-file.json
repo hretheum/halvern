@@ -1,0 +1,330 @@
+{
+  "id": "pl-short-00-EXAMPLE",
+  "language": "pl",
+  "group": "Slavic",
+  "length_class": "short",
+  "template_id": "standard_meeting",
+  "participants": [
+    "Anna Kowalska",
+    "Marek Wiśniewski",
+    "Ola Dąbrowska",
+    "Piotr Zieliński"
+  ],
+  "transcript": [
+    {
+      "t": 0.0,
+      "speaker": "Anna Kowalska",
+      "text": "Dobra, zaczynamy. Mamy trzy rzeczy: baza, budżet na hosting i termin wydania."
+    },
+    {
+      "t": 9.5,
+      "speaker": "Marek Wiśniewski",
+      "text": "Co do bazy — sprawdziłem oba warianty. MySQL nam nie wystarczy przy tych zapytaniach."
+    },
+    {
+      "t": 21.0,
+      "speaker": "Ola Dąbrowska",
+      "text": "Czyli Postgres?"
+    },
+    {
+      "t": 24.2,
+      "speaker": "Marek Wiśniewski",
+      "text": "Tak. Postawmy na Postgresa, decyzja podjęta."
+    },
+    {
+      "t": 31.8,
+      "speaker": "Anna Kowalska",
+      "text": "Zgoda. Marek, przygotujesz skrypt migracyjny na dwunastego września?"
+    },
+    {
+      "t": 40.1,
+      "speaker": "Marek Wiśniewski",
+      "text": "Zrobię, dwunasty września."
+    },
+    {
+      "t": 46.0,
+      "speaker": "Piotr Zieliński",
+      "text": "Hosting wychodzi nam osiemset euro miesięcznie przy obecnym ruchu."
+    },
+    {
+      "t": 55.4,
+      "speaker": "Anna Kowalska",
+      "text": "Osiemset to mieści się w budżecie. Zatwierdzam ten koszt."
+    },
+    {
+      "t": 63.0,
+      "speaker": "Ola Dąbrowska",
+      "text": "W zeszłym kwartale płaciliśmy dwanaście tysięcy czterysta euro rocznie, więc to nawet taniej."
+    },
+    {
+      "t": 74.5,
+      "speaker": "Piotr Zieliński",
+      "text": "Ola, zbierzesz oferty od trzech dostawców do dwudziestego września?"
+    },
+    {
+      "t": 83.0,
+      "speaker": "Ola Dąbrowska",
+      "text": "Jasne, dwudziesty września."
+    },
+    {
+      "t": 88.6,
+      "speaker": "Anna Kowalska",
+      "text": "Wydanie — proponuję piątego października."
+    },
+    {
+      "t": 95.0,
+      "speaker": "Marek Wiśniewski",
+      "text": "Piątego się nie wyrobimy z migracją."
+    },
+    {
+      "t": 101.2,
+      "speaker": "Anna Kowalska",
+      "text": "To dobrze, że mówisz. Zmieniamy: wydajemy dwunastego października, nie piątego."
+    },
+    {
+      "t": 111.9,
+      "speaker": "Ola Dąbrowska",
+      "text": "A co z przeniesieniem analityki na nowy klaster?"
+    },
+    {
+      "t": 118.0,
+      "speaker": "Anna Kowalska",
+      "text": "Zdecydujemy w przyszłym tygodniu, dziś tego nie ruszamy."
+    },
+    {
+      "t": 126.4,
+      "speaker": "Piotr Zieliński",
+      "text": "Podobnie z tym audytem bezpieczeństwa — na razie nikt tego nie prowadzi."
+    },
+    {
+      "t": 135.0,
+      "speaker": "Marek Wiśniewski",
+      "text": "I jeszcze zmiana dostawcy CDN. To parkujemy na razie."
+    },
+    {
+      "t": 142.8,
+      "speaker": "Ola Dąbrowska",
+      "text": "Tomasz Lis pytał o dostęp do panelu, ale go dziś nie ma, więc pomijam."
+    },
+    {
+      "t": 152.0,
+      "speaker": "Anna Kowalska",
+      "text": "Ostatnia rzecz — rekrutacja na stanowisko backendowe. Wracamy do tego za tydzień."
+    },
+    {
+      "t": 161.3,
+      "speaker": "Piotr Zieliński",
+      "text": "Piotr weźmie przegląd kosztów infrastruktury na trzydziestego września."
+    },
+    {
+      "t": 170.0,
+      "speaker": "Anna Kowalska",
+      "text": "Dobrze. Anna przygotuje podsumowanie dla zarządu na piętnastego września."
+    },
+    {
+      "t": 178.5,
+      "speaker": "Marek Wiśniewski",
+      "text": "Aha, i pokrycie testami mamy teraz na poziomie sześćdziesięciu siedmiu procent."
+    },
+    {
+      "t": 183.0,
+      "speaker": "Ola Dąbrowska",
+      "text": "Aha, Katarzyna Nowak przesłała uwagi do dokumentacji, ale to nie na dziś."
+    },
+    {
+      "t": 187.0,
+      "speaker": "Anna Kowalska",
+      "text": "Notuję. To tyle, dzięki."
+    }
+  ],
+  "ground_truth": {
+    "facts": [
+      {
+        "id": "F1",
+        "kind": "decision",
+        "canonical": "The team chose Postgres over MySQL",
+        "paraphrases": [
+          "went with Postgres",
+          "Postgres was selected",
+          "decided on PostgreSQL"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F2",
+        "kind": "decision",
+        "canonical": "The monthly hosting cost of 800 EUR was approved",
+        "paraphrases": [
+          "approved the hosting spend",
+          "signed off the 800 EUR monthly cost"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F3",
+        "kind": "decision",
+        "canonical": "The release date moved from 5 October to 12 October",
+        "paraphrases": [
+          "release pushed to 12 October",
+          "shipping on the 12th instead of the 5th"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F4",
+        "kind": "action",
+        "canonical": "Marek prepares the migration script by 12 September",
+        "paraphrases": [
+          "Marek will write the migration script",
+          "migration script owned by Marek"
+        ],
+        "owner": "Marek Wiśniewski",
+        "due": "2026-09-12"
+      },
+      {
+        "id": "F5",
+        "kind": "action",
+        "canonical": "Ola collects quotes from three providers by 20 September",
+        "paraphrases": [
+          "Ola gathers three vendor offers",
+          "Ola to get quotes from three suppliers"
+        ],
+        "owner": "Ola Dąbrowska",
+        "due": "2026-09-20"
+      },
+      {
+        "id": "F6",
+        "kind": "action",
+        "canonical": "Piotr reviews infrastructure costs by 30 September",
+        "paraphrases": [
+          "Piotr takes the infrastructure cost review",
+          "cost review owned by Piotr"
+        ],
+        "owner": "Piotr Zieliński",
+        "due": "2026-09-30"
+      },
+      {
+        "id": "F7",
+        "kind": "action",
+        "canonical": "Anna prepares the board summary by 15 September",
+        "paraphrases": [
+          "Anna writes the summary for the board",
+          "board summary owned by Anna"
+        ],
+        "owner": "Anna Kowalska",
+        "due": "2026-09-15"
+      },
+      {
+        "id": "F8",
+        "kind": "figure",
+        "canonical": "Hosting costs 800 EUR per month",
+        "paraphrases": [
+          "800 EUR monthly hosting",
+          "hosting is 800 a month"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F9",
+        "kind": "figure",
+        "canonical": "Test coverage is 67 percent",
+        "paraphrases": [
+          "coverage sits at 67%",
+          "67 percent test coverage"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F10",
+        "kind": "figure",
+        "canonical": "Three providers will be asked for quotes",
+        "paraphrases": [
+          "quotes from 3 suppliers",
+          "three vendor offers"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F11",
+        "kind": "date",
+        "canonical": "The release is on 12 October",
+        "paraphrases": [
+          "ships 12 October",
+          "release date is the 12th of October"
+        ],
+        "owner": null,
+        "due": null
+      },
+      {
+        "id": "F12",
+        "kind": "date",
+        "canonical": "The migration script is due 12 September",
+        "paraphrases": [
+          "migration due on 12 September",
+          "script deadline 12 September"
+        ],
+        "owner": null,
+        "due": null
+      }
+    ],
+    "decoys": [
+      {
+        "id": "D1",
+        "claim": "Moving the analytics stack to the new cluster",
+        "cancellation_cue": "Zdecydujemy w przyszłym tygodniu",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D2",
+        "claim": "Running a security audit",
+        "cancellation_cue": "na razie nikt tego nie prowadzi",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D3",
+        "claim": "Changing the CDN provider",
+        "cancellation_cue": "To parkujemy na razie",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      },
+      {
+        "id": "D4",
+        "claim": "Hiring for the backend role",
+        "cancellation_cue": "Wracamy do tego za tydzień",
+        "must_not_appear_as": [
+          "decision",
+          "action"
+        ]
+      }
+    ],
+    "distractors": {
+      "numbers": [
+        "dwanaście tysięcy czterysta",
+        "piątego października"
+      ],
+      "names": [
+        "Tomasz Lis",
+        "Katarzyna Nowak"
+      ]
+    },
+    "reversal": {
+      "initial": "Release on 5 October",
+      "final": "Release on 12 October",
+      "correct_answer": "final"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+/experiments
+
+# dependencies
+/node_modules
+**/models
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+*.mp4
+
+# testing
+/coverage
+/dist
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Audio files
+*.wav
+
+# Large media files
+docs/demo.mov
+docs/demo.gif
+
+
+meeting_minutes.db
+
+# Added by Task Master AI
+# Logs
+logs
+*.log
+dev-debug.log
+# Dependency directories
+node_modules/
+# Environment variables
+.env
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+experiments/
+# ...but the bake-off is documentation and belongs in the repository. The bare
+# pattern above is inherited and matches a directory of that name at any depth,
+# which silently swallowed docs/experiments/ — `git add -A` skipped it without
+# a word and several commits looked clean while carrying none of it.
+!docs/experiments/
+!docs/experiments/**
+.cursor/
+target/
+
+frontend/src-tauri/binaries/
+# Task reports written by agents at the end of a work batch. Working notes for
+# the next session, not part of the codebase — and easy to sweep in by accident
+# with `git add -A`, which is how two of them already reached a commit.
+RAPORT-*.md

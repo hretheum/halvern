@@ -1,0 +1,15 @@
+# pnpm >= 10 reads settings from this file; the "pnpm" field in package.json
+# is ignored. The overrides keep exactly one version of each ProseMirror
+# package in the graph so BlockNote, Tiptap, and the next.config.js aliases
+# all share a single instance. Versions follow @blocknote/core 0.54.0.
+overrides:
+  prosemirror-model: 1.25.11
+  prosemirror-state: 1.4.4
+  prosemirror-view: 1.42.2
+  prosemirror-transform: 1.12.0
+  prosemirror-tables: 1.8.5
+
+minimumReleaseAgeExclude:
+  - '@blocknote/core@0.54.0'
+  - '@blocknote/react@0.54.0'
+  - '@blocknote/shadcn@0.54.0'

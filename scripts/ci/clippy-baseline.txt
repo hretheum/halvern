@@ -1,0 +1,11 @@
+27
+
+# The number above is the clippy warning count for `cargo clippy --lib` that
+# this codebase was inherited with. It is a ceiling, not a target.
+#
+# `clippy-ratchet.sh` fails a change that raises it, and also fails one that
+# lowers it without updating this file — so the number can only ever walk down,
+# and every step down is a commit somebody can see.
+#
+# If you fixed warnings: put the new count on the first line and keep this
+# explanation underneath.

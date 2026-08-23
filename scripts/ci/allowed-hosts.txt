@@ -1,0 +1,59 @@
+# Every network host this application's source is allowed to name.
+#
+# Halvern's central claim is that meetings do not leave the machine. That claim
+# is only as good as the last commit, and a new hostname is the cheapest way to
+# break it — one line in a pull request, in a file nobody was looking at.
+#
+# So the set of hosts is a reviewed list rather than an emergent property.
+# `check-network-hosts.sh` extracts every host literal from the Rust and
+# TypeScript sources and fails if one is not named here. Adding a host is
+# allowed; adding it silently is not.
+#
+# Format: one host per line. A line's comment says why it may be contacted and
+# under what conditions. If you cannot write that sentence, that is the finding.
+
+# --- Model downloads. Fetched once, on first run, before any meeting exists.
+huggingface.co
+  # Speech models: Parakeet v2/v3 (istupakov) and Whisper (ggerganov). Also the
+  # summarization models. These requests reveal that an IP is downloading a
+  # model and nothing else.
+
+# --- Summarization providers. Contacted ONLY if the user configures a key.
+# Each of these receives the transcript of the meeting being summarized, which
+# is why PRIVACY_POLICY.md names them individually.
+api.openai.com
+api.anthropic.com
+api.groq.com
+openrouter.ai
+ollama.com
+  # Model catalogue for the Ollama integration. The inference endpoint itself is
+  # whatever the user configures, and defaults to localhost.
+
+# --- Local. Not network egress in any meaningful sense, but they appear as
+# URLs in source and the extractor cannot tell the difference.
+localhost
+127.0.0.1
+
+# --- Dormant. Present in source, unreachable in a shipped build.
+us.i.posthog.com
+  # The default value of AnalyticsConfig::host (`analytics/analytics.rs:55`).
+  # It is inert: the same Default sets `api_key: String::new()` and
+  # `enabled: false`, and the client is constructed only
+  # `if config.enabled && !config.api_key.is_empty()`. With no key there is no
+  # client and every send path returns early. A default build therefore cannot
+  # reach this host, which is what README.md and PRIVACY_POLICY.md claim.
+  #
+  # If you are here because you are wiring analytics up: the endpoint and key
+  # are meant to come from `option_env!`, so that a binary built without them
+  # has no way to send. Do not replace this with a hardcoded live endpoint.
+
+# --- Not contacted at runtime. Documentation links and XML namespaces.
+github.com
+  # Repository and issue links in user-facing copy.
+www.w3.org
+  # SVG/XML namespace URIs. Never fetched; they are identifiers, not addresses.
+
+# --- Placeholders in examples, tests and validation messages.
+custom.example
+x.yy.zz
+host

@@ -1,0 +1,118 @@
+name: CI
+
+# The gate every change passes before it reaches main.
+#
+# Until this file existed, every workflow in this repository was
+# `workflow_dispatch` — including the one named "pr-main-check", which only
+# reads the version out of tauri.conf.json and never compiles anything. Nothing
+# ran automatically on a pull request. A contributor could open one, see a clean
+# green page, and be told days later that it does not build.
+#
+# The jobs are deliberately ordered cheapest-first, and `guards` needs no
+# toolchain at all, so an obvious mistake fails in under a minute instead of
+# after a macOS runner has spent fifteen.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  guards:
+    name: Project guards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The language and format checks compare against the merge base, so
+          # they need history rather than a shallow clone.
+          fetch-depth: 0
+
+      - name: Resolve merge base
+        run: echo "BASE_SHA=$(git merge-base origin/main HEAD)" >> "$GITHUB_ENV"
+
+      # rustfmt only — no full toolchain build, this job must stay fast.
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Run guards
+        run: ./scripts/ci/guards.sh
+
+  rust:
+    name: Rust — tests and clippy
+    # macOS because the audio path is macOS-specific: ScreenCaptureKit system
+    # capture and the CoreAudio tap do not exist on the Linux runners, and a
+    # green Linux build would prove nothing about the code that actually runs.
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: frontend/src-tauri
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Tauri resolves `externalBin` at build-script time, so without this file
+      # every cargo command fails with "resource path
+      # 'binaries/llama-helper-...' doesn't exist" — before compiling a line.
+      # It is not part of beforeBuildCommand, so CI has to do it explicitly.
+      - name: Build the llama-helper sidecar
+        working-directory: frontend
+        run: node scripts/build-sidecar.js
+
+      - name: Test
+        working-directory: frontend/src-tauri
+        run: cargo test --lib
+
+      - name: Clippy (ratchet)
+        run: ./scripts/ci/clippy-ratchet.sh
+
+  frontend:
+    name: Frontend — types and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Install
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check
+        working-directory: frontend
+        run: pnpm run typecheck
+
+      - name: Build
+        working-directory: frontend
+        run: pnpm run build

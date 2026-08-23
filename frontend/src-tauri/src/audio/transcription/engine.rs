@@ -1,0 +1,588 @@
+// audio/transcription/engine.rs
+//
+// TranscriptionEngine enum and model initialization/validation logic.
+
+use super::provider::TranscriptionProvider;
+use log::{info, warn};
+use std::sync::Arc;
+use tauri::{AppHandle, Manager, Runtime};
+
+// ============================================================================
+// TRANSCRIPTION ENGINE ENUM
+// ============================================================================
+
+// Transcription engine abstraction to support multiple providers
+pub enum TranscriptionEngine {
+    Whisper(Arc<crate::whisper_engine::WhisperEngine>),  // Direct access (backward compat)
+    Parakeet(Arc<crate::parakeet_engine::ParakeetEngine>), // Direct access (backward compat)
+    Provider(Arc<dyn TranscriptionProvider>),  // Trait-based (preferred for new code)
+}
+
+impl TranscriptionEngine {
+    /// Check if the engine has a model loaded
+    pub async fn is_model_loaded(&self) -> bool {
+        match self {
+            Self::Whisper(engine) => engine.is_model_loaded().await,
+            Self::Parakeet(engine) => engine.is_model_loaded().await,
+            Self::Provider(provider) => provider.is_model_loaded().await,
+        }
+    }
+
+    /// Get the current model name
+    pub async fn get_current_model(&self) -> Option<String> {
+        match self {
+            Self::Whisper(engine) => engine.get_current_model().await,
+            Self::Parakeet(engine) => engine.get_current_model().await,
+            Self::Provider(provider) => provider.get_current_model().await,
+        }
+    }
+
+    /// Get the provider name for logging
+    pub fn provider_name(&self) -> &str {
+        match self {
+            Self::Whisper(_) => "Whisper (direct)",
+            Self::Parakeet(_) => "Parakeet (direct)",
+            Self::Provider(provider) => provider.provider_name(),
+        }
+    }
+
+    /// Transcribe one batch of 16kHz mono samples, whichever engine this is.
+    /// Returns (text, confidence). Parakeet reports no per-segment confidence,
+    /// so it keeps the 0.9 placeholder the batch paths always used for it;
+    /// remote providers report none either and get the same treatment.
+    pub async fn transcribe_batch(
+        &self,
+        audio: Vec<f32>,
+        language: Option<String>,
+    ) -> Result<(String, f32), String> {
+        match self {
+            Self::Whisper(engine) => engine
+                .transcribe_audio_with_confidence(audio, language)
+                .await
+                .map(|(text, confidence, _is_partial)| (text, confidence))
+                .map_err(|e| e.to_string()),
+            Self::Parakeet(engine) => engine
+                .transcribe_audio(audio)
+                .await
+                .map(|text| (text, 0.9f32))
+                .map_err(|e| e.to_string()),
+            Self::Provider(provider) => provider
+                .transcribe(audio, language)
+                .await
+                .map(|result| (result.text, result.confidence.unwrap_or(0.9)))
+                .map_err(|e| e.to_string()),
+        }
+    }
+
+    /// Build the remote OpenAI-compatible engine from its saved configuration.
+    ///
+    /// Batch paths only (retranscription / import enhancement). The live
+    /// recording path never constructs this: `validate_transcription_model_ready`
+    /// rejects every provider except the local ones before recording starts,
+    /// so a network failure can degrade a batch job but never live capture.
+    pub fn remote_from_config(
+        config: super::remote_provider::RemoteTranscriptionConfig,
+    ) -> Result<Self, String> {
+        if config.endpoint.trim().is_empty() {
+            return Err("Remote transcription endpoint is not configured".to_string());
+        }
+        if config.model.trim().is_empty() {
+            return Err("Remote transcription model is not configured".to_string());
+        }
+        Ok(Self::Provider(Arc::new(
+            super::remote_provider::RemoteTranscriptionProvider::new(config),
+        )))
+    }
+}
+
+// ============================================================================
+// MODEL VALIDATION AND INITIALIZATION
+// ============================================================================
+
+/// Whether the transcription engine the user is actually configured for has a
+/// model on disk.
+///
+/// The pre-flight check in the UI used to ask Parakeet directly, which was
+/// correct only while Parakeet was the sole engine onboarding could install.
+/// Asking the configured provider instead means a Whisper user is not told to
+/// download a model they already have.
+/// `provider` overrides the stored configuration. Onboarding needs that: it asks
+/// this before `complete_onboarding` has written the config, so reading the
+/// config there would answer for whichever engine the machine used last.
+#[tauri::command]
+pub async fn transcription_model_available<R: Runtime>(
+    app: AppHandle<R>,
+    provider: Option<String>,
+) -> Result<bool, String> {
+    let provider = match provider {
+        Some(provider) => provider,
+        None => match crate::api::api::api_get_transcript_config(
+            app.clone(),
+            app.clone().state(),
+            None,
+        )
+        .await
+        {
+            Ok(Some(config)) => config.provider,
+            // No configuration yet means a fresh install, which onboarding has
+            // not finished writing; Parakeet is what such an install would have.
+            _ => crate::language::PROVIDER_PARAKEET.to_string(),
+        },
+    };
+
+    if provider == crate::language::PROVIDER_WHISPER {
+        // Deliberately not whisper_has_available_models: that answers false
+        // whenever the engine has not finished initializing, and initialization
+        // is spawned asynchronously at startup. Right after launch it would
+        // report a perfectly good model as missing and send the user off to
+        // download it again. Listing falls back to scanning the models
+        // directory, which has no such dependency.
+        let models = crate::whisper_engine::commands::whisper_get_available_models().await?;
+        Ok(models.iter().any(|model| {
+            matches!(
+                model.status,
+                crate::whisper_engine::whisper_engine::ModelStatus::Available
+            )
+        }))
+    } else {
+        // Initialization is what populates the model list; without it a present
+        // model reads as absent.
+        crate::parakeet_engine::commands::parakeet_init().await?;
+        crate::parakeet_engine::commands::parakeet_has_available_models().await
+    }
+}
+
+/// Whether a model for the configured engine is downloading right now.
+///
+/// Distinguishes "wait a moment" from "you have nothing installed", which are
+/// very different things to tell someone who just pressed record.
+#[tauri::command]
+pub async fn transcription_model_downloading<R: Runtime>(app: AppHandle<R>) -> Result<bool, String> {
+    let provider = match crate::api::api::api_get_transcript_config(
+        app.clone(),
+        app.clone().state(),
+        None,
+    )
+    .await
+    {
+        Ok(Some(config)) => config.provider,
+        _ => crate::language::PROVIDER_PARAKEET.to_string(),
+    };
+
+    // The two engines carry their own identically shaped ModelStatus, so each
+    // branch matches against its own.
+    if provider == crate::language::PROVIDER_WHISPER {
+        let models = crate::whisper_engine::commands::whisper_get_available_models().await?;
+        Ok(models.iter().any(|model| {
+            matches!(
+                model.status,
+                crate::whisper_engine::whisper_engine::ModelStatus::Downloading { .. }
+            )
+        }))
+    } else {
+        let models = crate::parakeet_engine::commands::parakeet_get_available_models().await?;
+        Ok(models.iter().any(|model| {
+            matches!(
+                model.status,
+                crate::parakeet_engine::ModelStatus::Downloading { .. }
+            )
+        }))
+    }
+}
+
+/// Validate that transcription models (Whisper or Parakeet) are ready before starting recording
+pub async fn validate_transcription_model_ready<R: Runtime>(app: &AppHandle<R>) -> Result<(), String> {
+    // Check transcript configuration to determine which engine to validate
+    let config = match crate::api::api::api_get_transcript_config(
+        app.clone(),
+        app.clone().state(),
+        None,
+    )
+    .await
+    {
+        Ok(Some(config)) => {
+            info!(
+                "📝 Found transcript config - provider: {}, model: {}",
+                config.provider, config.model
+            );
+            config
+        }
+        Ok(None) => {
+            info!("📝 No transcript config found, defaulting to parakeet");
+            crate::api::api::TranscriptConfig {
+                provider: "parakeet".to_string(),
+                model: crate::config::DEFAULT_PARAKEET_MODEL.to_string(),
+                api_key: None,
+            }
+        }
+        Err(e) => {
+            warn!("⚠️ Failed to get transcript config: {}, defaulting to parakeet", e);
+            crate::api::api::TranscriptConfig {
+                provider: "parakeet".to_string(),
+                model: crate::config::DEFAULT_PARAKEET_MODEL.to_string(),
+                api_key: None,
+            }
+        }
+    };
+
+    // Validate based on provider. The arms use the constants onboarding writes,
+    // so the spelling cannot drift between what is stored and what is accepted.
+    match config.provider.as_str() {
+        crate::language::PROVIDER_WHISPER => {
+            info!("🔍 Validating Whisper model...");
+            // Ensure whisper engine is initialized first
+            if let Err(init_error) = crate::whisper_engine::commands::whisper_init().await {
+                warn!("❌ Failed to initialize Whisper engine: {}", init_error);
+                return Err(format!(
+                    "Failed to initialize speech recognition: {}",
+                    init_error
+                ));
+            }
+
+            // Call the whisper validation command with config support
+            match crate::whisper_engine::commands::whisper_validate_model_ready_with_config(app).await {
+                Ok(model_name) => {
+                    info!("✅ Whisper model validation successful: {} is ready", model_name);
+                    Ok(())
+                }
+                Err(e) => {
+                    warn!("❌ Whisper model validation failed: {}", e);
+                    Err(e)
+                }
+            }
+        }
+        crate::language::PROVIDER_PARAKEET => {
+            info!("🔍 Validating Parakeet model...");
+            // Ensure parakeet engine is initialized first
+            if let Err(init_error) = crate::parakeet_engine::commands::parakeet_init().await {
+                warn!("❌ Failed to initialize Parakeet engine: {}", init_error);
+                return Err(format!(
+                    "Failed to initialize Parakeet speech recognition: {}",
+                    init_error
+                ));
+            }
+
+            // Use the validation command that includes auto-discovery and loading
+            // This matches the Whisper behavior for consistency
+            match crate::parakeet_engine::commands::parakeet_validate_model_ready_with_config(app).await {
+                Ok(model_name) => {
+                    info!("✅ Parakeet model validation successful: {} is ready", model_name);
+                    Ok(())
+                }
+                Err(e) => {
+                    warn!("❌ Parakeet model validation failed: {}", e);
+                    Err(e)
+                }
+            }
+        }
+        other => {
+            // Deliberate hard boundary: live recording accepts local engines only.
+            // The remote OpenAI-compatible provider exists, but solely for batch
+            // work (retranscription / import) — a network failure mid-meeting
+            // must never be able to take down live transcription.
+            warn!("❌ Unsupported transcription provider for local recording: {}", other);
+            Err(format!(
+                "Provider '{}' is not supported for live transcription. Please select 'localWhisper' or 'parakeet'. Remote transcription is available for retranscription only.",
+                other
+            ))
+        }
+    }
+}
+
+/// Get or initialize the appropriate transcription engine based on provider configuration
+pub async fn get_or_init_transcription_engine<R: Runtime>(
+    app: &AppHandle<R>,
+) -> Result<TranscriptionEngine, String> {
+    // Get provider configuration from API
+    let config = match crate::api::api::api_get_transcript_config(
+        app.clone(),
+        app.clone().state(),
+        None,
+    )
+    .await
+    {
+        Ok(Some(config)) => {
+            info!(
+                "📝 Transcript config - provider: {}, model: {}",
+                config.provider, config.model
+            );
+            config
+        }
+        Ok(None) => {
+            info!("📝 No transcript config found, defaulting to parakeet");
+            crate::api::api::TranscriptConfig {
+                provider: "parakeet".to_string(),
+                model: crate::config::DEFAULT_PARAKEET_MODEL.to_string(),
+                api_key: None,
+            }
+        }
+        Err(e) => {
+            warn!("⚠️ Failed to get transcript config: {}, defaulting to parakeet", e);
+            crate::api::api::TranscriptConfig {
+                provider: "parakeet".to_string(),
+                model: crate::config::DEFAULT_PARAKEET_MODEL.to_string(),
+                api_key: None,
+            }
+        }
+    };
+
+    // Initialize the appropriate engine based on provider
+    match config.provider.as_str() {
+        "parakeet" => {
+            info!("🦜 Initializing Parakeet transcription engine");
+
+            // Get Parakeet engine
+            let engine = {
+                let guard = crate::parakeet_engine::commands::PARAKEET_ENGINE
+                    .lock()
+                    .unwrap();
+                guard.as_ref().cloned()
+            };
+
+            match engine {
+                Some(engine) => {
+                    // Check if model is loaded
+                    if engine.is_model_loaded().await {
+                        let model_name = engine.get_current_model().await
+                            .unwrap_or_else(|| "unknown".to_string());
+                        info!("✅ Parakeet model '{}' already loaded", model_name);
+                        Ok(TranscriptionEngine::Parakeet(engine))
+                    } else {
+                        Err("Parakeet engine initialized but no model loaded. This should not happen after validation.".to_string())
+                    }
+                }
+                None => {
+                    Err("Parakeet engine not initialized. This should not happen after validation.".to_string())
+                }
+            }
+        }
+        // "localWhisper", and anything unrecognised, falls back to Whisper.
+        _ => {
+            info!("🎤 Initializing Whisper transcription engine");
+            let whisper_engine = get_or_init_whisper(app).await?;
+            Ok(TranscriptionEngine::Whisper(whisper_engine))
+        }
+    }
+}
+
+/// Get or initialize transcription engine using API configuration
+/// Returns Whisper engine if provider is localWhisper, otherwise returns error for non-Whisper providers
+pub async fn get_or_init_whisper<R: Runtime>(
+    app: &AppHandle<R>,
+) -> Result<Arc<crate::whisper_engine::WhisperEngine>, String> {
+    // Check if engine already exists and has a model loaded
+    let existing_engine = {
+        let engine_guard = crate::whisper_engine::commands::WHISPER_ENGINE
+            .lock()
+            .unwrap();
+        engine_guard.as_ref().cloned()
+    };
+
+    if let Some(engine) = existing_engine {
+        // Check if a model is already loaded
+        if engine.is_model_loaded().await {
+            let current_model = engine
+                .get_current_model()
+                .await
+                .unwrap_or_else(|| "unknown".to_string());
+
+            // NEW: Check if loaded model matches saved config
+            let configured_model = match crate::api::api::api_get_transcript_config(
+                app.clone(),
+                app.clone().state(),
+                None,
+            )
+            .await
+            {
+                Ok(Some(config)) => {
+                    info!(
+                        "📝 Saved transcript config - provider: {}, model: {}",
+                        config.provider, config.model
+                    );
+                    if config.provider == "localWhisper" && !config.model.is_empty() {
+                        Some(config.model)
+                    } else {
+                        None
+                    }
+                }
+                Ok(None) => {
+                    info!("📝 No transcript config found in database");
+                    None
+                }
+                Err(e) => {
+                    warn!("⚠️ Failed to get transcript config: {}", e);
+                    None
+                }
+            };
+
+            // If loaded model matches config, reuse it
+            if let Some(ref expected_model) = configured_model {
+                if current_model == *expected_model {
+                    info!(
+                        "✅ Loaded model '{}' matches saved config, reusing",
+                        current_model
+                    );
+                    return Ok(engine);
+                } else {
+                    info!(
+                        "🔄 Loaded model '{}' doesn't match saved config '{}', reloading correct model...",
+                        current_model, expected_model
+                    );
+                    // Unload the incorrect model
+                    engine.unload_model().await;
+                    info!("📉 Unloaded incorrect model '{}'", current_model);
+                    // Continue to model loading logic below
+                }
+            } else {
+                // No specific config saved, accept currently loaded model
+                info!(
+                    "✅ No specific model configured, using currently loaded model: '{}'",
+                    current_model
+                );
+                return Ok(engine);
+            }
+        } else {
+            info!("🔄 Whisper engine exists but no model loaded, will load model from config");
+        }
+    }
+
+    // Initialize new engine if needed
+    info!("Initializing Whisper engine");
+
+    // First ensure the engine is initialized
+    if let Err(e) = crate::whisper_engine::commands::whisper_init().await {
+        return Err(format!("Failed to initialize Whisper engine: {}", e));
+    }
+
+    // Get the engine reference
+    let engine = {
+        let engine_guard = crate::whisper_engine::commands::WHISPER_ENGINE
+            .lock()
+            .unwrap();
+        engine_guard
+            .as_ref()
+            .cloned()
+            .ok_or("Failed to get initialized engine")?
+    };
+
+    // Get model configuration from API
+    let model_to_load =
+        match crate::api::api::api_get_transcript_config(app.clone(), app.clone().state(), None)
+            .await
+        {
+            Ok(Some(config)) => {
+                info!(
+                    "Got transcript config from API - provider: {}, model: {}",
+                    config.provider, config.model
+                );
+                if config.provider == "localWhisper" {
+                    info!("Using model from API config: {}", config.model);
+                    config.model
+                } else {
+                    // Non-Whisper provider (e.g., parakeet) - this function shouldn't be called
+                    return Err(format!(
+                        "Cannot initialize Whisper engine: Config uses '{}' provider. This is a bug in the transcription task initialization.",
+                        config.provider
+                    ));
+                }
+            }
+            Ok(None) => {
+                info!("No transcript config found in API, falling back to 'small'");
+                "small".to_string()
+            }
+            Err(e) => {
+                warn!(
+                    "Failed to get transcript config from API: {}, falling back to 'small'",
+                    e
+                );
+                "small".to_string()
+            }
+        };
+
+    info!("Selected model to load: {}", model_to_load);
+
+    // Discover available models to check if the desired model is downloaded
+    let models = engine
+        .discover_models()
+        .await
+        .map_err(|e| format!("Failed to discover models: {}", e))?;
+
+    info!("Discovered {} models", models.len());
+    for model in &models {
+        info!(
+            "Model: {} - Status: {:?} - Path: {}",
+            model.name,
+            model.status,
+            model.path.display()
+        );
+    }
+
+    // Check if the desired model is available
+    let model_info = models.iter().find(|model| model.name == model_to_load);
+
+    if model_info.is_none() {
+        info!(
+            "Model '{}' not found in discovered models. Available models: {:?}",
+            model_to_load,
+            models.iter().map(|m| &m.name).collect::<Vec<_>>()
+        );
+    }
+
+    match model_info {
+        Some(model) => {
+            match model.status {
+                crate::whisper_engine::ModelStatus::Available => {
+                    info!("Loading model: {}", model_to_load);
+                    engine
+                        .load_model(&model_to_load)
+                        .await
+                        .map_err(|e| format!("Failed to load model '{}': {}", model_to_load, e))?;
+                    info!("✅ Model '{}' loaded successfully", model_to_load);
+                }
+                crate::whisper_engine::ModelStatus::Missing => {
+                    return Err(format!(
+                        "Model '{}' is not downloaded. Please download it first from the settings.",
+                        model_to_load
+                    ));
+                }
+                crate::whisper_engine::ModelStatus::Downloading { progress } => {
+                    return Err(format!("Model '{}' is currently downloading ({}%). Please wait for it to complete.", model_to_load, progress));
+                }
+                crate::whisper_engine::ModelStatus::Error(ref err) => {
+                    return Err(format!("Model '{}' has an error: {}. Please check the model or try downloading it again.", model_to_load, err));
+                }
+                crate::whisper_engine::ModelStatus::Corrupted { .. } => {
+                    return Err(format!("Model '{}' is corrupted. Please delete it and download again from the settings.", model_to_load));
+                }
+            }
+        }
+        None => {
+            // Check if we have any available models and try to load the first one
+            let available_models: Vec<_> = models
+                .iter()
+                .filter(|m| matches!(m.status, crate::whisper_engine::ModelStatus::Available))
+                .collect();
+
+            if let Some(fallback_model) = available_models.first() {
+                warn!(
+                    "Model '{}' not found, falling back to available model: '{}'",
+                    model_to_load, fallback_model.name
+                );
+                engine.load_model(&fallback_model.name).await.map_err(|e| {
+                    format!(
+                        "Failed to load fallback model '{}': {}",
+                        fallback_model.name, e
+                    )
+                })?;
+                info!(
+                    "✅ Fallback model '{}' loaded successfully",
+                    fallback_model.name
+                );
+            } else {
+                return Err(format!("Model '{}' is not supported and no other models are available. Please download a model from the settings.", model_to_load));
+            }
+        }
+    }
+
+    Ok(engine)
+}

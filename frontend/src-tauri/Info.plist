@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This application needs access to your microphone to record meeting audio.</string>
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>This application needs screen recording permission to capture system audio during meetings.</string>
+    <key>NSAudioCaptureUsageDescription</key>
+    <string>This application needs permission to capture system audio output for meeting transcription and recording.</string>
+    <!-- Both calendar keys are required: the first is what macOS 13 asks with,
+         the second is what macOS 14+ asks with once access was split into
+         read-only and write-only. Missing either one means a silent denial. -->
+    <key>NSCalendarsUsageDescription</key>
+    <string>This application reads your calendar to name recordings after the meeting they belong to.</string>
+    <key>NSCalendarsFullAccessUsageDescription</key>
+    <string>This application reads meeting titles, times, participants and agendas from your calendar so recordings are named and summarized with the right context.</string>
+    <key>com.apple.security.device.audio-input</key>
+    <true/>
+</dict>
+</plist>

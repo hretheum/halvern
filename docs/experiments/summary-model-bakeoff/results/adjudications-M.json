@@ -1,0 +1,114 @@
+{
+  "de-short-01|gemma3:4b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "de-short-01|gemma3:4b|M|1|D2": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "de-short-01|gemma3:4b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "de-short-01|qwen3.5:2b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "de-short-01|qwen3.5:2b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "de-short-01|qwen3.5:4b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "de-short-01|qwen3.5:4b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|gemma3:1b|M|1|D2": {
+    "fabricated": true,
+    "evidence": "substantive work assigned to an unowned topic"
+  },
+  "en-short-01|gemma3:1b|M|1|D4": {
+    "fabricated": true,
+    "evidence": "substantive work assigned to an unowned topic"
+  },
+  "en-short-01|qwen3.5:2b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|qwen3.5:2b|M|1|D2": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|qwen3.5:2b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|qwen3.5:2b|M|1|D4": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|qwen3.5:4b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|qwen3.5:4b|M|1|D2": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|qwen3.5:4b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "en-short-01|qwen3.5:4b|M|1|D4": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "pl-short-01|qwen3.5:2b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "pl-short-01|qwen3.5:2b|M|1|D2": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "pl-short-01|qwen3.5:2b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "pl-short-01|qwen3.5:2b|M|1|D4": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "pl-short-01|qwen3.5:4b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "pl-short-01|qwen3.5:4b|M|1|D2": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "pl-short-01|qwen3.5:4b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "tr-short-01|gemma3:1b|M|1|D1": {
+    "fabricated": true,
+    "evidence": "substantive work assigned to an unowned topic"
+  },
+  "tr-short-01|gemma3:4b|M|1|D3": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "tr-short-01|qwen3.5:2b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  },
+  "tr-short-01|qwen3.5:4b|M|1|D1": {
+    "fabricated": false,
+    "evidence": null
+  }
+}

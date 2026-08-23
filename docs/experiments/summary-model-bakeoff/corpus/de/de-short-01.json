@@ -1,0 +1,75 @@
+{
+  "id": "de-short-01",
+  "language": "de",
+  "group": "WesternEuropean",
+  "length_class": "short",
+  "template_id": "standard_meeting",
+  "participants": ["Katrin Ahlgrim", "Jonas Vetter", "Sibel Öztürk", "Ralf Neubauer"],
+  "transcript": [
+    { "t": 0.0, "speaker": "Katrin Ahlgrim", "text": "Fangen wir an. Drei Punkte: der Lagerdienstleister, die Retourenquote und wann wir den neuen Katalog rausschicken." },
+    { "t": 10.5, "speaker": "Jonas Vetter", "text": "Beim Lagerdienstleister habe ich beide Angebote durchgerechnet. Nordlicht ist billiger, aber die garantieren uns keine Samstagszustellung." },
+    { "t": 22.8, "speaker": "Sibel Öztürk", "text": "Wie groß ist der Preisunterschied denn?" },
+    { "t": 26.4, "speaker": "Jonas Vetter", "text": "Etwa vierzehn Prozent über das Jahr gerechnet. Bei unserem Volumen sind das ungefähr sechsundzwanzigtausend Euro." },
+    { "t": 37.0, "speaker": "Ralf Neubauer", "text": "Und wie viele Bestellungen betrifft die Samstagszustellung überhaupt?" },
+    { "t": 44.2, "speaker": "Sibel Öztürk", "text": "Knapp neun Prozent. Aber das sind genau die Kunden, die sich beschweren, wenn es nicht klappt." },
+    { "t": 54.9, "speaker": "Katrin Ahlgrim", "text": "Dann nehmen wir Hansa Logistik, trotz des höheren Preises. Das ist entschieden. Ich will keine Diskussion über neun Prozent unserer lautesten Kunden." },
+    { "t": 68.3, "speaker": "Jonas Vetter", "text": "Verstanden." },
+    { "t": 70.5, "speaker": "Katrin Ahlgrim", "text": "Jonas, übernimmst du den Vertragsentwurf bis zum achtzehnten September?" },
+    { "t": 78.0, "speaker": "Jonas Vetter", "text": "Achtzehnter September, ja. Ich stimme mich vorher mit der Rechtsabteilung ab." },
+    { "t": 85.6, "speaker": "Katrin Ahlgrim", "text": "Gut. Retourenquote, Sibel." },
+    { "t": 89.1, "speaker": "Sibel Öztürk", "text": "Wir liegen bei zweiundzwanzig Prozent. Das ist zu hoch. Der größte Teil kommt aus einer einzigen Produktkategorie, den Winterjacken, wo die Größentabelle nicht stimmt." },
+    { "t": 104.7, "speaker": "Ralf Neubauer", "text": "Das können wir doch einfach korrigieren." },
+    { "t": 109.2, "speaker": "Sibel Öztürk", "text": "Ja, aber es betrifft vierhundert Artikel. Das ist Handarbeit." },
+    { "t": 116.8, "speaker": "Katrin Ahlgrim", "text": "Sibel, machst du die Korrektur der Größentabellen bis zum fünfundzwanzigsten September?" },
+    { "t": 125.3, "speaker": "Sibel Öztürk", "text": "Fünfundzwanzigster September. Schaffe ich." },
+    { "t": 130.0, "speaker": "Katrin Ahlgrim", "text": "Zum Katalog. Ich hatte den zehnten Oktober im Kopf." },
+    { "t": 137.4, "speaker": "Ralf Neubauer", "text": "Der zehnte geht nicht. Wenn die Größentabellen erst Ende September fertig sind, haben wir keine Zeit für den Korrekturlauf." },
+    { "t": 149.9, "speaker": "Katrin Ahlgrim", "text": "Stimmt. Wir verschieben den Katalogversand auf den vierundzwanzigsten Oktober, nicht den zehnten. Bitte alle notieren." },
+    { "t": 162.5, "speaker": "Ralf Neubauer", "text": "Danke, das ist realistischer." },
+    { "t": 166.0, "speaker": "Katrin Ahlgrim", "text": "Ralf, dann machst du den Korrekturlauf. Bis zum neunzehnten Oktober?" },
+    { "t": 173.8, "speaker": "Ralf Neubauer", "text": "Neunzehnter Oktober, in Ordnung." },
+    { "t": 179.0, "speaker": "Jonas Vetter", "text": "Was ist mit dem neuen Fotostudio? Wir schieben das seit Wochen." },
+    { "t": 186.4, "speaker": "Katrin Ahlgrim", "text": "Das entscheiden wir heute nicht. Nächste Woche, wenn die Zahlen da sind." },
+    { "t": 194.0, "speaker": "Sibel Öztürk", "text": "Und die Umstellung auf das neue Kassensystem? Herr Brandner hatte nachgefragt." },
+    { "t": 202.7, "speaker": "Katrin Ahlgrim", "text": "Dafür ist noch niemand zuständig. Ich vergebe das nicht in dieser Sitzung." },
+    { "t": 210.3, "speaker": "Ralf Neubauer", "text": "Dann wäre da noch die Frage, ob wir den Standort in Bremen aufgeben." },
+    { "t": 218.9, "speaker": "Katrin Ahlgrim", "text": "Das stellen wir zurück. Dafür brauchen wir mehr Zeit als heute." },
+    { "t": 226.0, "speaker": "Sibel Öztürk", "text": "Letzter Punkt: sollen wir für den Katalog eine Testgruppe einrichten?" },
+    { "t": 233.5, "speaker": "Katrin Ahlgrim", "text": "Entscheiden wir ebenfalls nächste Woche. Halb zusagen bringt uns nichts." },
+    { "t": 241.0, "speaker": "Jonas Vetter", "text": "Fürs Protokoll: der letzte Katalog hat dreiundfünfzigtausend Euro gekostet. Das war allerdings mit Sonderdruck." },
+    { "t": 251.6, "speaker": "Katrin Ahlgrim", "text": "Notiert, aber danach planen wir nicht. Katrin schreibt die Zusammenfassung für die Geschäftsführung bis zum zwanzigsten September." },
+    { "t": 262.0, "speaker": "Ralf Neubauer", "text": "Übrigens hat Frau Kellermann die alten Verträge geschickt, sie ist aber nicht mehr im Projekt." },
+    { "t": 270.4, "speaker": "Katrin Ahlgrim", "text": "Danke. Das war's, bis nächste Woche." }
+  ],
+  "ground_truth": {
+    "facts": [
+      { "id": "F1", "kind": "decision", "canonical": "The team chose Hansa Logistik over Nordlicht despite the higher price", "paraphrases": ["went with Hansa Logistik", "Hansa Logistik was selected as the warehouse provider", "decided against Nordlicht"], "owner": null, "due": null },
+      { "id": "F2", "kind": "decision", "canonical": "The catalogue mailing moved from 10 October to 24 October", "paraphrases": ["catalogue pushed to 24 October", "sending on the 24th instead of the 10th"], "owner": null, "due": null },
+      { "id": "F3", "kind": "decision", "canonical": "The winter jacket size tables will be corrected rather than left as they are", "paraphrases": ["decided to fix the size tables", "size table correction was approved"], "owner": null, "due": null },
+      { "id": "F4", "kind": "action", "canonical": "Jonas prepares the contract draft by 18 September", "paraphrases": ["Jonas writes the contract draft", "contract draft owned by Jonas"], "owner": "Jonas Vetter", "due": "2026-09-18" },
+      { "id": "F5", "kind": "action", "canonical": "Sibel corrects the size tables by 25 September", "paraphrases": ["Sibel fixes the size tables", "size table correction assigned to Sibel"], "owner": "Sibel Öztürk", "due": "2026-09-25" },
+      { "id": "F6", "kind": "action", "canonical": "Ralf runs the proofing pass by 19 October", "paraphrases": ["Ralf does the correction run", "proofing run owned by Ralf"], "owner": "Ralf Neubauer", "due": "2026-10-19" },
+      { "id": "F7", "kind": "action", "canonical": "Katrin writes the management summary by 20 September", "paraphrases": ["Katrin prepares the summary for management", "management summary owned by Katrin"], "owner": "Katrin Ahlgrim", "due": "2026-09-20" },
+      { "id": "F8", "kind": "figure", "canonical": "Hansa Logistik costs about fourteen percent more, roughly 26000 EUR a year", "paraphrases": ["14% more expensive", "about 26 thousand euros a year more"], "owner": null, "due": null },
+      { "id": "F9", "kind": "figure", "canonical": "The return rate is twenty-two percent", "paraphrases": ["22% returns", "return quota sits at twenty-two percent"], "owner": null, "due": null },
+      { "id": "F10", "kind": "figure", "canonical": "Saturday delivery affects just under nine percent of orders", "paraphrases": ["9% of orders need Saturday delivery", "nearly nine percent of orders"], "owner": null, "due": null },
+      { "id": "F11", "kind": "date", "canonical": "The catalogue goes out on 24 October", "paraphrases": ["catalogue mailing on 24 October", "dispatch date is 24 October"], "owner": null, "due": null },
+      { "id": "F12", "kind": "date", "canonical": "The contract draft is due 18 September", "paraphrases": ["contract due 18 September", "draft deadline 18 September"], "owner": null, "due": null }
+    ],
+    "decoys": [
+      { "id": "D1", "claim": "The new photo studio", "cancellation_cue": "Das entscheiden wir heute nicht", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D2", "claim": "Switching to the new point-of-sale system", "cancellation_cue": "Dafür ist noch niemand zuständig", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D3", "claim": "Giving up the Bremen location", "cancellation_cue": "Das stellen wir zurück", "must_not_appear_as": ["decision", "action"] },
+      { "id": "D4", "claim": "Setting up a test group for the catalogue", "cancellation_cue": "Entscheiden wir ebenfalls nächste Woche", "must_not_appear_as": ["decision", "action"] }
+    ],
+    "distractors": {
+      "numbers": ["dreiundfünfzigtausend Euro", "den zehnten Oktober"],
+      "names": ["Herr Brandner", "Frau Kellermann"]
+    },
+    "reversal": {
+      "initial": "Catalogue mailing on 10 October",
+      "final": "Catalogue mailing on 24 October",
+      "correct_answer": "final"
+    }
+  }
+}
