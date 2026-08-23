@@ -145,6 +145,51 @@ Nothing is rebuilt; this only attaches a ticket. Stapling matters because it
 makes the check work offline — without it Gatekeeper has to ask Apple, and a
 user on a plane gets a warning for a file that is perfectly fine.
 
+## 3a. The updater signing key — a different key, and a worse thing to lose
+
+Two signatures matter here and they are unrelated. Apple's Developer ID
+certificate proves to macOS that the app came from you. The **updater key**
+proves to an installed Halvern that an update came from you. Neither can stand
+in for the other.
+
+Generated 23 August 2026, at `~/Documents/halvern-keys/halvern-updater.key`,
+with **no password** — so no `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` is needed.
+The public half is compiled into `tauri.conf.json` under `plugins.updater`, and
+`TAURI_SIGNING_PRIVATE_KEY` is set as a repository secret so the release
+workflow can sign the bundle.
+
+**Losing this key is worse than losing the Apple certificate.** Apple will
+re-issue a certificate; you go through the portal again and carry on. Nobody
+can re-issue this one, because the public half is already inside every copy of
+Halvern anyone has installed. Lose the private key and:
+
+- every existing installation is cut off from updates permanently — the app
+  will refuse anything signed by a replacement key, which is exactly what it is
+  built to do;
+- the only remedy is reaching each person individually and asking them to
+  download a rebuilt app with a new key inside;
+- and there is no warning. Everything keeps working until the day you try to
+  ship a fix.
+
+**The GitHub secret is not a backup.** Secrets are write-only: you cannot read
+one back out. If the file on disk is the only other copy, there is one copy.
+
+So: password manager, in the same place as the `.p12` and the app-specific
+password from §2, **and** a second copy that does not depend on this machine —
+an encrypted drive kept somewhere else, or a printout. It is roughly 350 bytes
+of base64; paper is not an absurd answer for something that cannot be reissued.
+
+`~/Documents/halvern-keys/` is a staging post, not the destination. Delete it
+once the copies exist.
+
+### If you would rather it had a password
+
+Generating a fresh keypair is free **only until the first public release**.
+After that the public half is in binaries on other people's machines, and
+replacing it orphans every one of them — the same shape as the version
+renumbering in docs/VERSIONING.md. A password means a second repository secret
+and a key file that is useless on its own if a backup ever leaks.
+
 ## 4. Verify — on a Mac that has never seen the app
 
 This is the step people skip and it is the only one that proves anything. Done
@@ -179,6 +224,7 @@ certificate exported as a base64 `.p12` and these repository secrets:
 | `APPLE_ID` | the account email |
 | `APPLE_PASSWORD` | the app-specific password from §2 |
 | `APPLE_TEAM_ID` | the ten-character team identifier |
+| `TAURI_SIGNING_PRIVATE_KEY` | the updater key from §3a — **set**, 23 August 2026 |
 
 `tauri-action` imports the certificate into a temporary keychain when
 `APPLE_CERTIFICATE` is present, so the workflow change is mostly passing these
