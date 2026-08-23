@@ -117,30 +117,59 @@ One badge, no maintenance, and for someone arriving cold it turns a large Rust
 codebase into something navigable. Sign up after the repository is public and
 add the badge alongside the existing ones.
 
-## 4. Before the repository goes public — you, at the machine
+## 4. Publication — done, 23 August 2026
 
-1. **Create `hretheum/halvern`**, empty, public, no README or licence generated
-   by GitHub (the tree has both).
-2. **Description, in English.** The current one is in Polish, which would cost
-   most of the international reach on its own. Something close to README's
-   opening: *"Meeting notes that never leave your machine. Local recording,
-   transcription and summarisation for macOS."*
-3. **Topics** — these drive repository search, and are free:
-   `privacy`, `local-first`, `meeting-notes`, `transcription`, `whisper`,
-   `tauri`, `rust`, `macos`, `speech-to-text`, `self-hosted`.
-4. **Push the squashed tree:**
-   ```bash
-   git checkout --orphan launch
-   git add -A
-   git commit -m "Halvern 0.4.0"
-   git remote add halvern git@github.com:hretheum/halvern.git
-   git push halvern launch:main
-   ```
-   Verify with `git log --oneline` on the new remote that exactly one commit
-   arrived, and that `git log --all` on the public clone shows nothing else.
-5. **Install CodeRabbit and cubic.dev**, add the cubic badge to README.
-6. **Enable** issues, discussions, and branch protection on `main` requiring
-   the `CI` workflow.
+`hretheum/halvern` is public and live. Description and the ten discovery
+topics are set. The tree went up as a single parentless commit, built with
+`git commit-tree` from the working tree rather than `git checkout --orphan`,
+so the local branch was never switched and could not be left half-migrated.
+
+Verified on a fresh clone: one commit, no parents, 509 files, 5.9 MB, nothing
+else reachable.
+
+One trap worth writing down, because it wasted a push: in zsh, `"$COMMIT:refs/heads/main"`
+is not the refspec you typed. `:r` is a zsh modifier that strips an extension,
+so the shell silently rewrites it and git reports a refspec that does not match
+anything. Braces fix it — `"${COMMIT}:refs/heads/main"`.
+
+Branch rules are a **ruleset** rather than classic branch protection: deletion
+and force-push blocked, pull request with one approving review, code-owner
+review, thread resolution required, and admin bypass. Two consequences worth
+knowing. `CODEOWNERS` is `* @hretheum` and GitHub does not let anyone approve
+their own pull request, so the maintainer's own PRs will always merge through
+the bypass; Dependabot's will not, since it is the author and can be reviewed
+normally. And the ruleset requires a review but **not a green CI**, so a red
+pull request can still be merged — the required status checks are the piece
+still to add.
+
+### What publication immediately surfaced
+
+Both were real, both predated the repository, and both were invisible until a
+clean machine tried to build.
+
+**`pnpm install --frozen-lockfile` had never worked on a clean checkout.**
+`frontend/pnpm-workspace.yaml` is not a workspace definition — it carries
+`overrides` and `minimumReleaseAgeExclude`, which from pnpm 10 are read there
+instead of from the `pnpm` field in package.json. pnpm 8 sees the filename,
+demands a `packages` list, and stops. It looked fine locally only because
+`node_modules` predated the file.
+
+The diagnosis was slower than it should have been because `packageManager`
+said `pnpm@8.15.9`, and **pnpm honours that field by downgrading itself to
+it** — so `pnpm --version` reported 8.15.9 even with 11.21.0 installed, and
+even `npx pnpm@10` reported 8.15.9. Meanwhile `pnpm-lock.yaml` is
+`lockfileVersion: '9.0'`, which pnpm 8 cannot write, and with no `pnpm` field
+in package.json the ProseMirror overrides keeping BlockNote on one instance
+were being ignored entirely.
+
+**Then Node.** With pnpm at 11.21.0 the failure moved to
+`ERR_UNKNOWN_BUILTIN_MODULE`: pnpm 11 declares `node: >=22.13` and the
+workflows pinned Node 20, which GitHub is deprecating anyway.
+
+The common shape is the lesson: two hard requirements that were real, unstated,
+and discovered by a runner rather than by the person installing. Both are now
+declared — `packageManager` for pnpm, `engines` for Node — so the next person
+gets a version error instead of a stack trace.
 
 ## 5. The thing that matters more than any of this
 
