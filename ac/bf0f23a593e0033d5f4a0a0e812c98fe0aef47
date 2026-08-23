@@ -1,0 +1,25 @@
+scripts/ci/check-brand.sh
+  s_8e7c8d8b770249::t_4e1a1436bd4850 23-36,44
+frontend/src/lib/analytics.ts
+  s_8e7c8d8b770249::t_4e1a1436bd4850 185,188
+docs/OSS_LAUNCH.md
+  s_8e7c8d8b770249::t_f779d4c5d4b85c 206-225
+frontend/src/services/indexedDBService.ts
+  s_8e7c8d8b770249::t_5c9ce7e0e8027e 34-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "acbf0f23a593e0033d5f4a0a0e812c98fe0aef47",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
