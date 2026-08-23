@@ -66,7 +66,7 @@ Pre-release, and honest about it:
 - **macOS 14.4 or later**, which is where the system-audio capture lives.
   Windows and Linux targets exist in the build configuration, inherited from
   upstream, but have not been exercised here — do not assume they work.
-- Builds are **signed and notarized** as of 0.4.0, so Gatekeeper opens them
+- Builds are **signed and notarized** as of 0.1.0, so Gatekeeper opens them
   without a warning. Verified by downloading onto a Mac that had never run it —
   the only check that proves anything, since Gatekeeper does not quarantine what
   was built locally.

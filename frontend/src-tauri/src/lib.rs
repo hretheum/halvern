@@ -69,6 +69,7 @@ pub mod openrouter;
 pub mod parakeet_engine;
 pub mod state;
 pub mod summary;
+pub mod updater;
 pub mod tray;
 pub mod utils;
 pub mod whisper_engine;
@@ -439,6 +440,9 @@ pub fn run() {
         .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_process::init())
+        // Update checking. What it sends, and why it is not on a timer,
+        // is written down in `updater.rs` and PRIVACY_POLICY.md.
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(whisper_engine::parallel_commands::ParallelProcessorState::new())
         .manage(Arc::new(RwLock::new(
             None::<notifications::manager::NotificationManager<tauri::Wry>>,
@@ -669,6 +673,9 @@ pub fn run() {
             audio::incremental_saver::recover_audio_from_checkpoints,
             audio::incremental_saver::cleanup_checkpoints,
             audio::incremental_saver::has_audio_checkpoints,
+            // Updates (see updater.rs for what a check discloses)
+            updater::check_for_update,
+            updater::install_update,
             console_utils::show_console,
             console_utils::hide_console,
             console_utils::toggle_console,

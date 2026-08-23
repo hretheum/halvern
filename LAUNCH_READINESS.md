@@ -309,29 +309,32 @@ and passed our own `<document>` tag and an unfilled `# <Add Title here>`
 placeholder straight through to the reader. `gemma3:1b` produced all three. The
 pipeline should not depend on the model being strong enough to avoid them.
 
-### 2.5 There is no way to ship a fix to anyone who has already downloaded
+### 2.5 Updates reach existing installations — built 23 August 2026, unverified
 
-`tauri-plugin-updater` is in `Cargo.toml`, and that is the whole of it: no
-`plugins.updater` block in `tauri.conf.json`, no call site in Rust, nothing in
-the frontend. The app never checks for updates and has no mechanism to.
+**Closed in code, open in practice.** `tauri-plugin-updater` is registered,
+`tauri.conf.json` carries an endpoint and a public key, and `updater.rs`
+exposes two commands the interface calls: one check, one install-and-restart.
+The check runs once per launch when the setting is on, and from a button in
+Settings whenever the user asks.
 
-The good half of this is that nothing points at upstream's release
-infrastructure. `release.yml` still mentions `s3://meetily-updates/latest.json`,
-but no shipped code reads it, so a Halvern build will not fetch upstream's
-artifacts.
+**Not on a timer, deliberately.** A periodic check would turn "is Halvern open
+right now" into a signal with a heartbeat, and when somebody is in meetings is
+the thing this product exists to keep to itself. What a check discloses is
+written into PRIVACY_POLICY.md rather than left to be discovered: one GET for a
+static file, no identifier, no body.
 
-The bad half is what it means on launch day. A burst of first-time users on
-varied hardware is exactly the situation that surfaces a bug worth fixing within
-hours, and every one of them would have a permanently broken copy — with the
-only remedy being "download the DMG again", announced somewhere they may never
-look.
+**What has not happened yet:**
 
-Two honest options. Wire the updater, which needs a signing key pair, a hosting
-location for `latest.json` and the artifacts, and `createUpdaterArtifacts` in
-the bundle config. Or decide not to, and say so in the release notes so that
-"check for updates manually" is a stated property rather than a discovery. What
-should not happen is shipping with the dependency compiled in, no update path,
-and no decision recorded — which is the current state.
+- `TAURI_SIGNING_PRIVATE_KEY` is not in the repository secrets, so a release
+  built today would ship without the signature the updater requires, and every
+  update would be refused. The keypair exists; the secret has to be added by
+  hand.
+- No release has ever been cut from this repository, so `latest.json` has never
+  been produced and the endpoint currently 404s. The first release proves the
+  path or finds what is wrong with it.
+- Nobody has installed an update this way. Until an old build has pulled a new
+  one on a real machine, this is code that compiles rather than a feature that
+  works.
 
 ## 3. What is already strong
 

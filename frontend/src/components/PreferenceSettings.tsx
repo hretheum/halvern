@@ -5,6 +5,7 @@ import { Switch } from "./ui/switch"
 import Analytics from "@/lib/analytics"
 import AnalyticsConsentSwitch from "./AnalyticsConsentSwitch"
 import { AppearanceSetting } from "./AppearanceSetting"
+import { UpdateSettings } from "./UpdateSettings"
 import { useConfig, NotificationSettings } from "@/contexts/ConfigContext"
 
 export function PreferenceSettings() {
@@ -139,6 +140,11 @@ export function PreferenceSettings() {
           </div>
           <Switch checked={notificationsEnabledValue} onCheckedChange={setNotificationsEnabled} />
         </div>
+      </div>
+
+      {/* Updates Section */}
+      <div className="bg-card rounded-lg border border-border p-6 shadow-xs">
+        <UpdateSettings />
       </div>
 
       {/* Analytics Section */}

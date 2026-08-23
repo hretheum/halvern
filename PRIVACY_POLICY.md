@@ -1,6 +1,6 @@
 # Halvern Privacy Policy
 
-*Applies to Halvern 0.4.0. Last updated 18 August 2026.*
+*Applies to Halvern 0.1.0. Last updated 23 August 2026.*
 
 Most privacy policies are written to permit as much as possible. This one is
 written to be checked. Every claim below names the file that makes it true, so
@@ -73,6 +73,25 @@ at a commercial API sends your meetings there.
 **Model downloads.** On first run Halvern fetches speech and summarization models
 from HuggingFace. Those requests reveal that some IP address is downloading a
 model. They carry nothing about you or your meetings.
+
+**Update checks.** Once per launch, if the setting is on, Halvern fetches one
+static file from GitHub Releases — `latest.json` — to learn whether a newer
+version exists. It is a plain GET, the same request a browser makes when
+somebody clicks a download link. It has no body, carries no identifier, and
+says nothing about your meetings, your usage, or your settings. GitHub sees
+what any web server sees about any download: an IP address, a User-Agent, and
+a time.
+
+It runs **once per launch and never on a timer**, deliberately. A periodic
+check would turn "is Halvern open right now" into a signal with a heartbeat,
+and when you are in meetings is the thing this product exists to keep to
+itself. Settings → General → *Check for updates on launch* turns it off, and
+with it off nothing is requested until you press the button yourself.
+
+What comes back is verified against a signing key compiled into the app, so an
+update that was not built and signed by us is refused rather than installed.
+The check is in one place — `updater.rs` — if you would rather read it than
+take our word.
 
 **Obsidian and file export.** Writes to the vault or folder you choose, on your
 own disk.

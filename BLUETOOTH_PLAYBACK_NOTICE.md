@@ -231,4 +231,4 @@ From [Apple Technical Note TN2321](https://developer.apple.com/library/archive/t
 ---
 
 **Last Updated**: October 10, 2025
-**Applies To**: Halvern 0.4.0+ on macOS
+**Applies To**: Halvern 0.1.0+ on macOS

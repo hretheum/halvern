@@ -6,7 +6,7 @@ import { HalvernMark } from '@/components/brand/HalvernMark';
 
 
 export function About() {
-    const [currentVersion, setCurrentVersion] = useState<string>('0.4.0');
+    const [currentVersion, setCurrentVersion] = useState<string>('');
 
     useEffect(() => {
         // Get current version on mount

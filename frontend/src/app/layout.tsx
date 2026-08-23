@@ -23,6 +23,7 @@ import { OnboardingFlow } from '@/components/onboarding'
 import { loadBetaFeatures } from '@/types/betaFeatures'
 import { DownloadProgressToastProvider } from '@/components/shared/DownloadProgressToast'
 import { RecordingStopPrompt } from '@/components/RecordingStopPrompt'
+import { UpdateOnLaunch } from '@/components/UpdateSettings'
 import { RecoveryPrompt } from '@/components/TranscriptRecovery/RecoveryPrompt'
 import { RecordingPostProcessingProvider } from '@/contexts/RecordingPostProcessingProvider'
 import { ImportAudioDialog, ImportDropOverlay } from '@/components/ImportAudio'
@@ -258,6 +259,10 @@ export default function RootLayout({
                               {/* Download progress toast provider - listens for background downloads */}
                               <DownloadProgressToastProvider />
                               <RecordingStopPrompt />
+                              {/* Once per launch, and only if the setting is on.
+                                  Not during onboarding: the first thing a new
+                                  user sees should not be an upgrade prompt. */}
+                              {!showOnboarding && <UpdateOnLaunch />}
                               {!showOnboarding && <RecoveryPrompt />}
 
                               {/* Show onboarding or main app */}

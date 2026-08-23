@@ -719,6 +719,7 @@ $env:RUST_LOG="debug"; ./clean_run_windows.bat
 - [www/index.html](www/index.html) - The landing page. Self-contained, no build step, palette taken from the token pyramid
 - [LAUNCH_READINESS.md](LAUNCH_READINESS.md) - What must be true before a public launch: blockers, standing risks, what is deliberately deferred, and the order of work
 - [docs/OSS_LAUNCH.md](docs/OSS_LAUNCH.md) - Publishing the repository itself: why a new repo rather than a rename, what was cut from the tree and why, CodeRabbit and cubic.dev, and the missing update channel that matters more than any of it
+- [docs/VERSIONING.md](docs/VERSIONING.md) - Why 0.1.0 and not 0.4.0, what "breaking" means for an app whose users own the data, the four files carrying the version, and the rule that nothing else may hardcode it
 
 **Design**:
 - [docs/ONBOARDING_LANGUAGE_MODEL.md](docs/ONBOARDING_LANGUAGE_MODEL.md) - Why onboarding must ask for the meeting language, and how that answer picks the transcription engine and the summary model

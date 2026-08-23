@@ -2,7 +2,7 @@
 #
 # Moves an existing Meetily-era installation onto the Halvern names.
 #
-# The rename in 0.4.0 changed four things that the filesystem remembers:
+# The rename in 0.1.0 changed four things that the filesystem remembers:
 #
 #   bundle identifier   com.meetily.ai   -> io.halvern.app
 #   brand data folder   Meetily/meetily  -> Halvern
@@ -10,7 +10,7 @@
 #   log folder          com.meetily.ai   -> io.halvern.app
 #
 # Everything the app owns is keyed off those, so without this script a build of
-# 0.4.0 starts with an empty library, re-downloads 5-6 GB of models, and leaves
+# 0.1.0 starts with an empty library, re-downloads 5-6 GB of models, and leaves
 # the old data orphaned on disk. Nothing is deleted here — directories are
 # renamed in place, which on one volume is instant regardless of size.
 #
@@ -69,7 +69,7 @@ step() { printf '\n\033[1m%s\033[0m\n' "$*"; }
 
 # Does this directory hold anything the user would miss?
 #
-# Launching 0.4.0 once before migrating is the normal order of events, and it
+# Launching 0.1.0 once before migrating is the normal order of events, and it
 # creates the destination as an empty scaffold: a database with no meetings and
 # model directories with no models. Refusing to continue in that case would send
 # people to delete folders by hand, which is how real data gets lost. So the

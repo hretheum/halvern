@@ -30,10 +30,16 @@ grep -Ev '^[[:space:]]*#|^[[:space:]]*$' "$ALLOWLIST" | tr -d ' \t' | sort -u > 
 # www/ is in scope because it is where an analytics script would go, and the
 # landing page now promises in public that there is none. A guard that cannot
 # see the page cannot protect the promise the page makes.
-grep -rhoE 'https?://[a-zA-Z0-9._-]+' frontend/src-tauri/src frontend/src www \
-  --include='*.rs' --include='*.ts' --include='*.tsx' --include='*.html' \
-  --include='*.js' --include='*.css' 2>/dev/null \
-  | sed -E 's|https?://||' | sort -u > "$work/found"
+# `tauri.conf.json` is scanned by name because it holds addresses the source
+# does not: the updater endpoint lives there, and a host reachable from the
+# shipped app that no source file mentions is exactly what this guard exists
+# to stop slipping through.
+{
+  grep -rhoE 'https?://[a-zA-Z0-9._-]+' frontend/src-tauri/src frontend/src www \
+    --include='*.rs' --include='*.ts' --include='*.tsx' --include='*.html' \
+    --include='*.js' --include='*.css' 2>/dev/null
+  grep -hoE 'https?://[a-zA-Z0-9._-]+' frontend/src-tauri/tauri.conf.json 2>/dev/null
+} | sed -E 's|https?://||' | sort -u > "$work/found"
 
 comm -23 "$work/found" "$work/allowed" > "$work/unreviewed"
 

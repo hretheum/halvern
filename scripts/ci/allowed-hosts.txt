@@ -63,3 +63,7 @@ docs.github.com
   # Pages serves the page and GitHub Releases hands over the download, so their
   # logging is the other half of what that section describes. Linked, never
   # requested.
+
+asset.localhost
+  # Tauri's own asset protocol, in the img-src of the CSP. A loopback name the
+  # webview uses to read files this app already put on disk; it leaves nothing.
