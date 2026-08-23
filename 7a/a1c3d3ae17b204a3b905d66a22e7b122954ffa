@@ -1,0 +1,70 @@
+frontend/src/components/AnalyticsDataModal.tsx
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 126
+frontend/src/components/AnalyticsConsentSwitch.tsx
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 7,98
+frontend/src/app/layout.tsx
+  s_8e7c8d8b770249::t_76ebbd82ca92cd 26,262-265
+frontend/package.json
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 3
+scripts/ci/allowed-hosts.txt
+  s_8e7c8d8b770249::t_2b0ecda018beb3 66-69
+README.md
+  s_8e7c8d8b770249::t_6e8d808e6c0fbe 69
+LAUNCH_READINESS.md
+  s_8e7c8d8b770249::t_030275c8561d93 312-337
+frontend/src-tauri/src/updater.rs
+  s_8e7c8d8b770249::t_c286459007e76e 1-159
+frontend/src/components/About.tsx
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 9
+frontend/src-tauri/Cargo.toml
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 3
+scripts/migrate-meetily-to-halvern.sh
+  s_8e7c8d8b770249::t_92eb8c5cd4fce5 5,13,72
+CLAUDE.md
+  s_8e7c8d8b770249::t_92eb8c5cd4fce5 722
+frontend/src-tauri/src/lib.rs
+  s_8e7c8d8b770249::t_3d9c594e0e4558 72,443-445,676-678
+scripts/ci/check-network-hosts.sh
+  s_8e7c8d8b770249::t_1945a9b89ee52d 33-42
+frontend/src-tauri/tauri.conf.json
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 4
+  s_8e7c8d8b770249::t_e79698e0211a29 108-116
+  s_8e7c8d8b770249::t_c5fd77c8dc7cd6 29
+docs/VERSIONING.md
+  s_8e7c8d8b770249::t_1a889041148f2a 1-70
+www/index.html
+  s_8e7c8d8b770249::t_92eb8c5cd4fce5 127
+PRIVACY_POLICY.md
+  s_8e7c8d8b770249::t_43097caf340a45 3,77-94
+  s_8e7c8d8b770249::t_d80b209c8391f4 95
+frontend/src/components/UpdateSettings.tsx
+  s_8e7c8d8b770249::t_30b6489889b5d3 1-35,37-46,48-260
+  s_8e7c8d8b770249::t_c8f94c9450dddd 36,47
+frontend/src/components/AnalyticsProvider.tsx
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 6,97
+frontend/src/components/PreferenceSettings.tsx
+  s_8e7c8d8b770249::t_31a4102294d3b3 145-149
+  s_8e7c8d8b770249::t_76ebbd82ca92cd 8
+.github/ISSUE_TEMPLATE/bug.yml
+  s_8e7c8d8b770249::t_78eb8bb5339cc8 60
+BLUETOOTH_PLAYBACK_NOTICE.md
+  s_8e7c8d8b770249::t_92eb8c5cd4fce5 234
+Cargo.lock
+  s_8e7c8d8b770249::t_28450dd924d48e 2614
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "7aa1c3d3ae17b204a3b905d66a22e7b122954ffa",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
