@@ -66,7 +66,11 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 8
+          # Must match `packageManager` in frontend/package.json. pnpm honours
+          # that field and downgrades itself to it, so a mismatch here does not
+          # produce a version error — it produces whatever the field says, and
+          # `pnpm-workspace.yaml` is only readable from 10 onwards.
+          version: 11
           run_install: false
 
       - uses: actions/setup-node@v4
@@ -96,7 +100,11 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 8
+          # Must match `packageManager` in frontend/package.json. pnpm honours
+          # that field and downgrades itself to it, so a mismatch here does not
+          # produce a version error — it produces whatever the field says, and
+          # `pnpm-workspace.yaml` is only readable from 10 onwards.
+          version: 11
           run_install: false
 
       - uses: actions/setup-node@v4
