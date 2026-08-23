@@ -1,15 +1,18 @@
 # The clippy ratchet counts warnings, and a warning count is only comparable
 # against the same compiler. `dtolnay/rust-toolchain@stable` pulled whatever
-# was newest that morning — 1.98.0 on 23 August against 1.95.0 locally — and
-# reported 63 warnings where the maintainer's machine reported 27. Those 36
-# were lints that did not exist in April, not decay in the code, and the
-# ratchet cannot tell the difference.
+# shipped that morning: on 23 August it installed 1.98.0 and reported 63
+# warnings where the maintainer's 1.95.0 reported 27. Those 36 were a single
+# lint that did not exist in April — `useless_borrows_in_formatting` — not
+# decay in the code, and the ratchet cannot tell the difference.
 #
-# So the toolchain is pinned and a Rust upgrade becomes a deliberate change:
-# bump this file, watch the count move, decide what the new lints are worth,
-# and update scripts/ci/clippy-baseline.txt in the same commit. rustup honours
-# this file automatically, so a contributor arriving on a different stable gets
-# the right one installed without being told.
+# Pinned, so a Rust upgrade is a deliberate change: bump this file, watch the
+# count move, decide what the new lints are worth, and update
+# scripts/ci/clippy-baseline.txt in the same commit. rustup honours this file
+# automatically, so a contributor arriving on a different stable gets the right
+# one installed without being told.
+#
+# 1.98.0 as of 23 August 2026, with those 36 fixed, which is why the baseline
+# is still 27 and not 63.
 [toolchain]
-channel = "1.95.0"
+channel = "1.98.0"
 components = ["clippy", "rustfmt"]
