@@ -1,0 +1,26 @@
+frontend/src-tauri/src/api/api.rs
+  s_8e7c8d8b770249::t_040843527ec2ba 410-413,429,460-463,513,519,524,543-544,558,591,626,632,639,656,660,666,1050-1051,1148-1149,1264-1265
+frontend/src-tauri/src/summary/service.rs
+  s_8e7c8d8b770249::t_040843527ec2ba 417,422
+frontend/src-tauri/src/summary/commands.rs
+  s_8e7c8d8b770249::t_040843527ec2ba 355,436-437,455,473,492
+rust-toolchain.toml
+  s_8e7c8d8b770249::t_607a03ace49541 17
+  s_8e7c8d8b770249::t_053aef0899812d 3-6,8-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "ddf159411a6861416c6d1c7ab009b9538efdc536",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
