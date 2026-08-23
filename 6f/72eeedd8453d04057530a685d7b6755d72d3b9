@@ -1,0 +1,23 @@
+.github/workflows/ci.yml
+  s_8e7c8d8b770249::t_4ee599e2b6102a 78,112
+.github/workflows/build.yml
+  s_8e7c8d8b770249::t_4ee599e2b6102a 89
+frontend/package.json
+  s_8e7c8d8b770249::t_4ee599e2b6102a 81-83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6f72eeedd8453d04057530a685d7b6755d72d3b9",
+  "prompts": {},
+  "sessions": {
+    "s_8e7c8d8b770249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9af966c8-0d9d-4d3c-a22c-84c0442d0688",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
