@@ -272,7 +272,48 @@ class, exempting only the one line that names the superseded store in order to
 delete it. Verified by reintroducing `meetily_user_id` and watching the guard
 fail, then restoring.
 
-## 8. Deliberately not before launch
+## 8. Where the landing page is hosted, and why that was not a free choice
+
+**GitHub Pages**, deployed from `www/` by `.github/workflows/pages.yml`.
+
+The page has no `<script>` tag and says so in public: no analytics script, no
+cookies, no fingerprinting, nothing running in the reader's browser. That
+sentence rules out most of the obvious hosts, because their analytics *is* a
+browser beacon — Vercel Web Analytics, Cloudflare Web Analytics, Plausible,
+Fathom, Umami. Adding any of them would make the page's own text false, on the
+one page whose entire job is to be checkable.
+
+Cloudflare Pages was the first recommendation and was withdrawn. Not for the
+analytics beacon, which is optional, but for the interstitial: the default
+security level challenges visitors by IP reputation, which lands on VPN and Tor
+users. That is disproportionately this product's audience, and a privacy-first
+site asking a VPN user to prove they are human is a comment thread nobody wins.
+
+That left the real trade. **Netlify Analytics** reads Netlify's own request
+logs — server-side, no script, no cookies, roughly the fields the page
+describes — for about $9 a month. **GitHub Pages** is free and never
+challenges anyone, but hands you no logs at all.
+
+GitHub Pages wins for now on one observation: **the number actually wanted is
+free from somewhere else.** The download button points at GitHub Releases, so
+GitHub hands over the file, and `download_count` per release asset is in a
+public API. Netlify would be bought purely for "where from" and "in what
+language" — worth paying for once there is traffic, and worth nothing before
+then. Revisit after launch, not before.
+
+The page's own copy was rewritten to match, and this is worth stating plainly
+because it was wrong for a day: the "What this page collects" section used to
+say the server handing you the file sees your request. Once the download button
+resolved to GitHub Releases, that server became GitHub. The section now says
+GitHub serves both the page and the file, that those logs are GitHub's and we
+never see them, and that the only thing readable on our side is an aggregate
+download count. **The copy is coupled to the host** — moving to Netlify means
+rewriting it again, in the same commit as the move.
+
+`pages.yml` refuses to deploy an `index.html` containing a `<script>` tag. The
+page's promise is enforceable, so it is enforced.
+
+## 9. Deliberately not before launch
 
 - Trimming `build.yml`'s unused Windows and Ubuntu branches. It is the only
   workflow that produces a release, and it cannot be tested here.

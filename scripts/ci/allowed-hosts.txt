@@ -57,3 +57,9 @@ www.w3.org
 custom.example
 x.yy.zz
 host
+
+docs.github.com
+  # GitHub's privacy statement, linked from "What this page collects". GitHub
+  # Pages serves the page and GitHub Releases hands over the download, so their
+  # logging is the other half of what that section describes. Linked, never
+  # requested.

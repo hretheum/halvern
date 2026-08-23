@@ -1,0 +1,69 @@
+name: Pages
+
+# Publishes `www/` to GitHub Pages.
+#
+# Branch-based publishing only offers the repository root or `/docs`, and the
+# site lives in `www/` while `/docs` holds the project's documentation. So this
+# uploads `www/` as an artifact and deploys that, which also keeps the site out
+# of the repository root.
+#
+# The host is part of the site's promise, not an implementation detail. The
+# page states it runs no analytics script, sets no cookies and does no
+# fingerprinting, and it has no `<script>` tag at all. GitHub Pages keeps that
+# true: nothing is injected, and the request logs belong to GitHub rather than
+# to us. Moving to a host that offers analytics through a browser beacon would
+# make the page's own text false — see docs/OSS_LAUNCH.md.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'www/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, and never cancel one that is running: a half-applied
+# deploy is worse than a queued one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Fails the deploy rather than shipping a page that contradicts itself.
+      # `check-network-hosts.sh` covers `www/`, but it runs in the CI workflow,
+      # which path filters could one day stop firing for a `www/`-only change.
+      - name: Refuse to publish a page that runs scripts
+        run: |
+          if grep -qiE '<script' www/index.html; then
+            echo "www/index.html contains a <script> tag."
+            echo
+            echo "The page tells readers that nothing runs in their browser to"
+            echo "watch them, and names the absence of a script as the reason."
+            echo "If a script belongs there now, that paragraph has to change"
+            echo "first — and this check with it."
+            exit 1
+          fi
+          echo "no scripts in www/index.html"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: www
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

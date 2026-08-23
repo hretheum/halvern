@@ -216,20 +216,25 @@
     <p>A product that promises your meetings stay put should say what its own website
       does. This one has no analytics script, no cookies and no fingerprinting &mdash;
       nothing runs in your browser to watch you.</p>
-    <p>When you press Download, the server that hands you the file sees what every web
-      server sees about every request:</p>
+    <p>This page is served by GitHub Pages, and Download sends you to GitHub Releases,
+      so GitHub&rsquo;s servers hand you both the page and the file. They log what every
+      web server logs:</p>
     <div class="scroller">
       <table>
-        <tr><th>Country</th><td class="fact">Derived from the IP address, then discarded.</td></tr>
+        <tr><th>IP address</th><td class="fact">Which implies a rough location.</td></tr>
         <tr><th>Language</th><td class="fact">The Accept-Language header your browser sends.</td></tr>
         <tr><th>Referrer</th><td class="fact">Which page sent you here, when your browser says.</td></tr>
         <tr><th>Browser and OS</th><td class="fact">The User-Agent string.</td></tr>
-        <tr><th>Time and count</th><td class="fact">When, and how many.</td></tr>
+        <tr><th>Time</th><td class="fact">When you asked.</td></tr>
       </table>
     </div>
-    <p>That is aggregate: how many people downloaded it and roughly from where. There is
-      no identifier that follows you between visits, because there is nothing set in
-      your browser to follow you with.</p>
+    <p>Those logs are GitHub&rsquo;s and we never see them. What we can read is one
+      number, from a public API anyone can call: how many times each release file has
+      been downloaded in total. Not who, not where, not when &mdash; a count.</p>
+    <p>So there is no identifier that follows you between visits, because there is
+      nothing set in your browser to follow you with, and nothing on our side to
+      follow you into. <a class="body-link" href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub&rsquo;s privacy statement</a>
+      covers their half.</p>
   </div>
 </section>
 

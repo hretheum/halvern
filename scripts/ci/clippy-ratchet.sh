@@ -36,7 +36,19 @@ cd frontend/src-tauri
 # as long as the warning count on the way down happened to match the
 # baseline. That's exactly how a deny-by-default error sat in this codebase
 # unnoticed: the count matched, so the ratchet said nothing was wrong.
-if clippy_output=$(cargo clippy --lib --message-format=short 2>&1); then
+# `--message-format=short` is parsed by grep below, so the output has to be
+# plain. `swatinem/rust-cache` exports CARGO_TERM_COLOR=always, and with colour
+# on, cargo writes `\e[1m\e[33mwarning\e[0m:` — the escape codes land between
+# the word and the colon, so `grep 'warning:'` matches nothing and the count
+# comes back 0 on a codebase with 27 warnings.
+#
+# That is the same failure as the `|| true` this script used to have: a number
+# that is not a count of anything. It surfaced only because 0 was *below* the
+# baseline and tripped the "you removed warnings" branch. Had the baseline been
+# 0, or the drift been the other way, the ratchet would have reported success
+# on a measurement of nothing. So the script sets this itself rather than
+# trusting whatever the caller exported.
+if clippy_output=$(CARGO_TERM_COLOR=never cargo clippy --lib --message-format=short 2>&1); then
   clippy_exit=0
 else
   clippy_exit=$?
