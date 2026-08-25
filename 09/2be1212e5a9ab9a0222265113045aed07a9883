@@ -1,0 +1,21 @@
+frontend/src/app/layout.tsx
+  s_39af233242ee42::t_34ae51887930bb 10-11,298
+frontend/src/components/ThemedToaster.tsx
+  s_39af233242ee42::t_6841eeeffeff57 1-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "092be1212e5a9ab9a0222265113045aed07a9883",
+  "prompts": {},
+  "sessions": {
+    "s_39af233242ee42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b941f94-ebf5-4ea4-8ef8-1b7b4f9b278e",
+        "model": "unknown"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
