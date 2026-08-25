@@ -51,12 +51,13 @@ clippy baseline of 27 is only meaningful because of that.
    `docs/assets/design-rollout/` are **design mockups, not app captures** —
    `Trigger silence detection (demo)` appears in none of the source — so they
    must not be used as if they were screenshots.
-2. **Verify 0.1.0 on a Mac that has never run Halvern.** The release is cut,
-   signed, notarized and stapled, and `latest.json` is served — but Gatekeeper
-   does not quarantine what was built locally, so a broken signature looks
-   perfect here. Download the `.dmg` over the network onto a second machine and
-   open it; `docs/SIGNING.md` §4 has the three commands. The update path itself
-   stays unproven until 0.1.1 exists to be offered.
+2. **Launch 0.1.0 on a Mac that has never run Halvern.** The signature part is
+   already proven: the released `.dmg` was downloaded from GitHub, given the
+   quarantine attribute Safari would attach, and evaluated — `accepted /
+   source=Notarized Developer ID`, ticket stapled, and the same for the app
+   inside it. What a second machine still decides is whether it *starts*:
+   microphone and screen-recording prompts, macOS 14.4, nothing missing. The
+   update path stays unproven until 0.1.1 exists to be offered.
 3. **Ten open Dependabot pull requests.** #1 (`tauri-action` 0→1) was checked
    against the five options `build.yml` actually passes and is safe. #6–#10 are
    npm, including TypeScript 5→7 and framer-motion 11→13, which are not

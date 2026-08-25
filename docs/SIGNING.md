@@ -202,6 +202,22 @@ This is the step people skip and it is the only one that proves anything. Done
 for 0.4.0 on 19 August: downloaded onto a second machine, opened, launched, no
 developer warning.
 
+For 0.1.0 the signature half was verified without a second machine, because
+quarantine is what Gatekeeper actually keys on and it can be applied by hand:
+
+```bash
+curl -sL -o downloaded.dmg https://github.com/hretheum/halvern/releases/latest/download/Halvern_0.1.0_aarch64.dmg
+xattr -w com.apple.quarantine "0081;$(printf '%x' $(date +%s));Safari;$(uuidgen)" downloaded.dmg
+spctl -a -vvv -t open --context context:primary-signature downloaded.dmg
+```
+
+That returned `accepted / source=Notarized Developer ID`, and `stapler
+validate` passed on the downloaded copy — so the file GitHub serves is intact
+and its ticket travels with it. It leaves exactly one thing to a machine that
+has never run Halvern: whether the app *launches* there. That is a different
+question from whether it is signed, and the commands below are still how you
+answer it.
+
 Gatekeeper does not quarantine what was built locally, so a broken signature
 looks perfect on the machine that produced it. The check that matters is
 downloading the `.dmg` over the network — not copying it over AirDrop from the
