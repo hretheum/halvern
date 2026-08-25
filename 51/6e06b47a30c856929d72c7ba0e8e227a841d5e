@@ -1,0 +1,21 @@
+CLAUDE.md
+  s_8ee3f6e66d3772::t_f467748a5d545c 750-751
+  s_8ee3f6e66d3772::t_654745e745ffd5 746-749
+  s_8ee3f6e66d3772::t_42ca2d64503688 72-90,93,102-110,115,117,119-123
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "516e06b47a30c856929d72c7ba0e8e227a841d5e",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
