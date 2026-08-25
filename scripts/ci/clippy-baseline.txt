@@ -1,7 +1,8 @@
-27
+25
 
-# The number above is the clippy warning count for `cargo clippy --lib` that
-# this codebase was inherited with. It is a ceiling, not a target.
+# The number above is the clippy warning count for `cargo clippy --lib`. It is
+# a ceiling, not a target. The codebase was inherited with 135; 27 was the
+# figure it sat at when the ratchet was written.
 #
 # `clippy-ratchet.sh` fails a change that raises it, and also fails one that
 # lowers it without updating this file — so the number can only ever walk down,

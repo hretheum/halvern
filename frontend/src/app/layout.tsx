@@ -7,7 +7,8 @@ import { TopBar } from '@/components/AppShell/TopBar'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
 import { ThemeProvider } from 'next-themes'
 import { SystemThemeBridge } from '@/components/SystemThemeBridge'
-import { Toaster, toast } from 'sonner'
+import { ThemedToaster } from '@/components/ThemedToaster'
+import { toast } from 'sonner'
 import "sonner/dist/styles.css"
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
@@ -123,6 +124,23 @@ export default function RootLayout({
         sessionStorage.setItem('autoStartRecording', 'true');
         router.push('/record');
       }
+    });
+
+    return () => {
+      unlisten.then(fn => fn());
+    };
+  }, [showOnboarding, router]);
+
+  useEffect(() => {
+    // ⌘, from the application menu. The menu item carries the accelerator, so
+    // this fires whether the user picked it or typed it.
+    const unlisten = listen('request-settings', () => {
+      if (showOnboarding) {
+        // Settings sits under the onboarding overlay, so navigating there
+        // during setup moves a screen nobody can see.
+        return;
+      }
+      router.push('/settings');
     });
 
     return () => {
@@ -294,7 +312,7 @@ export default function RootLayout({
           </AnalyticsProvider>
         </ThemeProvider>
 
-        <Toaster position="bottom-center" richColors closeButton />
+        <ThemedToaster />
       </body>
     </html>
   )

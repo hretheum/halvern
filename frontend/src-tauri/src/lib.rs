@@ -71,6 +71,7 @@ pub mod state;
 pub mod summary;
 pub mod updater;
 pub mod tray;
+pub mod menu;
 pub mod utils;
 pub mod whisper_engine;
 
@@ -443,6 +444,9 @@ pub fn run() {
         // Update checking. What it sends, and why it is not on a timer,
         // is written down in `updater.rs` and PRIVACY_POLICY.md.
         .plugin(tauri_plugin_updater::Builder::new().build())
+        // The default menu plus a Settings item, so ⌘, works. See menu.rs.
+        .menu(menu::build)
+        .on_menu_event(|app, event| menu::handle_event(app, event.id.as_ref()))
         .manage(whisper_engine::parallel_commands::ParallelProcessorState::new())
         .manage(Arc::new(RwLock::new(
             None::<notifications::manager::NotificationManager<tauri::Wry>>,

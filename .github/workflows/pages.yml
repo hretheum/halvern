@@ -20,6 +20,12 @@ on:
     paths:
       - 'www/**'
       - '.github/workflows/pages.yml'
+  # A release changes what the page should say about the download, so the page
+  # is rebuilt when one is published. Without this the version and size under
+  # the button describe whatever was current the last time somebody edited the
+  # HTML, on the one page whose whole argument is that its claims are checkable.
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -42,6 +48,48 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      # The download button points at `releases/latest`, so it never goes stale
+      # — but the line beneath it names a version and a size, and those were
+      # typed by hand. They are stamped from the current release here instead.
+      #
+      # Done at deploy time rather than in the browser: the page carries no
+      # script, says so in its own text, and the step below refuses to publish
+      # one. A fetch for the version would make that paragraph false.
+      - name: Stamp the current release into the page
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if ! RELEASE=$(gh api "repos/${{ github.repository }}/releases/latest" 2>/dev/null); then
+            echo "No published release yet; leaving the page's own values in place."
+            exit 0
+          fi
+
+          VERSION=$(echo "$RELEASE" | jq -r '.tag_name' | sed 's/^v//')
+          SIZE_BYTES=$(echo "$RELEASE" | jq -r '[.assets[] | select(.name | endswith(".dmg")) | .size] | first // empty')
+
+          if [ -z "$VERSION" ] || [ -z "$SIZE_BYTES" ]; then
+            echo "::error::Release has no version or no .dmg asset — refusing to guess."
+            exit 1
+          fi
+
+          SIZE_MB=$(( (SIZE_BYTES + 524288) / 1048576 ))
+          echo "Stamping version $VERSION, ${SIZE_MB} MB"
+
+          before=$(cat www/index.html)
+          sed -i "s|<span id=\"dl-size\">[^<]*</span>|<span id=\"dl-size\">${SIZE_MB}\&nbsp;MB</span>|" www/index.html
+          sed -i "s|<span id=\"dl-version\">[^<]*</span>|<span id=\"dl-version\">${VERSION}</span>|" www/index.html
+
+          # A silent no-op here would publish a page quietly describing an old
+          # release, which is the failure this step exists to prevent.
+          if [ "$before" = "$(cat www/index.html)" ]; then
+            echo "::error::Neither marker was replaced. Has www/index.html lost its dl-size / dl-version spans?"
+            exit 1
+          fi
+
+          grep -o '<p class="beneath fact">.*</p>' www/index.html
 
       # Fails the deploy rather than shipping a page that contradicts itself.
       # `check-network-hosts.sh` covers `www/`, but it runs in the CI workflow,
