@@ -1,0 +1,22 @@
+www/index.html
+  s_39af233242ee42::t_c1dc9ec882dee1 127
+.github/workflows/pages.yml
+  s_39af233242ee42::t_1b9b4a593a13cd 23-28,52-92
+  s_39af233242ee42::t_a9556f46ffb1fa 93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "276b59d58adcf3bf307c0a3c7621453eed589978",
+  "prompts": {},
+  "sessions": {
+    "s_39af233242ee42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b941f94-ebf5-4ea4-8ef8-1b7b4f9b278e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
