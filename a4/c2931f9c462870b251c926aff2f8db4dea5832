@@ -1,0 +1,21 @@
+scripts/generate-update-manifest-github.js
+  s_39af233242ee42::t_1a9256e1ac68ac 18-43,85,146,193,203
+scripts/test-update-locally.js
+  s_39af233242ee42::t_1a9256e1ac68ac 108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "a4c2931f9c462870b251c926aff2f8db4dea5832",
+  "prompts": {},
+  "sessions": {
+    "s_39af233242ee42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b941f94-ebf5-4ea4-8ef8-1b7b4f9b278e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
