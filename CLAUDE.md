@@ -69,22 +69,28 @@ and Pages are disabled there and its Dependabot pull requests are closed.
 (pnpm 11.21.0) and `engines` (Node ≥22.13). None of the three floats, and the
 clippy baseline — now 25 — is only meaningful because of that.
 
+**Dependencies are current, and the one setting that would police them is
+not.** All ten Dependabot pull requests were applied *here* rather than merged
+there, and that is the rule, not a preference: the public history is rebuilt
+from this tree, so anything merged on the public side is silently reverted by
+the next `commit-tree` push. Five action majors — including `pnpm/action-setup`
+v6, which is the first version that knows pnpm 11 exists, and `tauri-action`
+v1, whose renamed options this workflow happens not to pass. Then the weekly
+patch-and-minor group, `@types/node` 20→26, framer-motion 11→13, and TypeScript
+5.9→7.0, which is the Go compiler: the TypeScript step in `next build` fell
+from 3.2s to 584ms.
+
+What is missing is a cooldown. `pnpm-workspace.yaml` carries a
+`minimumReleaseAgeExclude` list, but nothing anywhere sets `minimumReleaseAge`
+— `pnpm config get minimumReleaseAge` answers `undefined` — so the exclusions
+are written against a rule that is not in force. lucide-react 1.34.0 was left
+out of the sweep on those grounds: it had been published the previous day, and
+a fresh release of a package exporting a thousand names is the exact shape the
+cooldown exists for.
+
 ### Pick up here
 
-1. **Push the pending commits.** Four sit on `fix/release-and-updater`, merged
-   into neither remote, because the machine lost outbound HTTPS mid-session:
-   updater error logging, download progress logging, the failure message in the
-   update notice, and Escape leaving Settings. Merge fast-forward into `main`,
-   push to `origin`, then build the public commit with `commit-tree` as above.
-   Run `./scripts/ci/guards.sh`, `cargo test --lib` **and**
-   `./scripts/ci/clippy-ratchet.sh` first — the ratchet is not part of
-   `guards.sh`, which is how a red CI got pushed earlier today.
-2. **Verify the signature survived the in-place update.** The updated 0.1.1 in
-   `/Applications` has not been checked, because the tooling that would check
-   it was reporting `CSSMERR_TP_NOT_TRUSTED` for Apple's own Calculator at the
-   time — a broken sandbox, not a broken bundle. One command settles it:
-   `codesign --verify --deep --strict --verbose=2 /Applications/Halvern.app && xcrun stapler validate /Applications/Halvern.app`
-3. **A real screenshot, then a demo recording, for the README.** The first
+1. **A real screenshot, then a demo recording, for the README.** The first
    screen still has no picture of the product. The four PNGs in
    `docs/assets/design-rollout/` are **design mockups, not app captures** —
    `Trigger silence detection (demo)` appears nowhere in the source — so they
@@ -93,28 +99,28 @@ clippy baseline — now 25 — is only meaningful because of that.
    it is in `~/Library/Application Support/halvern-real-data-*` with a
    `README.txt` and the script that puts it back. **Restore it before recording
    anything real.**
-4. **Launch on a Mac that has never run Halvern.** The signature half is
-   proven: the released `.dmg` was downloaded from GitHub, given the quarantine
-   attribute Safari attaches, and evaluated — `accepted / source=Notarized
-   Developer ID`. What a second machine decides is whether it *starts*:
-   microphone and screen-recording prompts, the macOS 14.4 floor, nothing
-   missing.
-5. **Ten open Dependabot pull requests** in the public repository. #1
-   (`tauri-action` 0→1) was checked against the five options `build.yml`
-   passes and is safe. #6–#10 are npm, including TypeScript 5→7 and
-   framer-motion 11→13, which are not mechanical.
-6. **Back the updater key up off this machine.** One readable copy exists, in
+2. **Launch on a Mac that has never run Halvern.** The signature half is
+   proven twice over now: the released `.dmg` was downloaded from GitHub, given
+   the quarantine attribute Safari attaches, and evaluated — `accepted /
+   source=Notarized Developer ID` — and on 25 August the copy in
+   `/Applications` that had updated itself in place from 0.1.0 verified the
+   same way, `codesign --verify --deep --strict` and `stapler validate` both
+   clean. What a second machine decides is whether it *starts*: microphone and
+   screen-recording prompts, the macOS 14.4 floor, nothing missing.
+3. **Back the updater key up off this machine.** One readable copy exists, in
    `~/Documents/halvern-keys/`. A GitHub secret is write-only and is not a
    backup. Losing it cuts every installation off from updates forever —
    `docs/SIGNING.md` §3a. This matters more now than yesterday: installations
    exist.
-7. **`www` CNAME**, and consider dropping the wildcard A/AAAA records at OVH:
+4. **`www` CNAME**, and consider dropping the wildcard A/AAAA records at OVH:
    they currently point every subdomain at GitHub Pages.
-8. **The cubic.dev badge**, once someone has confirmed in a logged-out browser
+5. **The cubic.dev badge**, once someone has confirmed in a logged-out browser
    that the wiki is publicly readable.
-9. **`serverAddress` and `localhost:5167`** are the last remains of the deleted
-   Python tier. `SidebarProvider` still sets the address and components still
-   read it, which is why the CSP entry stayed when the other two were removed.
+6. **Decide the dependency cooldown.** Either set `minimumReleaseAge` in
+   `pnpm-workspace.yaml` so the `minimumReleaseAgeExclude` list beneath it
+   means something, or delete the list. Whichever it is, `pnpm install
+   --frozen-lockfile` in CI has to be tried under the new setting before it
+   lands, because a cooldown can refuse a version the lockfile already names.
 
 ## Project Overview
 
@@ -737,6 +743,12 @@ $env:RUST_LOG="debug"; ./clean_run_windows.bat
    - `PooledBuffer` (`audio/buffer_pool.rs`) is re-exported from
      `audio/mod.rs` and used nowhere. `AudioBufferPool` in the same file is
      live, used by `recording_state.rs`.
+   - `useModelConfiguration` (`hooks/meeting-details/useModelConfiguration.ts`)
+     is the frontend's entry in this list: two hundred lines that load, listen
+     for and save the summary model configuration, called from nowhere. Found
+     on 25 August while removing the `serverAddress` prop that was its only
+     tie to the deleted server tier, and reported rather than deleted, like
+     everything else in this list.
 
    The pattern behind all of these is worth naming: **a registered command, an
    export, or a `pub` item is not a call path.** Grep for the caller, and for

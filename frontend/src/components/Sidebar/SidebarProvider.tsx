@@ -26,8 +26,6 @@ interface SidebarContextType {
   isMeetingActive: boolean;
   setIsMeetingActive: (active: boolean) => void;
   handleRecordingToggle: () => void;
-  serverAddress: string;
-  setServerAddress: (address: string) => void;
   // Summary polling management
   activeSummaryPolls: Map<string, NodeJS.Timeout>;
   startSummaryPolling: (meetingId: string, processId: string, onUpdate: (result: any) => void) => void;
@@ -55,7 +53,6 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [currentMeeting, setCurrentMeeting] = useState<CurrentMeeting | null>(null);
   const [meetings, setMeetings] = useState<CurrentMeeting[]>([]);
   const [isMeetingActive, setIsMeetingActive] = useState(false);
-  const [serverAddress, setServerAddress] = useState('');
   const [activeSummaryPolls, setActiveSummaryPolls] = useState<Map<string, NodeJS.Timeout>>(new Map());
   const [activeSettingsTab, setActiveSettingsTab] = useState<string | null>(null);
 
@@ -67,30 +64,24 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
 
   // Extract fetchMeetings as a reusable function
   const fetchMeetings = React.useCallback(async () => {
-    if (serverAddress) {
-      try {
-        const meetings = await invoke('api_get_meetings') as Array<{ id: string, title: string }>;
-        const transformedMeetings = meetings.map((meeting: any) => ({
-          id: meeting.id,
-          title: meeting.title
-        }));
-        setMeetings(transformedMeetings);
-        Analytics.trackBackendConnection(true);
-      } catch (error) {
-        console.error('Error fetching meetings:', error);
-        setMeetings([]);
-        Analytics.trackBackendConnection(false, error instanceof Error ? error.message : 'Unknown error');
-      }
+    try {
+      const meetings = await invoke('api_get_meetings') as Array<{ id: string, title: string }>;
+      const transformedMeetings = meetings.map((meeting: any) => ({
+        id: meeting.id,
+        title: meeting.title
+      }));
+      setMeetings(transformedMeetings);
+      Analytics.trackBackendConnection(true);
+    } catch (error) {
+      console.error('Error fetching meetings:', error);
+      setMeetings([]);
+      Analytics.trackBackendConnection(false, error instanceof Error ? error.message : 'Unknown error');
     }
-  }, [serverAddress]);
+  }, []);
 
   useEffect(() => {
     fetchMeetings();
-  }, [serverAddress, fetchMeetings]);
-
-  useEffect(() => {
-    setServerAddress('http://localhost:5167');
-  }, []);
+  }, [fetchMeetings]);
 
   // Start a recording from anywhere in the app
   const handleRecordingToggle = () => {
@@ -221,8 +212,6 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
       isMeetingActive,
       setIsMeetingActive,
       handleRecordingToggle,
-      serverAddress,
-      setServerAddress,
       activeSummaryPolls,
       startSummaryPolling,
       stopSummaryPolling,
