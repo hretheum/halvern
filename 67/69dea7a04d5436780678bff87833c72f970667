@@ -1,0 +1,21 @@
+frontend/package.json
+  s_8ee3f6e66d3772::t_d96fae1d049f69 79
+frontend/pnpm-lock.yaml
+  s_8ee3f6e66d3772::t_5cf5b6ceb24404 155-156,1552-1671,2167-2169,3678-3737,4233-4254
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "6769dea7a04d5436780678bff87833c72f970667",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
