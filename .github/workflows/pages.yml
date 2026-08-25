@@ -20,12 +20,21 @@ on:
     paths:
       - 'www/**'
       - '.github/workflows/pages.yml'
-  # A release changes what the page should say about the download, so the page
-  # is rebuilt when one is published. Without this the version and size under
-  # the button describe whatever was current the last time somebody edited the
-  # HTML, on the one page whose whole argument is that its claims are checkable.
-  release:
-    types: [published]
+  # Not `release: [published]`, though a release is exactly when the page needs
+  # rebuilding. Two reasons, found by trying it:
+  #
+  # The `github-pages` environment permits deployments from `main` only, so a
+  # run triggered by a release — whose ref is the tag — is rejected before any
+  # step executes. The run fails with nothing red in it, which is a miserable
+  # thing to debug.
+  #
+  # And it would be wrong even if it worked: a tag deploy publishes `www/` as
+  # it stood at the tag, silently reverting any change to the site made since.
+  # The site should come from `main` and the version from the latest release,
+  # which are two different things.
+  #
+  # So publishing a release ends with `gh workflow run pages.yml --ref main`.
+  # docs/VERSIONING.md carries it as a step.
   workflow_dispatch:
 
 permissions:

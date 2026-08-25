@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Where things stand — 24 August 2026
+## Where things stand — 25 August 2026
 
 Read this first after a break; the rest of the file is reference.
 
@@ -33,45 +33,86 @@ yet — a CNAME to `hretheum.github.io.` is still needed, and the `www` TXT
 record at OVH has to go first because a wildcard does not cover a name that
 owns any record.
 
-**Version 0.1.0.** Renumbered down from upstream's 0.4.0 while it was still
-free — see [docs/VERSIONING.md](docs/VERSIONING.md).
+**Released: 0.1.0 and 0.1.1**, both signed, notarized and stapled — the app
+during the build, the disk image afterwards, because Tauri does the first and
+not the second. Both were cut locally; `docs/SIGNING.md` §5 lists the six
+secrets CI would need and the repository holds one of them.
 
-**Green:** CI (guards, Rust tests and clippy, frontend types and build) and
-Pages. The branch ruleset requires all three checks plus a review, with admin
-bypass, so direct pushes to the public main still work.
+**The update path is proven end to end.** 0.1.1 was offered to an installed
+0.1.0, downloaded, signature-checked, installed, and the application restarted
+into the new version — 25 August, in the log. Everything before that had only
+shown the check working, never the install.
+
+That took three failed attempts to reach, and the reason is worth keeping: the
+network was down, and nothing said so. The install logged its start and not its
+failure, and the notice in the corner sent the error to `console.error`. Both
+are fixed — the log records failures and download progress at quarter marks,
+and the notice shows the reason with a "Try again" button. The same action had
+been reporting correctly all along in Settings → Updates, which is why nobody
+noticed.
+
+**The landing page keeps its own version current.** `www/index.html` carries
+`dl-size` and `dl-version` markers, stamped from the latest release when Pages
+deploys. It cannot be triggered by the release event: the `github-pages`
+environment only accepts deployments from `main`, and a tag deploy would
+publish `www/` as it stood at the tag. Releasing therefore ends with
+`gh workflow run pages.yml --ref main` — step 6 in docs/VERSIONING.md.
+
+**Actions are off in the private repository.** Its CI ran a `macos-latest` job
+that GitHub bills at ×10, Dependabot opened sixteen pull requests there, and a
+single day cost around 2500 billable minutes against a monthly allowance of
+2000–3000. Public repositories are free, including macOS, so the public repo
+keeps its CI; the private one is an archive and needs none. Build, Release, CI
+and Pages are disabled there and its Dependabot pull requests are closed.
 
 **Toolchain is pinned** by `rust-toolchain.toml` (1.98.0), `packageManager`
 (pnpm 11.21.0) and `engines` (Node ≥22.13). None of the three floats, and the
-clippy baseline of 27 is only meaningful because of that.
+clippy baseline — now 25 — is only meaningful because of that.
 
-### What is next, in order
+### Pick up here
 
-1. **A real screenshot, then a demo recording, for the README.** The first
-   screen has no picture of the product. The four PNGs in
+1. **Push the pending commits.** Four sit on `fix/release-and-updater`, merged
+   into neither remote, because the machine lost outbound HTTPS mid-session:
+   updater error logging, download progress logging, the failure message in the
+   update notice, and Escape leaving Settings. Merge fast-forward into `main`,
+   push to `origin`, then build the public commit with `commit-tree` as above.
+   Run `./scripts/ci/guards.sh`, `cargo test --lib` **and**
+   `./scripts/ci/clippy-ratchet.sh` first — the ratchet is not part of
+   `guards.sh`, which is how a red CI got pushed earlier today.
+2. **Verify the signature survived the in-place update.** The updated 0.1.1 in
+   `/Applications` has not been checked, because the tooling that would check
+   it was reporting `CSSMERR_TP_NOT_TRUSTED` for Apple's own Calculator at the
+   time — a broken sandbox, not a broken bundle. One command settles it:
+   `codesign --verify --deep --strict --verbose=2 /Applications/Halvern.app && xcrun stapler validate /Applications/Halvern.app`
+3. **A real screenshot, then a demo recording, for the README.** The first
+   screen still has no picture of the product. The four PNGs in
    `docs/assets/design-rollout/` are **design mockups, not app captures** —
-   `Trigger silence detection (demo)` appears in none of the source — so they
-   must not be used as if they were screenshots.
-2. **Launch 0.1.0 on a Mac that has never run Halvern.** The signature part is
-   already proven: the released `.dmg` was downloaded from GitHub, given the
-   quarantine attribute Safari would attach, and evaluated — `accepted /
-   source=Notarized Developer ID`, ticket stapled, and the same for the app
-   inside it. What a second machine still decides is whether it *starts*:
-   microphone and screen-recording prompts, macOS 14.4, nothing missing. The
-   update path stays unproven until 0.1.1 exists to be offered.
-3. **Ten open Dependabot pull requests.** #1 (`tauri-action` 0→1) was checked
-   against the five options `build.yml` actually passes and is safe. #6–#10 are
-   npm, including TypeScript 5→7 and framer-motion 11→13, which are not
-   mechanical.
-4. **Back the updater key up off this machine.** One readable copy exists, in
+   `Trigger silence detection (demo)` appears nowhere in the source — so they
+   must not be used as if they were screenshots. The maintainer's own data was
+   moved aside for this on 25 August so the app would show a clean first run;
+   it is in `~/Library/Application Support/halvern-real-data-*` with a
+   `README.txt` and the script that puts it back. **Restore it before recording
+   anything real.**
+4. **Launch on a Mac that has never run Halvern.** The signature half is
+   proven: the released `.dmg` was downloaded from GitHub, given the quarantine
+   attribute Safari attaches, and evaluated — `accepted / source=Notarized
+   Developer ID`. What a second machine decides is whether it *starts*:
+   microphone and screen-recording prompts, the macOS 14.4 floor, nothing
+   missing.
+5. **Ten open Dependabot pull requests** in the public repository. #1
+   (`tauri-action` 0→1) was checked against the five options `build.yml`
+   passes and is safe. #6–#10 are npm, including TypeScript 5→7 and
+   framer-motion 11→13, which are not mechanical.
+6. **Back the updater key up off this machine.** One readable copy exists, in
    `~/Documents/halvern-keys/`. A GitHub secret is write-only and is not a
-   backup. Losing it cuts every future installation off from updates forever —
-   `docs/SIGNING.md` §3a.
-5. **`www` CNAME**, and consider dropping the wildcard A/AAAA records at OVH:
+   backup. Losing it cuts every installation off from updates forever —
+   `docs/SIGNING.md` §3a. This matters more now than yesterday: installations
+   exist.
+7. **`www` CNAME**, and consider dropping the wildcard A/AAAA records at OVH:
    they currently point every subdomain at GitHub Pages.
-6. **The cubic.dev badge**, once someone has confirmed in a logged-out browser
-   that the wiki is publicly readable. Fetched anonymously it returns a sign-in
-   page, which is why it is not in the README.
-7. **`serverAddress` and `localhost:5167`** are the last remains of the deleted
+8. **The cubic.dev badge**, once someone has confirmed in a logged-out browser
+   that the wiki is publicly readable.
+9. **`serverAddress` and `localhost:5167`** are the last remains of the deleted
    Python tier. `SidebarProvider` still sets the address and components still
    read it, which is why the CSP entry stayed when the other two were removed.
 

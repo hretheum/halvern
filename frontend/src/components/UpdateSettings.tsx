@@ -61,6 +61,7 @@ export function UpdateOnLaunch() {
   const [update, setUpdate] = useState<UpdateInfo | null>(null)
   const [installing, setInstalling] = useState(false)
   const [dismissed, setDismissed] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (launchCheckStarted) return
@@ -87,11 +88,17 @@ export function UpdateOnLaunch() {
 
   const install = async () => {
     setInstalling(true)
+    setError(null)
     try {
       await invoke("install_update")
       await relaunch()
-    } catch (error) {
-      console.error("Update installation failed:", error)
+    } catch (err) {
+      // Shown, not just logged. This used to end at console.error, so a failed
+      // install looked like nothing at all: the spinner stopped, the same
+      // notice came back, and the only account of what went wrong was in a
+      // developer console nobody has open.
+      console.error("Update installation failed:", err)
+      setError(String(err))
       setInstalling(false)
     }
   }
@@ -104,6 +111,14 @@ export function UpdateOnLaunch() {
       <p className="mt-1 text-xs text-muted-foreground">
         You are running {update.current_version}.
       </p>
+      {error && (
+        // text-sm rather than text-xs: this is something a person has to read
+        // and act on, and twelve pixels is for badges.
+        <p className="mt-2 text-sm text-destructive">
+          {error} — you can try again, or download the new version from
+          halvern.io.
+        </p>
+      )}
       <div className="mt-3 flex gap-2">
         <button
           onClick={install}
@@ -116,7 +131,7 @@ export function UpdateOnLaunch() {
             </>
           ) : (
             <>
-              <Download className="h-3.5 w-3.5" /> Install and restart
+              <Download className="h-3.5 w-3.5" /> {error ? "Try again" : "Install and restart"}
             </>
           )}
         </button>

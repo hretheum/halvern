@@ -84,7 +84,13 @@ pub async fn check_for_update<R: Runtime>(app: AppHandle<R>) -> Result<UpdateInf
                 notes: None,
             })
         }
-        Err(e) => Err(format!("Update check failed: {}", e)),
+        Err(e) => {
+            // Logged as well as returned. The launch check swallows its error
+            // by design — nobody asked for it — so without this line a failing
+            // check leaves no trace anywhere.
+            log::warn!("Update check failed: {}", e);
+            Err(format!("Update check failed: {}", e))
+        }
     }
 }
 
@@ -110,10 +116,45 @@ pub async fn install_update<R: Runtime>(app: AppHandle<R>) -> Result<(), String>
     // Signature verification happens inside `download_and_install` against the
     // public key in tauri.conf.json. A tampered or unsigned artifact fails
     // here rather than being written anywhere.
+    // The progress callbacks were empty, which meant a failed install left no
+    // way to tell a download that never started from one that died halfway.
+    // Logged at quarter marks rather than per chunk: enough to place the
+    // failure, not enough to bury the log.
+    let mut downloaded: usize = 0;
+    let mut next_mark: u8 = 0;
+
     update
-        .download_and_install(|_chunk, _total| {}, || {})
+        .download_and_install(
+            move |chunk, total| {
+                downloaded += chunk;
+                let Some(total) = total else { return };
+                if total == 0 {
+                    return;
+                }
+                let percent = (downloaded as u64 * 100 / total) as u8;
+                while next_mark <= 100 && percent >= next_mark {
+                    log::info!(
+                        "Update download {}% ({} of {} bytes)",
+                        next_mark,
+                        downloaded,
+                        total
+                    );
+                    next_mark = next_mark.saturating_add(25);
+                }
+            },
+            || log::info!("Update downloaded; replacing the application bundle"),
+        )
         .await
-        .map_err(|e| format!("Update installation failed: {}", e))?;
+        .map_err(|e| {
+            // This log line is here because its absence was noticed the hard
+            // way: an install was started twice, downloaded nothing because
+            // the network had dropped, and left "Installing update 0.1.1" as
+            // the last word on the subject. The interface showed the error and
+            // the log — the thing you read afterwards — showed a success that
+            // never happened.
+            log::error!("Update installation failed: {}", e);
+            format!("Update installation failed: {}", e)
+        })?;
 
     log::info!("Update {} installed; restart to run it", update.version);
     Ok(())

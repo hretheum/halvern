@@ -74,6 +74,12 @@ does not need to track.
    fails rather than let that happen.
 5. Publish the draft. A draft is downloadable by nobody and visible to no
    installation.
+6. `gh workflow run pages.yml --ref main` — the site stamps the current
+   version and download size from the latest release when it deploys, and it
+   has no way to know a release happened. It cannot be triggered by the release
+   event: the `github-pages` environment only accepts deployments from `main`,
+   and a tag deploy would publish `www/` as it stood at the tag, reverting
+   anything changed since.
 
 A release that is not signed is not a release: Gatekeeper will refuse it on
 any machine that did not build it, and the download page promises otherwise.

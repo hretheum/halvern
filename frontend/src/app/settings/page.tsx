@@ -52,6 +52,39 @@ export default function SettingsPage() {
     return () => setActiveSettingsTab(null);
   }, [category, setActiveSettingsTab]);
 
+  // Escape leaves Settings, the way it closes anything else layered over the
+  // work. The back button in the corner stays: this is the shortcut for people
+  // who expect it, not a replacement for the visible way out.
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || event.defaultPrevented) return;
+
+      // A dialog, a select or a popover open on top of Settings owns Escape —
+      // closing the whole screen out from under one would be the wrong answer
+      // to "get me out of this". Radix marks its open layers with data-state,
+      // so their presence is the signal.
+      if (document.querySelector('[role="dialog"], [data-state="open"][role="listbox"]')) {
+        return;
+      }
+
+      // Typing in a field: Escape belongs to the field first — reverting an
+      // edit is what people expect there, not navigating away from it.
+      const target = event.target as HTMLElement | null;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target?.isContentEditable
+      ) {
+        return;
+      }
+
+      router.push('/');
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [router]);
+
   // Load saved transcript configuration on mount
   useEffect(() => {
     const loadTranscriptConfig = async () => {
