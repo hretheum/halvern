@@ -1,0 +1,19 @@
+frontend/src/app/settings/page.tsx
+  s_39af233242ee42::t_809726c60e5af1 55-87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "f8263f98864e17a514cbbe033298bb04a0c3ddb6",
+  "prompts": {},
+  "sessions": {
+    "s_39af233242ee42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b941f94-ebf5-4ea4-8ef8-1b7b4f9b278e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
