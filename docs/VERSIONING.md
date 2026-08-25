@@ -59,12 +59,21 @@ does not need to track.
 
 ## Releasing
 
-1. Bump the four files together.
+1. Bump the four files together. The Release workflow checks they agree and
+   stops if they do not, because a build that reports one version while the
+   release page shows another is a bug reporters cannot see past.
 2. `docs/SIGNING.md` for the signed, notarized build.
-3. Tag `v<version>` and run the Release workflow, which builds, signs, and
-   uploads the bundle plus `latest.json`.
+3. Run the Release workflow. It reads the version from `tauri.conf.json`,
+   creates the tag and a draft release, builds, signs, notarizes — the disk
+   image included — and uploads the bundle plus `latest.json`. Do not create
+   the tag by hand: if `v<version>` already exists the workflow refuses, rather
+   than inventing a fourth segment the updater cannot compare, which is what it
+   used to do.
 4. `latest.json` is what the updater reads. Publishing a release without it
-   means existing installations see nothing — see `updater.rs`.
+   means existing installations see nothing — see `updater.rs`. The workflow
+   fails rather than let that happen.
+5. Publish the draft. A draft is downloadable by nobody and visible to no
+   installation.
 
 A release that is not signed is not a release: Gatekeeper will refuse it on
 any machine that did not build it, and the download page promises otherwise.

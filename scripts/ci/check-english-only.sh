@@ -31,7 +31,7 @@ status=0
 # labels in `lib/speaker-labels.ts`. Removing quoted spans leaves comments,
 # identifiers and log message shells, which is exactly the prose the rule is
 # about.
-hits=$(find frontend/src-tauri/src frontend/src scripts \
+hits=$(find frontend/src-tauri/src frontend/src frontend/scripts scripts \
         \( -name '*.rs' -o -name '*.ts' -o -name '*.tsx' -o -name '*.js' \
            -o -name '*.mjs' -o -name '*.sh' \) -type f 2>/dev/null \
        | grep -v 'scripts/ci/check-english-only.sh' \

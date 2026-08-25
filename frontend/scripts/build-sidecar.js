@@ -63,14 +63,14 @@ function targetTriple() {
   const out = execFileSync('rustc', ['-vV'], { encoding: 'utf8' });
   const line = out.split('\n').find((l) => l.startsWith('host:'));
   if (!line) {
-    throw new Error('Nie udało się odczytać target triple z `rustc -vV`');
+    throw new Error('Could not read the target triple from `rustc -vV`');
   }
   return line.split(':')[1].trim();
 }
 
 function main() {
   if (!fs.existsSync(HELPER_DIR)) {
-    console.error(`❌ Nie znaleziono katalogu llama-helper: ${HELPER_DIR}`);
+    console.error(`❌ No llama-helper directory at: ${HELPER_DIR}`);
     process.exit(1);
   }
 
@@ -79,12 +79,12 @@ function main() {
   if (isRelease) args.push('--release');
   if (feature) args.push('--features', feature);
 
-  console.log(`🦙 Budowanie llama-helper (${profileDir}), features: ${feature || 'brak'}`);
+  console.log(`🦙 Building llama-helper (${profileDir}), features: ${feature || 'none'}`);
 
   try {
     execFileSync('cargo', args, { cwd: HELPER_DIR, stdio: 'inherit' });
   } catch (err) {
-    console.error('❌ Budowanie llama-helper nie powiodło się');
+    console.error('❌ Building llama-helper failed');
     process.exit(err.status || 1);
   }
 
@@ -97,7 +97,7 @@ function main() {
 
   const srcPath = path.join(WORKSPACE_ROOT, 'target', profileDir, baseName);
   if (!fs.existsSync(srcPath)) {
-    console.error(`❌ Nie znaleziono zbudowanej binarki: ${srcPath}`);
+    console.error(`❌ No built binary at: ${srcPath}`);
     process.exit(1);
   }
 

@@ -56,8 +56,13 @@ fi
 echo "  all four models present"
 
 say "1. Building the harness"
-cp "$ROOT/scripts/summary_bench.rs" "$TAURI/src/bin/summary_bench.rs"
-(cd "$TAURI" && cargo build --release --bin summary_bench)
+# An example, not a bin. Anything under src/bin/ is discovered by cargo and
+# picked up by the Tauri bundler, which is how a 29 MB measurement harness
+# ended up inside a signed, notarized 0.1.0 disk image. Examples are built
+# only when asked for by name.
+mkdir -p "$TAURI/examples"
+cp "$ROOT/scripts/summary_bench.rs" "$TAURI/examples/summary_bench.rs"
+(cd "$TAURI" && cargo build --release --example summary_bench)
 
 say "2. Pre-flight P0 — chat templates"
 echo "  Run the two P0 probes from 03-prompts.md against each model."
@@ -68,12 +73,12 @@ read -r -p "  All four models passed P0? [y/N] " ok
 [ "$ok" = "y" ] || { echo "  stopping"; exit 1; }
 
 say "3. Tier A — qwen3.5:4b vs gemma3:4b (arm $ARM)"
-(cd "$TAURI" && "$TAURI/../../target/release/summary_bench" \
+(cd "$TAURI" && "$TAURI/../../target/release/examples/summary_bench" \
   --corpus "$ROOT/corpus" --out "$OUT" --models "$TIER_A" \
   --arm "$ARM" --repeats 3 --data-dir "$DATA_DIR")
 
 say "4. Tier B — qwen3.5:2b vs gemma3:1b (arm $ARM)"
-(cd "$TAURI" && "$TAURI/../../target/release/summary_bench" \
+(cd "$TAURI" && "$TAURI/../../target/release/examples/summary_bench" \
   --corpus "$ROOT/corpus" --out "$OUT" --models "$TIER_B" \
   --arm "$ARM" --repeats 3 --data-dir "$DATA_DIR")
 

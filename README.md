@@ -6,6 +6,7 @@
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue" alt="MIT licence"></a>
     <img src="https://img.shields.io/badge/Platform-macOS%2014.4%2B-lightgrey" alt="macOS 14.4 or later">
     <img src="https://img.shields.io/badge/Silicon-Apple%20only-C07A3A" alt="Apple Silicon only">
+    <a href="https://halvern.io"><img src="https://img.shields.io/badge/halvern.io-download-C07A3A" alt="Download at halvern.io"></a>
   </p>
 </div>
 
@@ -72,14 +73,23 @@ Pre-release, and honest about it:
   was built locally.
 - First run downloads a speech model and a summarisation model, together
   roughly 1.5–3 GB depending on the answers you give during setup.
+- **0.1.0 is the first release**, signed and notarized, and the first build
+  whose update path can be exercised at all — there was nothing for the updater
+  to find until it existed.
 
 See [LAUNCH_READINESS.md](LAUNCH_READINESS.md) for the full list of what is
 solid, what is not, and what is deliberately deferred.
 
 ## Building
 
-See [docs/BUILDING.md](docs/BUILDING.md). In short: a Rust toolchain, Node with
-pnpm, and `pnpm run tauri:build` from `frontend/`.
+See [docs/BUILDING.md](docs/BUILDING.md). In short: `pnpm run tauri:build` from
+`frontend/`.
+
+The toolchain versions are pinned and not suggestions — `rust-toolchain.toml`
+for Rust, `packageManager` and `engines` in `frontend/package.json` for pnpm
+and Node. rustup and pnpm both honour those files, so the right versions
+install themselves; a mismatched one fails in ways that do not look like
+version problems. [docs/VERSIONING.md](docs/VERSIONING.md) explains why.
 
 Developer-facing notes — architecture, conventions, the test suite, and the
 traps worth knowing before changing the audio path — live in

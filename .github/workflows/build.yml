@@ -57,6 +57,39 @@ jobs:
           ref: ${{ inputs.ref }}
           fetch-depth: 0
 
+      # Checked here rather than discovered later. Without this the first sign
+      # of a missing secret is `security import` failing on an empty file,
+      # thirty minutes into a release build, with a message about a corrupt
+      # certificate. Every name below is required for a signed, notarized
+      # macOS build; docs/SIGNING.md section 5 says where each comes from.
+      - name: Check the macOS signing secrets are all present
+        if: contains(inputs.platform, 'macos') && inputs.sign-binaries
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          missing=""
+          for name in APPLE_CERTIFICATE APPLE_CERTIFICATE_PASSWORD KEYCHAIN_PASSWORD \
+                      APPLE_ID APPLE_PASSWORD APPLE_TEAM_ID TAURI_SIGNING_PRIVATE_KEY; do
+            eval "value=\${$name}"
+            if [ -z "$value" ]; then
+              missing="$missing $name"
+            fi
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secrets:$missing"
+            echo "A build with sign-binaries: true cannot produce a downloadable"
+            echo "release without them: Gatekeeper refuses an unsigned app on any"
+            echo "machine that did not build it. See docs/SIGNING.md section 5."
+            exit 1
+          fi
+          echo "All macOS signing secrets are present."
+
       - name: Get version from tauri.conf.json.
         id: get-version
         shell: bash
@@ -594,6 +627,62 @@ jobs:
           releaseName: ${{ inputs.release-id && format('v{0}', steps.get-version.outputs.version) || '' }}
           releaseId: ${{ inputs.release-id }}
           args: ${{ inputs.build-args }} ${{ steps.build-features.outputs.features }}
+
+      # Tauri notarizes the .app, staples it, and then builds the .dmg around
+      # it — so the file people actually download is signed but unnotarized.
+      # Verified on 19 August 2026: the app came back `accepted / Notarized
+      # Developer ID` while the disk image from the same build came back
+      # `rejected / Unnotarized Developer ID`. This was a manual step after
+      # every release, which is the kind of step that gets forgotten exactly
+      # once. See docs/SIGNING.md section 3.
+      - name: Notarize and staple the disk image
+        if: contains(inputs.platform, 'macos') && inputs.sign-binaries
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ inputs.release-id }}
+        run: |
+          set -euo pipefail
+          BUNDLE_DIR="target/${{ inputs.target }}/${{ steps.build-profile.outputs.profile }}/bundle/dmg"
+          DMG=$(find "$BUNDLE_DIR" -name '*.dmg' -maxdepth 1 | head -1)
+          if [ -z "$DMG" ]; then
+            echo "::error::No .dmg found under $BUNDLE_DIR"
+            exit 1
+          fi
+          echo "Notarizing $DMG"
+
+          xcrun notarytool submit "$DMG" \
+            --apple-id "$APPLE_ID" \
+            --team-id "$APPLE_TEAM_ID" \
+            --password "$APPLE_PASSWORD" \
+            --wait
+
+          xcrun stapler staple "$DMG"
+
+          # Proves the ticket is attached to the file rather than merely issued
+          # by Apple. Without it Gatekeeper has to ask Apple over the network,
+          # and someone offline gets a warning for a file that is fine.
+          xcrun stapler validate "$DMG"
+
+          # tauri-action already uploaded the pre-staple copy, and stapling
+          # rewrites the file. Replace the asset, or the release serves a disk
+          # image without its ticket.
+          if [ -n "$RELEASE_ID" ]; then
+            NAME=$(basename "$DMG")
+            ASSET_ID=$(gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets" \
+              --jq ".[] | select(.name == \"$NAME\") | .id")
+            if [ -n "$ASSET_ID" ]; then
+              echo "Replacing already-uploaded $NAME (asset $ASSET_ID)"
+              gh api --method DELETE "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets/$ASSET_ID"
+            fi
+            gh api --method POST \
+              "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets?name=$NAME" \
+              --header "Content-Type: application/octet-stream" \
+              --input "$DMG" > /dev/null
+            echo "Uploaded the stapled $NAME"
+          fi
 
       - name: Upload artifacts (macOS)
         if: inputs.upload-artifacts && contains(inputs.platform, 'macos')

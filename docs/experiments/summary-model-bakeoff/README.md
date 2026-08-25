@@ -23,7 +23,7 @@ Status: designed, not yet run. Everything needed to run it is in this folder.
 |---|---|---|
 | [`scripts/validate_corpus.py`](scripts/validate_corpus.py) | Gate the corpus before a run costs an overnight | tested |
 | [`scripts/score.py`](scripts/score.py) | All six metrics, locally; emits uncertain rows for adjudication | tested on fixtures |
-| [`scripts/summary_bench.rs`](scripts/summary_bench.rs) | Drives the real summary path; drop into `src/bin/` | written, unrun |
+| [`scripts/summary_bench.rs`](scripts/summary_bench.rs) | Drives the real summary path; `run.sh` drops it into `examples/`, never `src/bin/` — see below | written, unrun |
 | [`scripts/run.sh`](scripts/run.sh) | Orchestrates a full run and records the conditions | written, unrun |
 | [`scripts/extract-control-set.sh`](scripts/extract-control-set.sh) | Pulls six real meetings as a reality check | written, unrun |
 | [`scripts/example-corpus-file.json`](scripts/example-corpus-file.json) | Worked example of a corpus file | validates |

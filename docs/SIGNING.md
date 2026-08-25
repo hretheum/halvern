@@ -145,6 +145,12 @@ Nothing is rebuilt; this only attaches a ticket. Stapling matters because it
 makes the check work offline — without it Gatekeeper has to ask Apple, and a
 user on a plane gets a warning for a file that is perfectly fine.
 
+**In CI this is no longer manual.** `build.yml` submits, staples and validates
+the disk image after `tauri-action` finishes, and then replaces the copy
+`tauri-action` already uploaded — stapling rewrites the file, so the first
+upload is the one without a ticket. The steps above remain what a local build
+needs.
+
 ## 3a. The updater signing key — a different key, and a worse thing to lose
 
 Two signatures matter here and they are unrelated. Apple's Developer ID
@@ -213,29 +219,34 @@ in front of it.
 
 ## 5. CI — later, and not urgent
 
-`.github/workflows/release.yml` has no macOS signing step. Adding one needs the
-certificate exported as a base64 `.p12` and these repository secrets:
+**The workflow is ready; the secrets are not.** `build.yml` imports the
+certificate into a temporary keychain, passes the credentials to
+`tauri-action`, and notarizes the disk image afterwards. What is missing is the
+values — as of 25 August 2026 the repository holds exactly one secret,
+`TAURI_SIGNING_PRIVATE_KEY`.
 
 | Secret | What it is |
 |---|---|
 | `APPLE_CERTIFICATE` | the `.p12`, base64-encoded |
 | `APPLE_CERTIFICATE_PASSWORD` | the password set when exporting it |
-| `APPLE_SIGNING_IDENTITY` | the full identity string |
+| `KEYCHAIN_PASSWORD` | any string; it unlocks the throwaway keychain the runner builds in |
 | `APPLE_ID` | the account email |
 | `APPLE_PASSWORD` | the app-specific password from §2 |
 | `APPLE_TEAM_ID` | the ten-character team identifier |
 | `TAURI_SIGNING_PRIVATE_KEY` | the updater key from §3a — **set**, 23 August 2026 |
 
-`tauri-action` imports the certificate into a temporary keychain when
-`APPLE_CERTIFICATE` is present, so the workflow change is mostly passing these
-through.
+`APPLE_SIGNING_IDENTITY` is not in the list: the workflow reads the identity
+off the imported certificate rather than having it typed twice, which is one
+fewer string that can disagree with the keychain.
 
-The `sign-binaries: true` already in that file is the Windows path and does
-nothing for macOS.
+A release build with any of these missing now stops in its first minute and
+names them. It used to fail on `security import` reading an empty file, thirty
+minutes in, with a message about a corrupt certificate — the error was true and
+told you nothing.
 
-This is deliberately last. Signing locally proves the certificate and the
-entitlements work; automating it before that just moves a failure somewhere
-harder to read.
+Signing locally still comes first. It proves the certificate and the
+entitlements work, and a CI failure in that same territory is much harder to
+read.
 
 ## What is still true after all of this
 

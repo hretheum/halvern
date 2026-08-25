@@ -15,6 +15,32 @@
 const fs = require('fs');
 const path = require('path');
 
+// The repository the manifest points updates at.
+//
+// This was hardcoded to the upstream project this app was forked from, which
+// meant every URL in a generated manifest named somebody else's releases. The
+// signature check would have refused whatever came back, so the visible
+// symptom would have been "updates are broken" rather than anything alarming —
+// which is exactly the kind of defect that survives a review.
+//
+// It is read from the updater endpoint in tauri.conf.json instead of written
+// down a second time, so the manifest cannot disagree with the address the
+// installed app actually asks.
+function releaseRepository() {
+  const configPath = path.join(__dirname, '..', 'frontend', 'src-tauri', 'tauri.conf.json');
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  const endpoint = config?.plugins?.updater?.endpoints?.[0];
+  const match = endpoint && endpoint.match(/github\.com\/([^/]+\/[^/]+)\/releases/);
+  if (!match) {
+    console.error('Could not read the release repository from the updater endpoint in tauri.conf.json.');
+    console.error(`Endpoint found: ${endpoint || '(none)'}`);
+    process.exit(1);
+  }
+  return match[1];
+}
+
+const REPO = releaseRepository();
+
 const [version, bundleDir = 'frontend/src-tauri/target/release/bundle/updater', outputFile = 'latest.json', notes = ''] = process.argv.slice(2);
 
 if (!version) {
@@ -56,7 +82,7 @@ const versionDir = `v${versionClean}`;
 const pubDate = new Date().toISOString();
 
 console.log(`Generating manifest for version ${versionClean}...`);
-console.log(`GitHub Repository: Zackriya-Solutions/meeting-minutes`);
+console.log(`GitHub Repository: ${REPO}`);
 console.log(`Bundle Directory: ${bundleDir}`);
 console.log('');
 
@@ -117,7 +143,7 @@ bundleFiles.forEach(filename => {
 
   if (platform && !platforms[platform]) {
     // Generate GitHub Release URL
-    const githubUrl = `https://github.com/Zackriya-Solutions/meeting-minutes/releases/download/${versionDir}/${filename}`;
+    const githubUrl = `https://github.com/${REPO}/releases/download/${versionDir}/${filename}`;
 
     // Check if signature file exists (look for .sig file with same name)
     const sigFile = path.join(bundleDir, `${filename}.sig`);
@@ -164,7 +190,7 @@ console.log('');
 console.log(`✓ Manifest generated: ${outputPath}`);
 console.log(`\nNext steps:`);
 console.log(`1. Create GitHub Release with tag: v${versionClean}`);
-console.log(`   URL: https://github.com/Zackriya-Solutions/meeting-minutes/releases/new?tag=v${versionClean}`);
+console.log(`   URL: https://github.com/${REPO}/releases/new?tag=v${versionClean}`);
 console.log(`\n2. Upload this file to the release:`);
 console.log(`   - File: ${outputFile}`);
 console.log(`   - Name: latest.json (must be exact)`);
@@ -174,4 +200,4 @@ Object.keys(platforms).forEach(platform => {
   console.log(`   - ${filename}`);
 });
 console.log(`\n4. Verify the manifest is accessible:`);
-console.log(`   curl https://github.com/Zackriya-Solutions/meeting-minutes/releases/latest/download/latest.json`);
+console.log(`   curl https://github.com/${REPO}/releases/latest/download/latest.json`);

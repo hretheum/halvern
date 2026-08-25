@@ -23,47 +23,51 @@ jobs:
         with:
           fetch-depth: 0  # Fetch all tags
 
-      - name: Get version from tauri.conf.json and check for existing tags
+      # The updater compares semver. A version it cannot parse is not a loud
+      # failure — the update check simply offers nothing, forever, on machines
+      # nobody is watching. This step used to invent a fourth segment
+      # (0.1.0.1, 0.1.0.2 ...) when a tag already existed, which is exactly
+      # that shape of defect, so it now refuses instead. Releasing again means
+      # bumping the version deliberately, in the four files docs/VERSIONING.md
+      # lists, which is what a release is.
+      - name: Resolve the version, and refuse to guess one
         id: get-version
         shell: bash
         run: |
-          BASE_VERSION=$(grep -o '"version": "[^"]*"' frontend/src-tauri/tauri.conf.json | cut -d'"' -f4)
-          echo "Base version from tauri.conf.json: $BASE_VERSION"
+          set -euo pipefail
 
-          # Fetch all tags
-          git fetch --tags
+          VERSION=$(grep -o '"version": "[^"]*"' frontend/src-tauri/tauri.conf.json | head -1 | cut -d'"' -f4)
+          echo "Version from tauri.conf.json: $VERSION"
 
-          # Check if base version tag exists
-          if git tag -l "v${BASE_VERSION}" | grep -q .; then
-            echo "Tag v${BASE_VERSION} already exists, looking for minor updates..."
-
-            # Find all existing minor versions (e.g., 0.1.1.1, 0.1.1.2, etc.)
-            LATEST_MINOR=0
-            for i in $(seq 1 100); do
-              if git tag -l "v${BASE_VERSION}.${i}" | grep -q .; then
-                LATEST_MINOR=$i
-              else
-                break
-              fi
-            done
-
-            # Increment to next minor version
-            NEXT_MINOR=$((LATEST_MINOR + 1))
-
-            if [ $NEXT_MINOR -gt 100 ]; then
-              echo "ERROR: Maximum minor version (100) reached for ${BASE_VERSION}"
-              echo "Please update the version in tauri.conf.json"
-              exit 1
-            fi
-
-            VERSION="${BASE_VERSION}.${NEXT_MINOR}"
-            echo "Using minor update version: $VERSION"
-          else
-            VERSION="${BASE_VERSION}"
-            echo "Using base version: $VERSION"
+          if ! printf '%s' "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::'$VERSION' is not a semver version the updater can compare."
+            exit 1
           fi
 
-          echo "Final version: $VERSION"
+          # The four files that must agree. Cargo.lock follows the crate, so it
+          # is checked too: a stale lock means the built binary reports a
+          # version the release page does not.
+          CARGO_VERSION=$(grep -m1 '^version = ' frontend/src-tauri/Cargo.toml | cut -d'"' -f2)
+          PKG_VERSION=$(node -p "require('./frontend/package.json').version")
+          LOCK_VERSION=$(awk '/^name = "halvern"$/{getline; print}' Cargo.lock | cut -d'"' -f2)
+
+          mismatch=""
+          [ "$CARGO_VERSION" = "$VERSION" ] || mismatch="$mismatch frontend/src-tauri/Cargo.toml=$CARGO_VERSION"
+          [ "$PKG_VERSION" = "$VERSION" ]   || mismatch="$mismatch frontend/package.json=$PKG_VERSION"
+          [ "$LOCK_VERSION" = "$VERSION" ]  || mismatch="$mismatch Cargo.lock=$LOCK_VERSION"
+          if [ -n "$mismatch" ]; then
+            echo "::error::Version files disagree with tauri.conf.json ($VERSION):$mismatch"
+            echo "See docs/VERSIONING.md — bump the four files together."
+            exit 1
+          fi
+
+          git fetch --tags --quiet
+          if git tag -l "v${VERSION}" | grep -q .; then
+            echo "::error::Tag v${VERSION} already exists."
+            echo "Bump the version in the four files docs/VERSIONING.md lists, then run this again."
+            exit 1
+          fi
+
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Create Draft Release
@@ -121,80 +125,78 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Get release assets and latest.json
+      # A release missing latest.json is not a smaller release, it is a
+      # release that never reaches anyone who already installed the app —
+      # their update check reads that file and nothing else. Same for the
+      # .app.tar.gz and its .sig: the .dmg is what a new visitor downloads,
+      # the tarball is what an existing installation applies. Checked here
+      # rather than discovered when the next version fails to land.
+      - name: Verify the release can actually be downloaded and applied
         id: release-info
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euo pipefail
           VERSION="${{ needs.create-release.outputs.version }}"
           RELEASE_ID="${{ needs.create-release.outputs.release-id }}"
 
-          echo "## Release Assets" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          ASSETS=$(gh api "repos/${{ github.repository }}/releases/${RELEASE_ID}/assets" --jq '.[].name')
+          echo "Assets on the release:"
+          echo "$ASSETS"
 
-          # List all release assets
-          echo "### Files in Release" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          gh api repos/${{ github.repository }}/releases/${RELEASE_ID}/assets --jq '.[] | "\(.name) (\(.size / 1048576 | floor)MB)"' >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-
-          # Download and show latest.json
-          echo "### latest.json content" >> $GITHUB_STEP_SUMMARY
-          gh release download "v${VERSION}" --pattern "latest.json" --dir . 2>/dev/null || echo "latest.json not yet available"
-          if [ -f latest.json ]; then
-            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
-            cat latest.json >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          missing=""
+          echo "$ASSETS" | grep -q '\.dmg$'          || missing="$missing .dmg"
+          echo "$ASSETS" | grep -q '\.app\.tar\.gz$' || missing="$missing .app.tar.gz"
+          echo "$ASSETS" | grep -q '\.sig$'          || missing="$missing .sig"
+          echo "$ASSETS" | grep -q '^latest\.json$'   || missing="$missing latest.json"
+          if [ -n "$missing" ]; then
+            echo "::error::Release v${VERSION} is missing:$missing"
+            echo "The updater endpoint reads latest.json from this release; without"
+            echo "the tarball and its signature there is nothing for it to apply."
+            exit 1
           fi
-          echo "" >> $GITHUB_STEP_SUMMARY
 
-          # Download links
-          echo "### Download Links" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Release page:** https://github.com/${{ github.repository }}/releases/tag/v${VERSION}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Download all as ZIP:** https://github.com/${{ github.repository }}/archive/refs/tags/v${VERSION}.zip" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Updates:** not wired. `tauri.conf.json` configures no updater endpoint, so a user who downloads this release has no way to receive the next one. See LAUNCH_READINESS.md 2.5." >> $GITHUB_STEP_SUMMARY
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          {
+            echo "## Release v${VERSION}"
+            echo ""
+            echo "### Files"
+            echo '```'
+            gh api "repos/${{ github.repository }}/releases/${RELEASE_ID}/assets" \
+              --jq '.[] | "\(.name) (\(.size / 1048576 | floor)MB)"'
+            echo '```'
+            echo ""
+          } >> $GITHUB_STEP_SUMMARY
 
-      - name: Release Summary
+          ASSET_ID=$(gh api "repos/${{ github.repository }}/releases/${RELEASE_ID}/assets" \
+            --jq '.[] | select(.name == "latest.json") | .id')
+          gh api -H "Accept: application/octet-stream" \
+            "repos/${{ github.repository }}/releases/assets/${ASSET_ID}" > latest.json
+
+          {
+            echo "### latest.json — what the updater reads"
+            echo '```json'
+            cat latest.json
+            echo '```'
+            echo ""
+            echo "**Download page:** https://github.com/${{ github.repository }}/releases/tag/v${VERSION}"
+            echo ""
+            echo "**Updater endpoint:** \`releases/latest/download/latest.json\` — served only"
+            echo "once this draft is published. Installed copies see the update on their next"
+            echo "check; a draft reaches nobody."
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: Next steps
         run: |
-          echo "============================================"
-          echo "=== Release Created Successfully ==="
-          echo "============================================"
-          echo "Version: v${{ needs.create-release.outputs.version }}"
-          echo "Release URL: https://github.com/${{ github.repository }}/releases/tag/v${{ needs.create-release.outputs.version }}"
-          echo ""
-          echo "Uploaded assets (via tauri-action):"
-          echo "  - macOS: DMG installer + app.tar.gz (for updater) + .sig"
-          echo "  - Windows: MSI + NSIS installers (SIGNED via signCommand) + .sig files"
-          echo "  - Updater manifest: latest.json (auto-generated by tauri-action)"
-          echo ""
-          echo "Next steps:"
-          echo "  1. Review the draft release"
-          echo "  2. Edit release notes if needed"
-          echo "  3. Publish the release when ready"
-          echo "============================================"
-
-          # Add to GitHub Step Summary
-          echo "## Release Created Successfully" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Version:** v${{ needs.create-release.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Release URL:** [View Release](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.create-release.outputs.version }})" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Uploaded Assets" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Platform | Assets |" >> $GITHUB_STEP_SUMMARY
-          echo "|----------|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| **macOS** | DMG installer, app.tar.gz (updater), .sig |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Windows** | MSI installer (SIGNED), NSIS installer (SIGNED), .sig files |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Updater** | latest.json manifest (auto-generated by tauri-action) |" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "1. [Review the draft release](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.create-release.outputs.version }})" >> $GITHUB_STEP_SUMMARY
-          echo "2. Edit release notes if needed" >> $GITHUB_STEP_SUMMARY
-          echo "3. Publish the release when ready" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### Next steps"
+            echo ""
+            echo "1. Review the draft release."
+            echo "2. Publish it. Nothing is downloadable and no installation sees the"
+            echo "   update while it stays a draft."
+            echo "3. Verify on a Mac that has never run Halvern — download the .dmg over"
+            echo "   the network, open it, launch the app, and expect no developer"
+            echo "   warning. Gatekeeper does not quarantine what was built locally, so"
+            echo "   this is the only check that proves the signature. See"
+            echo "   docs/SIGNING.md section 4."
+            echo "4. Verify the update path from the previous version, once one exists."
+          } >> $GITHUB_STEP_SUMMARY

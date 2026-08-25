@@ -7,7 +7,30 @@ Companion to [LAUNCH_READINESS.md](../LAUNCH_READINESS.md), which is about
 whether the *product* is ready. This document is about the *repository* and the
 launch itself.
 
-Written 23 August 2026.
+Written 23 August 2026, updated 24 August.
+
+## Done, as of 24 August 2026
+
+| | |
+|---|---|
+| Repository | [github.com/hretheum/halvern](https://github.com/hretheum/halvern) — public, MIT, one squashed root commit, not a GitHub fork |
+| Site | [halvern.io](https://halvern.io) — GitHub Pages, certificate issued and HTTPS enforced |
+| CI | Green: guards, Rust tests and clippy, frontend types and build |
+| Branch rules | Ruleset requiring those three checks plus a review, admin bypass |
+| Bots | CodeRabbit and cubic.dev installed; `.coderabbit.yaml` in the tree |
+| Updater | Wired end to end, `TAURI_SIGNING_PRIVATE_KEY` set as a repository secret |
+| Version | 0.1.0 |
+
+**Still open**, in the order they matter: a real screenshot and then a demo
+recording for the README; verifying 0.1.0 on a Mac that has never run it; ten
+Dependabot pull requests; an off-machine backup of the updater key; the `www`
+CNAME; the cubic badge.
+
+The first release is cut — 0.1.0, signed, notarized and stapled, with
+`latest.json` on it. What it still cannot prove is the update *path*: that
+needs a 0.1.1 for an installed 0.1.0 to be offered. The list with reasoning
+lives at the top of [CLAUDE.md](../CLAUDE.md), which is the file that gets read
+first.
 
 ## The decision everything else follows from
 
@@ -171,12 +194,19 @@ and discovered by a runner rather than by the person installing. Both are now
 declared — `packageManager` for pnpm, `engines` for Node — so the next person
 gets a version error instead of a stack trace.
 
-## 5. The thing that matters more than any of this
+## 5. The thing that matters more than any of this — done, 23 August 2026
 
-**There is no update channel.** `tauri.conf.json` configures no updater
-endpoint, so somebody who downloads 0.4.0 has no way to receive 0.4.1.
-LAUNCH_READINESS.md 2.5 has said so for a while; publishing changes what it
-costs.
+**Closed.** `tauri.conf.json` now names an updater endpoint —
+`releases/latest/download/latest.json` — and the release workflow verifies that
+the file, the tarball and its signature are actually on the release before
+calling it done. The argument below is kept because it is why the work was
+pulled forward, and because the reasoning applies to the next thing that looks
+skippable.
+
+**There was no update channel.** `tauri.conf.json` configured no updater
+endpoint, so somebody who downloaded 0.4.0 had no way to receive 0.4.1.
+LAUNCH_READINESS.md 2.5 had said so for a while; publishing changed what it
+cost.
 
 A launch that goes well is precisely the scenario where this hurts. The version
 people download in the first 48 hours is the version they judge the project on,

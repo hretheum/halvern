@@ -2,6 +2,78 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Where things stand — 24 August 2026
+
+Read this first after a break; the rest of the file is reference.
+
+**The source is public.** [github.com/hretheum/halvern](https://github.com/hretheum/halvern),
+one squashed root commit, MIT, not a GitHub fork. The full development history
+stays in the private `hretheum/meetily` as the provenance record — see
+[docs/OSS_LAUNCH.md](docs/OSS_LAUNCH.md) for why a new repository rather than a
+rename.
+
+**Two remotes, two histories, deliberately.** Local `main` carries the whole
+history and pushes to `origin` (the private repo). The public repository has an
+unrelated one-commit history, so commits reach it by building a commit from the
+current tree onto its head:
+
+```bash
+TREE=$(git rev-parse 'HEAD^{tree}'); PUB=$(git rev-parse halvern/main)
+NEW=$(git commit-tree "$TREE" -p "$PUB" -m "message")
+git push https://github.com/hretheum/halvern.git "${NEW}:refs/heads/main"
+git fetch -q halvern && git branch -f public halvern/main
+```
+
+Braces around `${NEW}` are not optional: in zsh, `"$NEW:refs/..."` triggers the
+`:r` modifier and silently mangles the refspec.
+
+**Live:** [halvern.io](https://halvern.io) serves `www/` from GitHub Pages over
+HTTPS, certificate issued and enforced. `www.halvern.io` is **not** configured
+yet — a CNAME to `hretheum.github.io.` is still needed, and the `www` TXT
+record at OVH has to go first because a wildcard does not cover a name that
+owns any record.
+
+**Version 0.1.0.** Renumbered down from upstream's 0.4.0 while it was still
+free — see [docs/VERSIONING.md](docs/VERSIONING.md).
+
+**Green:** CI (guards, Rust tests and clippy, frontend types and build) and
+Pages. The branch ruleset requires all three checks plus a review, with admin
+bypass, so direct pushes to the public main still work.
+
+**Toolchain is pinned** by `rust-toolchain.toml` (1.98.0), `packageManager`
+(pnpm 11.21.0) and `engines` (Node ≥22.13). None of the three floats, and the
+clippy baseline of 27 is only meaningful because of that.
+
+### What is next, in order
+
+1. **A real screenshot, then a demo recording, for the README.** The first
+   screen has no picture of the product. The four PNGs in
+   `docs/assets/design-rollout/` are **design mockups, not app captures** —
+   `Trigger silence detection (demo)` appears in none of the source — so they
+   must not be used as if they were screenshots.
+2. **Verify 0.1.0 on a Mac that has never run Halvern.** The release is cut,
+   signed, notarized and stapled, and `latest.json` is served — but Gatekeeper
+   does not quarantine what was built locally, so a broken signature looks
+   perfect here. Download the `.dmg` over the network onto a second machine and
+   open it; `docs/SIGNING.md` §4 has the three commands. The update path itself
+   stays unproven until 0.1.1 exists to be offered.
+3. **Ten open Dependabot pull requests.** #1 (`tauri-action` 0→1) was checked
+   against the five options `build.yml` actually passes and is safe. #6–#10 are
+   npm, including TypeScript 5→7 and framer-motion 11→13, which are not
+   mechanical.
+4. **Back the updater key up off this machine.** One readable copy exists, in
+   `~/Documents/halvern-keys/`. A GitHub secret is write-only and is not a
+   backup. Losing it cuts every future installation off from updates forever —
+   `docs/SIGNING.md` §3a.
+5. **`www` CNAME**, and consider dropping the wildcard A/AAAA records at OVH:
+   they currently point every subdomain at GitHub Pages.
+6. **The cubic.dev badge**, once someone has confirmed in a logged-out browser
+   that the wiki is publicly readable. Fetched anonymously it returns a sign-in
+   page, which is why it is not in the README.
+7. **`serverAddress` and `localhost:5167`** are the last remains of the deleted
+   Python tier. `SidebarProvider` still sets the address and components still
+   read it, which is why the CSP entry stayed when the other two were removed.
+
 ## Project Overview
 
 **Halvern** is a privacy-first AI meeting assistant that captures, transcribes, and summarizes meetings entirely on local infrastructure. The supported application is the Tauri desktop app with a Rust core.
@@ -53,7 +125,28 @@ pnpm run tauri:dev:metal    # macOS Metal GPU
 pnpm run tauri:dev:cuda     # NVIDIA CUDA
 pnpm run tauri:dev:vulkan   # AMD/Intel Vulkan
 pnpm run tauri:dev:cpu      # CPU-only (no GPU)
+
+# A clean profile — onboarding from step one, your real library untouched
+HALVERN_APP_SUFFIX=shots pnpm run tauri:dev
+rm -rf ~/Library/Application\ Support/io.halvern.app.shots   # afterwards
 ```
+
+`HALVERN_APP_SUFFIX` changes the bundle identifier, so the build gets its own
+database, settings and models. macOS grants permissions per identifier, so a
+suffixed build asks for microphone and screen recording again — expected, not a
+fault.
+
+**The three versions that matter are pinned, and all three had to be fixed on
+the day the repository went public:**
+
+| What | Where | Why it is pinned |
+|---|---|---|
+| Rust 1.98.0 | `rust-toolchain.toml` | A clippy warning count is only comparable against one compiler. A floating `stable` reported 63 warnings against a local 27 and failed CI on unchanged code. |
+| pnpm 11.21.0 | `packageManager` in `frontend/package.json` | `pnpm-workspace.yaml` carries settings, not workspace members, and only pnpm ≥10 reads it that way. pnpm honours this field by downgrading itself to it, so a wrong value is invisible — `npx pnpm@10` also reported 8.15.9. |
+| Node ≥22.13 | `engines` in `frontend/package.json` | pnpm 11 requires it. It was undeclared, so CI discovered it as `ERR_UNKNOWN_BUILTIN_MODULE`. |
+
+Nothing else may hardcode a version; the interface asks the app at runtime.
+See [docs/VERSIONING.md](docs/VERSIONING.md).
 
 ### Window chrome, and why Liquid Glass does not apply
 
@@ -112,6 +205,22 @@ The page states in public that it carries no analytics script, no cookies and no
 fingerprinting. `check-network-hosts` therefore covers `www/` — it scanned only
 the app before, leaving the one directory where a tracker would actually be
 added invisible to it.
+
+**Published to [halvern.io](https://halvern.io)** by
+`.github/workflows/pages.yml`, which uploads `www/` as an artifact because
+branch publishing only offers the repository root or `/docs`. The workflow
+**refuses to deploy an `index.html` containing a `<script>` tag**: the page's
+promise is enforceable, so it is enforced.
+
+**The host was a constrained choice, and the copy is coupled to it.** Vercel,
+Cloudflare and Plausible all deliver analytics as a browser beacon, which would
+make the page's first sentence false. Cloudflare Pages was also dropped for its
+IP-reputation interstitial, which lands on VPN and Tor users — this product's
+audience. GitHub Pages gives no traffic figures at all, which is affordable
+only because the number actually wanted, downloads, comes free from the GitHub
+releases API. Moving to Netlify for server-side analytics means rewriting "What
+this page collects" in the same commit. Reasoning in
+[docs/OSS_LAUNCH.md](docs/OSS_LAUNCH.md) §8.
 
 ### Service Endpoints
 - **Frontend Dev**: http://localhost:3118

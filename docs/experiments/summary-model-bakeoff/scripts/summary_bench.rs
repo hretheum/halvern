@@ -1,7 +1,12 @@
 //! Bake-off harness: run every corpus transcript through the real summary path.
 //!
-//! Copy to `frontend/src-tauri/src/bin/summary_bench.rs` and run from
-//! `frontend/src-tauri`. It follows the shape of the existing `vad_bench.rs`.
+//! Copy to `frontend/src-tauri/examples/summary_bench.rs` and run from
+//! `frontend/src-tauri` with `cargo build --release --example summary_bench`.
+//! It follows the shape of `examples/vad_bench.rs`.
+//!
+//! Not `src/bin/`: cargo discovers everything there, and the Tauri bundler
+//! ships what cargo builds — which is how this harness travelled inside a
+//! signed 0.1.0 disk image, 29 MB of it, before anyone noticed.
 //!
 //! The point of calling `generate_meeting_summary` directly, rather than
 //! reimplementing the prompts, is that the prompts under test must be the
