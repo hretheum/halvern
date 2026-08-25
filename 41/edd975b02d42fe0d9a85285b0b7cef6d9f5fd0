@@ -1,0 +1,21 @@
+scripts/ci/check-english-only.sh
+  s_39af233242ee42::t_c5763bb1e951c8 34
+frontend/scripts/build-sidecar.js
+  s_39af233242ee42::t_b61b8072c17d70 66,73,82,87,100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "41edd975b02d42fe0d9a85285b0b7cef6d9f5fd0",
+  "prompts": {},
+  "sessions": {
+    "s_39af233242ee42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b941f94-ebf5-4ea4-8ef8-1b7b4f9b278e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
