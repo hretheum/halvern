@@ -1,0 +1,19 @@
+frontend/src-tauri/src/updater.rs
+  s_39af233242ee42::t_2cad510a3b01e5 87-93,122-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "5f616017e9377be10251ddc75c4374315bba0596",
+  "prompts": {},
+  "sessions": {
+    "s_39af233242ee42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b941f94-ebf5-4ea4-8ef8-1b7b4f9b278e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
