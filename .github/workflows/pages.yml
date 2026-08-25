@@ -78,14 +78,26 @@ jobs:
           SIZE_MB=$(( (SIZE_BYTES + 524288) / 1048576 ))
           echo "Stamping version $VERSION, ${SIZE_MB} MB"
 
-          before=$(cat www/index.html)
+          # Check the markers exist before substituting, not whether the file
+          # changed afterwards. The common case is that the page already says
+          # the right thing — a release deploys, then a later push redeploys —
+          # and "nothing changed" is success there, not failure. Comparing
+          # before and after failed exactly that case the first time it ran.
+          for marker in dl-size dl-version; do
+            if ! grep -q "<span id=\"$marker\">" www/index.html; then
+              echo "::error::www/index.html has no <span id=\"$marker\"> to stamp into."
+              exit 1
+            fi
+          done
+
           sed -i "s|<span id=\"dl-size\">[^<]*</span>|<span id=\"dl-size\">${SIZE_MB}\&nbsp;MB</span>|" www/index.html
           sed -i "s|<span id=\"dl-version\">[^<]*</span>|<span id=\"dl-version\">${VERSION}</span>|" www/index.html
 
-          # A silent no-op here would publish a page quietly describing an old
-          # release, which is the failure this step exists to prevent.
-          if [ "$before" = "$(cat www/index.html)" ]; then
-            echo "::error::Neither marker was replaced. Has www/index.html lost its dl-size / dl-version spans?"
+          # Assert the result rather than the change: this is what the visitor
+          # will read.
+          if ! grep -q "<span id=\"dl-version\">${VERSION}</span>" www/index.html \
+             || ! grep -q "<span id=\"dl-size\">${SIZE_MB}&nbsp;MB</span>" www/index.html; then
+            echo "::error::Stamping did not take. Expected version ${VERSION} and ${SIZE_MB} MB."
             exit 1
           fi
 
