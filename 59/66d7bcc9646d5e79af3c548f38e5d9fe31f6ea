@@ -1,0 +1,21 @@
+frontend/src/hooks/usePermissionCheck.ts
+  s_8ee3f6e66d3772::t_5b50356660617e 1,19,60,79-111
+frontend/src/components/TranscriptRecovery/RecoveryPrompt.tsx
+  s_8ee3f6e66d3772::t_5f3e7342db7dff 77-90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "5966d7bcc9646d5e79af3c548f38e5d9fe31f6ea",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
