@@ -1,0 +1,40 @@
+frontend/src-tauri/src/audio/recording_manager.rs
+  s_8ee3f6e66d3772::t_3087f2e2956476 32-39,60-61,147-150,152-154,156,586
+  s_8ee3f6e66d3772::t_aa4d4f4cdc9e15 17,550-585,587
+  s_8ee3f6e66d3772::t_a411f7ca15d54f 588
+frontend/src/components/VirtualizedTranscriptView.tsx
+  s_8ee3f6e66d3772::t_2c6b830e5dbc59 349
+frontend/src-tauri/src/audio/recording_commands.rs
+  s_8ee3f6e66d3772::t_6ece69018aa23c 420-421,1243-1322
+  s_8ee3f6e66d3772::t_7eeef16b0403b0 43-54,624-628
+  s_8ee3f6e66d3772::t_3087f2e2956476 1196-1198,1217-1219
+  s_8ee3f6e66d3772::t_dcce1e442e6f9e 374,392-394,530,563,588
+  s_8ee3f6e66d3772::t_ddafef8b607f14 1323-1324
+frontend/src/hooks/useMicrophoneSwitchNotice.ts
+  s_8ee3f6e66d3772::t_7ccff7acf72c72 1-71
+frontend/src/app/layout.tsx
+  s_8ee3f6e66d3772::t_2c6b830e5dbc59 19,84-87
+  s_8ee3f6e66d3772::t_3b2e239400c8b5 88
+frontend/src-tauri/src/audio/device_monitor.rs
+  s_8ee3f6e66d3772::t_312bea01ef8620 9-17,34-40
+  s_8ee3f6e66d3772::t_b6d462af32e87b 383-453
+  s_8ee3f6e66d3772::t_7d35d545addb59 123,158-159,184,187-189,221-227,243,246-247
+  s_8ee3f6e66d3772::t_a3ca220858c5a1 228-242,244-245,304-347
+  s_8ee3f6e66d3772::t_45f9feb584dccc 248,348
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "fc32ea1073357d6a165b6be2df27c8dd22078e86",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
