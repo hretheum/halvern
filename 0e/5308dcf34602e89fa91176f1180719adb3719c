@@ -1,0 +1,21 @@
+frontend/src/hooks/useFitWindowToContent.ts
+  s_8ee3f6e66d3772::t_860221983bb198 1-135
+frontend/src/components/onboarding/OnboardingContainer.tsx
+  s_8ee3f6e66d3772::t_71fbdc5e55d506 1,6,25-30,104-108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "0e5308dcf34602e89fa91176f1180719adb3719c",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
