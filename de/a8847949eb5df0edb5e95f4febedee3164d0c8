@@ -1,0 +1,30 @@
+frontend/src/hooks/useRecordingStart.ts
+  s_8ee3f6e66d3772::t_cb3bf4cd6465fc 38
+  s_8ee3f6e66d3772::t_0294da7b30783b 83-97
+  s_8ee3f6e66d3772::t_1fb9eed3310d13 155
+frontend/src/app/record/page.tsx
+  s_8ee3f6e66d3772::t_8cf388f6c38589 111
+frontend/src/components/RecordingControls.tsx
+  s_8ee3f6e66d3772::t_8cf388f6c38589 43-47,344-362
+frontend/src/components/Sidebar/SidebarProvider.tsx
+  s_8ee3f6e66d3772::t_90b5ba5e9bb5df 8
+  s_8ee3f6e66d3772::t_1fb9eed3310d13 61,89-100
+frontend/src/contexts/RecordingStateContext.tsx
+  s_8ee3f6e66d3772::t_4c90fdba6c377b 47-57,265-268
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "dea8847949eb5df0edb5e95f4febedee3164d0c8",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
