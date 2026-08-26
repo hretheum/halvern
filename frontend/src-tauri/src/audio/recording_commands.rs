@@ -40,6 +40,18 @@ static IS_RECORDING: AtomicBool = AtomicBool::new(false);
 
 // Global recording manager and transcription task to keep them alive during recording
 static RECORDING_MANAGER: Mutex<Option<RecordingManager>> = Mutex::new(None);
+
+/// Held by anything that takes the recording manager out of the global slot to
+/// do async work with it.
+///
+/// Both the stop path and a microphone switch have to own the manager while
+/// they await — the streams cannot be replaced through a shared reference, and
+/// holding a `std::sync::Mutex` guard across an await is the deadlock this
+/// codebase already has one example of. So they take it out instead, and this
+/// lock is what stops the two of them doing that at the same time: without it a
+/// stop arriving mid-switch would find an empty slot and skip the flush,
+/// losing the end of the meeting.
+static CAPTURE_SWAP_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
 static TRANSCRIPTION_TASK: Mutex<Option<JoinHandle<()>>> = Mutex::new(None);
 
 // Listener ID for proper cleanup - prevents microphone from staying active after recording stops
@@ -359,6 +371,7 @@ async fn begin_recording<R: Runtime>(
     fallback_name: Option<String>,
     origin: super::recording_saver::RecordingOrigin,
     prefs: RecordingRuntimePrefs,
+    follows_default_microphone: bool,
     engine_lifecycle_guard: tokio::sync::OwnedMutexGuard<()>,
 ) -> Result<(), String> {
     let mut manager = RecordingManager::new();
@@ -376,6 +389,9 @@ async fn begin_recording<R: Runtime>(
     manager.set_recordings_root(prefs.recordings_root);
     manager.set_calendar_match(calendar_match);
     manager.set_origin(origin);
+    // A recording told which microphone to use stays on it. Only one that took
+    // the system default follows the system default.
+    manager.set_follows_default_microphone(follows_default_microphone);
 
     let app_for_error = app.clone();
     manager.set_error_callback(move |error| {
@@ -400,6 +416,8 @@ async fn begin_recording<R: Runtime>(
         let mut global_manager = RECORDING_MANAGER.lock().unwrap();
         *global_manager = Some(manager);
     }
+
+    spawn_device_event_task(app.clone());
 
     info!("🔍 Setting IS_RECORDING to true and resetting SPEECH_DETECTED_EMITTED");
     IS_RECORDING.store(true, Ordering::SeqCst);
@@ -509,6 +527,7 @@ pub async fn start_recording_with_meeting_name<R: Runtime>(
         fallback_name,
         origin,
         prefs,
+        preferred_mic_name.is_none(),
         engine_lifecycle_guard,
     )
     .await
@@ -541,6 +560,7 @@ pub async fn start_recording_with_devices_and_meeting<R: Runtime>(
     // is what the UI sends for its Default entries. Treating None as "no stream"
     // is what once produced silent recordings for anyone without a saved
     // preference.
+    let follows_default_microphone = mic_device_name.is_none();
     let microphone_device = match mic_device_name {
         Some(name) => Some(Arc::new(parse_audio_device(&name).map_err(|e| {
             format!("Invalid microphone device '{}': {}", name, e)
@@ -565,6 +585,7 @@ pub async fn start_recording_with_devices_and_meeting<R: Runtime>(
         // Reached only from the UI's own record button.
         super::recording_saver::RecordingOrigin::default(),
         prefs,
+        follows_default_microphone,
         engine_lifecycle_guard,
     )
     .await
@@ -600,6 +621,11 @@ pub async fn stop_recording<R: Runtime>(
     );
 
     // Step 1: Stop audio capture immediately (no more new chunks) with proper error handling
+    //
+    // The swap lock is taken first: a microphone switch may be holding the
+    // manager right now, and taking the slot from under it would leave this
+    // shutdown with nothing to flush.
+    let _swap_guard = CAPTURE_SWAP_LOCK.lock().await;
     let manager_for_cleanup = {
         let mut global_manager = RECORDING_MANAGER.lock().unwrap();
         global_manager.take()
@@ -1167,6 +1193,9 @@ pub enum DeviceEventResponse {
         device_type: String,
     },
     DeviceListChanged,
+    DefaultInputChanged {
+        device_name: String,
+    },
 }
 
 impl From<DeviceEvent> for DeviceEventResponse {
@@ -1185,6 +1214,9 @@ impl From<DeviceEvent> for DeviceEventResponse {
                 }
             }
             DeviceEvent::DeviceListChanged => DeviceEventResponse::DeviceListChanged,
+            DeviceEvent::DefaultInputChanged { device_name } => {
+                DeviceEventResponse::DefaultInputChanged { device_name }
+            }
         }
     }
 }
@@ -1206,6 +1238,88 @@ pub async fn poll_audio_device_events() -> Result<Option<DeviceEventResponse>, S
         // Not recording, no events
         Ok(None)
     }
+}
+
+/// Act on what the device monitor sees, for as long as the recording runs.
+///
+/// In Rust rather than in the interface, because the interface may be on
+/// another screen, busy, or — as happened on 26 August — waiting minutes for a
+/// device enumeration to return. A recording that has stopped hearing anything
+/// is exactly the moment not to depend on the webview being responsive.
+fn spawn_device_event_task<R: Runtime>(app: AppHandle<R>) {
+    tokio::spawn(async move {
+        loop {
+            tokio::time::sleep(tokio::time::Duration::from_secs(2)).await;
+
+            if !IS_RECORDING.load(Ordering::SeqCst) {
+                break;
+            }
+
+            // Short, synchronous, and never held across an await.
+            let event = {
+                let mut guard = match RECORDING_MANAGER.lock() {
+                    Ok(guard) => guard,
+                    Err(poisoned) => poisoned.into_inner(),
+                };
+                guard.as_mut().and_then(|manager| manager.poll_device_events())
+            };
+
+            let Some(DeviceEvent::DefaultInputChanged { device_name }) = event else {
+                continue;
+            };
+
+            let previous = super::input_activity::snapshot().microphone_device;
+            info!(
+                "🎤 Following the system default onto '{}' (was {:?})",
+                device_name, previous
+            );
+
+            // Own the manager for the switch, with the swap lock held so a stop
+            // cannot take the slot in the meantime.
+            let swap_guard = CAPTURE_SWAP_LOCK.lock().await;
+            let mut manager = {
+                let mut guard = match RECORDING_MANAGER.lock() {
+                    Ok(guard) => guard,
+                    Err(poisoned) => poisoned.into_inner(),
+                };
+                guard.take()
+            };
+
+            let outcome = match manager.as_mut() {
+                Some(manager) => manager.switch_microphone_to_default(device_name.clone()).await,
+                None => Err(anyhow::anyhow!("recording ended before the switch")),
+            };
+
+            {
+                let mut guard = match RECORDING_MANAGER.lock() {
+                    Ok(guard) => guard,
+                    Err(poisoned) => poisoned.into_inner(),
+                };
+                *guard = manager;
+            }
+            drop(swap_guard);
+
+            match outcome {
+                Ok(()) => {
+                    super::input_activity::set_devices(
+                        Some(device_name.clone()),
+                        super::input_activity::snapshot().system_device,
+                    );
+                    let _ = app.emit(
+                        "microphone-switched",
+                        serde_json::json!({ "from": previous, "to": device_name }),
+                    );
+                }
+                Err(e) => {
+                    warn!("⚠️ Could not switch onto '{}': {}", device_name, e);
+                    let _ = app.emit(
+                        "microphone-switch-failed",
+                        serde_json::json!({ "device": device_name, "reason": e.to_string() }),
+                    );
+                }
+            }
+        }
+    });
 }
 
 /// What each source has actually delivered since this recording started.

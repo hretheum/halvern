@@ -116,7 +116,15 @@ cooldown exists for.
    they currently point every subdomain at GitHub Pages.
 5. **The cubic.dev badge**, once someone has confirmed in a logged-out browser
    that the wiki is publicly readable.
-6. **Decide the dependency cooldown.** Either set `minimumReleaseAge` in
+6. **Why a Bluetooth microphone stream opens and stays empty.** Two shapes,
+   both seen on 26 August and both still unexplained: a stream that produced
+   its first sample three minutes and twenty-three seconds after opening, and
+   streams that produced samples immediately whose every value was zero. What
+   changed is that neither is invisible now — `audio_input_activity` counts
+   both and the recording screen says which one is happening, naming the
+   device. Gotcha 12 has the evidence and the dead ends already ruled out;
+   start from the counters and `raw_tap`, not from device enumeration.
+7. **Decide the dependency cooldown.** Either set `minimumReleaseAge` in
    `pnpm-workspace.yaml` so the `minimumReleaseAgeExclude` list beneath it
    means something, or delete the list. Whichever it is, `pnpm install
    --frozen-lockfile` in CI has to be tried under the new setting before it
@@ -804,6 +812,53 @@ $env:RUST_LOG="debug"; ./clean_run_windows.bat
     changes where every transcript gets cut. `redemption_time_is_400ms_on_every_platform`
     asserts the shipping value so the next person to notice has to change it on
     purpose, with a real recording to justify the number.
+
+12. **A microphone stream can open and then deliver nothing, or deliver
+    silence, and neither used to be visible.** Both happened on 26 August with
+    AirPods, on the released 0.1.1, and both are in the log:
+
+    - A recording started at 11:46:24 and its first sample reached the pipeline
+      at **11:49:47** — three minutes and twenty-three seconds of an open
+      stream producing nothing, with not one line logged in between. The screen
+      said "Listening for speech…" throughout, which was true and useless.
+    - Two later recordings received samples immediately, at full rate, every
+      value zero. In the log they appear only as `RMS preservation: 0.0%` on
+      the resampler's first chunk.
+
+    **Why this is not a device-enumeration problem, so nobody re-investigates
+    that.** `list_audio_devices` and `default_input_device` build a fresh
+    `cpal::default_host()` on every call and cache nothing, and a long-running
+    process does follow the system default changing:
+    `cargo run --example device_watch` caught a headset connecting and
+    disconnecting over ten minutes, both times reporting the new defaults. The
+    application's own log shows the same process (pid 4140, started 11:16)
+    choosing `Mikrofon (MacBook Air)` at 11:43 and `To moje` at 11:46. What was
+    stale was the *interface*: the device check ran once per mount and the
+    device monitor only runs during a recording, so an idle application
+    described the machine as it had been at launch. That is fixed; the two
+    failures above are not.
+
+    `audio/input_activity.rs` is the measurement that was missing. It counts,
+    from the audio callback, how many samples each source delivered and how
+    many crossed a floor just above zero — so "nothing arrived" and "zeroes
+    arrived" are different numbers rather than the same blank screen. Atomics,
+    no timestamps, no lock: the interface polls `audio_input_activity` and
+    decides what a gap means. Ten seconds of nothing, or fifteen of silence,
+    now produce a message naming the device.
+
+    The remaining question is why Core Audio behaves this way with a Bluetooth
+    headset in hands-free mode. The counters are what a next attempt should
+    start from, along with the raw tap.
+
+13. **`flex-1` without `min-h-0` is a scroll container that cannot scroll.** In
+    a flex column `flex-1` leaves `min-height: auto`, so the box grows to its
+    content instead of shrinking to the space available; `overflow-y-auto` then
+    has nothing to scroll and the parent's `overflow-hidden` clips the rest
+    with no way to reach it. `OnboardingContainer` had exactly this and the
+    summary-model step lost its last models and its button, on 26 August, with
+    no scrollbar to suggest anything was missing. `LibraryScreen`, the record
+    and meeting-details screens and the app layout all carry `min-h-0`; check
+    for it before concluding that a screen "just needs a bigger window".
 
 ## Repository-Specific Conventions
 

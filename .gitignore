@@ -87,3 +87,8 @@ frontend/src-tauri/binaries/
 # the next session, not part of the codebase — and easy to sweep in by accident
 # with `git add -A`, which is how two of them already reached a commit.
 RAPORT-*.md
+
+# Screenshots taken while testing the app. They are working material for one
+# session — the ones the README and the site actually use are committed under
+# docs/assets/ and www/, deliberately and by name.
+screenshots/

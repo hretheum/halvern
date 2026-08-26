@@ -6,7 +6,15 @@ use tokio::task::JoinHandle;
 use anyhow::Result;
 use log::{debug, info, warn, error};
 
-use super::devices::{AudioDevice, list_audio_devices};
+use super::devices::{AudioDevice, default_input_device, list_audio_devices};
+
+/// The microphone a recording is currently using, shared with whoever can
+/// change it.
+///
+/// The monitor needs this to answer "is the system's default still the device
+/// we are recording?", and the answer has to move when a switch succeeds —
+/// otherwise the monitor reports the same change forever.
+pub type ActiveMicrophone = Arc<std::sync::RwLock<Option<String>>>;
 
 /// Device monitoring events
 #[derive(Debug, Clone)]
@@ -23,6 +31,13 @@ pub enum DeviceEvent {
     },
     /// Device list has changed (new device added or removed)
     DeviceListChanged,
+    /// The system's default input is no longer the microphone being recorded.
+    ///
+    /// Distinct from a disconnect: the device in use is still there and still
+    /// working, and something else has become the machine's default — a
+    /// headset connecting, most often, which macOS makes the default input the
+    /// moment it appears.
+    DefaultInputChanged { device_name: String },
 }
 
 /// Type of device being monitored
@@ -105,6 +120,7 @@ impl AudioDeviceMonitor {
         &mut self,
         microphone: Option<Arc<AudioDevice>>,
         system_audio: Option<Arc<AudioDevice>>,
+        active_microphone: Option<ActiveMicrophone>,
     ) -> Result<()> {
         if self.monitor_handle.is_some() {
             warn!("Device monitor already running");
@@ -139,7 +155,8 @@ impl AudioDeviceMonitor {
         let stop_signal = self.stop_signal.clone();
 
         let handle = tokio::spawn(async move {
-            Self::monitor_loop(monitored_devices, event_sender, stop_signal).await;
+            Self::monitor_loop(monitored_devices, event_sender, stop_signal, active_microphone)
+                .await;
         });
 
         self.monitor_handle = Some(handle);
@@ -164,8 +181,12 @@ impl AudioDeviceMonitor {
         mut monitored_devices: Vec<MonitoredDevice>,
         event_sender: mpsc::UnboundedSender<DeviceEvent>,
         stop_signal: Arc<tokio::sync::Notify>,
+        active_microphone: Option<ActiveMicrophone>,
     ) {
         let mut last_device_list = Vec::new();
+        // The default already reported, so one headset connecting produces one
+        // event rather than one every polling cycle.
+        let mut reported_default: Option<String> = None;
         let check_interval = Duration::from_secs(2); // Poll every 2 seconds
 
         loop {
@@ -196,6 +217,34 @@ impl AudioDeviceMonitor {
                 let _ = event_sender.send(DeviceEvent::DeviceListChanged);
             }
             last_device_list = current_devices.clone();
+
+            // Has something else become the machine's default input? This is
+            // not a disconnect — the device in use is still present and still
+            // delivering — so it is checked separately from the loop below.
+            if let Some(active) = active_microphone.as_ref() {
+                let in_use = active.read().ok().and_then(|name| name.clone());
+                let system_default = default_input_device().ok().map(|device| device.name);
+
+                match default_change_to_report(
+                    system_default.as_deref(),
+                    in_use.as_deref(),
+                    &current_devices,
+                    reported_default.as_deref(),
+                ) {
+                    DefaultChange::Report(device_name) => {
+                        info!(
+                            "🎤 System default input is now '{}', recording is on {:?}",
+                            device_name, in_use
+                        );
+                        let _ = event_sender.send(DeviceEvent::DefaultInputChanged {
+                            device_name: device_name.clone(),
+                        });
+                        reported_default = Some(device_name);
+                    }
+                    DefaultChange::Nothing => {}
+                    DefaultChange::Forget => reported_default = None,
+                }
+            }
 
             // Check each monitored device
             for monitored in &mut monitored_devices {
@@ -252,6 +301,51 @@ impl AudioDeviceMonitor {
     }
 }
 
+/// What to do about the system default, having looked at it.
+#[derive(Debug, PartialEq)]
+enum DefaultChange {
+    /// Say so, and remember having said it.
+    Report(String),
+    /// Nothing to say, and nothing to forget.
+    Nothing,
+    /// The default agrees with what is in use again, so a later move counts as
+    /// new. Without this, unplugging a headset and plugging it back in during
+    /// one recording would be reported once and then never again.
+    Forget,
+}
+
+/// Whether a default that differs from the microphone in use is worth an event.
+///
+/// Pure, because every condition here is a judgement that has to be right and
+/// none of them need a machine to decide: the device has to actually be in the
+/// list, since a name in the default slot that nothing can open is not
+/// something to switch to; and the same move must not be reported on every
+/// polling cycle.
+fn default_change_to_report(
+    system_default: Option<&str>,
+    in_use: Option<&str>,
+    available: &[AudioDevice],
+    already_reported: Option<&str>,
+) -> DefaultChange {
+    let (Some(default_name), Some(in_use_name)) = (system_default, in_use) else {
+        return DefaultChange::Nothing;
+    };
+
+    if default_name == in_use_name {
+        return DefaultChange::Forget;
+    }
+
+    if already_reported == Some(default_name) {
+        return DefaultChange::Nothing;
+    }
+
+    if !available.iter().any(|device| device.name == default_name) {
+        return DefaultChange::Nothing;
+    }
+
+    DefaultChange::Report(default_name.to_string())
+}
+
 impl Default for AudioDeviceMonitor {
     fn default() -> Self {
         Self::new().0
@@ -284,6 +378,77 @@ mod tests {
         );
         assert!(!builtin.is_bluetooth);
         assert_eq!(builtin.disconnect_threshold(), 2);
+    }
+
+    fn device(name: &str) -> AudioDevice {
+        AudioDevice::new(name.to_string(), super::super::devices::DeviceType::Input)
+    }
+
+    #[test]
+    fn a_new_default_that_can_be_opened_is_reported_once() {
+        let available = vec![device("Mikrofon (MacBook Air)"), device("To moje")];
+
+        assert_eq!(
+            default_change_to_report(
+                Some("To moje"),
+                Some("Mikrofon (MacBook Air)"),
+                &available,
+                None
+            ),
+            DefaultChange::Report("To moje".to_string())
+        );
+
+        // Same answer on the next polling cycle: already said.
+        assert_eq!(
+            default_change_to_report(
+                Some("To moje"),
+                Some("Mikrofon (MacBook Air)"),
+                &available,
+                Some("To moje")
+            ),
+            DefaultChange::Nothing
+        );
+    }
+
+    #[test]
+    fn a_default_that_is_not_in_the_device_list_is_not_worth_switching_to() {
+        let available = vec![device("Mikrofon (MacBook Air)")];
+
+        assert_eq!(
+            default_change_to_report(
+                Some("To moje"),
+                Some("Mikrofon (MacBook Air)"),
+                &available,
+                None
+            ),
+            DefaultChange::Nothing,
+            "a name in the default slot that nothing can open is not a device"
+        );
+    }
+
+    #[test]
+    fn agreement_clears_the_memory_so_the_next_move_counts_as_new() {
+        let available = vec![device("To moje")];
+
+        assert_eq!(
+            default_change_to_report(Some("To moje"), Some("To moje"), &available, Some("To moje")),
+            DefaultChange::Forget,
+            "unplugging a headset and plugging it back in must be reported both times"
+        );
+    }
+
+    #[test]
+    fn nothing_is_reported_when_either_side_is_unknown() {
+        let available = vec![device("To moje")];
+
+        assert_eq!(
+            default_change_to_report(None, Some("Mikrofon (MacBook Air)"), &available, None),
+            DefaultChange::Nothing
+        );
+        assert_eq!(
+            default_change_to_report(Some("To moje"), None, &available, None),
+            DefaultChange::Nothing
+        );
     }
 
     #[tokio::test]

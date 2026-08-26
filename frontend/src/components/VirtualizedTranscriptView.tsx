@@ -346,7 +346,7 @@ export const VirtualizedTranscriptView: React.FC<VirtualizedTranscriptViewProps>
                                     : inputHealth.state === 'waiting'
                                         ? `The stream opened ${inputHealth.seconds}s ago and has not delivered a single sample. The recording is running and will keep whatever arrives.`
                                         : inputHealth.state === 'silent'
-                                            ? `Sound is arriving and every sample is silent, for ${inputHealth.seconds}s. Check that the microphone is not muted, and that it is the one you meant — a closed laptop muffles its own.`
+                                            ? `Sound is arriving and every sample is silent, for ${inputHealth.seconds}s. Check that the microphone is not muted and that it is the one you meant.`
                                             : 'Speak to see live transcription'}
                             </p>
                         </>

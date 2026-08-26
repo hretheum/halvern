@@ -16,6 +16,7 @@ import { listen, UnlistenFn } from '@tauri-apps/api/event'
 import { invoke } from '@tauri-apps/api/core'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { rememberSettingsOrigin } from '@/lib/settingsOrigin'
+import { useMicrophoneSwitchNotice } from '@/hooks/useMicrophoneSwitchNotice'
 import { RecordingStateProvider } from '@/contexts/RecordingStateContext'
 import { OllamaDownloadProvider } from '@/contexts/OllamaDownloadContext'
 import { TranscriptProvider } from '@/contexts/TranscriptContext'
@@ -79,6 +80,11 @@ export default function RootLayout({
   useEffect(() => {
     settingsOriginRef.current = pathname
   }, [pathname])
+
+  // Mounted here rather than on the recording screen: the switch happens in
+  // Rust whatever the interface is showing, so the notice has to reach whoever
+  // is looking at the library or at settings when it happens.
+  useMicrophoneSwitchNotice()
 
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [onboardingCompleted, setOnboardingCompleted] = useState(false)

@@ -14,7 +14,7 @@ use super::recording_state::{RecordingState, AudioChunk, DeviceType as Recording
 use super::pipeline::AudioPipelineManager;
 use super::stream::AudioStreamManager;
 use super::recording_saver::RecordingSaver;
-use super::device_monitor::{AudioDeviceMonitor, DeviceEvent, DeviceMonitorType};
+use super::device_monitor::{ActiveMicrophone, AudioDeviceMonitor, DeviceEvent, DeviceMonitorType};
 
 /// Stream manager type enumeration
 pub enum StreamManagerType {
@@ -29,6 +29,14 @@ pub struct RecordingManager {
     recording_saver: RecordingSaver,
     device_monitor: Option<AudioDeviceMonitor>,
     device_event_receiver: Option<mpsc::UnboundedReceiver<DeviceEvent>>,
+    /// The microphone this recording is on, shared with the device monitor so
+    /// it can tell "the system default moved" from "our device vanished", and
+    /// updated when a switch succeeds so the same move is not reported twice.
+    active_microphone: ActiveMicrophone,
+    /// Whether the microphone was the system default rather than a stated
+    /// preference. A recording that was told which device to use does not get
+    /// moved off it by something appearing on the machine.
+    follows_default_microphone: bool,
 }
 
 // SAFETY: RecordingManager contains types that we've marked as Send
@@ -49,6 +57,8 @@ impl RecordingManager {
             recording_saver: RecordingSaver::new(),
             device_monitor: Some(device_monitor),
             device_event_receiver: Some(device_event_receiver),
+            active_microphone: Arc::new(std::sync::RwLock::new(None)),
+            follows_default_microphone: false,
         }
     }
 
@@ -134,9 +144,16 @@ impl RecordingManager {
         // Pipeline handles mixing and distribution to both recording and transcription
         self.stream_manager.start_streams(microphone_device.clone(), system_device.clone()).await?;
 
+        if let Ok(mut active) = self.active_microphone.write() {
+            *active = microphone_device.as_ref().map(|device| device.name.clone());
+        }
+
         // Start device monitoring to detect disconnects
+        let watch_default = self
+            .follows_default_microphone
+            .then(|| self.active_microphone.clone());
         if let Some(ref mut monitor) = self.device_monitor {
-            if let Err(e) = monitor.start_monitoring(microphone_device, system_device) {
+            if let Err(e) = monitor.start_monitoring(microphone_device, system_device, watch_default) {
                 warn!("Failed to start device monitoring: {}", e);
                 // Non-fatal - continue without monitoring
             } else {
@@ -527,6 +544,45 @@ impl RecordingManager {
                 error!("Device reconnect failed: {}", e);
                 Err(e)
             }
+        }
+    }
+
+    /// Whether this recording's microphone came from the system default, and
+    /// may therefore move when the default moves.
+    pub fn set_follows_default_microphone(&mut self, follows: bool) {
+        self.follows_default_microphone = follows;
+    }
+
+    /// Move the recording onto a device that has become the system default.
+    ///
+    /// Mechanically identical to reconnecting a device that came back: both
+    /// stop the streams and start them again with a different microphone, and
+    /// the stream manager cannot replace one stream on its own. What differs is
+    /// the reason, and that the device being left is still working — so this is
+    /// only ever called when the recording was following the default in the
+    /// first place.
+    ///
+    /// The shared name is updated on success, which is what stops the monitor
+    /// reporting the same move on its next cycle.
+    pub async fn switch_microphone_to_default(&mut self, device_name: String) -> Result<()> {
+        info!("🎤 Switching the recording microphone to '{}'", device_name);
+
+        match self
+            .attempt_device_reconnect(&device_name, DeviceMonitorType::Microphone)
+            .await
+        {
+            Ok(true) => {
+                if let Ok(mut active) = self.active_microphone.write() {
+                    *active = Some(device_name.clone());
+                }
+                info!("✅ Recording microphone switched to '{}'", device_name);
+                Ok(())
+            }
+            Ok(false) => Err(anyhow::anyhow!(
+                "Device '{}' became the default and then was not available",
+                device_name
+            )),
+            Err(e) => Err(e),
         }
     }
 
