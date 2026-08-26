@@ -1,0 +1,29 @@
+frontend/src/components/AppShell/TopBar.tsx
+  s_8ee3f6e66d3772::t_d3d9087a0d46e3 31-32,34,38,79-82
+  s_8ee3f6e66d3772::t_ef0d99ac56bded 9
+frontend/src/lib/settingsOrigin.ts
+  s_8ee3f6e66d3772::t_0d71966d314b0e 1-53
+frontend/src/app/settings/page.tsx
+  s_8ee3f6e66d3772::t_42d2577ee4cd65 6
+  s_8ee3f6e66d3772::t_ef0d99ac56bded 82,113
+frontend/src/app/layout.tsx
+  s_8ee3f6e66d3772::t_ef0d99ac56bded 13-14,155
+  s_8ee3f6e66d3772::t_a8117ac235fd21 72-82
+  s_8ee3f6e66d3772::t_42d2577ee4cd65 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "25fa5c7476e4296d6c62aaa0c22e972a7bd20e5b",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
