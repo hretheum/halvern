@@ -1,0 +1,37 @@
+frontend/src-tauri/src/lib.rs
+  s_8ee3f6e66d3772::t_d4d9fe94a1fff5 674
+frontend/src-tauri/src/audio/input_activity.rs
+  s_8ee3f6e66d3772::t_d3a87bd0d8923a 1-102,110-113,116-126,132-135,143-146,152-154,157-241,255-272
+  s_8ee3f6e66d3772::t_e01ab829c58718 103-109,114-115,127-131,136-142,147-151,155-156,242-254
+frontend/src/hooks/useAudioInputHealth.ts
+  s_8ee3f6e66d3772::t_bf3be753a6916f 1-137
+frontend/src/components/VirtualizedTranscriptView.tsx
+  s_8ee3f6e66d3772::t_7a91d5e2849587 14-19
+  s_8ee3f6e66d3772::t_35a369b48bfd89 207-210
+  s_8ee3f6e66d3772::t_f50057e48014f5 326-332,334-341,343-350
+frontend/src-tauri/src/audio/mod.rs
+  s_8ee3f6e66d3772::t_d66ca36d0dbbca 37
+frontend/src-tauri/src/audio/pipeline.rs
+  s_8ee3f6e66d3772::t_72e5fbbe069649 456-465
+frontend/src-tauri/src/audio/recording_commands.rs
+  s_8ee3f6e66d3772::t_49787ae47e9b87 385-388
+  s_8ee3f6e66d3772::t_f428843e07eb3c 406-407,409-412
+  s_8ee3f6e66d3772::t_cd9ec053f404ca 408,1211-1224
+  s_8ee3f6e66d3772::t_57558dbf7c1cd1 1225-1226
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "37ed6a4e9873b54fe2edbd385a317a29c43c1023",
+  "prompts": {},
+  "sessions": {
+    "s_8ee3f6e66d3772": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1311de76-642c-48be-bba2-b3f4643bfed1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
