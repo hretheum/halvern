@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 
 export interface PermissionStatus {
@@ -16,7 +16,7 @@ export function usePermissionCheck() {
     error: null,
   });
 
-  const checkPermissions = async () => {
+  const checkPermissions = useCallback(async () => {
     setStatus(prev => ({ ...prev, isChecking: true, error: null }));
 
     try {
@@ -57,7 +57,7 @@ export function usePermissionCheck() {
       });
       return { hasMicrophone: false, hasSystemAudio: false };
     }
-  };
+  }, []);
 
   const requestPermissions = async () => {
     try {
@@ -76,7 +76,39 @@ export function usePermissionCheck() {
   // Check permissions on mount
   useEffect(() => {
     checkPermissions();
-  }, []);
+  }, [checkPermissions]);
+
+  // And again whenever the window comes back, because devices appear and
+  // disappear while the application is running and nothing else notices.
+  //
+  // The device monitor only runs during a recording, and this check only ran
+  // on mount, so connecting a headset while the app sat idle left the screen
+  // describing the machine as it had been at launch. Rust resolves the current
+  // default at the moment a recording starts and always did — the staleness
+  // was here, in what the interface believed.
+  //
+  // Focus and visibility rather than an interval: enumerating audio devices is
+  // not free (on 26 August one such call took minutes), and the moment that
+  // matters is the one where somebody plugs something in and looks back at the
+  // window.
+  const isCheckingRef = useRef(false);
+  isCheckingRef.current = status.isChecking;
+
+  useEffect(() => {
+    const recheck = () => {
+      if (isCheckingRef.current) return;
+      if (document.visibilityState === 'hidden') return;
+      checkPermissions();
+    };
+
+    window.addEventListener('focus', recheck);
+    document.addEventListener('visibilitychange', recheck);
+
+    return () => {
+      window.removeEventListener('focus', recheck);
+      document.removeEventListener('visibilitychange', recheck);
+    };
+  }, [checkPermissions]);
 
   return {
     ...status,

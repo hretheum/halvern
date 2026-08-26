@@ -453,6 +453,16 @@ impl AudioCapture {
         // this line then becomes reproducible offline from the resulting files.
         super::raw_tap::write(&self.device_type, self.sample_rate, &mono_data);
 
+        // Count what the device actually delivered, at the first point where it
+        // is known and before anything can change it. Two failures on 26 August
+        // were invisible until the log was read afterwards: a stream that
+        // produced its first sample three minutes and twenty-three seconds
+        // after it opened, and a stream that produced samples immediately whose
+        // every value was zero. The interface can only tell those apart, or
+        // report either one, if the count is kept here.
+        let peak = mono_data.iter().map(|sample| sample.abs()).fold(0.0f32, f32::max);
+        super::input_activity::record_chunk(&self.device_type, mono_data.len(), peak);
+
         // CRITICAL FIX: Resample to 48kHz if device uses different sample rate
         // This fixes Bluetooth devices (like Sony WH-1000XM4) that report 16kHz or 44.1kHz
         // Without this, audio is sped up 3x and VAD fails

@@ -35,7 +35,7 @@ export function useRecordingStart(
   const { clearTranscripts, setMeetingTitle } = useTranscripts();
   const { setIsMeetingActive } = useSidebar();
   const { selectedDevices } = useConfig();
-  const { setStatus } = useRecordingState();
+  const { setStatus, isFinalizing } = useRecordingState();
 
   // Generate meeting title with timestamp
   const generateMeetingTitle = useCallback(() => {
@@ -79,6 +79,21 @@ export function useRecordingStart(
   const handleRecordingStart = useCallback(async () => {
     try {
       console.log('handleRecordingStart called - checking transcription model status');
+
+      // The previous meeting may still be being assembled. Rust clears its own
+      // recording flag once the audio file is written, but the transcripts are
+      // still arriving here and the meeting has not been saved yet, so the
+      // backend would accept this start and race that save. Refuse it here,
+      // where the tail of the operation actually lives, and say why — the
+      // error the backend eventually returned was not something anyone could
+      // act on.
+      if (isFinalizing) {
+        toast.info('Still finishing the last recording', {
+          description: 'The meeting is being saved. This takes a moment; the microphone comes back when it is done.',
+          duration: 4000,
+        });
+        return;
+      }
 
       // Check the configured transcription model is ready before starting
       const transcriptionReady = await checkTranscriptionReady();
@@ -137,7 +152,7 @@ export function useRecordingStart(
       // Re-throw so RecordingControls can handle device-specific errors
       throw error;
     }
-  }, [generateMeetingTitle, setMeetingTitle, setIsRecording, clearTranscripts, setIsMeetingActive, checkTranscriptionReady, checkIfModelDownloading, selectedDevices, showModal, setStatus]);
+  }, [generateMeetingTitle, setMeetingTitle, setIsRecording, clearTranscripts, setIsMeetingActive, checkTranscriptionReady, checkIfModelDownloading, selectedDevices, showModal, setStatus, isFinalizing]);
 
   // Check for autoStartRecording flag and start recording automatically
   useEffect(() => {

@@ -11,6 +11,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { TranscriptSegmentData } from "@/types";
 import { speakerLabel } from "@/lib/speaker-labels";
 import { LAYOUT } from "@/lib/layout";
+import { useAudioInputHealth } from "@/hooks/useAudioInputHealth";
+
+/** A device name when there is one, and something honest when there is not. */
+function describeSource(device: string | null): string {
+    return device ? `“${device}”` : 'the microphone';
+}
 
 export interface VirtualizedTranscriptViewProps {
     /** Transcript segments to display */
@@ -198,6 +204,10 @@ export const VirtualizedTranscriptView: React.FC<VirtualizedTranscriptViewProps>
         },
     });
 
+    // Is the recording actually hearing anything? Only asked while running and
+    // not paused; the hook is inert otherwise.
+    const inputHealth = useAudioInputHealth(isRecording && !isPaused);
+
     // Custom hook for auto-scrolling (supports both virtualized and non-virtualized)
     useAutoScroll({
         scrollRef,
@@ -313,13 +323,31 @@ export const VirtualizedTranscriptView: React.FC<VirtualizedTranscriptViewProps>
                     {isRecording ? (
                         <>
                             <div className="flex items-center justify-center mb-3">
-                                <div className={`w-3 h-3 rounded-full ${isPaused ? 'bg-orange-500' : 'bg-blue-500 animate-pulse'}`}></div>
+                                <div className={`w-3 h-3 rounded-full ${
+                                    isPaused
+                                        ? 'bg-orange-500'
+                                        : inputHealth.state === 'ok'
+                                            ? 'bg-blue-500 animate-pulse'
+                                            : 'bg-warning-text'
+                                }`}></div>
                             </div>
-                            <p className="text-sm text-muted-foreground">
-                                {isPaused ? 'Recording paused' : 'Listening for speech...'}
+                            <p className={`text-sm ${inputHealth.state === 'ok' ? 'text-muted-foreground' : 'text-warning-text'}`}>
+                                {isPaused
+                                    ? 'Recording paused'
+                                    : inputHealth.state === 'waiting'
+                                        ? `No audio from ${describeSource(inputHealth.device)} yet`
+                                        : inputHealth.state === 'silent'
+                                            ? `${describeSource(inputHealth.device)} is delivering silence`
+                                            : 'Listening for speech...'}
                             </p>
-                            <p className="text-xs mt-1 text-muted-foreground">
-                                {isPaused ? 'Click resume to continue recording' : 'Speak to see live transcription'}
+                            <p className="text-sm mt-1 text-muted-foreground">
+                                {isPaused
+                                    ? 'Click resume to continue recording'
+                                    : inputHealth.state === 'waiting'
+                                        ? `The stream opened ${inputHealth.seconds}s ago and has not delivered a single sample. The recording is running and will keep whatever arrives.`
+                                        : inputHealth.state === 'silent'
+                                            ? `Sound is arriving and every sample is silent, for ${inputHealth.seconds}s. Check that the microphone is not muted, and that it is the one you meant — a closed laptop muffles its own.`
+                                            : 'Speak to see live transcription'}
                             </p>
                         </>
                     ) : (

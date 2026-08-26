@@ -34,6 +34,7 @@ pub mod batch_processor;
 pub mod system_detector;
 pub mod system_audio_commands;
 pub mod device_monitor;  // NEW: Device disconnect/reconnect monitoring
+pub mod input_activity;  // Whether audio is arriving at all, and whether it is silence
 pub mod playback_monitor; // NEW: Playback device detection for BT warnings
 
 // Transcription module (provider abstraction, engine management, worker pool)

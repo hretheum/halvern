@@ -74,6 +74,20 @@ export function RecoveryPrompt() {
     }
   }, [recoverableMeetings]);
 
+  // Nothing left to decide about: close, and hand the screen back to whatever
+  // the dialog was covering. Recovering or deleting the last entry used to
+  // leave an empty dialog on screen whose only remaining function was a close
+  // button — a question with no question left in it.
+  //
+  // Safe against the moment before the startup check has answered, because the
+  // dialog is only ever opened once the list is non-empty.
+  useEffect(() => {
+    if (showDialog && recoverableMeetings.length === 0) {
+      setShowDialog(false);
+      sessionStorage.removeItem('recovery_dialog_shown');
+    }
+  }, [showDialog, recoverableMeetings.length]);
+
   const handleRecovery = async (meetingId: string) => {
     try {
       const result = await recoverMeeting(meetingId);

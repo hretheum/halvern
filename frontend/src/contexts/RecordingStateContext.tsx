@@ -44,6 +44,17 @@ interface RecordingStateContextType extends RecordingState {
   isStopping: boolean;
   isProcessing: boolean;
   isSaving: boolean;
+  /**
+   * The previous recording is still being finalised and a new one must not
+   * start yet.
+   *
+   * Rust clears its own recording flag once the audio file is written, but the
+   * database save happens here, after the last transcript has streamed in — so
+   * between those two points the backend answers "not recording" while a
+   * meeting is still being assembled. Starting again in that window raced the
+   * save and produced an error nobody could act on.
+   */
+  isFinalizing: boolean;
 }
 
 const RecordingStateContext = createContext<RecordingStateContextType | null>(null);
@@ -251,6 +262,10 @@ export function RecordingStateProvider({ children }: { children: React.ReactNode
     isStopping: state.status === RecordingStatus.STOPPING,
     isProcessing: state.status === RecordingStatus.PROCESSING_TRANSCRIPTS,
     isSaving: state.status === RecordingStatus.SAVING,
+    isFinalizing:
+      state.status === RecordingStatus.STOPPING ||
+      state.status === RecordingStatus.PROCESSING_TRANSCRIPTS ||
+      state.status === RecordingStatus.SAVING,
   }), [state, setStatus]);
 
   return (

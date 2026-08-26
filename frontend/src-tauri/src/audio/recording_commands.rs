@@ -382,6 +382,10 @@ async fn begin_recording<R: Runtime>(
         let _ = app_for_error.emit("recording-error", error.user_message());
     });
 
+    // Taken before the devices are handed to the manager, which consumes them.
+    let microphone_name = microphone_device.as_ref().map(|device| device.name.clone());
+    let system_name = system_device.as_ref().map(|device| device.name.clone());
+
     let transcription_receiver = manager
         .start_recording(
             microphone_device,
@@ -399,6 +403,13 @@ async fn begin_recording<R: Runtime>(
 
     info!("🔍 Setting IS_RECORDING to true and resetting SPEECH_DETECTED_EMITTED");
     IS_RECORDING.store(true, Ordering::SeqCst);
+    // Sample counts describe this recording, not every recording since launch,
+    // and the names are what a "nothing is arriving" message has to point at.
+    super::input_activity::reset();
+    super::input_activity::set_devices(
+        microphone_name.clone(),
+        system_name.clone(),
+    );
     drop(engine_lifecycle_guard);
     reset_speech_detected_flag();
 
@@ -1195,6 +1206,22 @@ pub async fn poll_audio_device_events() -> Result<Option<DeviceEventResponse>, S
         // Not recording, no events
         Ok(None)
     }
+}
+
+/// What each source has actually delivered since this recording started.
+///
+/// Polled rather than pushed, alongside `poll_audio_device_events`, and for the
+/// same reason: the counters are updated from the audio callback, and a Tauri
+/// event per chunk would put an allocation and a serialisation in the hot path
+/// to answer a question the interface asks once a second.
+///
+/// The numbers are cumulative. The caller takes differences between polls and
+/// decides what a gap means — "nothing has arrived in eight seconds" and "only
+/// zeroes have arrived for a minute" are different sentences to show a person,
+/// and neither judgement belongs down here.
+#[tauri::command]
+pub async fn audio_input_activity() -> Result<super::input_activity::InputActivity, String> {
+    Ok(super::input_activity::snapshot())
 }
 
 /// Get information about the active audio output device

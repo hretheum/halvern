@@ -10,11 +10,12 @@ import { SystemThemeBridge } from '@/components/SystemThemeBridge'
 import { ThemedToaster } from '@/components/ThemedToaster'
 import { toast } from 'sonner'
 import "sonner/dist/styles.css"
-import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { listen, UnlistenFn } from '@tauri-apps/api/event'
 import { invoke } from '@tauri-apps/api/core'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { rememberSettingsOrigin } from '@/lib/settingsOrigin'
 import { RecordingStateProvider } from '@/contexts/RecordingStateContext'
 import { OllamaDownloadProvider } from '@/contexts/OllamaDownloadContext'
 import { TranscriptProvider } from '@/contexts/TranscriptContext'
@@ -68,6 +69,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const router = useRouter()
+  const pathname = usePathname()
+
+  // The screen a ⌘, would be leaving. Held in a ref rather than read from the
+  // effect's closure: adding `pathname` to that effect's dependencies would
+  // tear down and re-register the Tauri listener on every navigation, and
+  // `listen` is async, so the teardown races the registration.
+  const settingsOriginRef = useRef(pathname)
+  useEffect(() => {
+    settingsOriginRef.current = pathname
+  }, [pathname])
+
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [onboardingCompleted, setOnboardingCompleted] = useState(false)
 
@@ -140,6 +152,7 @@ export default function RootLayout({
         // during setup moves a screen nobody can see.
         return;
       }
+      rememberSettingsOrigin(settingsOriginRef.current);
       router.push('/settings');
     });
 

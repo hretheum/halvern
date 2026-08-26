@@ -7,7 +7,6 @@ import { usePermissionCheck } from '@/hooks/usePermissionCheck';
 import { useRecordingState, RecordingStatus } from '@/contexts/RecordingStateContext';
 import { useTranscripts } from '@/contexts/TranscriptContext';
 import { useConfig } from '@/contexts/ConfigContext';
-import { StatusOverlays } from '@/app/_components/StatusOverlays';
 import Analytics from '@/lib/analytics';
 import { SettingsModals } from '@/app/_components/SettingsModal';
 import { TranscriptPanel } from '@/app/_components/TranscriptPanel';
@@ -100,9 +99,16 @@ export default function RecordScreen() {
           <div className="text-[13px] text-muted-foreground">{sourceLabel}</div>
         )}
 
-        {(hasMicrophone || isRecording) &&
-          status !== RecordingStatus.PROCESSING_TRANSCRIPTS &&
-          status !== RecordingStatus.SAVING && (
+        {/* A running recording always shows its controls. `hasMicrophone` only
+            decides whether there is anything to *start*: it begins as false and
+            turns true when `get_audio_devices` answers, and on 26 August that
+            answer took over three minutes while a recording was already
+            running — leaving a recording on screen with no way to stop it.
+            Whether the machine has a microphone cannot gate the stop button;
+            if devices cannot even be listed, stopping matters more, not less.
+            `recordingState` is the single source of truth here, rather than the
+            local copy that a sync effect fills in afterwards. */}
+        {(recordingState.isRecording || hasMicrophone || recordingState.isFinalizing) && (
             <RecordingControls
               isRecording={recordingState.isRecording}
               onRecordingStop={(callApi = true) => handleRecordingStop(callApi)}
@@ -128,10 +134,6 @@ export default function RecordScreen() {
         />
       </div>
 
-      <StatusOverlays
-        isProcessing={status === RecordingStatus.PROCESSING_TRANSCRIPTS && !recordingState.isRecording}
-        isSaving={status === RecordingStatus.SAVING}
-      />
     </motion.div>
   );
 }

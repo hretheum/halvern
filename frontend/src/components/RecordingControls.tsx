@@ -40,6 +40,11 @@ export const RecordingControls: React.FC<RecordingControlsProps> = ({
   const recordingState = useRecordingState();
   const isPaused = recordingState.isPaused;
 
+  // The previous recording is still being assembled: Rust has written the audio
+  // and cleared its own flag, but the transcripts are still streaming in and the
+  // meeting has not been saved. Starting again here raced that save.
+  const isFinalizing = recordingState.isFinalizing;
+
   const [recordingPath, setRecordingPath] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
@@ -336,7 +341,25 @@ export const RecordingControls: React.FC<RecordingControlsProps> = ({
     <TooltipProvider>
       <div className="flex flex-col space-y-2">
         <div className="flex items-center justify-center gap-4">
-          {isProcessing && !isParentProcessing ? (
+          {isFinalizing ? (
+            // Deliberately not `disabled`: a control that is off for a reason
+            // keeps its place in the tab order and states the reason, rather
+            // than vanishing and leaving the screen with no microphone at all.
+            <div className="flex flex-col items-center gap-2">
+              <button
+                type="button"
+                aria-disabled="true"
+                aria-describedby="finalizing-reason"
+                onClick={(event) => event.preventDefault()}
+                className="w-13 h-13 flex items-center justify-center rounded-full bg-muted-foreground/40 text-white"
+              >
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-background" />
+              </button>
+              <span id="finalizing-reason" className="text-sm text-muted-foreground">
+                {recordingState.isSaving ? 'Saving the meeting…' : 'Finalizing the recording…'}
+              </span>
+            </div>
+          ) : isProcessing && !isParentProcessing ? (
             <div className="flex items-center space-x-2">
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-foreground"></div>
               <span className="text-sm text-muted-foreground">Processing recording...</span>

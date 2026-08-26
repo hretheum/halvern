@@ -6,6 +6,7 @@ import { Settings } from 'lucide-react';
 import { useRecordingState } from '@/contexts/RecordingStateContext';
 import { HalvernMark } from '@/components/brand/HalvernMark';
 import { LAYOUT } from '@/lib/layout';
+import { rememberSettingsOrigin } from '@/lib/settingsOrigin';
 
 /**
  * The application toolbar shown on every screen: the logo on the left and
@@ -27,12 +28,14 @@ export function TopBar() {
   // to define it against a modal it never rendered; the top bar is mounted
   // on every screen, so this is where the hook now lives.
   useEffect(() => {
-    (window as unknown as { openSettings?: () => void }).openSettings = () =>
+    (window as unknown as { openSettings?: () => void }).openSettings = () => {
+      rememberSettingsOrigin(pathname);
       router.push('/settings');
+    };
     return () => {
       delete (window as unknown as { openSettings?: () => void }).openSettings;
     };
-  }, [router]);
+  }, [router, pathname]);
 
   return (
     <div className={`h-10 shrink-0 flex items-center gap-2.5 ${LAYOUT.INSET} bg-card border-b border-border`}>
@@ -73,7 +76,10 @@ export function TopBar() {
       <button
         title="Settings"
         aria-label="Settings"
-        onClick={() => router.push('/settings')}
+        onClick={() => {
+          rememberSettingsOrigin(pathname);
+          router.push('/settings');
+        }}
         className={`flex items-center justify-center ${LAYOUT.ICON_BUTTON} rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors`}
       >
         <Settings className="w-4 h-4" />

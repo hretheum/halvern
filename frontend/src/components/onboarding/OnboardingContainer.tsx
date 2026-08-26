@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ProgressIndicator } from './shared/ProgressIndicator';
 import { useOnboarding } from '@/contexts/OnboardingContext';
+import { useFitWindowToContent } from '@/hooks/useFitWindowToContent';
 import type { OnboardingContainerProps } from '@/types/onboarding';
 
 export function OnboardingContainer({
@@ -21,6 +22,12 @@ export function OnboardingContainer({
   canGoPrevious = true,
 }: OnboardingContainerProps) {
   const { goToStep, goPrevious, goNext } = useOnboarding();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Fit the window to the step, up to what the screen allows. The scroll
+  // container below still has to work on its own: on a display too small for
+  // the tallest step, this stops at the work area and the rest scrolls.
+  useFitWindowToContent(scrollRef);
 
   const handlePrevious = () => {
     if (onPrevious) {
@@ -94,8 +101,11 @@ export function OnboardingContainer({
           )}
         </div>
 
-        {/* Content - Scrollable */}
-        <div className="flex-1 overflow-y-auto pr-2">
+        {/* Content - Scrollable. `min-h-0` is load-bearing: without it `flex-1`
+            keeps `min-height: auto`, the box grows to its content instead of
+            shrinking, and the parent's `overflow-hidden` clips what does not
+            fit with no way to reach it. */}
+        <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto pr-2">
           <div className="space-y-6">{children}</div>
         </div>
       </div>

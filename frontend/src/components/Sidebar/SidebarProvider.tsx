@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Analytics from '@/lib/analytics';
 import { invoke } from '@tauri-apps/api/core';
 import { useRecordingState } from '@/contexts/RecordingStateContext';
+import { toast } from 'sonner';
 
 export interface CurrentMeeting {
   id: string;
@@ -57,7 +58,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [activeSettingsTab, setActiveSettingsTab] = useState<string | null>(null);
 
   // Use recording state from RecordingStateContext (single source of truth)
-  const { isRecording } = useRecordingState();
+  const { isRecording, isFinalizing } = useRecordingState();
 
   const pathname = usePathname();
   const router = useRouter();
@@ -85,6 +86,18 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
 
   // Start a recording from anywhere in the app
   const handleRecordingToggle = () => {
+    // `isRecording` goes false as soon as Rust has written the audio, while the
+    // transcripts are still arriving and the meeting has not been saved. This
+    // entry point sits outside the recording screen, so it needs the same
+    // refusal the microphone button now shows.
+    if (isFinalizing) {
+      toast.info('Still finishing the last recording', {
+        description: 'The meeting is being saved. This takes a moment.',
+        duration: 4000,
+      });
+      return;
+    }
+
     if (!isRecording) {
       if (pathname === '/record') {
         // Already on the recording screen - its start hook is listening.

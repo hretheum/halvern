@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { takeSettingsOrigin } from '@/lib/settingsOrigin';
 import { invoke } from '@tauri-apps/api/core';
 import { TranscriptSettings } from '@/components/TranscriptSettings';
 import { RecordingSettings } from '@/components/RecordingSettings';
@@ -78,7 +79,7 @@ export default function SettingsPage() {
         return;
       }
 
-      router.push('/');
+      router.push(takeSettingsOrigin());
     };
 
     document.addEventListener('keydown', onKeyDown);
@@ -109,7 +110,7 @@ export default function SettingsPage() {
       {/* Category column */}
       <div className="w-[190px] shrink-0 border-r border-border bg-card px-2 py-3 flex flex-col gap-0.5 overflow-y-auto">
         <button
-          onClick={() => router.push('/')}
+          onClick={() => router.push(takeSettingsOrigin())}
           className="flex items-center gap-1.5 px-2 py-1.5 mb-1.5 rounded-md text-xs text-muted-foreground hover:text-foreground text-left"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
