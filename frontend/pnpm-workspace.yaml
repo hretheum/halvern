@@ -9,7 +9,31 @@ overrides:
   prosemirror-transform: 1.12.0
   prosemirror-tables: 1.8.5
 
-minimumReleaseAgeExclude:
-  - '@blocknote/core@0.54.0'
-  - '@blocknote/react@0.54.0'
-  - '@blocknote/shadcn@0.54.0'
+# How old a published version has to be, in minutes, before pnpm will resolve
+# it. This is the window in which a compromised release gets noticed and
+# yanked, and it is the one dependency control here that does not rely on
+# somebody reading a diff carefully.
+#
+# It was never missing. pnpm 11 defaults to 1440, so a day-long cooldown has
+# been in force ever since the pnpm pin landed, and `pnpm config get
+# minimumReleaseAge` answering `undefined` means unset, not inactive — reading
+# it as "inactive" is what made the exclusion list below look like it guarded
+# nothing. Writing the number down makes it a decision instead of a vendor
+# default that the next pnpm major could move underneath us.
+#
+# Seven days, not one, because Dependabot runs weekly on Monday and
+# .github/dependabot.yml gives it a matching seven-day cooldown. The two
+# numbers have to agree: a bot proposing a fresher release than pnpm will
+# install produces pull requests whose CI cannot pass.
+#
+# Raising this is not free — a cooldown can refuse a version the lockfile
+# already names, so `pnpm install --frozen-lockfile` has to be tried before any
+# change here lands. Verified against this lockfile on 31 August 2026.
+minimumReleaseAge: 10080
+
+# `minimumReleaseAgeExclude` listed @blocknote/core, @blocknote/react and
+# @blocknote/shadcn at 0.54.0 — published 13 August 2026 and wanted the same
+# week. They cleared the window long ago, so the list had stopped excluding
+# anything. Add entries back only while a specific release is actually being
+# waited on; the accepted forms are a bare name, a scope glob such as
+# '@blocknote/*', and an exact 'name@version'.

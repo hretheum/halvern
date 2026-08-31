@@ -7,6 +7,19 @@
 # Grouping matters more than frequency here. An ungrouped Cargo update on a
 # Tauri app produces a dozen PRs that each bump one transitive crate and each
 # cost a full macOS CI run.
+#
+# The grouping has to name majors explicitly, and for a year it did not. A
+# group restricted to `update-types: [minor, patch]` does not match a major, so
+# every major fell through ungrouped and took its own pull request. That is how
+# 31 August 2026 produced ten PRs in three minutes: five Cargo majors, two
+# Action majors, one ungrouped lucide-react major, and two grouped ones.
+# Dependabot puts a dependency in the first group it matches, so the catch-all
+# `major` group goes last, after the ones that select by name.
+#
+# `cooldown` stops Dependabot proposing a version that pnpm will then refuse to
+# install. pnpm 11 enforces `minimumReleaseAge` (see pnpm-workspace.yaml), so
+# without this the bot would eventually open a pull request whose CI cannot
+# pass, for a reason nothing in the PR explains.
 
 version: 2
 updates:
@@ -16,6 +29,8 @@ updates:
       interval: weekly
       day: monday
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       # Tauri's crates are versioned together and break together. Splitting them
       # across PRs produces combinations that were never tested upstream.
@@ -23,6 +38,8 @@ updates:
         patterns: ['tauri', 'tauri-*']
       patch-and-minor:
         update-types: [minor, patch]
+      major:
+        update-types: [major]
 
   - package-ecosystem: npm
     directory: /frontend
@@ -30,6 +47,8 @@ updates:
       interval: weekly
       day: monday
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       next:
         patterns: ['next', '@next/*', 'eslint-config-next']
@@ -39,11 +58,19 @@ updates:
         patterns: ['@blocknote/*']
       patch-and-minor:
         update-types: [minor, patch]
+      major:
+        update-types: [major]
 
   # Actions pinned by tag drift silently, and a compromised action is a supply
-  # chain problem in a project whose whole claim is about where data goes.
+  # chain problem in a project whose whole claim is about where data goes. One
+  # group, because they get reviewed in one sitting or not at all.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
       day: monday
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ['*']

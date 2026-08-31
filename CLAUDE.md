@@ -875,19 +875,31 @@ $env:RUST_LOG="debug"; ./clean_run_windows.bat
   - `main`: the only long-lived line of development
   - `feat/*`, `fix/*`, `refaktor/*`: short-lived work branches, merged by
     fast-forward after their gates pass
-- **Worktrees**: two as of 19 August — `transcriptz/meetily` on `main`, which is
-  used to record real meetings, and `meetily-rust-coverage` for work. Never
-  touch a worktree you were not pointed at. Builds from different branches share
-  one app data directory keyed by the bundle identifier, so set
-  `HALVERN_APP_SUFFIX` when a branch's schema could diverge from `main` (see
-  `frontend/scripts/tauri-auto.js`). It is also how you exercise a fresh install
-  without disturbing the real one — onboarding only appears when the data
-  directory is empty.
+- **One checkout, at `~/dev/halvern`.** There are no worktrees as of 26 August.
+  The repository used to live at `~/dev/transcriptz/meetily` — inside the
+  private planning repository, which had `meetily/` in its `.gitignore` with a
+  note saying the fork has its own repository, so the nesting was leftover
+  rather than intended — with a second, linked worktree at
+  `~/dev/meetily-rust-coverage`. Both are gone. The move was a plain `mv` and
+  needed no `git worktree repair`, because the linked worktree was removed
+  first: a linked worktree points at its parent by absolute path in both
+  directions, and moving either end breaks the pair.
 
-  A stale worktree on an old branch is a trap rather than merely clutter: two
-  were removed on 19 August because they still built `com.meetily.ai`, which
-  after the data migration means an empty library and a six-gigabyte
-  re-download.
+  The two trees held 80 GB, of which 77 GB was `target/` and `node_modules`.
+  Removing them took the machine from 41 GB free to 112 GB. Anything that only
+  existed in the working tree because it is gitignored — the bakeoff's raw
+  results, `prompts/`, the task reports — was copied across first; that is the
+  check to repeat before deleting any checkout here.
+
+  If a worktree is ever added again: builds from different branches share one
+  app data directory keyed by the bundle identifier, so set
+  `HALVERN_APP_SUFFIX` when a branch's schema could diverge from `main` (see
+  `frontend/scripts/tauri-auto.js`). That is also how you exercise a fresh
+  install without disturbing the real one — onboarding only appears when the
+  data directory is empty. And a stale worktree on an old branch is a trap
+  rather than clutter: two were removed on 19 August because they still built
+  `com.meetily.ai`, which after the data migration means an empty library and a
+  six-gigabyte re-download.
 
 ## Key Files Reference
 
