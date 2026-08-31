@@ -108,7 +108,8 @@ tree controls. `.github/dependabot.yml` is the same blob object in both
 repositories, so the config cannot say "not here" either. Closing the pull
 requests is worse than doing nothing: `open-pull-requests-limit` frees the
 slot, and the following Monday brings five different crates instead. On 31
-August it brought ten in three minutes.
+August it brought ten in three minutes. The archive is therefore muted rather
+than stopped — see item 7.
 
 ### Pick up here
 
@@ -146,13 +147,25 @@ August it brought ten in three minutes.
    both and the recording screen says which one is happening, naming the
    device. Gotcha 12 has the evidence and the dead ends already ruled out;
    start from the counters and `raw_tap`, not from device enumeration.
-7. **Turn Dependabot off on the archive repository.** Nothing it opens there
-   can be merged: `origin` is pushed to one-way from this checkout, so a merge
-   commit on its `main` breaks that. Grouping and the cooldown landed on 31
-   August and cut the volume, but the bot should not be running there at all.
-   It is a switch in Settings → Code security on `hretheum/meetily` and
-   nowhere else — there is no REST API for it, and the Actions API will not
-   disable the dynamic workflow that carries it.
+7. **The archive's Dependabot is muted, not stopped, and that is the best
+   available.** Nothing it opens there can be merged: `origin` is pushed to
+   one-way from this checkout, so a merge commit on its `main` breaks that.
+   There is no way to turn it off. Version updates have no switch — Settings →
+   Code security offers `Configure`, not `Disable`, because the feature is on
+   exactly while `.github/dependabot.yml` exists on the default branch, and
+   that file is one blob shared by both remotes. The other page entries
+   (alerts, security updates, dependency graph) are separate features and were
+   already off while the bot ran, so they are not the lever either.
+
+   What was done instead, on 31 August: the repository is set to `ignored` via
+   `PUT /repos/hretheum/meetily/subscription`, which is the only thing that
+   silences `review_requested`. That reason comes from `* @hretheum` in
+   CODEOWNERS and survives both unwatching and "Participating and @mentions".
+
+   **Leave its open pull requests open.** Closing one frees a slot under
+   `open-pull-requests-limit` and the next Monday fills it with something else;
+   an open PR holds the slot and nothing replaces it. Now that the repository
+   is silent, three stale PRs cost nothing and closing them buys noise.
 
 ## Project Overview
 
