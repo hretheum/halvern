@@ -30,7 +30,7 @@ jobs:
     name: Project guards
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # The language and format checks compare against the merge base, so
           # they need history rather than a shallow clone.
@@ -57,7 +57,7 @@ jobs:
     # green Linux build would prove nothing about the code that actually runs.
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Pinned by rust-toolchain.toml, deliberately. A warning count is only
       # comparable against the same compiler.
@@ -102,7 +102,7 @@ jobs:
     name: Frontend — types and build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: pnpm/action-setup@v6
         with:
