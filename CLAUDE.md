@@ -63,14 +63,15 @@ that GitHub bills at ×10, Dependabot opened sixteen pull requests there, and a
 single day cost around 2500 billable minutes against a monthly allowance of
 2000–3000. Public repositories are free, including macOS, so the public repo
 keeps its CI; the private one is an archive and needs none. Build, Release, CI
-and Pages are disabled there and its Dependabot pull requests are closed.
+and Pages are disabled there. Dependabot is not, and closing its pull requests
+did not settle it — see the paragraph on both remotes below.
 
 **Toolchain is pinned** by `rust-toolchain.toml` (1.98.0), `packageManager`
 (pnpm 11.21.0) and `engines` (Node ≥22.13). None of the three floats, and the
 clippy baseline — now 25 — is only meaningful because of that.
 
-**Dependencies are current, and the one setting that would police them is
-not.** All ten Dependabot pull requests were applied *here* rather than merged
+**Dependencies are current, and the cooldown that polices them is now written
+down.** All ten Dependabot pull requests were applied *here* rather than merged
 there, and that is the rule, not a preference: the public history is rebuilt
 from this tree, so anything merged on the public side is silently reverted by
 the next `commit-tree` push. Five action majors — including `pnpm/action-setup`
@@ -80,13 +81,34 @@ patch-and-minor group, `@types/node` 20→26, framer-motion 11→13, and TypeScr
 5.9→7.0, which is the Go compiler: the TypeScript step in `next build` fell
 from 3.2s to 584ms.
 
-What is missing is a cooldown. `pnpm-workspace.yaml` carries a
-`minimumReleaseAgeExclude` list, but nothing anywhere sets `minimumReleaseAge`
-— `pnpm config get minimumReleaseAge` answers `undefined` — so the exclusions
-are written against a rule that is not in force. lucide-react 1.34.0 was left
-out of the sweep on those grounds: it had been published the previous day, and
-a fresh release of a package exporting a thousand names is the exact shape the
-cooldown exists for.
+The cooldown was never missing, which is the reverse of what this file said
+until 31 August. pnpm 11 defaults `minimumReleaseAge` to 1440, so a day-long
+delay has been in force ever since the pnpm pin landed. `pnpm config get
+minimumReleaseAge` answers `undefined` because it is unset, and unset is not
+the same as inactive — reading it as inactive is what made the
+`minimumReleaseAgeExclude` list look like it guarded nothing, and lucide-react
+1.34.0 was held out of the sweep on that mistaken ground.
+
+Both halves are now stated. `pnpm-workspace.yaml` sets seven days,
+`.github/dependabot.yml` carries a matching seven-day `cooldown` per ecosystem
+so the bot cannot propose a release pnpm will then refuse to install, and the
+stale exclusions are gone. Checked rather than assumed: pnpm 11.21.0 rejects a
+too-fresh version with `ERR_PNPM_NO_MATURE_MATCHING_VERSION`, honours
+`name@version` in the exclude list, and `pnpm install --frozen-lockfile` passes
+under the new value while reporting that it verified all 315 lockfile entries
+against it. That last line answers the question the old note left open: a
+frozen install does consult the cooldown.
+
+**Dependabot runs against both remotes, and only one of them should be acting
+on it.** The archive has Build, Release, CI and Pages disabled, which does
+nothing to Dependabot — it runs as two synthetic workflows,
+`dynamic/dependabot/dependabot-updates` and `dynamic/dependabot/update-graph`,
+that the Actions API refuses to disable (HTTP 422) and that no file in this
+tree controls. `.github/dependabot.yml` is the same blob object in both
+repositories, so the config cannot say "not here" either. Closing the pull
+requests is worse than doing nothing: `open-pull-requests-limit` frees the
+slot, and the following Monday brings five different crates instead. On 31
+August it brought ten in three minutes.
 
 ### Pick up here
 
@@ -124,11 +146,13 @@ cooldown exists for.
    both and the recording screen says which one is happening, naming the
    device. Gotcha 12 has the evidence and the dead ends already ruled out;
    start from the counters and `raw_tap`, not from device enumeration.
-7. **Decide the dependency cooldown.** Either set `minimumReleaseAge` in
-   `pnpm-workspace.yaml` so the `minimumReleaseAgeExclude` list beneath it
-   means something, or delete the list. Whichever it is, `pnpm install
-   --frozen-lockfile` in CI has to be tried under the new setting before it
-   lands, because a cooldown can refuse a version the lockfile already names.
+7. **Turn Dependabot off on the archive repository.** Nothing it opens there
+   can be merged: `origin` is pushed to one-way from this checkout, so a merge
+   commit on its `main` breaks that. Grouping and the cooldown landed on 31
+   August and cut the volume, but the bot should not be running there at all.
+   It is a switch in Settings → Code security on `hretheum/meetily` and
+   nowhere else — there is no REST API for it, and the Actions API will not
+   disable the dynamic workflow that carries it.
 
 ## Project Overview
 
