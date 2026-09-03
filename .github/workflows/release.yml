@@ -101,8 +101,26 @@ jobs:
           # binary nobody has ever run: README says the Windows target is
           # inherited from upstream and unexercised, and shipping it from the
           # release workflow would have contradicted that on the download page.
-          # `build.yml` still carries its Windows and Ubuntu branches, unused,
-          # for whenever one of them is actually tested.
+          # `build.yml` still carries its Windows and Ubuntu branches, and
+          # `installer.yml` is how you exercise one without cutting a release.
+          #
+          # Adding a second entry here is two lines and one trap. Each build
+          # job runs `tauri-action` against the same `release-id`, and each one
+          # uploads its own `latest.json` describing only the platform it
+          # built. The second upload therefore replaces the first, and the
+          # release ends up offering updates to exactly one platform — the one
+          # that happened to finish last. Nothing fails; the other platform's
+          # installations simply never see another update, which is the same
+          # silent shape as the version-parsing defect above.
+          #
+          # The fix belongs in `release-summary`, which already runs after every
+          # build and already downloads `latest.json`: rebuild it there from the
+          # release's own assets, covering every platform, and re-upload. The
+          # per-platform key names are already handled — see
+          # `scripts/generate-update-manifest-github.js`, which maps a filename
+          # to `darwin-aarch64`, `windows-x86_64` or `linux-x86_64`. What that
+          # script cannot do yet is read the signatures back off a release
+          # rather than off a local bundle directory.
           - platform: "macos-latest" # for Apple Silicon only (M1 and above)
             args: "--target aarch64-apple-darwin"
             target: "aarch64-apple-darwin"

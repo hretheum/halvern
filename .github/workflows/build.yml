@@ -90,6 +90,51 @@ jobs:
           fi
           echo "All macOS signing secrets are present."
 
+      # The Windows half of the same problem, and it fails less politely than
+      # the macOS half: without these the run reaches `smctl --version` — a
+      # DigiCert tool that is not installed on the runner either — and reports
+      # a missing command rather than a missing secret. Nothing in this
+      # repository has ever set them, so today this step is what turns
+      # `sign-binaries: true` on Windows into a sentence instead of a puzzle.
+      #
+      # `DIGICERT_KEYPAIR_ALIAS` is deliberately not listed: the certsync step
+      # derives it and exports it, and `scripts/sign-windows.ps1` treats its
+      # absence as "skip signing, exit 0", which is what makes an unsigned
+      # local or on-demand build work at all.
+      - name: Check the Windows signing secrets are all present
+        if: contains(inputs.platform, 'windows') && inputs.sign-binaries
+        shell: bash
+        env:
+          SM_HOST: ${{ secrets.SM_HOST }}
+          SM_API_KEY: ${{ secrets.SM_API_KEY }}
+          SM_CLIENT_CERT_FILE_B64: ${{ secrets.SM_CLIENT_CERT_FILE_B64 }}
+          SM_CLIENT_CERT_PASSWORD: ${{ secrets.SM_CLIENT_CERT_PASSWORD }}
+          SM_CODE_SIGNING_CERT_SHA1_HASH: ${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          missing=""
+          for name in SM_HOST SM_API_KEY SM_CLIENT_CERT_FILE_B64 \
+                      SM_CLIENT_CERT_PASSWORD SM_CODE_SIGNING_CERT_SHA1_HASH \
+                      TAURI_SIGNING_PRIVATE_KEY; do
+            eval "value=\${$name}"
+            if [ -z "$value" ]; then
+              missing="$missing $name"
+            fi
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secrets:$missing"
+            echo "These come from a DigiCert KeyLocker account, which this project"
+            echo "does not have. Windows code signing is a separate purchase from"
+            echo "the Apple one and buys less than it used to: since 2024 neither"
+            echo "OV nor EV skips SmartScreen, both build reputation from downloads."
+            echo
+            echo "To build a Windows installer without signing it, run the"
+            echo "'Installer (on demand)' workflow instead. It passes"
+            echo "sign-binaries: false and hands back a .msi as an artifact."
+            exit 1
+          fi
+          echo "All Windows signing secrets are present."
+
       - name: Get version from tauri.conf.json.
         id: get-version
         shell: bash

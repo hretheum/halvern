@@ -1,0 +1,83 @@
+name: "Installer (on demand)"
+
+# Builds an installer for one platform and hands it back as an artifact,
+# without creating a release.
+#
+# `build.yml` could already do this — it takes `upload-artifacts`, it has
+# working Windows and Ubuntu branches, and with no `release-id` it uploads to
+# nothing. What was missing was any way to *start* it: `build.yml` is
+# `workflow_call` only, and its single caller is `release.yml`, which begins by
+# creating a draft release. So the only way to find out whether a Windows
+# installer builds at all was to cut a release for a platform nobody had ever
+# compiled, which is not a thing anyone would do.
+#
+# This is that missing entry point. It signs nothing and releases nothing; the
+# question it answers is "does a .msi come out of the other end".
+#
+# When Windows and Linux are proven and someone wants to ship them, the change
+# is one matrix entry in `release.yml` — plus the updater manifest, which is a
+# separate problem worth reading about below.
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: "Which platform to build an installer for"
+        required: true
+        type: choice
+        default: "windows-latest"
+        options:
+          - windows-latest
+          - ubuntu-22.04
+          - macos-latest
+      debug:
+        description: "Build the debug profile (much faster, much bigger)"
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: installer-${{ github.ref }}-${{ inputs.platform }}
+  cancel-in-progress: true
+
+jobs:
+  resolve:
+    name: Resolve the target triple
+    runs-on: ubuntu-latest
+    outputs:
+      target: ${{ steps.target.outputs.target }}
+    steps:
+      # `build.yml` uses `target` both for cargo and for the path it looks for
+      # bundles under, and macOS is the only platform whose path includes it.
+      # Getting this wrong produces a green build with an empty artifact, so it
+      # is computed once, here, rather than typed into three places.
+      - name: Map platform to target
+        id: target
+        run: |
+          case "${{ inputs.platform }}" in
+            windows-latest) echo "target=x86_64-pc-windows-msvc"   >> "$GITHUB_OUTPUT" ;;
+            ubuntu-22.04)   echo "target=x86_64-unknown-linux-gnu" >> "$GITHUB_OUTPUT" ;;
+            macos-latest)   echo "target=aarch64-apple-darwin"     >> "$GITHUB_OUTPUT" ;;
+            *) echo "::error::Unhandled platform ${{ inputs.platform }}"; exit 1 ;;
+          esac
+
+  installer:
+    needs: resolve
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: ${{ inputs.platform }}
+      target: ${{ needs.resolve.outputs.target }}
+      # macOS is the only platform where tauri needs the triple passed through;
+      # the other two bundle into an unsuffixed path and `--target` only slows
+      # them down.
+      build-args: ${{ inputs.platform == 'macos-latest' && '--target aarch64-apple-darwin' || '' }}
+      upload-artifacts: true
+      # Nothing here is signed. On Windows that means SmartScreen will warn on
+      # download, which is correct for a build that exists to be inspected
+      # rather than handed to anyone.
+      sign-binaries: false
+      is-debug-build: ${{ inputs.debug }}
+      asset-prefix: "halvern-installer"
+    secrets: inherit

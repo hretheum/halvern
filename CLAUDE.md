@@ -138,6 +138,42 @@ from the August failures, which were a git dependency on
 `thewh1teagle/esaxx-rs` that now answers 404; that one has cleared, and
 `cargo generate-lockfile` resolves 829 packages cleanly.
 
+**Windows and Linux compile again, and CI will not let them stop.** Both had
+been broken for some time by a single misplaced line: `tauri-plugin-log` was
+declared under `[target.'cfg(target_os = "macos")'.dependencies]` while
+`build_logger()` in `lib.rs` uses it with no `cfg` at all. Every non-macOS
+build therefore died at the import, before anything platform-specific had a
+chance to be wrong. One line, two platforms, and invisible from a Mac.
+
+The general shape is worth keeping, because nothing in this repository could
+have caught it: **a dependency in a target-specific section, used by code that
+is not gated the same way, breaks only the platforms you do not build.** No
+test fails, no lint fires, `cargo check` on the maintainer's machine is clean.
+Only a compiler running for that target says anything. That is now what
+`ci.yml`'s `other-platforms` matrix is for, on `windows-latest` and
+`ubuntu-latest`, and both are required checks rather than advisory: run
+33803622812 on 3 September was the first time either target had ever been
+compiled here, Linux in six minutes and Windows in twelve.
+
+Two things learned in passing, both cheap and both non-obvious. A job with
+`continue-on-error: true` reports its conclusion as `success` even when its
+steps failed, so that first run was read step by step rather than by its badge.
+And the fastest way to find these is not the Windows runner: `k12` builds the
+Linux target in a container in under a minute, most of what is left to find is
+`cfg(not(target_os = "macos"))` rather than anything about WinAPI, and the
+missing `libclang-dev` in `docs/BUILDING.md` was found that way in seconds
+rather than in a forty-minute round trip.
+
+**Compiling is not working, and README says so in those words.** Nobody has
+recorded a meeting on either platform. The Windows system-audio path looks
+plausible — `get_windows_device` hands back an output device and cpal 0.15.3
+sets `AUDCLNT_STREAMFLAGS_LOOPBACK` when one is opened for input, so Windows
+needs no BlackHole equivalent — but plausible from reading is exactly the
+standard this file warns about everywhere else. `installer.yml` now builds an
+unsigned installer for a chosen platform on demand, without cutting a release,
+which is the step that was missing: `build.yml` could always do it and had no
+way to be started except through `release.yml`, which begins by creating one.
+
 ### Pick up here
 
 1. **A real screenshot, then a demo recording, for the README.** The first
@@ -198,6 +234,31 @@ from the August failures, which were a git dependency on
    crates above cannot be updated at all. One declaration with platform-gated
    features is the shape; it needs a build on each platform's feature set to
    confirm, which is why it was reported rather than done on 31 August.
+
+   This got cheaper on 3 September: `installer.yml` will build any one of the
+   three platforms on demand, which is exactly the per-platform confirmation
+   that declaration needs.
+
+9. **Build a Windows installer, then find a Windows machine.** Compilation is
+   settled; packaging and running are not. Run `installer.yml` against
+   `windows-latest` and see whether a `.msi` comes out — that path has never
+   been exercised either, and it uses `--features vulkan`, which the compile
+   job does not.
+
+   After that the work stops being something CI can do. A runner has no
+   microphone and no output device, so it cannot answer whether the app starts,
+   whether onboarding completes, or whether WASAPI loopback actually delivers
+   samples. That needs a real x86-64 Windows machine; note that Windows on
+   Apple Silicon under Parallels is `aarch64-pc-windows-msvc`, a different
+   target from the one CI builds, so it proves less than it appears to.
+
+   Do not add Windows to the `release.yml` matrix before that. The comment
+   there now spells out the trap waiting: each build job uploads its own
+   `latest.json` naming only its own platform, so the second upload replaces
+   the first and one platform's installations silently stop seeing updates
+   forever. The fix belongs in `release-summary`, and
+   `scripts/generate-update-manifest-github.js` already knows the platform key
+   names but reads bundles off a local directory rather than off a release.
 
 ## Project Overview
 
@@ -729,15 +790,34 @@ $env:RUST_LOG="debug"; ./clean_run_windows.bat
 - **System Audio**: Requires virtual audio device (BlackHole) for system capture
 
 ### Windows
-- **Audio Capture**: Uses WASAPI (Windows Audio Session API)
-- **GPU**: CUDA (NVIDIA) or Vulkan (AMD/Intel) via Cargo features
-- **Build Tools**: Requires Visual Studio Build Tools with C++ workload
-- **System Audio**: Uses WASAPI loopback for system capture
+
+Compiles in CI since 3 September 2026 and has never been run. Everything below
+is what the code says it does, not what anyone has watched it do.
+
+- **Audio Capture**: WASAPI (Windows Audio Session API)
+- **System Audio**: WASAPI loopback, and it needs no virtual device. cpal
+  0.15.3 sets `AUDCLNT_STREAMFLAGS_LOOPBACK` when an output device is opened
+  for input (`host/wasapi/device.rs`), which is the path `get_windows_device`
+  takes. `SystemAudioCapture::start_system_audio_capture` still bails with
+  "not yet implemented for this platform", but that is the macOS-shaped path;
+  its only caller, `SystemAudioStreamManager`, is constructed nowhere
+- **GPU**: CUDA (NVIDIA) or Vulkan (AMD/Intel) via Cargo features. `build.yml`
+  passes `--features vulkan` and installs the SDK for it; the CI compile job
+  does not, so Vulkan on Windows is still unproven
+- **Build Tools**: Visual Studio Build Tools with the C++ workload, plus CMake
 
 ### Linux
-- **Audio Capture**: ALSA/PulseAudio
-- **GPU**: CUDA (NVIDIA) or Vulkan via Cargo features
-- **Dependencies**: Requires cmake, llvm, libomp
+
+Same status: compiles in CI, never run.
+
+- **Audio Capture**: ALSA/PulseAudio. `configure_linux_audio` finds system
+  audio by looking for ALSA sources whose name contains `monitor`
+- **GPU**: CUDA (NVIDIA), Vulkan, or ROCm via Cargo features
+- **Dependencies**: the full list is in [docs/BUILDING.md](docs/BUILDING.md)
+  and was measured in a clean Ubuntu 24.04 container rather than remembered.
+  `libclang-dev` is the one people miss — bindgen backs both `whisper-rs-sys`
+  and `llama-cpp-2`, and its absence surfaces as `Unable to find libclang`
+  from inside a dependency's build script
 
 ## Performance Optimization Guidelines
 
@@ -1009,6 +1089,8 @@ $env:RUST_LOG="debug"; ./clean_run_windows.bat
 **Process**:
 - [docs/CONTRIBUTION_PROCESS.md](docs/CONTRIBUTION_PROCESS.md) - The CI pipeline and the five project guards, with the reasoning behind each. Read before changing anything under `scripts/ci/`
 - [scripts/ci/guards.sh](scripts/ci/guards.sh) - Run this before pushing. Same script CI runs
+- [.github/workflows/ci.yml](.github/workflows/ci.yml) - What runs on every push and pull request: guards, the macOS test-and-clippy job, the `other-platforms` matrix that compiles Windows and Linux, and the frontend build
+- [.github/workflows/installer.yml](.github/workflows/installer.yml) - Builds an unsigned installer for one chosen platform and hands it back as an artifact. The way to exercise a platform's packaging without creating a release; `build.yml` could always do this and had no entry point
 - [scripts/ci/allowed-hosts.txt](scripts/ci/allowed-hosts.txt) - Every network host the source may name, each with the reason it may be contacted. Also the shortest honest answer to "where does this app connect"
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Branches, worktrees, testing conventions, commit style
 - [SECURITY.md](SECURITY.md) - What counts as a vulnerability here, and what is explicitly out of scope

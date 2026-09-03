@@ -68,8 +68,8 @@ Pre-release, and honest about it:
   Windows and Linux targets exist in the build configuration, inherited from
   upstream. Neither had compiled for some time: `tauri-plugin-log` was declared
   for macOS only while `build_logger()` used it unconditionally, so both died
-  at the import. That is fixed, the Linux build has been run in a clean Ubuntu
-  24.04 container, and CI now checks both on every change.
+  at the import. Both compile again as of 3 September 2026 and CI checks them
+  on every change, on a real Windows runner and a real Linux one.
   **Compiling is not working.** Nobody has recorded a meeting on either
   platform, the Windows system-audio path through WASAPI loopback is untested,
   and neither build is signed or released. Do not assume they work.

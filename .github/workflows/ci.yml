@@ -118,9 +118,17 @@ jobs:
     # ship nothing yet. It compiles whisper.cpp and llama.cpp regardless,
     # because build scripts run either way.
     #
-    # Advisory on purpose. README says neither target has ever been exercised,
-    # so this job starts by measuring that rather than by gating macOS work on
-    # it. Drop `continue-on-error` per platform as each one first goes green.
+    # This started advisory, with `continue-on-error`, because README said
+    # neither target had ever been exercised and the job existed to measure
+    # that rather than to gate macOS work. Both went green on the first run
+    # that ever tried them — 3 September 2026, run 33803622812, Linux in 6m and
+    # Windows in 12m — so the measurement is done and the flag is gone. A red
+    # job here now means somebody broke a target that was working.
+    #
+    # Note for whoever reads a green tick above a broken build: with
+    # `continue-on-error: true` a job whose steps failed still reports its
+    # conclusion as `success`. That is why the first run was checked step by
+    # step rather than by its badge.
     strategy:
       fail-fast: false
       matrix:
@@ -130,7 +138,6 @@ jobs:
           - name: Linux
             runs-on: ubuntu-latest
     runs-on: ${{ matrix.runs-on }}
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 

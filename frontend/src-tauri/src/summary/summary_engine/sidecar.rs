@@ -12,8 +12,11 @@ use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
 use tokio::process::{Child, ChildStdin, ChildStdout};
 use tokio::sync::{Mutex, RwLock};
 
-#[cfg(target_os = "windows")]
-use std::os::windows::process::CommandExt;
+// No `std::os::windows::process::CommandExt` here, unlike audio/encode.rs and
+// its neighbours: those build a `std::process::Command`, which needs the trait
+// for `creation_flags`. This one builds a `tokio::process::Command`, which
+// carries its own inherent `creation_flags` on Windows, so importing the trait
+// only produced an unused-import warning on every Windows build.
 
 use super::models;
 
