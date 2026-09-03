@@ -1,6 +1,11 @@
 // macOS audio permissions handling
 use anyhow::Result;
-use log::{info, warn, error};
+use log::info;
+// Only the macOS half of this file logs anything but `info`; the stubs below
+// have nothing to warn about. Importing them unconditionally made every Linux
+// and Windows build emit an unused-import warning.
+#[cfg(target_os = "macos")]
+use log::{error, warn};
 
 #[cfg(target_os = "macos")]
 use std::process::Command;

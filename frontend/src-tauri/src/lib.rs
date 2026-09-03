@@ -385,7 +385,8 @@ pub fn get_language_preference_internal() -> Option<String> {
 /// was to start the binary from a terminal — and every question about what the
 /// app did during a real meeting was unanswerable after the fact.
 ///
-/// Files land in `~/Library/Logs/io.halvern.app/` on macOS. `RUST_LOG` still
+/// Files land in `~/Library/Logs/io.halvern.app/` on macOS and in
+/// `%LOCALAPPDATA%\io.halvern.app\logs\` on Windows. `RUST_LOG` still
 /// works for raising the level to `debug` or `trace` when hunting something
 /// specific; the default stays at `info` so a long meeting does not fill the
 /// disk.

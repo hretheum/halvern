@@ -66,7 +66,13 @@ Pre-release, and honest about it:
   enough to be a different product rather than a slower one.
 - **macOS 14.4 or later**, which is where the system-audio capture lives.
   Windows and Linux targets exist in the build configuration, inherited from
-  upstream, but have not been exercised here — do not assume they work.
+  upstream. Neither had compiled for some time: `tauri-plugin-log` was declared
+  for macOS only while `build_logger()` used it unconditionally, so both died
+  at the import. That is fixed, the Linux build has been run in a clean Ubuntu
+  24.04 container, and CI now checks both on every change.
+  **Compiling is not working.** Nobody has recorded a meeting on either
+  platform, the Windows system-audio path through WASAPI loopback is untested,
+  and neither build is signed or released. Do not assume they work.
 - Builds are **signed and notarized** as of 0.1.0, so Gatekeeper opens them
   without a warning. Verified by downloading onto a Mac that had never run it —
   the only check that proves anything, since Gatekeeper does not quarantine what

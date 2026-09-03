@@ -51,7 +51,14 @@ pnpm run build
 
 # Set environment variables for the build
 
+# `tauri:build`, not `tauri build`. The npm script runs scripts/tauri-auto.js,
+# which builds the llama-helper sidecar into
+# src-tauri/binaries/llama-helper-<triple> first. Tauri resolves externalBin at
+# build-script time and aborts with "resource path 'binaries/llama-helper-...'
+# doesn't exist" when it is missing, so the bare form works only on a machine
+# that happens to have built the sidecar before — which is every machine that
+# has already built once, and no fresh clone. The same line was wrong in
+# clean_run.sh and in both Windows batch files.
 echo "Building Tauri app..."
-pnpm run tauri build
-sleep
+pnpm run tauri:build
 

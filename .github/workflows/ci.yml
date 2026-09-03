@@ -98,6 +98,84 @@ jobs:
       - name: Clippy (ratchet)
         run: ./scripts/ci/clippy-ratchet.sh
 
+  other-platforms:
+    name: Rust — ${{ matrix.name }} compiles
+    # The only machines in this project that can answer whether the Windows and
+    # Linux targets still compile. A Mac cannot cross-compile either one:
+    # whisper-rs-sys and llama-cpp-2 build C++ through CMake against the target's
+    # own toolchain, `build.rs` verifies the FFmpeg it downloads by running it,
+    # and WiX, NSIS, deb and AppImage all bundle only on their own platform.
+    #
+    # Both targets broke the same way and for the same reason, which is the
+    # argument for running them together: `tauri-plugin-log` sat in the macOS
+    # section of Cargo.toml while `build_logger()` used it unconditionally, so
+    # every non-macOS build failed at the import. Most of what is left to find
+    # is `cfg(not(target_os = "macos"))`, not anything specific to WinAPI or
+    # ALSA, and either runner will find it.
+    #
+    # `cargo check`, not `cargo build`: the point is to catch the next `#[cfg]`
+    # mistake, and a full bundle costs several times as long for targets that
+    # ship nothing yet. It compiles whisper.cpp and llama.cpp regardless,
+    # because build scripts run either way.
+    #
+    # Advisory on purpose. README says neither target has ever been exercised,
+    # so this job starts by measuring that rather than by gating macOS work on
+    # it. Drop `continue-on-error` per platform as each one first goes green.
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows
+            runs-on: windows-latest
+          - name: Linux
+            runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runs-on }}
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      # Tauri's own Linux prerequisites, plus libasound2-dev because cpal binds
+      # ALSA directly and libclang-dev because both whisper-rs-sys and
+      # llama-cpp-2 generate their bindings with bindgen. Measured in a clean
+      # Ubuntu 24.04 container, not copied from a list: without libclang the
+      # build dies in bindgen with "Unable to find libclang", and without
+      # webkit2gtk it dies in pkg-config, both from inside a dependency's
+      # build script where the cause is not obvious.
+      - name: Install Linux system dependencies
+        if: matrix.name == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev \
+            libxdo-dev libssl-dev libasound2-dev \
+            clang libclang-dev cmake patchelf
+
+      - name: Install the pinned toolchain
+        run: rustup show active-toolchain
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: frontend/src-tauri
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11
+          run_install: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Same reason as the macOS job: `externalBin` is resolved by the build
+      # script, so a missing sidecar fails before any code is compiled.
+      - name: Build the llama-helper sidecar
+        working-directory: frontend
+        run: node scripts/build-sidecar.js
+
+      - name: Check
+        working-directory: frontend/src-tauri
+        run: cargo check --lib
+
   frontend:
     name: Frontend — types and build
     runs-on: ubuntu-latest

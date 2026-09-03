@@ -39,7 +39,7 @@ pnpm run build
 # Set environment variables for the build
 echo "Setting up build environment..."
 
+# `tauri:dev`, not `tauri dev` — see the note in clean_build.sh.
 echo "Building Tauri app..."
-pnpm run tauri dev
-sleep
+pnpm run tauri:dev
 

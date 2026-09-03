@@ -88,6 +88,12 @@ frontend/src-tauri/binaries/
 # with `git add -A`, which is how two of them already reached a commit.
 RAPORT-*.md
 
+# Working notes written for the maintainer rather than for the repository:
+# plain-language plans, decision scratchpads, what-to-do-next lists. Same
+# reason as the reports above — useful for a week, wrong within a month, and
+# they are in Polish, which the published tree is not.
+NOTATKA-*.md
+
 # Screenshots taken while testing the app. They are working material for one
 # session — the ones the README and the site actually use are committed under
 # docs/assets/ and www/, deliberately and by name.

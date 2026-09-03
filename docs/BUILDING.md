@@ -17,16 +17,35 @@ If you're new to building on Linux, start here. These simple commands work for m
 
 #### 1. Install Basic Dependencies
 
+The Ubuntu list below was measured in a clean 24.04 container rather than
+assembled from memory; the Fedora and Arch lines are its equivalents and have
+not been run. The three packages that used to be missing all fail from inside
+somebody else's build script, where the cause is not obvious:
+
+- **`libclang-dev`** — `whisper-rs-sys` and `llama-cpp-2` both generate their
+  bindings with bindgen. Without it: `Unable to find libclang`.
+- **`libwebkit2gtk-4.1-dev`** — the webview Tauri renders into. Without it: a
+  pkg-config error naming `webkit2gtk-4.1`.
+- **`libasound2-dev`** — cpal binds ALSA directly, on every Linux build,
+  whether or not PulseAudio is what actually runs.
+
 ```bash
 # Ubuntu/Debian
 sudo apt update
-sudo apt install build-essential cmake git
+sudo apt install build-essential cmake git pkg-config \
+  clang libclang-dev libomp-dev \
+  libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev \
+  libxdo-dev libssl-dev libasound2-dev patchelf
 
 # Fedora/RHEL
-sudo dnf install gcc-c++ cmake git
+sudo dnf install gcc-c++ cmake git pkgconf-pkg-config \
+  clang-devel libomp-devel \
+  webkit2gtk4.1-devel libappindicator-gtk3-devel librsvg2-devel \
+  libxdo-devel openssl-devel alsa-lib-devel patchelf
 
 # Arch Linux
-sudo pacman -S base-devel cmake git
+sudo pacman -S base-devel cmake git clang openmp \
+  webkit2gtk-4.1 libappindicator-gtk3 librsvg xdotool alsa-lib patchelf
 ```
 
 #### 2. Build and Run
