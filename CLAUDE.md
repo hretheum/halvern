@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Where things stand — 25 August 2026
+## Where things stand — 3 September 2026
 
 Read this first after a break; the rest of the file is reference.
 
@@ -111,6 +111,33 @@ slot, and the following Monday brings five different crates instead. On 31
 August it brought ten in three minutes. The archive is therefore muted rather
 than stopped — see item 7.
 
+**Three grouped pull requests stand open on the public repository and one of
+them cannot pass.** #11 (six Actions) and #12 (lucide-react, which the cooldown
+held back to 1.33.0 rather than the 1.35.0 it offered a week earlier) are
+green. #13 carries sixteen Cargo majors and fails `Rust — tests and clippy` in
+36 seconds. None of the three is a merge candidate — they are notifications,
+and updates get applied in this tree and pushed, as above.
+
+**`whisper-rs` is declared three times, and that is what freezes ten crates.**
+It appears once per platform in `frontend/src-tauri/Cargo.toml` (lines 189, 198
+and 209), all at 0.13.2. Cargo resolves the union of every target, so when
+Dependabot bumps one declaration to 0.16.0 and leaves the other two alone, the
+graph holds two packages linking the native library `whisper` and cargo refuses
+it outright:
+
+```
+package `whisper-rs-sys` links to the native library `whisper`, but it
+conflicts with a previous package which links to `whisper` as well
+```
+
+Ten crates come back `dependency_file_not_resolvable` for that reason —
+criterion, futures, infer, memory-stats, strsim, tar, tauri-build,
+tracing-subscriber, xz2 and zip — and the Cargo half of every Dependabot run
+ends as a failure whether or not it produced a pull request. This is separate
+from the August failures, which were a git dependency on
+`thewh1teagle/esaxx-rs` that now answers 404; that one has cleared, and
+`cargo generate-lockfile` resolves 829 packages cleanly.
+
 ### Pick up here
 
 1. **A real screenshot, then a demo recording, for the README.** The first
@@ -166,6 +193,11 @@ than stopped — see item 7.
    `open-pull-requests-limit` and the next Monday fills it with something else;
    an open PR holds the slot and nothing replaces it. Now that the repository
    is silent, three stale PRs cost nothing and closing them buys noise.
+8. **Collapse the three `whisper-rs` declarations into one.** Until that
+   happens the Cargo ecosystem reports a failed run every Monday and the ten
+   crates above cannot be updated at all. One declaration with platform-gated
+   features is the shape; it needs a build on each platform's feature set to
+   confirm, which is why it was reported rather than done on 31 August.
 
 ## Project Overview
 
