@@ -1,0 +1,44 @@
+frontend/clean_build.sh
+  s_a975a03b484a5d::t_901a6d9a5fbf47 54-61,63
+README.md
+  s_a975a03b484a5d::t_8c84d1a77bff23 69-75
+docs/BUILDING.md
+  s_a975a03b484a5d::t_e23070c249ba7c 20-23
+  s_a975a03b484a5d::t_3e9231cd1f3177 24-31,35-38,41-44,47-48
+docs/building_in_linux.md
+  s_a975a03b484a5d::t_1ccc45ab221937 13-18,22-25,28-31,34-35
+frontend/src-tauri/src/lib.rs
+  s_a975a03b484a5d::t_d95d791ffdd953 388-389
+.github/workflows/ci.yml
+  s_a975a03b484a5d::t_16400a433843d1 138-143,150-151
+  s_a975a03b484a5d::t_772d3c1148b1fc 101-107,109-114,116-132,136-137,144-149
+  s_a975a03b484a5d::t_0ac984d5215678 108,115,133-135,152-178
+frontend/clean_run.sh
+  s_a975a03b484a5d::t_4862387393730e 42,44
+frontend/clean_run_windows.bat
+  s_a975a03b484a5d::t_15ad7f09b2b6b0 2,4-7,9-10,12-27
+frontend/clean_build_windows.bat
+  s_a975a03b484a5d::t_bf95459d93d001 2,4-13,15-26,29-32
+frontend/src-tauri/Cargo.toml
+  s_a975a03b484a5d::t_cb87a2f1a88d93 159-164
+frontend/src-tauri/src/audio/permissions.rs
+  s_a975a03b484a5d::t_1697ff0b7c2384 3-8
+frontend/src-tauri/src/audio/recording_preferences.rs
+  s_a975a03b484a5d::t_c30c93e8fc3e86 127-130
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "6de1b0c60ec38436eed5ede8144356ddd027fb27",
+  "prompts": {},
+  "sessions": {
+    "s_a975a03b484a5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13b6cc7c-acea-4716-9349-2f90c8fdd936",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
