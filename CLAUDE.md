@@ -173,6 +173,8 @@ standard this file warns about everywhere else. `installer.yml` now builds an
 unsigned installer for a chosen platform on demand, without cutting a release,
 which is the step that was missing: `build.yml` could always do it and had no
 way to be started except through `release.yml`, which begins by creating one.
+It has been run once, against `windows-latest`, and both a `.msi` and an NSIS
+`.exe` came out — see item 9. What is left needs a machine, not a runner.
 
 ### Pick up here
 
@@ -239,11 +241,19 @@ way to be started except through `release.yml`, which begins by creating one.
    three platforms on demand, which is exactly the per-platform confirmation
    that declaration needs.
 
-9. **Build a Windows installer, then find a Windows machine.** Compilation is
-   settled; packaging and running are not. Run `installer.yml` against
-   `windows-latest` and see whether a `.msi` comes out — that path has never
-   been exercised either, and it uses `--features vulkan`, which the compile
-   job does not.
+9. **Find a Windows machine.** Compilation and packaging are both settled now.
+   Run 33805469917 on 3 September produced the first Windows installers this
+   project has ever had: `Halvern_0.1.1_x64-setup.exe` (NSIS, 41 MB) and
+   `Halvern_0.1.1_x64_en-US.msi` (WiX 3.14.1.8722, x64, 66 MB), each with its
+   minisign `.sig` from the updater key. Checked rather than assumed — a green
+   run with an empty artifact looks identical, so the files were downloaded and
+   identified, and the PE certificate table read to confirm what is and is not
+   signed. Authenticode: nothing, as expected with no DigiCert secrets. The
+   build used `--features vulkan`, which the compile job does not, so that
+   unknown is closed too.
+
+   The artifact expires 3 October 2026. Re-running `installer.yml` makes
+   another; nothing about it is precious.
 
    After that the work stops being something CI can do. A runner has no
    microphone and no output device, so it cannot answer whether the app starts,
