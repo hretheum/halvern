@@ -17,6 +17,23 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tokio = { version = "1.32.0", features = ["full"] }
 
+# Declared here, and only here, because it is a `links` crate: `whisper-rs-sys`
+# claims the native library `whisper`, and cargo refuses a graph holding two
+# packages that both claim it. It used to be stated three times, once per
+# platform, all at the same version — which is fine until Dependabot bumps one
+# of the three and leaves the others, and every Cargo run then dies with
+#
+#   package `whisper-rs-sys` links to the native library `whisper`, but it
+#   conflicts with a previous package which links to `whisper` as well
+#
+# That took the whole Cargo ecosystem down with it: ten unrelated crates came
+# back `dependency_file_not_resolvable` every Monday because the manifest could
+# not be resolved at all. One version string cannot disagree with itself.
+#
+# Platform acceleration is additive on top of this, in the member's own
+# target sections. `raw-api` is needed everywhere.
+whisper-rs = { version = "0.13.2", features = ["raw-api"] }
+
 # Profiles are read from the workspace root and nowhere else. A `[profile.*]`
 # section in a member manifest is ignored — cargo says so on every command and
 # nobody was reading it, so `llama-helper` had been building on the default
