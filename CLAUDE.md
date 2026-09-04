@@ -118,25 +118,34 @@ green. #13 carries sixteen Cargo majors and fails `Rust — tests and clippy` in
 36 seconds. None of the three is a merge candidate — they are notifications,
 and updates get applied in this tree and pushed, as above.
 
-**`whisper-rs` is declared three times, and that is what freezes ten crates.**
-It appears once per platform in `frontend/src-tauri/Cargo.toml` (lines 189, 198
-and 209), all at 0.13.2. Cargo resolves the union of every target, so when
-Dependabot bumps one declaration to 0.16.0 and leaves the other two alone, the
-graph holds two packages linking the native library `whisper` and cargo refuses
-it outright:
+**`whisper-rs` is declared once, as of 4 September 2026.** It used to appear
+three times in `frontend/src-tauri/Cargo.toml`, once per platform, all at
+0.13.2 — fine until Dependabot bumped one and left the others, at which point
+the graph held two packages linking the native library `whisper` and cargo
+refused it outright:
 
 ```
 package `whisper-rs-sys` links to the native library `whisper`, but it
 conflicts with a previous package which links to `whisper` as well
 ```
 
-Ten crates come back `dependency_file_not_resolvable` for that reason —
-criterion, futures, infer, memory-stats, strsim, tar, tauri-build,
-tracing-subscriber, xz2 and zip — and the Cargo half of every Dependabot run
-ends as a failure whether or not it produced a pull request. This is separate
-from the August failures, which were a git dependency on
-`thewh1teagle/esaxx-rs` that now answers 404; that one has cleared, and
-`cargo generate-lockfile` resolves 829 packages cleanly.
+That did not just break the whisper update. It made the manifest unresolvable,
+so ten unrelated crates — criterion, futures, infer, memory-stats, strsim, tar,
+tauri-build, tracing-subscriber, xz2 and zip — came back
+`dependency_file_not_resolvable` every Monday, and the Cargo half of every
+Dependabot run failed whether or not it produced a pull request.
+
+The version now lives in `[workspace.dependencies]` in the root manifest and
+nowhere else. macOS adds Metal and CoreML in its own target section through
+workspace inheritance, which is additive, so acceleration survives without a
+second version string that could drift from the first; Windows and Linux need
+nothing beyond `raw-api` and name the crate nowhere at all. One version string
+cannot disagree with itself.
+
+One trap for whoever checks this: `cargo metadata --filter-platform` reports
+`metal` and `coreml` for Windows, and did so before this change too. Feature
+resolution there is not target-aware. The Windows build compiling clean is what
+settles it, not the metadata.
 
 **Windows and Linux compile again, and CI will not let them stop.** Both had
 been broken for some time by a single misplaced line: `tauri-plugin-log` was
@@ -231,15 +240,10 @@ It has been run once, against `windows-latest`, and both a `.msi` and an NSIS
    `open-pull-requests-limit` and the next Monday fills it with something else;
    an open PR holds the slot and nothing replaces it. Now that the repository
    is silent, three stale PRs cost nothing and closing them buys noise.
-8. **Collapse the three `whisper-rs` declarations into one.** Until that
-   happens the Cargo ecosystem reports a failed run every Monday and the ten
-   crates above cannot be updated at all. One declaration with platform-gated
-   features is the shape; it needs a build on each platform's feature set to
-   confirm, which is why it was reported rather than done on 31 August.
-
-   This got cheaper on 3 September: `installer.yml` will build any one of the
-   three platforms on demand, which is exactly the per-platform confirmation
-   that declaration needs.
+8. ~~**Collapse the three `whisper-rs` declarations into one.**~~ Done on
+   4 September 2026, once the `other-platforms` matrix existed to confirm it —
+   the change needed a build on each platform's feature set, which is exactly
+   what it had been waiting for. See the paragraph above.
 
 9. **Find a Windows machine.** Compilation and packaging are both settled now.
    Run 33805469917 on 3 September produced the first Windows installers this
