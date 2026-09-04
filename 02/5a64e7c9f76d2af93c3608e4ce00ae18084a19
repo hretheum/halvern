@@ -1,9 +1,12 @@
 frontend/src-tauri/Cargo.toml
   s_a975a03b484a5d::t_1a728025608fdb 90-96
+  s_a975a03b484a5d::t_fb891fbe8cad5e 90-96
 frontend/src-tauri/src/audio/pipeline.rs
   s_a975a03b484a5d::t_3729d52f9687e5 849-871,873-877,959
+  s_a975a03b484a5d::t_40192fbbb602db 849-871,873-877,959
 frontend/src-tauri/src/audio/stream.rs
   s_a975a03b484a5d::t_18c2efa6112552 478-489,494-497
+  s_a975a03b484a5d::t_3b51042689c89f 478-489,494-497
 ---
 {
   "schema_version": "authorship/3.0.0",
