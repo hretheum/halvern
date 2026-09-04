@@ -99,7 +99,7 @@ env_logger = "0.11"
 # looking in the source exactly like the `log::` calls that reach the file. The
 # packaged logger is tauri-plugin-log, which collects `log` records only.
 tracing = { version = "0.1.40", features = ["log"] }
-which = "6.0.1"
+which = "8.0.6"
 
 # Bytes
 bytemuck = "1.16.1"
@@ -130,14 +130,14 @@ crossbeam = "0.8.4"
 dashmap = "6.1.0"
 
 # Directories
-dirs = "5.0.1"
+dirs = "6.0.0"
 
 # Additional dependencies for notification system
 url = "2.5.0"
 
 
 # System monitoring for resource management
-sysinfo = "0.32"
+sysinfo = "0.39"
 
 lazy_static = { version = "1.4.0" }
 realfft = "3.4.0"
@@ -151,7 +151,7 @@ rayon = "1.10"
 rubato = "0.15.0"
 ringbuf = "0.4.8"
 tempfile = "3.3.0"
-whatlang = "0.16.4"
+whatlang = "0.18.0"
 
 ffmpeg-sidecar = { git = "https://github.com/nathanbabcock/ffmpeg-sidecar", branch = "main" }
 
@@ -184,9 +184,7 @@ objc = "0.2.7"
 anyhow = "1.0"
 time = { version = "0.3", features = ["formatting"] }
 reqwest = { version = "0.11", features = ["multipart", "json"] }
-core-graphics = "0.23"
 cidre = { git = "https://github.com/yury/cidre", rev = "a9587fa", features = ["av"] }
-dasp = "0.11.0"
 # Kalendarz przez EventKit: nazwa spotkania, uczestnicy i agenda z zaproszenia.
 # Droga przez Microsoft Graph jest zamknięta — tenant blokuje samodzielną zgodę
 # na Calendars.Read (zmierzone). Konto Exchange w Kontach internetowych działa,
