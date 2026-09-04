@@ -1,0 +1,23 @@
+frontend/src-tauri/Cargo.toml
+  s_a975a03b484a5d::t_fb891fbe8cad5e 90-96
+frontend/src-tauri/src/audio/pipeline.rs
+  s_a975a03b484a5d::t_40192fbbb602db 849-871,873-877,959
+frontend/src-tauri/src/audio/stream.rs
+  s_a975a03b484a5d::t_3b51042689c89f 478-489,494-497
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "a22b880521a920ed12342d8a387892d207fbf034",
+  "prompts": {},
+  "sessions": {
+    "s_a975a03b484a5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13b6cc7c-acea-4716-9349-2f90c8fdd936",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
