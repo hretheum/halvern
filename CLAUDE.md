@@ -815,6 +815,21 @@ is what the code says it does, not what anyone has watched it do.
   passes `--features vulkan` and installs the SDK for it; the CI compile job
   does not, so Vulkan on Windows is still unproven
 - **Build Tools**: Visual Studio Build Tools with the C++ workload, plus CMake
+- **Automatic meeting detection does not exist here, and cannot fire.** The
+  whole rule set in `detection/policy.rs` is platform-independent pure logic,
+  but it is fed by `audio/system_detector.rs`, which is macOS-only in both
+  directions: `snapshot_audio_apps()` returns `Vec::new()` off macOS
+  (`system_detector.rs:482`) and the non-macOS `MacOSSystemAudioDetector::start`
+  logs a warning and returns. So nothing is ever detected, `on_audio_started`
+  is never called, and `autostart_if_enabled` has nothing to act on. Pressing
+  record by hand works; joining a Teams call starts nothing. Confirmed on
+  Windows, 4 September 2026.
+
+  The Windows equivalent of what Core Audio provides is WASAPI's
+  `IAudioSessionManager2` — it enumerates audio sessions with their owning
+  process id and active state, which is the same shape `DetectedApp` wants,
+  and `IAudioSessionNotification` gives the transitions. That is the port; the
+  policy above it needs nothing.
 
 ### Linux
 
@@ -1114,6 +1129,7 @@ Same status: compiles in CI, never run.
 
 **Design**:
 - [docs/ONBOARDING_LANGUAGE_MODEL.md](docs/ONBOARDING_LANGUAGE_MODEL.md) - Why onboarding must ask for the meeting language, and how that answer picks the transcription engine and the summary model
+- [docs/ONBOARDING_BACKGROUND_DOWNLOAD.md](docs/ONBOARDING_BACKGROUND_DOWNLOAD.md) - Letting someone leave onboarding while the models are still downloading. Written after the first Windows run stalled on a slow connection. One disabled button is the symptom; the document is mostly about the three things that have to exist before removing it is safe
 - [docs/DESIGN_SYSTEM_PLAN.md](docs/DESIGN_SYSTEM_PLAN.md) - The Halvern token pyramid, the state of the captured Figma views, and the order of work for branding the app and the future website
 - [docs/DESIGN_TOKEN_MAPPING.md](docs/DESIGN_TOKEN_MAPPING.md) - Captured hex → Figma token → shadcn variable. The lookup tables that make the remaining rollout mechanical; also where the three unavoidable mismatches are recorded
 - [design/tokens/halvern.tokens.json](design/tokens/halvern.tokens.json) - The exported pyramid. Edit the Figma collections and re-export; do not hand-edit

@@ -32,6 +32,8 @@ pub mod hardware_detector;
 pub mod async_logger;
 pub mod batch_processor;
 pub mod system_detector;
+#[cfg(target_os = "windows")]
+pub mod system_detector_windows;
 pub mod system_audio_commands;
 pub mod device_monitor;  // NEW: Device disconnect/reconnect monitoring
 pub mod input_activity;  // Whether audio is arriving at all, and whether it is silence

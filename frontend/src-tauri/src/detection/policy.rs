@@ -19,6 +19,15 @@ pub const DEFAULT_IGNORED: &[&str] = &[
     "com.ecamm.EcammLive",
     "com.loom.desktop",
     "us.zoom.ringcentral",
+    // Windows has no bundle identifiers, so `system_detector_windows` fills
+    // this field with the executable's stem instead — `obs64`, `ms-teams`.
+    // The two naming schemes share one list because they cannot collide: a
+    // reverse-DNS identifier always contains a dot and a stem never does.
+    "obs64",
+    "obs32",
+    "camtasiastudio",
+    "loom",
+    "sharex",
 ];
 
 /// Applications treated as a meeting on output alone. The microphone often
@@ -31,6 +40,15 @@ pub const DEFAULT_ALWAYS_MEETING: &[&str] = &[
     "com.cisco.webexmeetingsapp",
     "com.hnc.Discord",
     "com.tinyspeck.slackmacgap",
+    // Windows executable stems, as above. `ms-teams` is the current client and
+    // `teams` the classic one; both ship and both are still in use.
+    "ms-teams",
+    "teams",
+    "zoom",
+    "webex",
+    "webexmta",
+    "discord",
+    "slack",
 ];
 
 /// Tunable behaviour of the detector.

@@ -479,7 +479,12 @@ pub fn snapshot_audio_apps() -> Vec<DetectedApp> {
         list_system_audio_using_apps()
     }
 
-    #[cfg(not(target_os = "macos"))]
+    #[cfg(target_os = "windows")]
+    {
+        super::system_detector_windows::list_audio_sessions()
+    }
+
+    #[cfg(not(any(target_os = "macos", target_os = "windows")))]
     {
         Vec::new()
     }
@@ -527,30 +532,39 @@ fn list_system_audio_using_apps() -> Vec<DetectedApp> {
     apps
 }
 
-// Stub implementation for non-macOS platforms
-#[cfg(not(target_os = "macos"))]
-pub struct MacOSSystemAudioDetector;
+/// Platforms with no sensor yet.
+///
+/// Linux is the only one left. ALSA and PulseAudio can both answer "which
+/// clients are streaming", but through different interfaces, and neither has
+/// been written here.
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
+#[derive(Default)]
+pub struct UnsupportedSystemAudioDetector;
 
-#[cfg(not(target_os = "macos"))]
-impl Default for MacOSSystemAudioDetector {
-    fn default() -> Self {
-        Self
-    }
-}
-
-#[cfg(not(target_os = "macos"))]
-impl MacOSSystemAudioDetector {
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
+impl UnsupportedSystemAudioDetector {
     pub fn start(&mut self, _callback: SystemAudioCallback) {
-        tracing::warn!("System audio detection is only supported on macOS");
+        // `log`, not `tracing`: for a long time this line was the one thing
+        // that could have explained why automatic detection did nothing on
+        // another platform, and it went to a subscriber that does not exist.
+        warn!("System audio detection is not implemented on this platform");
     }
 
     pub fn stop(&mut self) {}
 }
 
+/// The sensor this build actually has.
+#[cfg(target_os = "macos")]
+type PlatformDetector = MacOSSystemAudioDetector;
+#[cfg(target_os = "windows")]
+type PlatformDetector = super::system_detector_windows::WindowsSystemAudioDetector;
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
+type PlatformDetector = UnsupportedSystemAudioDetector;
+
 /// Public interface for system audio detection
 #[derive(Default)]
 pub struct SystemAudioDetector {
-    inner: MacOSSystemAudioDetector,
+    inner: PlatformDetector,
 }
 
 impl SystemAudioDetector {
