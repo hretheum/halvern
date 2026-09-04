@@ -87,7 +87,13 @@ chrono = { version = "0.4.31", features = ["serde"] }
 # Log
 log = "0.4"
 env_logger = "0.11"
-tracing = "0.1.40"
+# The `log` feature makes tracing events emit `log` records when no tracing
+# subscriber is installed, and none is. Without it the twenty `tracing::` call
+# sites in this crate — every one of them in the audio detector, the system
+# audio commands or the Ollama metadata reader — write to nothing at all, while
+# looking in the source exactly like the `log::` calls that reach the file. The
+# packaged logger is tauri-plugin-log, which collects `log` records only.
+tracing = { version = "0.1.40", features = ["log"] }
 which = "6.0.1"
 
 # Bytes
@@ -202,6 +208,19 @@ whisper-rs = { version = "0.13.2", features = ["raw-api", "metal", "coreml"] }
 [target.'cfg(target_os = "windows")'.dependencies]
 whisper-rs = { version = "0.13.2", features = ["raw-api"] }
 futures-channel = "0.3.31"
+# WASAPI, for `audio/system_detector_windows.rs`: which applications hold an
+# active audio session, and on which direction. That is what automatic meeting
+# detection needs and what Core Audio supplies on macOS.
+#
+# 0.61 rather than a fresher major because the tree already resolves that
+# version through Tauri, so this adds a feature set rather than a fourth copy
+# of the bindings. cpal pins 0.54 of its own and is unaffected either way.
+windows = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Media_Audio",
+    "Win32_System_Com",
+    "Win32_System_Threading",
+] }
 
 # Linux-specific dependencies
 # Default: CPU-only build (no BLAS)

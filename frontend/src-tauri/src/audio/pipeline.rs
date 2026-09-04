@@ -846,11 +846,35 @@ fn flush_source(
 /// this drives a log line, not behaviour, and a spurious warning costs less than a
 /// missing one.
 fn output_may_bleed_into_microphone(device_name: &str) -> bool {
-    use super::device_detection::InputDeviceKind;
+    // macOS only, because macOS is the only platform where the answer is
+    // measured rather than guessed. `InputDeviceKind::detect` reaches Core
+    // Audio's transport type there; on Windows `detect_windows_native` is a
+    // list of English name patterns wearing a native-sounding name, and on
+    // Linux there is nothing at all.
+    //
+    // A Polish Windows reporting `Słuchawki (JBL LIVE460NC)` — the word is
+    // Polish for headphones — matched none of those patterns, fell through to
+    // "not Bluetooth", and told someone wearing headphones to put headphones
+    // on. Measured 4 September 2026, in the log from the first Windows run.
+    //
+    // Restoring this elsewhere means a real signal, not more keywords. On
+    // Windows that is `PKEY_AudioEndpoint_FormFactor` from the endpoint's
+    // property store, which answers Headphones, Headset or Speakers directly
+    // and in every language.
+    #[cfg(target_os = "macos")]
+    {
+        use super::device_detection::InputDeviceKind;
 
-    // Buffer size and sample rate only affect latency estimates, which this call
-    // ignores; the transport query does not depend on them.
-    !InputDeviceKind::detect(device_name, 512, 48_000).is_bluetooth()
+        // Buffer size and sample rate only affect latency estimates, which this
+        // call ignores; the transport query does not depend on them.
+        !InputDeviceKind::detect(device_name, 512, 48_000).is_bluetooth()
+    }
+
+    #[cfg(not(target_os = "macos"))]
+    {
+        let _ = device_name;
+        false
+    }
 }
 
 /// How long the VAD waits before treating a pause as the end of speech.
@@ -932,7 +956,7 @@ impl AudioPipeline {
         let vad_system = make_vad("system");
 
         info!(
-            "Potok z rozdzielonym rozpoznawaniem: dwa procesory VAD, wybaczanie {} ms, \
+            "Split detection pipeline: two VAD processors, {} ms redemption, \
              segments reach the model separately for each source",
             REDEMPTION_TIME_MS
         );

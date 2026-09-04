@@ -475,12 +475,26 @@ impl AudioStreamManager {
 
         // Start system audio stream
         if let Some(sys_device) = system_device {
-            info!("🔊 Creating system audio stream: {} (backend: {:?})", sys_device.name, backend);
+            // `backend` is the *configured preference*, not what is used. On
+            // Windows and Linux the preference stays at its ScreenCaptureKit
+            // default and the capture path resolves to CPAL, so printing the
+            // preference alone put "ScreenCaptureKit" in a Windows log — an
+            // Apple API on a machine that has never had one. Say which path is
+            // actually taken; the preference is only interesting beside it.
+            info!(
+                "🔊 Creating system audio stream: {} (path: {:?}, configured backend: {:?})",
+                sys_device.name,
+                choose_stream_path(&DeviceType::System, backend),
+                backend
+            );
             match AudioStream::create(sys_device.clone(), self.state.clone(), DeviceType::System).await {
                 Ok(stream) => {
                     self.state.set_system_device(sys_device);
                     self.system_stream = Some(stream);
-                    info!("✅ System audio stream created with {:?} backend", backend);
+                    info!(
+                        "✅ System audio stream created via {:?}",
+                        choose_stream_path(&DeviceType::System, backend)
+                    );
                 }
                 Err(e) => {
                     warn!("⚠️ Failed to create system audio stream: {}", e);

@@ -815,6 +815,26 @@ is what the code says it does, not what anyone has watched it do.
   passes `--features vulkan` and installs the SDK for it; the CI compile job
   does not, so Vulkan on Windows is still unproven
 - **Build Tools**: Visual Studio Build Tools with the C++ workload, plus CMake
+- **Automatic meeting detection works here as of 4 September 2026**, through
+  `audio/system_detector_windows.rs`. It polls WASAPI audio sessions on the
+  default render and capture endpoints every two seconds, keeps only
+  `AudioSessionStateActive`, and merges the two directions per process id.
+  Polling rather than `IAudioSessionNotification` because the policy layer
+  debounces for `min_duration` and re-confirms through `snapshot_audio_apps()`
+  anyway, so the callback route's precision buys nothing and costs a COM
+  object with apartment-bound lifetime.
+
+  `DetectedApp::bundle_id` carries the executable stem here — `ms-teams`,
+  `zoom`, `slack`. Not cosmetic: that field is the only way `pick_candidate`
+  recognises a *known* meeting application, and only a known one may start a
+  recording on output alone, before the microphone joins. `DEFAULT_IGNORED`
+  and `DEFAULT_ALWAYS_MEETING` carry Windows stems beside the macOS
+  identifiers; they cannot collide, since reverse-DNS always has a dot and a
+  stem never does.
+
+  Linux still has no sensor, and the settings switch now says so rather than
+  saving happily and doing nothing — which is what it did on Windows until
+  someone spent an evening finding out why.
 
 ### Linux
 
@@ -823,6 +843,10 @@ Same status: compiles in CI, never run.
 - **Audio Capture**: ALSA/PulseAudio. `configure_linux_audio` finds system
   audio by looking for ALSA sources whose name contains `monitor`
 - **GPU**: CUDA (NVIDIA), Vulkan, or ROCm via Cargo features
+- **Automatic meeting detection has no sensor here.** `snapshot_audio_apps()`
+  returns an empty list, so the rules never see a candidate. ALSA and
+  PulseAudio can both answer "which clients are streaming"; neither has been
+  written. The settings switch is shown disabled with that reason
 - **Dependencies**: the full list is in [docs/BUILDING.md](docs/BUILDING.md)
   and was measured in a clean Ubuntu 24.04 container rather than remembered.
   `libclang-dev` is the one people miss — bindgen backs both `whisper-rs-sys`
@@ -1114,6 +1138,7 @@ Same status: compiles in CI, never run.
 
 **Design**:
 - [docs/ONBOARDING_LANGUAGE_MODEL.md](docs/ONBOARDING_LANGUAGE_MODEL.md) - Why onboarding must ask for the meeting language, and how that answer picks the transcription engine and the summary model
+- [docs/ONBOARDING_BACKGROUND_DOWNLOAD.md](docs/ONBOARDING_BACKGROUND_DOWNLOAD.md) - Letting someone leave onboarding while the models are still downloading. Written after the first Windows run stalled on a slow connection. One disabled button is the symptom; the document is mostly about the three things that have to exist before removing it is safe
 - [docs/DESIGN_SYSTEM_PLAN.md](docs/DESIGN_SYSTEM_PLAN.md) - The Halvern token pyramid, the state of the captured Figma views, and the order of work for branding the app and the future website
 - [docs/DESIGN_TOKEN_MAPPING.md](docs/DESIGN_TOKEN_MAPPING.md) - Captured hex → Figma token → shadcn variable. The lookup tables that make the remaining rollout mechanical; also where the three unavoidable mismatches are recorded
 - [design/tokens/halvern.tokens.json](design/tokens/halvern.tokens.json) - The exported pyramid. Edit the Figma collections and re-export; do not hand-edit

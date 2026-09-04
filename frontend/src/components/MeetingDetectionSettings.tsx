@@ -3,6 +3,7 @@ import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { usePlatform } from '@/hooks/usePlatform';
 import {
   getDetectionSettings,
   saveDetectionSettings,
@@ -80,6 +81,18 @@ export function MeetingDetectionSettings() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
 
+  // Which platforms have something that notices an application using audio.
+  // macOS listens to a Core Audio property; Windows enumerates WASAPI audio
+  // sessions. Linux has neither yet, and `snapshot_audio_apps()` returns an
+  // empty list there, so the rules above it never see a candidate.
+  //
+  // `usePlatform` reads `navigator` and resolves after mount, so it is
+  // 'unknown' during the static prerender. Treating unknown as "has a sensor"
+  // is the right default: it keeps the control live for the platform this is
+  // usually read on, and the worst case is a switch that works.
+  const platform = usePlatform();
+  const hasSensor = platform !== 'linux';
+
   useEffect(() => {
     let cancelled = false;
     getDetectionSettings()
@@ -129,14 +142,31 @@ export function MeetingDetectionSettings() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <span className="text-sm font-medium">Detect meetings</span>
-          <p className="text-sm text-muted-foreground">
-            Takes effect on the next application start.
+          <p id="detect-meetings-reason" className="text-sm text-muted-foreground">
+            {hasSensor
+              ? 'Takes effect on the next application start.'
+              : 'Not available on this platform yet. The rules are ready; what is missing is the part that notices an application using audio, which exists for macOS and Windows and not for Linux.'}
           </p>
         </div>
+        {/*
+          `aria-disabled`, not `disabled`. A disabled switch leaves the tab
+          order, so a screen-reader user meets a gap where the explanation is.
+          The reason is on screen either way.
+
+          This switch was offered on every platform until 4 September 2026,
+          while the sensor behind it existed only on macOS. It saved happily
+          and did nothing, which cost the first Windows tester an evening
+          before anyone traced the call path.
+        */}
         <Switch
-          checked={settings.enabled}
-          disabled={busy}
-          onCheckedChange={(checked) => persist({ ...settings, enabled: checked })}
+          checked={hasSensor && settings.enabled}
+          disabled={busy && hasSensor}
+          aria-disabled={!hasSensor}
+          aria-describedby="detect-meetings-reason"
+          onCheckedChange={(checked) => {
+            if (!hasSensor) return;
+            persist({ ...settings, enabled: checked });
+          }}
         />
       </div>
 
