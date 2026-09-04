@@ -1,0 +1,29 @@
+frontend/src-tauri/src/audio/system_detector_windows.rs
+  s_a975a03b484a5d::t_a278b4bd496a16 1-300
+Cargo.lock
+  s_a975a03b484a5d::t_3a9508b28b7f87 2678
+frontend/src-tauri/Cargo.toml
+  s_a975a03b484a5d::t_f64928465bd741 211-223
+frontend/src-tauri/src/audio/mod.rs
+  s_a975a03b484a5d::t_9471a09a8ad1e0 35-36
+frontend/src-tauri/src/audio/system_detector.rs
+  s_a975a03b484a5d::t_f0fb7436531305 482-487,535-542,544-545,547-550,556-563,567
+frontend/src-tauri/src/detection/policy.rs
+  s_a975a03b484a5d::t_5978f6a587149b 22-30,43-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "6142f12ee027632b7f88f4401b87df2643eb90cb",
+  "prompts": {},
+  "sessions": {
+    "s_a975a03b484a5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13b6cc7c-acea-4716-9349-2f90c8fdd936",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
