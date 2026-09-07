@@ -1,6 +1,13 @@
 use crate::api::{MeetingDetails, MeetingTranscript};
 use crate::database::models::{MeetingModel, Transcript};
 use chrono::Utc;
+// sqlx 0.9 refuses a dynamically built SQL string unless the author says
+// they have read it. Every use of this wrapper in this file is a query whose
+// dynamic parts are a `WHERE` built from literal fragments with `?`
+// placeholders, an ORDER BY column from a closed enum returning `&'static
+// str`, and a direction from a bool. Values reach the statement only through
+// `.bind()`.
+use sqlx::AssertSqlSafe;
 use sqlx::{Connection, Error as SqlxError, SqliteConnection, SqlitePool};
 use tracing::{error, info};
 
@@ -215,7 +222,7 @@ impl MeetingsRepository {
         }
 
         let count_sql = format!("SELECT COUNT(*) FROM meetings m {}", where_clause);
-        let mut count_query = sqlx::query_as::<_, (i64,)>(&count_sql);
+        let mut count_query = sqlx::query_as::<_, (i64,)>(AssertSqlSafe(count_sql.clone()));
         for p in &filter_params {
             count_query = count_query.bind(p.clone());
         }
@@ -237,7 +244,7 @@ impl MeetingsRepository {
             direction
         );
 
-        let mut page_query = sqlx::query_as::<_, MeetingListRow>(&page_sql);
+        let mut page_query = sqlx::query_as::<_, MeetingListRow>(AssertSqlSafe(page_sql.clone()));
         for p in &filter_params {
             page_query = page_query.bind(p.clone());
         }
@@ -280,7 +287,7 @@ impl MeetingsRepository {
             placeholders
         );
 
-        let mut q = sqlx::query_as::<_, (String, String)>(&sql).bind(fts_match.to_string());
+        let mut q = sqlx::query_as::<_, (String, String)>(AssertSqlSafe(sql.clone())).bind(fts_match.to_string());
         for row in rows.iter() {
             q = q.bind(row.id.clone());
         }
