@@ -1,0 +1,27 @@
+Cargo.lock
+  s_a975a03b484a5d::t_d1a4dffa0ee17f 19,153,164,498-506,796-806,871,960-965,1119-1127,1262-1270,1310-1318,1544,1627-1628,1632-1642,1661,1929,1934,1936,1939,2054,2056,2409,2696-2706,2715,2717,2719,2757,2759,2761,2770-2779,2880-2888,3211,3675,3677,3680,3775,3924,4387,4461,4472-4473,4875-4885,4924-4929,5312,5390,5752-5764,5774-5786,5893,5922,5966,5968,5979,5981,5985,5995,6003,6014,6016,6027,6029,6031,6040,6046,6053,6055,6062,6071-6072,6080,6082,6097,6102,6105,6116,6118,6123,6649,6968,7448,7477,7579,8059,8061,8085,8817,9074,9079
+frontend/src-tauri/Cargo.toml
+  s_a975a03b484a5d::t_5dab86ed71a550 158
+frontend/src-tauri/src/database/repositories/meeting.rs
+  s_a975a03b484a5d::t_75b943f02b7d98 4-10,225,247,290
+frontend/src-tauri/src/database/repositories/setting.rs
+  s_a975a03b484a5d::t_1fb78acd536cae 4-10,122,159,233,264,300
+frontend/src-tauri/src/database/repositories/summary.rs
+  s_a975a03b484a5d::t_3af029666b52df 314-316
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b2db616b8bb547e8fe1b94c171b334df458e083a",
+  "prompts": {},
+  "sessions": {
+    "s_a975a03b484a5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13b6cc7c-acea-4716-9349-2f90c8fdd936",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
