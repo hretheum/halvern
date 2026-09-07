@@ -24,7 +24,23 @@
 version: 2
 updates:
   - package-ecosystem: cargo
-    directory: /frontend/src-tauri
+    # The workspace root, not `frontend/src-tauri`, which is one of its two
+    # members. Dependabot copies only this directory into its temporary tree,
+    # so pointing it at a member left the root manifest behind — and from
+    # 4 September, when `whisper-rs` moved into `[workspace.dependencies]` so
+    # it could not be declared three times and split, every crate in the
+    # ecosystem started failing to parse:
+    #
+    #   error inheriting `whisper-rs` from workspace root manifest's
+    #   `workspace.dependencies.whisper-rs`
+    #   Caused by: failed to find a workspace root
+    #
+    # That is the same `dependency_file_not_resolvable` symptom the workspace
+    # move was meant to end, arrived at from the opposite direction and hitting
+    # more crates than before. Cargo workspaces want the root here; from it
+    # Dependabot finds both members on its own, `llama-helper` included, which
+    # had no coverage at all while this pointed at the other one.
+    directory: /
     schedule:
       interval: weekly
       day: monday
