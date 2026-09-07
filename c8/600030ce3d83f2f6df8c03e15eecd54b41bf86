@@ -1,0 +1,25 @@
+.github/dependabot.yml
+  s_a975a03b484a5d::t_f5367990845b84 68-83
+Cargo.lock
+  s_a975a03b484a5d::t_01f4d1f7098a5d 153,164,1615,1883,1951-1952,3136,3712,3861,5325,5403,5894,6572,6574,6996,7476,7505,8123
+frontend/package.json
+  s_a975a03b484a5d::t_1b3970d05ca429 50
+frontend/pnpm-lock.yaml
+  s_a975a03b484a5d::t_4ac3fbac95f0bd 73-74,1450-1451,3559
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c8600030ce3d83f2f6df8c03e15eecd54b41bf86",
+  "prompts": {},
+  "sessions": {
+    "s_a975a03b484a5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13b6cc7c-acea-4716-9349-2f90c8fdd936",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Eryk Orłowski <eryk@talentcanvas.tech>"
+    }
+  }
+}
