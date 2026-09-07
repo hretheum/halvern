@@ -311,7 +311,9 @@ mod tests {
     /// rarely touches — can be asserted on directly.
     async fn column(pool: &SqlitePool, meeting_id: &str, name: &str) -> Option<String> {
         let sql = format!("SELECT {} AS v FROM summary_processes WHERE meeting_id = ?", name);
-        sqlx::query(&sql)
+        // `name` is a column named by the test that calls this, never by
+        // anything outside the file. sqlx 0.9 cannot know that and asks.
+        sqlx::query(sqlx::AssertSqlSafe(sql))
             .bind(meeting_id)
             .fetch_one(pool)
             .await

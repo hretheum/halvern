@@ -34,6 +34,14 @@ tokio = { version = "1.32.0", features = ["full"] }
 # target sections. `raw-api` is needed everywhere.
 whisper-rs = { version = "0.13.2", features = ["raw-api"] }
 
+# Same reasoning as above, for a plainer reason: it was declared three times in
+# frontend/src-tauri — build-dependencies, dependencies, and the macOS target
+# section — and the third listed a strict subset of the second's features, so
+# it contributed nothing but a version string that could drift from the others.
+# reqwest carries no `links`, so a split would not have failed loudly; it would
+# have compiled two copies of the HTTP stack into one binary.
+reqwest = { version = "0.13", features = ["blocking", "multipart", "json", "stream"] }
+
 # Profiles are read from the workspace root and nowhere else. A `[profile.*]`
 # section in a member manifest is ignored — cargo says so on every command and
 # nobody was reading it, so `llama-helper` had been building on the default

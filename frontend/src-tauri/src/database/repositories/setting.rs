@@ -1,6 +1,13 @@
 use crate::audio::transcription::RemoteTranscriptionConfig;
 use crate::database::models::{Setting, TranscriptSetting};
 use crate::summary::CustomOpenAIConfig;
+// sqlx 0.9 refuses a dynamically built SQL string unless the author says
+// they have read it. The only dynamic part in this file is a column name, which
+// cannot be a bind parameter, and it comes from a closed match on `provider`
+// that returns `&'static str` and errors on anything unrecognised — an
+// allowlist, not interpolated input. Values still reach the statement through
+// `.bind()`.
+use sqlx::AssertSqlSafe;
 use sqlx::SqlitePool;
 
 #[derive(serde::Deserialize, Debug)]
@@ -112,7 +119,7 @@ impl SettingsRepository {
             "#,
             api_key_column, api_key_column
         );
-        sqlx::query(&query)
+        sqlx::query(AssertSqlSafe(query.clone()))
             .bind(api_key)
             .bind(provider)
             .execute(pool)
@@ -149,7 +156,7 @@ impl SettingsRepository {
             "SELECT {} FROM settings WHERE id = '1' LIMIT 1",
             api_key_column
         );
-        let api_key: Option<String> = sqlx::query_scalar(&query).fetch_optional(pool).await?;
+        let api_key: Option<String> = sqlx::query_scalar(AssertSqlSafe(query.clone())).fetch_optional(pool).await?;
         // A column that was never set for this provider decodes as an empty
         // string rather than SQL NULL once any other setting has created the
         // row. An empty key is never a usable one, so callers that only ever
@@ -223,7 +230,7 @@ impl SettingsRepository {
             "#,
             api_key_column, crate::config::DEFAULT_PARAKEET_MODEL, api_key_column
         );
-        sqlx::query(&query)
+        sqlx::query(AssertSqlSafe(query.clone()))
             .bind(api_key)
             .bind(provider)
             .execute(pool)
@@ -254,7 +261,7 @@ impl SettingsRepository {
             "SELECT {} FROM transcript_settings WHERE id = '1' LIMIT 1",
             api_key_column
         );
-        let api_key: Option<String> = sqlx::query_scalar(&query).fetch_optional(pool).await?;
+        let api_key: Option<String> = sqlx::query_scalar(AssertSqlSafe(query.clone())).fetch_optional(pool).await?;
         // See get_api_key: an unset column decodes as "" once the row
         // exists, and that must read the same as "never set".
         Ok(api_key.filter(|k| !k.is_empty()))
@@ -290,7 +297,7 @@ impl SettingsRepository {
             "UPDATE settings SET {} = NULL WHERE id = '1'",
             api_key_column
         );
-        sqlx::query(&query).execute(pool).await?;
+        sqlx::query(AssertSqlSafe(query.clone())).execute(pool).await?;
 
         Ok(())
     }
