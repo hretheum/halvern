@@ -65,6 +65,22 @@ updates:
       # each platform's feature set, and a summary generated afterwards to
       # prove the sidecar still answers. It is not a weekly patch.
       - dependency-name: llama-cpp-2
+      # `zip` cannot leave 2.x while `ffmpeg-sidecar` is in the graph, and the
+      # constraint is not ours to relax. zip 4.x reaches XZ through
+      # `liblzma-sys`; `ffmpeg-sidecar` and zip 2.x reach it through `xz2`,
+      # which is `lzma-sys`. Both declare `links = "lzma"` and cargo allows one:
+      #
+      #   package `liblzma-sys` links to the native library `lzma`, but it
+      #   conflicts with a previous package which links to `lzma` as well
+      #
+      # Swapping this crate's own `xz2` build-dependency for `liblzma` does not
+      # help and was tried: `xz2` still arrives through ffmpeg-sidecar, so the
+      # graph then holds both. It clears when ffmpeg-sidecar moves, or when
+      # ffmpeg-sidecar goes — most of what this project imports from it is the
+      # runtime download path, and `build.rs` has downloaded and bundled FFmpeg
+      # since before that was written. Worth tracing before anyone tries again.
+      - dependency-name: zip
+        update-types: ["version-update:semver-major"]
     groups:
       # Tauri's crates are versioned together and break together. Splitting them
       # across PRs produces combinations that were never tested upstream.
