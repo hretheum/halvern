@@ -70,10 +70,10 @@ serde = { version = "1.0", features = ["derive"] }
 anyhow = "1.0"
 once_cell = "1.17.1"
 uuid = { version = "1.0", features = ["v4", "serde"] }
-posthog-rs = "0.3.7"
+posthog-rs = "0.25.4"
 
 # Cross-platform audio capture
-cpal = "0.15.3"
+cpal = "0.18.2"
 
 # Version inherited from the workspace root, deliberately — see the comment
 # there. macOS adds Metal and CoreML on top in its own target section; Windows
@@ -142,14 +142,14 @@ sysinfo = "0.39"
 lazy_static = { version = "1.4.0" }
 realfft = "3.4.0"
 regex = "1.11.0"
-ndarray = "0.16"
+ndarray = "0.17"
 bytes = { version = "1.9.0", features = ["serde"] }
 
-symphonia = { version = "0.5.4", features = ["aac", "isomp4", "mp3", "flac", "ogg", "vorbis", "pcm", "wav", "opt-simd"] }
-rand = "0.8.5"
+symphonia = { version = "0.6.1", features = ["aac", "isomp4", "mp3", "flac", "ogg", "vorbis", "pcm", "wav", "opt-simd"] }
+rand = "0.10.2"
 rayon = "1.10"
-rubato = "0.15.0"
-ringbuf = "0.4.8"
+rubato = "0.16.2"
+ringbuf = "0.5.1"
 tempfile = "3.3.0"
 whatlang = "0.18.0"
 
@@ -215,7 +215,7 @@ futures-channel = "0.3.31"
 # 0.61 rather than a fresher major because the tree already resolves that
 # version through Tauri, so this adds a feature set rather than a fourth copy
 # of the bindings. cpal pins 0.54 of its own and is unaffected either way.
-windows = { version = "0.61", features = [
+windows = { version = "0.62", features = [
     "Win32_Foundation",
     "Win32_Media_Audio",
     "Win32_System_Com",
@@ -234,10 +234,10 @@ futures-channel = "0.3.31"
 
 [dev-dependencies]
 tempfile = "3.3.0"
-infer = "0.15"
-criterion = { version = "0.5.1", features = ["async_tokio"] }
+infer = "0.19"
+criterion = { version = "0.8.2", features = ["async_tokio"] }
 memory-stats = "1.0"
-strsim = "0.10.0"
+strsim = "0.11.1"
 futures = "0.3.31"
 tracing-subscriber = "0.3.16"
 
