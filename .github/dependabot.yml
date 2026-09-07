@@ -47,6 +47,24 @@ updates:
     open-pull-requests-limit: 5
     cooldown:
       default-days: 7
+    ignore:
+      # `llama-cpp-2` is pinned with `=` in llama-helper/Cargo.toml because it
+      # breaks its API across patch releases, and Dependabot will happily edit
+      # an exact pin, which defeats the point of writing one.
+      #
+      # Measured, not feared. The first proposal after this ecosystem could see
+      # llama-helper at all — 7 September 2026, pull request #22 — moved it from
+      # 0.1.146 to 0.1.154 and stopped compiling on all three platforms:
+      #
+      #   error[E0277]: the trait bound `f32: TryFrom<u32>` is not satisfied
+      #   error[E0061]: this function takes 7 arguments but 8 were supplied
+      #   error[E0061]: this function takes 5 arguments but 4 were supplied
+      #
+      # It tracks llama.cpp, which does not promise a stable interface. Moving
+      # it is a deliberate piece of work with its own commit, its own build on
+      # each platform's feature set, and a summary generated afterwards to
+      # prove the sidecar still answers. It is not a weekly patch.
+      - dependency-name: llama-cpp-2
     groups:
       # Tauri's crates are versioned together and break together. Splitting them
       # across PRs produces combinations that were never tested upstream.

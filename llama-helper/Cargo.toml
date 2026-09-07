@@ -7,6 +7,16 @@ edition = "2021"
 anyhow = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+# Exact, and it has to stay exact: this crate tracks llama.cpp and changes its
+# API across patch releases. 0.1.154 alters three function signatures and does
+# not compile against this code — measured on 7 September 2026, on all three
+# platforms, from the first Dependabot proposal that could see this member at
+# all. `.github/dependabot.yml` ignores it for that reason; without the ignore
+# the bot edits the pin every week, which is the opposite of pinning.
+#
+# Moving it is deliberate work: its own commit, a build on each platform's
+# feature set, and a summary generated afterwards to prove the sidecar still
+# answers.
 llama-cpp-2 = "=0.1.146"
 encoding_rs = "0.8"
 
